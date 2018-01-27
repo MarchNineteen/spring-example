@@ -53,7 +53,7 @@
 
         <!-- 生成映射文件的包名和位置 -->
         <!--Mapper映射文件生成所在的目录 为每一个数据库的表生成对应的SqlMap文件 -->
-        <sqlMapGenerator targetPackage="com.wyb.business.dao.xml" targetProject="src/main/java">
+        <sqlMapGenerator targetPackage="mapping" targetProject="src/main/resources">
             <property name="enableSubPackages" value="false" />
         </sqlMapGenerator>
 

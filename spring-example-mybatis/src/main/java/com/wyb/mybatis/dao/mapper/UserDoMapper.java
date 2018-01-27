@@ -2,9 +2,8 @@ package com.wyb.mybatis.dao.mapper;
 
 import com.wyb.mybatis.dao.model.UserDo;
 import com.wyb.mybatis.dao.model.UserDoExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface UserDoMapper {
     long countByExample(UserDoExample example);
