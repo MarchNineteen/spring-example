@@ -13,6 +13,7 @@
   <modules>
     <module>spring-example-business</module>
     <module>spring-example-mybatis</module>
+    <module>spring-example-timer</module>
   </modules>
 
   <properties>
