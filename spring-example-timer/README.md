@@ -33,6 +33,7 @@ public class TaskServiceImpl implements TaskService {
 说明：ref参数指定的即任务类，method指定的即需要运行的方法，cron及cronExpression表达式，具体写法这里不介绍了，详情见上篇文章附录。
 
 - 注解形式
+
 1.编写方法
 ```
 @Scheduled(cron = "0/1 * * * * ?")
