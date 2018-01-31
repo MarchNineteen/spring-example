@@ -3,9 +3,11 @@ package com.wyb.cache.dao.mapper;
 import com.wyb.cache.dao.model.UserDo;
 import com.wyb.cache.dao.model.UserDoExample;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface UserDoMapper {
     long countByExample(UserDoExample example);
 
