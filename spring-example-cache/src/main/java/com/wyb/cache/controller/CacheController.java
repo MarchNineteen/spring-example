@@ -1,7 +1,7 @@
 package com.wyb.cache.controller;
 
 import com.wyb.cache.dao.model.UserDo;
-import com.wyb.cache.factory.Cache;
+import com.wyb.cache.service.CacheService;
 import com.wyb.cache.factory.CacheFactory;
 import com.wyb.cache.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +25,7 @@ public class CacheController {
     @Resource
     UserService userService;
 
-    public static Cache cache = CacheFactory.getCache("REDIS");
+    public static CacheService cache = CacheFactory.getCache("REDIS");
 
     @GetMapping("/byId")
     public UserDo cacheById(){

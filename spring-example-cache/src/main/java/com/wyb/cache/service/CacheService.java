@@ -1,4 +1,4 @@
-package com.wyb.cache.factory;
+package com.wyb.cache.service;
 
 /**
  * Description:
@@ -6,7 +6,7 @@ package com.wyb.cache.factory;
  * @author: Kunzite
  * @version: 2018-02-01 15:28
  */
-public interface Cache {
+public interface CacheService {
 
     public String setValue(String key,String value);
 

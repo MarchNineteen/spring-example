@@ -1,6 +1,6 @@
 package com.wyb.cache.service.impl;
 
-import com.wyb.cache.service.MemcachedService;
+import com.wyb.cache.service.CacheService;
 
 /**
  * Description:
@@ -8,7 +8,7 @@ import com.wyb.cache.service.MemcachedService;
  * @author: Kunzite
  * @version: 2018-02-01 15:53
  */
-public class MemcachedServiceImpl implements MemcachedService{
+public class MemcachedServiceImpl implements CacheService {
 
     @Override
     public String setValue(String key, String value) {

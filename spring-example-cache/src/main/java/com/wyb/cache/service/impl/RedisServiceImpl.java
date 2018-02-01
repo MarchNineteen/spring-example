@@ -1,6 +1,6 @@
 package com.wyb.cache.service.impl;
 
-import com.wyb.cache.service.RedisService;
+import com.wyb.cache.service.CacheService;
 import redis.clients.jedis.JedisCluster;
 
 import javax.annotation.Resource;
@@ -8,10 +8,10 @@ import javax.annotation.Resource;
 /**
  * Description:
  *
- * @author: wangyingbo
+ * @author: Kunzite
  * @version: 2018-02-01 15:26
  */
-public class RedisServiceImpl implements RedisService {
+public class RedisServiceImpl implements CacheService {
 
     @Resource
     JedisCluster jedisCluster;
