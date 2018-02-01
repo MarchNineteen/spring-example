@@ -34,7 +34,7 @@ http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springfr
     <bean name="genericObjectPoolConfig" class="org.apache.commons.pool2.impl.GenericObjectPoolConfig">
         <property name="maxWaitMillis" value="-1" />
         <property name="maxTotal" value="1000" />
-        <property name="minIdle" value="${spring.redis.pool.max-idle}" />
+        <property name="minIdle" value="1" />
         <property name="maxIdle" value="100" />
     </bean>
 
