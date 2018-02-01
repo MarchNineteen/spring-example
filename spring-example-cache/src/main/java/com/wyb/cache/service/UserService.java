@@ -13,4 +13,6 @@ import java.util.List;
  */
 public interface UserService {
     List<UserDo> listAll(int pageNum, int pageSize);
+
+    UserDo getById(String id);
 }

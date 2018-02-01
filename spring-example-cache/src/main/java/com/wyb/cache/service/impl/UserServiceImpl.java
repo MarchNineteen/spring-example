@@ -28,4 +28,9 @@ public class UserServiceImpl implements UserService {
         UserDoExample example = new UserDoExample();
         return userDoMapper.selectByExample(example);
     }
+
+    @Override
+    public UserDo getById(String id) {
+        return userDoMapper.selectByPrimaryKey(Integer.valueOf(id));
+    }
 }
