@@ -38,20 +38,20 @@ http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springfr
         <property name="maxIdle" value="100" />
     </bean>
 
-    <bean id="jedisCluster" class="com.wyb.cache.config.JedisClusterFactory">
-        <property name="connectionTimeout" value="3000" />
-        <property name="soTimeout" value="3000" />
-        <property name="maxRedirections" value="5" />
-        <property name="maxAttempts" value="5" />
-        <property name="password" value="" />
-        <property name="genericObjectPoolConfig" ref="genericObjectPoolConfig" />
-        <property name="jedisClusterNodes">
-            <set>
-                <value>127.0.0.1:6379</value>
-                <!--<value>121.199.45.208:7001</value>-->
-                <!--<value>121.199.45.208:7002</value>-->
-            </set>
-        </property>
-    </bean>
+    <!--<bean id="jedisCluster" class="com.wyb.cache.config.JedisClusterFactory">-->
+        <!--<property name="connectionTimeout" value="3000" />-->
+        <!--<property name="soTimeout" value="3000" />-->
+        <!--<property name="maxRedirections" value="5" />-->
+        <!--<property name="maxAttempts" value="5" />-->
+        <!--<property name="password" value="" />-->
+        <!--<property name="genericObjectPoolConfig" ref="genericObjectPoolConfig" />-->
+        <!--<property name="jedisClusterNodes">-->
+            <!--<set>-->
+                <!--<value>127.0.0.1:6379</value>-->
+                <!--&lt;!&ndash;<value>121.199.45.208:7001</value>&ndash;&gt;-->
+                <!--&lt;!&ndash;<value>121.199.45.208:7002</value>&ndash;&gt;-->
+            <!--</set>-->
+        <!--</property>-->
+    <!--</bean>-->
 
 </beans>

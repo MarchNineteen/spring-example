@@ -1,8 +1,7 @@
 package com.wyb.cache.factory;
 
 import com.wyb.cache.service.CacheService;
-import com.wyb.cache.service.impl.MemcachedServiceImpl;
-import com.wyb.cache.service.impl.RedisServiceImpl;
+import com.wyb.cache.utils.SpringContextHolder;
 
 /**
  * Description:
@@ -14,10 +13,10 @@ public class CacheFactory {
 
     public static CacheService getCache(String type) {
         if (type.equals("REDIS")){
-            return new RedisServiceImpl();
+            return SpringContextHolder.getBean("redisServiceImpl");
         }
         else {
-            return new MemcachedServiceImpl();
+            return SpringContextHolder.getBean("");
         }
     }
 }

@@ -7,7 +7,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/springboot?characterEncoding=utf8&useSSL=false
     username: root
-    password: 123456
+    password:
     #最大活跃数
     maxActive: 20
     #初始化数量
@@ -28,6 +28,14 @@ spring:
     testOnReturn: false
     #配置监控统计拦截的filters，去掉后监控界面sql将无法统计,'wall'用于防火墙
     filters: stat, wall, log4j
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    pool:
+      max-idle: 20
+      min-idle: 1
+      max-active: 20
+      max-wait: 60000
 mybatis:
   mapper-locations: classpath:mapping/*Mapper.xml
   type-aliases-package: com.wyb.cache.dao.model
@@ -39,11 +47,3 @@ pagehelper:
   supportMethodsArguments: true
   params: count=countSql
 
-redis:
-    host: 127.0.0.1
-    port: 6379
-    pool:
-      max-idle: 20
-      min-idle: 1
-      max-active: 20
-      max-wait: 60000

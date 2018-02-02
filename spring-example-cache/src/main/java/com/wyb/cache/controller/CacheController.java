@@ -1,9 +1,10 @@
 package com.wyb.cache.controller;
 
 import com.wyb.cache.dao.model.UserDo;
-import com.wyb.cache.service.CacheService;
 import com.wyb.cache.factory.CacheFactory;
+import com.wyb.cache.service.CacheService;
 import com.wyb.cache.service.UserService;
+import com.wyb.cache.utils.SpringContextHolder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,12 +26,22 @@ public class CacheController {
     @Resource
     UserService userService;
 
-    public static CacheService cache = CacheFactory.getCache("REDIS");
+    public CacheService cache = CacheFactory.getCache("REDIS");
 
-    @GetMapping("/byId")
-    public UserDo cacheById(){
+//    @Resource
+//    CacheService cache;
+
+    @GetMapping("/add")
+    public UserDo addById(){
         UserDo userDo = userService.getById("1");
-        String s = cache.setValue("name",userDo.getUsername());
+        CacheService cache = SpringContextHolder.getBean("redisServiceImpl");
+        cache.putCache(String.valueOf(userDo.getId()),userDo);
         return userDo;
+    }
+
+    @GetMapping("/get")
+    public UserDo getById(){
+        CacheService cache = SpringContextHolder.getBean("redisServiceImpl");
+        return (UserDo) cache.getCache("1");
     }
 }
