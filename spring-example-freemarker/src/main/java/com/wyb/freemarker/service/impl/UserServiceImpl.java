@@ -28,4 +28,11 @@ public class UserServiceImpl implements UserService {
         UserDoExample example = new UserDoExample();
         return userDoMapper.selectByExample(example);
     }
+
+    @Override
+    public UserDo getByName(String username) {
+        UserDoExample example = new UserDoExample();
+        example.createCriteria().andUsernameEqualTo(username);
+        return userDoMapper.selectByExample(example).get(0);
+    }
 }

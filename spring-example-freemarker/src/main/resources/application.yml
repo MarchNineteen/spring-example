@@ -31,13 +31,10 @@ spring:
 
   freemarker:
     template-loader-path: classpath:/templates/
-    suffix: .ftl
-    charset: UTF-8
-    content-type: text/html
-  mvc:
-    static-path-pattern: /static/**
-
-
+    cache: true
+  devtools:
+    restart:
+      enabled: true
 
 mybatis:
   mapper-locations: classpath:mapping/*Mapper.xml

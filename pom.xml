@@ -15,6 +15,7 @@
     <module>spring-example-mybatis</module>
     <module>spring-example-timer</module>
     <module>spring-example-cache</module>
+    <module>spring-example-freemarker</module>
   </modules>
 
   <properties>
