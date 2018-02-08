@@ -74,6 +74,14 @@
 			<version>1.2.3</version>
 		</dependency>
 
+		<!-- 配合@DateTimeFormat注解 -->
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>2.9.9</version>
+		</dependency>
+
+
 		<!--<dependency>-->
 			<!--<groupId>org.springframework.boot</groupId>-->
 			<!--<artifactId>spring-boot-devtools</artifactId>-->

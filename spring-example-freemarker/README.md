@@ -6,3 +6,6 @@
  
  springboot默认静态文件目录为static，模板文件目录为templates
  不需要webapp文件夹，打包模式也不用必须为war
+ 
+ springmvc 可以自动以mould接收，date类型需要 @DateTimeFormat(pattern = "yyyy-MM-dd")
+ 要使用这个注解需添加joda-time依赖

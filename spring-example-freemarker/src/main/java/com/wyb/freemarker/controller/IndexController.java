@@ -4,6 +4,7 @@ import com.wyb.freemarker.dao.model.UserDo;
 import com.wyb.freemarker.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -21,12 +22,12 @@ public class IndexController {
     @Resource
     private UserService userService;
 
-    @RequestMapping("/login")
-    public String freemarker(HttpServletRequest request,HashMap<String,Object> map,String name){
-        String username = request.getParameter("username");
-        String pwd = request.getParameter("pwd");
-        UserDo userDo = userService.getByName(username);
-        if (pwd.equals(userDo.getPassword())){
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    public String freemarker(UserDo userDo,HttpServletRequest request,HashMap<String,Object> map){
+        String username = userDo.getUsername();
+        String pwd = request.getParameter("password");
+        UserDo userDo1 = userService.getByName(username);
+        if (pwd.equals(userDo1.getPassword())){
             map.put("name", "Kunzite");
             map.put("sex", 1);    //sex:性别，1：男；0：女；
             // 模拟数据

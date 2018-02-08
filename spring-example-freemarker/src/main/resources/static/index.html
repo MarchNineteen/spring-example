@@ -5,9 +5,10 @@
 </head>
 
 <body>
-    <form action="/login" method="get">
+    <form action="/login" method="POST">
         用户名:<input name="username" type="text" /> <br/>
-        密码：<input type="text" name="pwd"/>
+        密码：<input name="password" type="text" />
+        时间：<input name="createTime" type="text" />
         <input type="submit" value="登录"/>
     </form>
 </body>

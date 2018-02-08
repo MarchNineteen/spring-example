@@ -21,7 +21,7 @@
 
     <h4>我的好友：</h4>
 <#list users as item>
-    姓名：${item.username} , 年龄${item.age}
+    姓名：${item.username} , 年龄${item.age} ，创建时间 ${item.createTime?string('yyyy-MM-dd hh:mm:ss')}
     <br>
 </#list>
 </body>

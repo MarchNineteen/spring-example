@@ -1,5 +1,7 @@
 package com.wyb.freemarker.dao.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -18,6 +20,7 @@ public class UserDo implements Serializable {
 
     private Integer status;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date createTime;
 
     private Date updateTime;
