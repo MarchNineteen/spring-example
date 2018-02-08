@@ -16,6 +16,9 @@
     <module>spring-example-timer</module>
     <module>spring-example-cache</module>
     <module>spring-example-freemarker</module>
+    <module>spring-example-mq</module>
+    <module>spring-example-aop</module>
+    <module>spring-example-thread</module>
   </modules>
 
   <properties>
