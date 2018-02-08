@@ -1,5 +1,5 @@
 # spring 定时任务设置
-参考：http://gong1208.iteye.com/blog/1773177
+> [参考](http://gong1208.iteye.com/blog/1773177)：http://gong1208.iteye.com/blog/1773177
 ### spring-task
 - 配置文件方式
 
