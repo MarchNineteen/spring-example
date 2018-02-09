@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.wyb</groupId>
-  <artifactId>spring-example-timer</artifactId>
+  <artifactId>spring-example</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 

@@ -1,7 +1,6 @@
 package com.wyb.cache.controller;
 
 import com.wyb.cache.dao.model.UserDo;
-import com.wyb.cache.factory.CacheFactory;
 import com.wyb.cache.service.CacheService;
 import com.wyb.cache.service.UserService;
 import com.wyb.cache.utils.SpringContextHolder;
@@ -26,7 +25,7 @@ public class CacheController {
     @Resource
     UserService userService;
 
-    public CacheService cache = CacheFactory.getCache("REDIS");
+//    public CacheService cache = CacheFactory.getCache("REDIS");
 
 //    @Resource
 //    CacheService cache;
