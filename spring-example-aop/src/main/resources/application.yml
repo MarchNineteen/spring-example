@@ -33,7 +33,7 @@ spring:
 
 mybatis:
   mapper-locations: classpath:mapping/*Mapper.xml
-  type-aliases-package: com.wyb.mybatis.dao.model
+  type-aliases-package: com.wyb.aop.dao.model
 
 #pagehelper分页插件
 pagehelper:

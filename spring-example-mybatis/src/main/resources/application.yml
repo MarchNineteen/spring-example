@@ -30,7 +30,7 @@ spring:
     filters: stat, wall, log4j
 mybatis:
   mapper-locations: classpath:mapping/*Mapper.xml
-  type-aliases-package: com.wyb.aop.dao.model
+  type-aliases-package: com.wyb.mybatis.dao.model
 
 #pagehelper分页插件
 pagehelper:
