@@ -4,9 +4,9 @@
 - [timer spring定时器](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-timer)
 - [cache 缓存配置](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-cache) 完成 redis 未完成 memcached
 - [freemaker springboot集成freemaker及 springboot热部署](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-freemarker) 
+- [aop springAOP面向切面编程](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-aop) 
 - 计划：
 - [mq spring消息队列](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-mq) 
-- [aop springAOP面向切面编程](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-aop) 
 - [thread 多线程编程](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-thread) 
 - 日志文件配置详解
 - 异常处理
