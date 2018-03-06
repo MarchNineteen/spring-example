@@ -36,6 +36,7 @@ spring:
       min-idle: 1
       max-active: 20
       max-wait: 60000
+
 mybatis:
   mapper-locations: classpath:mapping/*Mapper.xml
   type-aliases-package: com.wyb.cache.dao.model

@@ -46,23 +46,23 @@
     </bean>
 
     <!-- 配置DAO -->
-    <bean id="userDaoTarget" class="com.wyb.business.dao.mapper.UserDoMapper.*daoImpl">
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
+    <!--<bean id="userDaoTarget" class="com.wyb.business.dao.mapper.UserDoMapper.*daoImpl">-->
+        <!--<property name="dataSource" ref="dataSource"/>-->
+    <!--</bean>-->
 
-    <bean id="userDao"
-          class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
-        <!-- 配置事务管理器 -->
-        <property name="transactionManager" ref="transactionManager"/>
-        <property name="target" ref="userDaoTarget"/>
-        <property name="proxyInterfaces" value="com.wyb.business.dao.mapper.UserDoMapper"/>
-        <!-- 配置事务属性 -->
-        <property name="transactionAttributes">
-            <props>
-                <prop key="*">PROPAGATION_REQUIRED</prop>
-            </props>
-        </property>
-    </bean>
+    <!--<bean id="userDao"-->
+          <!--class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">-->
+        <!--&lt;!&ndash; 配置事务管理器 &ndash;&gt;-->
+        <!--<property name="transactionManager" ref="transactionManager"/>-->
+        <!--<property name="target" ref="userDaoTarget"/>-->
+        <!--<property name="proxyInterfaces" value="com.wyb.business.dao.mapper.UserDoMapper"/>-->
+        <!--&lt;!&ndash; 配置事务属性 &ndash;&gt;-->
+        <!--<property name="transactionAttributes">-->
+            <!--<props>-->
+                <!--<prop key="*">PROPAGATION_REQUIRED</prop>-->
+            <!--</props>-->
+        <!--</property>-->
+    <!--</bean>-->
 
 
 </beans>

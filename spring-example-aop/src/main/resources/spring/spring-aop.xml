@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.1.xsd" >
+
+    <!--不用申明  注解已申明-->
+    <!-- 声明一个业务类 -->
+    <!--<bean id="userManager" class="com.wyb.aop.controller.UserController" />-->
+    <!-- 声明通知类 -->
+    <!--<bean id="aspectBean" class="com.wyb.aop.aop.OperateAspect" />-->
+
+    <aop:config>
+        <aop:aspect ref="operateAspect" order="2">
+            <aop:pointcut id="pointcut" expression="execution(* com.wyb.aop.controller..*(..))"/>
+
+            <aop:before method="doBefore" pointcut-ref="pointcut"/>
+            <aop:after-returning method="doAfterReturning" pointcut-ref="pointcut" returning="result"/>
+            <aop:after method="doAfter" pointcut-ref="pointcut" />
+            <aop:around method="doAround" pointcut-ref="pointcut"/>
+            <aop:after-throwing method="doAfterThrowing" pointcut-ref="pointcut" throwing="ex"/>
+        </aop:aspect>
+    </aop:config>
+</beans>

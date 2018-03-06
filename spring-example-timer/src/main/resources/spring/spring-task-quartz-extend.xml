@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.1.xsd ">
+
+    <!--spring配置文件中配置作业类JobDetailBean-->
+    <bean name="job1" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.wyb.timer.service.quartzjob.QuartzJobExtendsQuartzJobBean" />
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="timeout" value="0" />
+            </map>
+        </property>
+    </bean>
+
+    <!--配置作业调度的触发方式（触发器） 按照一定频度调用任务 -->
+    <bean id="simpleTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+        <property name="jobDetail" ref="job1" />
+        <property name="startDelay" value="0" /><!-- 调度工厂实例化后，经过0秒开始执行调度 -->
+        <property name="repeatInterval" value="2000" /><!-- 每2秒调度一次 -->
+    </bean>
+
+    <!--配置作业调度的触发方式（触发器） 指定时间运行一次 -->
+    <bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="job1" />
+        <!--每天12:00运行一次 -->
+        <property name="cronExpression" value="0 0 12 * * ?" />
+    </bean>
+
+    <!--配置调度工厂-->
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref bean="simpleTrigger" />
+            </list>
+        </property>
+    </bean>
+</beans>

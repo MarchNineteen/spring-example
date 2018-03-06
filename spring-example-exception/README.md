@@ -1,0 +1,5 @@
+# 自定义异常处理解决方案
+
+使用@ControllerAdvice和@ExceptionHandler处理全局异常和自定义异常
+
+自定义业务层和控制层结果返回

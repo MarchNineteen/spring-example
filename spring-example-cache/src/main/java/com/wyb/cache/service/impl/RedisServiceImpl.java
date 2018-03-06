@@ -106,6 +106,7 @@ public class RedisServiceImpl implements CacheService {
         }
     }
 
+    @Override
     public Object getQueue(String key) {
         try {
             return redisTemplate.opsForList().rightPop(key);

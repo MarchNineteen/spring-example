@@ -1,4 +1,5 @@
 # spring 定时任务设置
+> [参考](http://gong1208.iteye.com/blog/1773177)：http://gong1208.iteye.com/blog/1773177
 ### spring-task
 - 配置文件方式
 
@@ -54,4 +55,12 @@ public class TaskServiceImpl implements TaskService {
 <task:scheduler id="qbScheduler" pool-size="10"/>
     <task:annotation-driven scheduler="qbScheduler" mode="proxy"/>
 ```
-### quart
+### Quartz
+- 作业类继承自特定的基类：org.springframework.scheduling.quartz.QuartzJobBean
+1.定义作业类
+2.配置作业类JobDetailBean
+3.配置作业调度的触发方式（触发器）
+4.配置调度工厂 
+- 作业类不继承自特定的基类
+
+**两者区别在乎注册作业类的方式不同**

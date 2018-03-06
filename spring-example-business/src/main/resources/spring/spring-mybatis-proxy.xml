@@ -59,13 +59,13 @@
         </property>
     </bean>
 
-    <!-- 配置DAO -->
-    <bean id="userDaoTarget" class="com.wyb.business.dao.mapper.UserDoMapper.*daoImpl">
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
+    <!--&lt;!&ndash; 配置DAO &ndash;&gt;-->
+    <!--<bean id="userDaoTarget" class="com.wyb.business.dao.mapper.UserDoMapper.*daoImpl">-->
+        <!--<property name="dataSource" ref="dataSource"/>-->
+    <!--</bean>-->
 
-    <bean id="userDao" parent="transactionBase">
-        <property name="target" ref="userDaoTarget"/>
-    </bean>
+    <!--<bean id="userDao" parent="transactionBase">-->
+        <!--<property name="target" ref="userDaoTarget"/>-->
+    <!--</bean>-->
 
 </beans>
