@@ -7,11 +7,12 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 
 /**
  * Description:
  *
- * @author: wangyingbo
+ * @author: Kunzite
  * @version: 2018-01-30 11:41
  */
 @Service
@@ -28,6 +29,8 @@ public class TaskServiceImpl implements TaskService {
         userDo.setAge(12);
         userDo.setStatus(0);
         userDo.setPhone("12345678911");
+        userDo.setCreateTime(new Date());
+        userDo.setUpdateTime(new Date());
         userDoMapper.insertSelective(userDo);
         System.out.println("success");
     }
