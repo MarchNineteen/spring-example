@@ -19,6 +19,7 @@
     <module>spring-example-mq</module>
     <module>spring-example-aop</module>
     <module>spring-example-thread</module>
+    <module>spring-example-exception</module>
   </modules>
 
   <properties>
