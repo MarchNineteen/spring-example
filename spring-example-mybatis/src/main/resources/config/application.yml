@@ -38,3 +38,7 @@ pagehelper:
   reasonable: true
   supportMethodsArguments: true
   params: count=countSql
+
+#自定义日志
+logging:
+  config: classpath:log4j2/log4j2.xml

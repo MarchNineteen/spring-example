@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" strict="true">
+
+  <Properties>
+    <Property name="project.name">spring-example-mybatis</Property>
+    <Property name="logging.file.path">/home/soka/${project.name}/logs</Property>
+    <Property name="logging.file.name">${logging.file.path}/${project.name}.log</Property>
+    <Property name="logging.file.warn.name">${logging.file.path}/${project.name}-warn.log</Property>
+    <Property name="logging.file.error.name">${logging.file.path}/${project.name}-error.log</Property>
+    <Property name="layout">%d %p [%t] %c{10}:%M:%L %m%n</Property>
+  </Properties>
+
+  <Appenders>
+    <Console name="Console" target="SYSTEM_OUT">
+      <PatternLayout pattern="${layout}"/>
+    </Console>
+
+    <RollingRandomAccessFile name="RollingRandomAccessFile"
+                             immediateFlush="true" fileName="${logging.file.name}"
+                             filePattern="${logging.file.name}-%d{yyyy-MM-dd-HH}">
+      <PatternLayout pattern="${layout}"/>
+      <Policies>
+        <TimeBasedTriggeringPolicy/>
+        <SizeBasedTriggeringPolicy size="250 MB"/>
+      </Policies>
+      <ThresholdFilter level="debug"/>
+    </RollingRandomAccessFile>
+
+    <RollingRandomAccessFile name="RollingRandomAccessFileWarn"
+                             immediateFlush="true" fileName="${logging.file.warn.name}"
+                             filePattern="${logging.file.warn.name}-%d{yyyy-MM-dd}">
+      <PatternLayout pattern="${layout}"/>
+      <Policies>
+        <TimeBasedTriggeringPolicy/>
+        <SizeBasedTriggeringPolicy size="250 MB"/>
+      </Policies>
+      <ThresholdFilter level="warn"/>
+    </RollingRandomAccessFile>
+
+    <RollingRandomAccessFile name="RollingRandomAccessFileError"
+                             immediateFlush="true" fileName="${logging.file.error.name}"
+                             filePattern="${logging.file.error.name}-%d{yyyy-MM-dd}">
+      <PatternLayout pattern="${layout}"/>
+      <ThresholdFilter level="error"/>
+      <Policies>
+        <TimeBasedTriggeringPolicy/>
+        <SizeBasedTriggeringPolicy size="250 MB"/>
+      </Policies>
+    </RollingRandomAccessFile>
+
+    <!-- 发送日志文件到邮件 -->
+    <!--<SMTP name="Mail" subject="productErrorBugReport"-->
+          <!--to="wangyingbo@sokamail.com"-->
+          <!--from=""-->
+          <!--smtpProtocol="smtp" smtpHost="smtp.exmail.qq.com" smtpPort="587" bufferSize="2" smtpDebug="false"-->
+          <!--smtpPassword="" smtpUsername="">-->
+    <!--</SMTP>-->
+    <!--<Async name="AsyncMail">-->
+      <!--<AppenderRef ref="Mail"/>-->
+    <!--</Async>-->
+
+  </Appenders>
+
+  <Loggers>
+
+    <Logger name="com.wyb" level="info"/>
+
+    <Root level="info">
+      <!--<AppenderRef ref="AsyncMail" level="error"/>-->
+      <AppenderRef ref="Console"/>
+      <AppenderRef ref="RollingRandomAccessFile"/>
+      <AppenderRef ref="RollingRandomAccessFileWarn"/>
+      <AppenderRef ref="RollingRandomAccessFileError"/>
+    </Root>
+  </Loggers>
+</Configuration>
