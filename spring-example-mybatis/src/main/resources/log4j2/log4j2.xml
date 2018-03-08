@@ -3,7 +3,7 @@
 
   <Properties>
     <Property name="project.name">spring-example-mybatis</Property>
-    <Property name="logging.file.path">/home/soka/${project.name}/logs</Property>
+    <Property name="logging.file.path">${project.name}/logs</Property>
     <Property name="logging.file.name">${logging.file.path}/${project.name}.log</Property>
     <Property name="logging.file.warn.name">${logging.file.path}/${project.name}-warn.log</Property>
     <Property name="logging.file.error.name">${logging.file.path}/${project.name}-error.log</Property>

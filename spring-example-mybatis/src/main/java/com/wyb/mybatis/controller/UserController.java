@@ -1,8 +1,9 @@
 package com.wyb.mybatis.controller;
 
-
 import com.wyb.mybatis.dao.model.UserDo;
 import com.wyb.mybatis.service.UserService;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +24,8 @@ public class UserController {
     @Resource
     private UserService userService;
 
+    @ApiOperation(value = "获取用户详细信息", notes = "根据url的id来获取用户详细信息")
+    @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "Long")
     @GetMapping("/list")
     public List<UserDo> list(){
         return userService.listAll(1,10);
