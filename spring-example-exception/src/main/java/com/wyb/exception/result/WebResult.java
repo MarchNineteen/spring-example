@@ -10,6 +10,7 @@ import java.util.Map;
 
 /**
  * web层返回结果
+ *
  * @author Kunzite
  */
 @SuppressWarnings("rawtypes")
@@ -76,12 +77,10 @@ public class WebResult<T> implements Serializable {
     }
 
 
-
     /**
      * 构造函数，转化WebResultEnum对象
      *
      * @param codeEnum 错误码
-     *
      */
     public WebResult(WebResultEnum codeEnum) {
         this(String.valueOf(codeEnum.getCodeNumber()), codeEnum.getDescription(), codeEnum == WebResultEnum.SUCCESS);
@@ -214,7 +213,9 @@ public class WebResult<T> implements Serializable {
     }
 
     public void setErrorMessage(final ErrorMessage errorMessage) {
-        this.errorMessage = new ArrayList<ErrorMessage>(){{add(errorMessage);}};
+        this.errorMessage = new ArrayList<ErrorMessage>() {{
+            add(errorMessage);
+        }};
     }
 
     public T getData() {

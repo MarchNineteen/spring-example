@@ -33,8 +33,6 @@ public class GlobExceptionHandler {
         return webResult;
     }
 
-
-
     @ExceptionHandler(NoAuth.class)
     @ResponseBody
     public WebResult<String> NoAuthError(NoAuth ex) {

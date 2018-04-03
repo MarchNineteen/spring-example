@@ -5,7 +5,7 @@ package com.wyb.exception.exception;
  */
 public class NoWxRequest extends Exception {
 
-    public NoWxRequest(){
+    public NoWxRequest() {
         super("请在微信浏览器内打开");
     }
 }
