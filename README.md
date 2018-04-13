@@ -6,6 +6,7 @@
 - [freemaker springboot集成freemaker及 springboot热部署](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-freemarker) 
 - [aop springAOP面向切面编程](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-aop) 
 - [自定义异常处理解决方案](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-exception)
+- [java test](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-test) 一些java的测试验证demo
 - 计划：
 - [mq spring消息队列](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-mq) 
 - [thread 多线程编程](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-thread) 

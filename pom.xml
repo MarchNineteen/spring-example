@@ -20,6 +20,7 @@
     <module>spring-example-aop</module>
     <module>spring-example-thread</module>
     <module>spring-example-exception</module>
+    <module>spring-example-test</module>
   </modules>
 
   <properties>
