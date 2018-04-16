@@ -21,6 +21,7 @@
     <module>spring-example-thread</module>
     <module>spring-example-exception</module>
     <module>spring-example-test</module>
+    <module>spring-example-shiro</module>
   </modules>
 
   <properties>

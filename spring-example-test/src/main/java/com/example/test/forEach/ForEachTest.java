@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
- * @author wangyb
+ *  for循环解析
+ *
+ * @author kunzite
  */
 public class ForEachTest {
 
