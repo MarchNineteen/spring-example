@@ -16,16 +16,16 @@ public abstract class BaseEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    protected Integer id;
 
     @Column(name = "is_delete")
-    private Integer isDelete = 0;
+    protected Integer isDelete = 0;
 
     @Column(name = "create_time")
-    private Date createTime;
+    protected Date createTime;
 
     @Column(name = "update_time")
-    private Date updateTime;
+    protected Date updateTime;
 
     public Integer getId() {
         return id;

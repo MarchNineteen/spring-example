@@ -1,10 +1,9 @@
 package com.wyb.shiro.service;
 
+import com.github.pagehelper.PageInfo;
 import com.wyb.shiro.dao.model.UserDo;
-
-import java.util.List;
 
 public interface UserService {
 
-    List<UserDo> listByPage();
+    PageInfo<UserDo> listByPage(int pageNum, int pageSize);
 }

@@ -89,12 +89,25 @@
             <!--<columnOverride column="is_delete" property="isDelete" javaType="java.lang.Integer"/>-->
         <!--</table>-->
 
-        <table tableName="menu" domainObjectName="MenuDo">
+        <!--<table tableName="menu" domainObjectName="MenuDo">-->
+            <!--<property name="runtimeSchema" value="shiro"/>-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+            <!--<columnOverride column="is_delete" property="isDelete" javaType="java.lang.Integer"/>-->
+        <!--</table>-->
+
+        <table tableName="role" domainObjectName="RoleDo">
             <property name="runtimeSchema" value="shiro"/>
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-            <!--<columnOverride column="id" property="id" javaType="java.lang.Long" />
-            -->
             <columnOverride column="is_delete" property="isDelete" javaType="java.lang.Integer"/>
+        </table>
+
+        <table tableName="user_role" domainObjectName="UserRoleDo">
+            <property name="runtimeSchema" value="shiro"/>
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="role_menu" domainObjectName="RoleMenuDo">
+            <property name="runtimeSchema" value="shiro"/>
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
 
     </context>
