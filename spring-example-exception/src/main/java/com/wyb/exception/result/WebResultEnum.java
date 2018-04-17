@@ -45,12 +45,10 @@ public enum WebResultEnum {
     NO_LIST_DATA("NO_LIST_DATA", 3000, "暂无信息展示"),
 
     /*插入数据库失败*/
-    INSERT_FAILURE("INSERT_FAILURE",3001,"插入数据库失败"),
+    INSERT_FAILURE("INSERT_FAILURE", 3001, "插入数据库失败"),
 
     /*更新数据库失败*/
-    UPDATE_FAILURE("UPDATE_FAILURE",3002,"插入数据库失败");
-
-
+    UPDATE_FAILURE("UPDATE_FAILURE", 3002, "插入数据库失败");
 
 
     /**
@@ -107,7 +105,6 @@ public enum WebResultEnum {
     public int getCodeNumber() {
         return codeNumber;
     }
-
 
 
 }

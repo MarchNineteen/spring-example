@@ -10,17 +10,25 @@ import com.wyb.exception.result.BizResultEnum;
  */
 public class BizException extends RuntimeException {
 
-    /** serialVersionUID */
+    /**
+     * serialVersionUID
+     */
     private static final long serialVersionUID = -5353102099168631668L;
 
-    /** 结果码 */
-    private String code             = "UNKNOWN";
+    /**
+     * 结果码
+     */
+    private String code = "UNKNOWN";
 
-    /** 数值型结果码 */
-    private int               codeNumber       = 101;
+    /**
+     * 数值型结果码
+     */
+    private int codeNumber = 101;
 
-    /** 异常信息 */
-    private String message          = "未知异常";
+    /**
+     * 异常信息
+     */
+    private String message = "未知异常";
 
     /**
      * 构造方法
@@ -38,7 +46,7 @@ public class BizException extends RuntimeException {
 
     /**
      * 构造方法
-     * 
+     *
      * @param resultCode 错误码
      */
     public BizException(BizResultEnum resultCode) {
@@ -49,8 +57,9 @@ public class BizException extends RuntimeException {
 
     /**
      * 构造方法
-     * @param resultCode	错误码
-     * @param appendMsg		补充错误信息
+     *
+     * @param resultCode 错误码
+     * @param appendMsg  补充错误信息
      */
     public BizException(BizResultEnum resultCode, String appendMsg) {
         this.code = resultCode.getCode();
@@ -69,7 +78,7 @@ public class BizException extends RuntimeException {
 
     /**
      * 构造方法
-     * 
+     *
      * @param cause
      */
     public BizException(Throwable cause) {
@@ -78,7 +87,7 @@ public class BizException extends RuntimeException {
 
     /**
      * 构造方法
-     * 
+     *
      * @param cause
      */
     public BizException(BizResultEnum resultCode, Throwable cause) {
