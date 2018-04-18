@@ -26,4 +26,11 @@ public class UserServiceImpl implements UserService {
         return page;
     }
 
+    @Override
+    public UserDo getByUserName(String userName) {
+        UserDo userDo = new UserDo();
+        userDo.setUsername(userName);
+        return userDoMapper.selectOne(userDo);
+    }
+
 }

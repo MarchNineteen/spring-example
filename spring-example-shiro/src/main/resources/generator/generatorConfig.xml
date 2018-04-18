@@ -4,9 +4,6 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
-
-    <!--导入属性配置 -->
-    <properties resource="application.yml"/>
     <!-- 数据库驱动 -->
     <classPathEntry
             location="C:\Users\user\.m2\repository\mysql\mysql-connector-java\5.1.44/mysql-connector-java-5.1.44.jar"/>
@@ -18,9 +15,6 @@
         <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
             <property name="mappers" value="com.wyb.shiro.dao.BaseMapper"/>
         </plugin>
-        <!-- 生成 JavaBean 对象重写 toString方法 -->
-        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
-
         <!-- optional，旨在创建class时，对注释进行控制-->
         <commentGenerator>
             <property name="suppressDate" value="true"/>

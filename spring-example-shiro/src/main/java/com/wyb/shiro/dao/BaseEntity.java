@@ -1,5 +1,7 @@
 package com.wyb.shiro.dao;
 
+import lombok.Data;
+
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,6 +12,7 @@ import java.util.Date;
 /**
  * @author kunzite
  */
+@Data
 public abstract class BaseEntity implements Serializable {
 
     private static final long serialVersionUID = -1618357536992740779L;
@@ -27,35 +30,4 @@ public abstract class BaseEntity implements Serializable {
     @Column(name = "update_time")
     protected Date updateTime;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Integer getIsDelete() {
-        return isDelete;
-    }
-
-    public void setIsDelete(Integer isDelete) {
-        this.isDelete = isDelete;
-    }
 }

@@ -28,6 +28,26 @@ spring:
     testOnReturn: false
     #配置监控统计拦截的filters，去掉后监控界面sql将无法统计,'wall'用于防火墙
     filters: stat, wall, log4j
+
+  freemarker:
+    cache: false
+    charset: UTF-8
+    check-template-location: true
+    content-type: text/html
+    expose-request-attributes: true
+    expose-session-attributes: true
+    expose-spring-macro-helpers: true
+    request-context-attribute: request
+    #default-encoding: UTF-8
+    settings.template_update_delay: 0
+    settings.number_format: 0.##########
+    settings.datetime_format: yyyy-MM-dd HH:mm:ss
+    settings.classic_compatible: true
+    settings.template_exception_handler: ignore
+    suffix: .ftl
+    templateEncoding: UTF-8
+    templateLoaderPath: classpath:/templates/
+
 mybatis:
   mapper-locations: classpath:mapping/*Mapper.xml
   type-aliases-package: com.wyb.shiro.dao.model
