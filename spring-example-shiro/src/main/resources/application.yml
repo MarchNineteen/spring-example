@@ -67,5 +67,7 @@ pagehelper:
 
 
 #自定义日志
-#logging:
+logging:
+  level:
+    root: info
 #  config: classpath:log4j2/log4j2.xml

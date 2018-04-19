@@ -30,6 +30,7 @@ public class UserServiceImpl implements UserService {
     public UserDo getByUserName(String userName) {
         UserDo userDo = new UserDo();
         userDo.setUsername(userName);
+        userDo.setIsDelete(0);
         return userDoMapper.selectOne(userDo);
     }
 

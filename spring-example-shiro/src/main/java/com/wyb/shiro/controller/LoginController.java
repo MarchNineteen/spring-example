@@ -6,9 +6,7 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author kunzite
@@ -18,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class LoginController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @ResponseBody
     public String login(
             @RequestParam(value = "username", required = true) String userName,
             @RequestParam(value = "password", required = true) String password,
@@ -36,5 +35,10 @@ public class LoginController {
             return "{\"Msg\":\"您的账号或密码输入错误\",\"state\":\"failed\"}";
         }
         return "{\"Msg\":\"登陆成功\",\"state\":\"success\"}";
+    }
+
+    @GetMapping(value = "/index")
+    public String index() {
+        return "login";
     }
 }
