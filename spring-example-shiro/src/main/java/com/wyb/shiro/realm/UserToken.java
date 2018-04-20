@@ -7,14 +7,19 @@ import org.apache.shiro.authc.AuthenticationToken;
  */
 public class UserToken implements AuthenticationToken {
 
+    private String token;
+
+    public UserToken(String password) {
+        this.token = password;
+    }
 
     @Override
     public Object getPrincipal() {
-        return null;
+        return token;
     }
 
     @Override
     public Object getCredentials() {
-        return null;
+        return token;
     }
 }

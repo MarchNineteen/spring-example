@@ -71,3 +71,9 @@ logging:
   level:
     root: info
 #  config: classpath:log4j2/log4j2.xml
+
+# jwt
+jwt:
+  header: Authorization
+  secret: wangyb
+  issuer: WANG YINGBO

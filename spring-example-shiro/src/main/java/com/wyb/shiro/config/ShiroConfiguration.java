@@ -1,7 +1,6 @@
 package com.wyb.shiro.config;
 
 import com.wyb.shiro.realm.ShiroRealm;
-import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
@@ -39,16 +38,16 @@ public class ShiroConfiguration {
      * 防止密码在数据库里明码保存，当然在登陆认证的时候，
      * 这个类也负责对form里输入的密码进行编码。
      */
-    @Bean(name = "hashedCredentialsMatcher")
-    public HashedCredentialsMatcher hashedCredentialsMatcher() {
-        HashedCredentialsMatcher credentialsMatcher = new HashedCredentialsMatcher();
-        //散列算法:这里使用MD5算法;
-        credentialsMatcher.setHashAlgorithmName("MD5");
-        //散列的次数，比如散列两次，相当于 md5(md5(""));
-        credentialsMatcher.setHashIterations(2);
-        credentialsMatcher.setStoredCredentialsHexEncoded(true);
-        return credentialsMatcher;
-    }
+//    @Bean(name = "hashedCredentialsMatcher")
+//    public HashedCredentialsMatcher hashedCredentialsMatcher() {
+//        HashedCredentialsMatcher credentialsMatcher = new HashedCredentialsMatcher();
+//        //散列算法:这里使用MD5算法;
+//        credentialsMatcher.setHashAlgorithmName("MD5");
+//        //散列的次数，比如散列两次，相当于 md5(md5(""));
+//        credentialsMatcher.setHashIterations(2);
+//        credentialsMatcher.setStoredCredentialsHexEncoded(true);
+//        return credentialsMatcher;
+//    }
 
     /**
      * ShiroRealm，这是个自定义的认证类，继承自AuthorizingRealm，

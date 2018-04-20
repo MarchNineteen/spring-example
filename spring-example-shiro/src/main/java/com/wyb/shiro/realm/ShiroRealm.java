@@ -5,9 +5,13 @@ import com.wyb.shiro.dao.model.RoleDo;
 import com.wyb.shiro.dao.model.UserDo;
 import com.wyb.shiro.service.MenuService;
 import com.wyb.shiro.service.UserService;
+import com.wyb.shiro.utils.JWTUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.*;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.AuthenticationInfo;
+import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -28,6 +32,7 @@ public class ShiroRealm extends AuthorizingRealm {
 
     /**
      * 授权方法，为当前登录的Subject授予角色和权限
+     *
      * @see：本例中该方法的调用时机为需授权资源被访问时
      * @see ：如果连续访问同一个URL（比如刷新），该方法不会被重复调用，Shiro有一个时间间隔（系统提供三种cache：内存，ehcache ，redis，在ehcache-shiro.xml中配置），超过这个时间间隔再刷新页面，该方法会被执行
      */
@@ -62,28 +67,33 @@ public class ShiroRealm extends AuthorizingRealm {
         return null;
     }
 
+    @Override
+    public boolean supports(AuthenticationToken token) {
+        return token instanceof UserToken;
+    }
+
     /**
      * 认证
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         log.info("doGetAuthenticationInfo +" + authenticationToken.toString());
+        String token = (String) authenticationToken.getCredentials();
+        String userName = JWTUtil.getUsername(token);
+        log.info(userName);
 
-        UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
-        String userName = token.getUsername();
-        log.info(userName + token.getPassword());
+        UserDo user = userService.getByUserName(userName);
+        if (user == null) {
+            throw new AuthenticationException("User didn't existed!");
 
-        UserDo user = userService.getByUserName(token.getUsername());
-        if (user != null) {
-//            byte[] salt = Encodes.decodeHex(user.getSalt());
-//            ShiroUser shiroUser=new ShiroUser(user.getId(), user.getLoginName(), user.getName());
-            //设置用户session
-            Session session = SecurityUtils.getSubject().getSession();
-            session.setAttribute("user", user);
-            return new SimpleAuthenticationInfo(userName, user.getPassword(), getName());
-        } else {
-            return null;
         }
+        if (!JWTUtil.verify(token, userName, user.getPassword())) {
+            throw new AuthenticationException("Username or password error");
+        }
+        //设置用户session
+        Session session = SecurityUtils.getSubject().getSession();
+        session.setAttribute("user", user);
+        return new SimpleAuthenticationInfo(userName, user.getPassword(), getName());
 //        return null;
     }
 }
