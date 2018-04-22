@@ -10,9 +10,6 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 /**
  * @author kunzite
  */
@@ -23,12 +20,10 @@ public class LoginController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
     public WebResult login(
-            HttpServletRequest request,HttpServletResponse response,
             @RequestParam(value = "username", required = true) String userName,
-            @RequestParam(value = "password", required = true) String password,
-            @RequestParam(value = "rememberMe", required = true, defaultValue = "false") boolean rememberMe
+            @RequestParam(value = "password", required = true) String password
     ) {
-        log.info("==========" + userName + password + rememberMe);
+        log.info("==========" + userName + password);
         Subject subject = SecurityUtils.getSubject();
 //        UsernamePasswordToken token = new UsernamePasswordToken(userName, password);
 //        token.setRememberMe(rememberMe);

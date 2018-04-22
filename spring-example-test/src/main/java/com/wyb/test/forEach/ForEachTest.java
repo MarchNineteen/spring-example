@@ -1,10 +1,10 @@
-package com.example.test.forEach;
+package com.wyb.test.forEach;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
- *  for循环解析
+ * for循环解析
  *
  * @author kunzite
  */
