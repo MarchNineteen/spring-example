@@ -68,13 +68,14 @@
             },
             success: function (data) {
                 // alert(data);
-                var data = $.parseJSON(data);
+//                var data = $.parseJSON(data);
 
-                if (data.msg == "success") {
-                    window.location.href = data.url
+                if (data.success) {
+                    window.location.href = "user/list";
                 } else {
                     // alert(data.reason);
-                    $("#loginError").html(data.returnStr);
+                    var error = data.errorMessage;
+                    $("#loginError").html(error[0]);
 
                 }
 

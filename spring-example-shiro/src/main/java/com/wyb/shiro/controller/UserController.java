@@ -18,7 +18,9 @@ public class UserController {
     private UserService userService;
 
     @GetMapping(value = "/list")
-    public PageInfo<UserDo> listByPage(@RequestParam(value = "pageNum",defaultValue = "0") int pageNum, @RequestParam(value = "pageSize",defaultValue = "20") int pageSize) {
+    public PageInfo<UserDo> listByPage(
+            @RequestParam(value = "pageNum",defaultValue = "0") int pageNum,
+            @RequestParam(value = "pageSize",defaultValue = "20") int pageSize) {
         return userService.listByPage(pageNum, pageSize);
     }
 }

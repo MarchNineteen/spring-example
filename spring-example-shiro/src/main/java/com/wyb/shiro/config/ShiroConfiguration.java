@@ -1,6 +1,8 @@
 package com.wyb.shiro.config;
 
+import com.wyb.shiro.filter.JWTFilter;
 import com.wyb.shiro.realm.ShiroRealm;
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
@@ -38,16 +40,16 @@ public class ShiroConfiguration {
      * 防止密码在数据库里明码保存，当然在登陆认证的时候，
      * 这个类也负责对form里输入的密码进行编码。
      */
-//    @Bean(name = "hashedCredentialsMatcher")
-//    public HashedCredentialsMatcher hashedCredentialsMatcher() {
-//        HashedCredentialsMatcher credentialsMatcher = new HashedCredentialsMatcher();
-//        //散列算法:这里使用MD5算法;
-//        credentialsMatcher.setHashAlgorithmName("MD5");
-//        //散列的次数，比如散列两次，相当于 md5(md5(""));
-//        credentialsMatcher.setHashIterations(2);
-//        credentialsMatcher.setStoredCredentialsHexEncoded(true);
-//        return credentialsMatcher;
-//    }
+    @Bean(name = "hashedCredentialsMatcher")
+    public HashedCredentialsMatcher hashedCredentialsMatcher() {
+        HashedCredentialsMatcher credentialsMatcher = new HashedCredentialsMatcher();
+        //散列算法:这里使用MD5算法;
+        credentialsMatcher.setHashAlgorithmName("MD5");
+        //散列的次数，比如散列两次，相当于 md5(md5(""));
+        credentialsMatcher.setHashIterations(2);
+        credentialsMatcher.setStoredCredentialsHexEncoded(true);
+        return credentialsMatcher;
+    }
 
     /**
      * ShiroRealm，这是个自定义的认证类，继承自AuthorizingRealm，
@@ -107,19 +109,31 @@ public class ShiroConfiguration {
         Map<String, Filter> filters = new LinkedHashMap<String, Filter>();
         LogoutFilter logoutFilter = new LogoutFilter();
         logoutFilter.setRedirectUrl("/login");
+        // 添加自己的过滤器并且取名为jwt
+        filters.put("jwt",new JWTFilter());
 //        filters.put("logout",null);
         shiroFilterFactoryBean.setFilters(filters);
 
         Map<String, String> filterChainDefinitionManager = new LinkedHashMap<String, String>();
+        //配置退出 过滤器,其中的具体的退出代码Shiro已经替我们实现了
         filterChainDefinitionManager.put("/logout", "logout");
-        filterChainDefinitionManager.put("/user/**", "authc,roles[ROLE_USER]");
+//        filterChainDefinitionManager.put("/user/**", "authc,roles[ROLE_USER]");
         filterChainDefinitionManager.put("/events/**", "authc,roles[ROLE_ADMIN]");
 //        filterChainDefinitionManager.put("/user/edit/**", "authc,perms[user:edit]");// 这里为了测试，固定写死的值，也可以从数据库或其他配置中读取
-        filterChainDefinitionManager.put("/**", "anon");
+        //<!-- 过滤链定义，从上向下顺序执行，一般将/**放在最为下边 -->:这是一个坑呢，一不小心代码就不好使了;
+        //<!-- authc:所有url都必须认证通过才可以访问; anon:所有url都可以匿名访问-->
+        filterChainDefinitionManager.put("login","anon");
+        filterChainDefinitionManager.put("/user/**", "jwt");
+        // 静态资源
+        filterChainDefinitionManager.put("/css/**", "anon");
+        filterChainDefinitionManager.put("/img/**", "anon");
+        filterChainDefinitionManager.put("/js/**", "anon");
+        filterChainDefinitionManager.put("/favicon.ico", "anon");
+//        filterChainDefinitionManager.put("/**", "anon");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionManager);
 
 
-        shiroFilterFactoryBean.setSuccessUrl("/");
+//        shiroFilterFactoryBean.setSuccessUrl("/");
         shiroFilterFactoryBean.setUnauthorizedUrl("/403");
         return shiroFilterFactoryBean;
     }
