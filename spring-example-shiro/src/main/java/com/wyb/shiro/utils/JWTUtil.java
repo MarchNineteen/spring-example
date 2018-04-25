@@ -5,7 +5,9 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.wyb.shiro.config.JWTConfig;
 
+import javax.annotation.Resource;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
 
@@ -13,6 +15,9 @@ import java.util.Date;
  * @author kunizte
  */
 public class JWTUtil {
+
+    @Resource
+    private JWTConfig jwtConfig;
 
     // 过期时间5分钟
     private static final long EXPIRE_TIME = 5 * 60 * 1000;
@@ -24,11 +29,12 @@ public class JWTUtil {
      * @param secret 用户的密码
      * @return 是否正确
      */
-    public static boolean verify(String token, String username, String secret) {
+    public static boolean verify(String token, Integer uid, String secret, String issuer) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             JWTVerifier verifier = JWT.require(algorithm)
-                    .withClaim("username", username)
+                    .withClaim("uid", uid)
+                    .withIssuer(issuer)
                     .build();
             verifier.verify(token);
             return true;
@@ -40,12 +46,12 @@ public class JWTUtil {
     /**
      * 获得token中的信息无需secret解密也能获得
      *
-     * @return token中包含的用户名
+     * @return token中包含的用户id
      */
-    public static String getUsername(String token) {
+    public static Integer getUid(String token) {
         try {
             DecodedJWT jwt = JWT.decode(token);
-            return jwt.getClaim("username").asString();
+            return jwt.getClaim("uid").asInt();
         } catch (JWTDecodeException e) {
             return null;
         }
@@ -54,17 +60,19 @@ public class JWTUtil {
     /**
      * 生成签名（token）,5min后过期
      *
-     * @param username 用户名
-     * @param secret   用户的密码
+     * @param uid    用户Id
+     * @param secret 用户的密码(或者配置的jwt密码)
+     * @param issuer JWT签发者
      * @return 加密的token
      */
-    public static String sign(String username, String secret) {
+    public static String sign(Integer uid, String secret, String issuer) {
         try {
             Date date = new Date(System.currentTimeMillis() + EXPIRE_TIME);
             Algorithm algorithm = Algorithm.HMAC256(secret);
             // 附带username信息
             return JWT.create()
-                    .withClaim("username", username)
+                    .withIssuer(issuer)
+                    .withClaim("uid", uid)
                     .withExpiresAt(date)
                     .sign(algorithm);
         } catch (UnsupportedEncodingException e) {

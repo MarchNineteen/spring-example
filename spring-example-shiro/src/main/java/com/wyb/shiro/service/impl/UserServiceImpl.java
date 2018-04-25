@@ -34,4 +34,12 @@ public class UserServiceImpl implements UserService {
         return userDoMapper.selectOne(userDo);
     }
 
+    @Override
+    public UserDo getById(Integer uid) {
+        UserDo userDo = new UserDo();
+        userDo.setId(uid);
+        userDo.setIsDelete(0);
+        return userDoMapper.selectOne(userDo);
+    }
+
 }

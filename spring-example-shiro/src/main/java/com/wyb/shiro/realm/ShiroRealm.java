@@ -17,6 +17,7 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.omg.PortableInterceptor.INACTIVE;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -79,17 +80,17 @@ public class ShiroRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         log.info("doGetAuthenticationInfo +" + authenticationToken.toString());
         String token = (String) authenticationToken.getCredentials();
-        String userName = JWTUtil.getUsername(token);
-        log.info(userName);
+        Integer uid = JWTUtil.getUid(token);
+        log.info(String.valueOf(uid));
 
-        UserDo user = userService.getByUserName(userName);
+        UserDo user = userService.getById(uid);
         if (user == null) {
             throw new AuthenticationException("User didn't existed!");
 
         }
-        if (!JWTUtil.verify(token, userName, user.getPassword())) {
-            throw new AuthenticationException("Username or password error");
-        }
+//        if (!JWTUtil.verify(token, uid, user.getPassword())) {
+//            throw new AuthenticationException("Username or password error");
+//        }
         //设置用户session
         Session session = SecurityUtils.getSubject().getSession();
         session.setAttribute("user", user);
