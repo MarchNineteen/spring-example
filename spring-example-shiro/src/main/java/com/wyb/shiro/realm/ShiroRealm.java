@@ -1,5 +1,6 @@
 package com.wyb.shiro.realm;
 
+import com.wyb.shiro.config.JWTConfig;
 import com.wyb.shiro.dao.model.MenuDo;
 import com.wyb.shiro.dao.model.RoleDo;
 import com.wyb.shiro.dao.model.UserDo;
@@ -17,11 +18,12 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.omg.PortableInterceptor.INACTIVE;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.annotation.Resource;
+
 /**
- * @author kunzite
+ * @author Kunzite
  */
 @Slf4j
 public class ShiroRealm extends AuthorizingRealm {
@@ -30,6 +32,8 @@ public class ShiroRealm extends AuthorizingRealm {
     private UserService userService;
     @Autowired
     private MenuService menuService;
+    @Resource
+    private JWTConfig jwtConfig;
 
     /**
      * 授权方法，为当前登录的Subject授予角色和权限
@@ -78,8 +82,10 @@ public class ShiroRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-        log.info("doGetAuthenticationInfo +" + authenticationToken.toString());
+        log.info("进行 shiro 认证 doGetAuthenticationInfo +" + authenticationToken.toString());
         String token = (String) authenticationToken.getCredentials();
+        log.info("验证当前Subject时获取到token为：" + token);
+
         Integer uid = JWTUtil.getUid(token);
         log.info(String.valueOf(uid));
 
@@ -88,9 +94,9 @@ public class ShiroRealm extends AuthorizingRealm {
             throw new AuthenticationException("User didn't existed!");
 
         }
-//        if (!JWTUtil.verify(token, uid, user.getPassword())) {
-//            throw new AuthenticationException("Username or password error");
-//        }
+        if (!JWTUtil.verify(token, uid, user.getPassword(),jwtConfig.getIssure())) {
+            throw new AuthenticationException("Username or password error");
+        }
         //设置用户session
         Session session = SecurityUtils.getSubject().getSession();
         session.setAttribute("user", user);

@@ -5,7 +5,7 @@ import com.wyb.shiro.dao.model.MenuDo;
 import java.util.List;
 
 /**
- * @author kunzite
+ * @author Kunzite
  */
 public interface MenuService {
 

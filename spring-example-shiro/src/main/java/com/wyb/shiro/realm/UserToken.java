@@ -3,7 +3,7 @@ package com.wyb.shiro.realm;
 import org.apache.shiro.authc.AuthenticationToken;
 
 /**
- * @author kunzite
+ * @author Kunzite
  */
 public class UserToken implements AuthenticationToken {
 

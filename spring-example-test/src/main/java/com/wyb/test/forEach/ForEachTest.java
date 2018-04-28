@@ -6,7 +6,7 @@ import java.util.Iterator;
 /**
  * for循环解析
  *
- * @author kunzite
+ * @author Kunzite
  */
 public class ForEachTest {
 

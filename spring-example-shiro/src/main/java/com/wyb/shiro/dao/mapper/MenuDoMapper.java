@@ -4,7 +4,7 @@ import com.wyb.shiro.dao.BaseMapper;
 import com.wyb.shiro.dao.model.MenuDo;
 
 /**
- * @author kunzite
+ * @author Kunzite
  */
 public interface MenuDoMapper extends BaseMapper<MenuDo> {
 }

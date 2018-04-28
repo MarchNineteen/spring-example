@@ -6,8 +6,10 @@
 - [freemaker springboot集成freemaker及 springboot热部署](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-freemarker) 
 - [aop springAOP面向切面编程](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-aop) 
 - [自定义异常处理解决方案](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-exception)
+- [shiro](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-shiro) springboot集成tkmybatis，shiro，jwt 实现权限登录系统
 - [java test](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-test) 一些java的测试验证demo
 - 计划：
+- [JavaSE](https://github.com/MarchNineteen/spring-example/tree/master/java-se) JavaSE学习
 - [mq spring消息队列](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-mq) 
 - [thread 多线程编程](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-thread) 
 - 日志文件配置详解

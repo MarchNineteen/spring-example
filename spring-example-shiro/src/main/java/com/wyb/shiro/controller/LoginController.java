@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 
 /**
- * @author kunzite
+ * @author Kunzite
  */
 @Slf4j
 @Controller
@@ -47,6 +47,8 @@ public class LoginController {
             subject.login(new UserToken(token));
         } catch (AuthenticationException e) {
             e.printStackTrace();
+            WebResult webResult = WebResult.illegalArgument("username",e.getMessage());
+            return webResult;
 //            rediect.addFlashAttribute("errorText", "您的账号或密码输入错误!");
 //            return "{\"Msg\":\"您的账号或密码输入错误\",\"state\":\"failed\"}";
         }

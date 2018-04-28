@@ -105,6 +105,13 @@ public class WebResult<T> implements Serializable {
         return success(null);
     }
 
+    public static <T> WebResult<T> illegalArgument(String field, String message) {
+        WebResult<T> result = new WebResult<T>();
+        List<ErrorMessage> errorMessages = new ArrayList<ErrorMessage>();
+        errorMessages.add(new ErrorMessage(field, "", message));
+        result.setErrorMessage(errorMessages);
+        return result;
+    }
 
     public String getResultCode() {
         return resultCode;

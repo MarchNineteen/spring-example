@@ -1,27 +1,44 @@
 package com.wyb.shiro.config;
 
+import com.wyb.shiro.config.properties.*;
 import com.wyb.shiro.filter.JWTFilter;
 import com.wyb.shiro.realm.ShiroRealm;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
-import org.apache.shiro.cache.ehcache.EhCacheManager;
+import org.apache.shiro.cache.CacheManager;
+import org.apache.shiro.cache.MemoryConstrainedCacheManager;
+import org.apache.shiro.mgt.DefaultSecurityManager;
+import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.filter.authc.LogoutFilter;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 
+import javax.annotation.Resource;
 import javax.servlet.Filter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * @author kunzite
+ * @author Kunzite
  */
+@EnableConfigurationProperties({
+        ShiroProperties.class, ShiroSignInProperties.class,
+        ShiroCookieProperties.class, ShiroSessionProperties.class,
+        ShiroJdbcRealmProperties.class
+})
 @Configuration
 public class ShiroConfiguration {
+
+    @Resource
+    private ShiroProperties properties;
+    @Resource
+    private ShiroSignInProperties signInProperties;
 
     /**
      * LifecycleBeanPostProcessor，这是个DestructionAwareBeanPostProcessor的子类，
@@ -40,7 +57,7 @@ public class ShiroConfiguration {
      * 防止密码在数据库里明码保存，当然在登陆认证的时候，
      * 这个类也负责对form里输入的密码进行编码。
      */
-    @Bean(name = "hashedCredentialsMatcher")
+    @Bean(name = "credentialsMatcher")
     public HashedCredentialsMatcher hashedCredentialsMatcher() {
         HashedCredentialsMatcher credentialsMatcher = new HashedCredentialsMatcher();
         //散列算法:这里使用MD5算法;
@@ -67,21 +84,12 @@ public class ShiroConfiguration {
      * SecurityManager，权限管理，这个类组合了登陆，登出，权限，session的处理，是个比较重要的类。
      */
     @Bean(name = "securityManager")
-    public DefaultWebSecurityManager securityManager() {
+    @DependsOn(value = {"shiroCacheManager", "rememberMeManager", "mainRealm"})
+    public DefaultWebSecurityManager securityManager(CacheManager cacheManager) {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         securityManager.setRealm(shiroRealm());
-        securityManager.setCacheManager(ehCacheManager());
+        securityManager.setCacheManager(cacheManager);
         return securityManager;
-    }
-
-    /**
-     * EhCacheManager，缓存管理，用户登陆成功后，把用户信息和权限信息缓存起来，
-     * 然后每次用户请求时，放入用户的session中，如果不设置这个bean，每个请求都会查询一次数据库。
-     */
-    @Bean(name = "ehCacheManager")
-    @DependsOn("lifecycleBeanPostProcessor")
-    public EhCacheManager ehCacheManager() {
-        return new EhCacheManager();
     }
 
     /**
@@ -91,9 +99,10 @@ public class ShiroConfiguration {
      * 使用代理方式;所以需要开启代码支持;
      */
     @Bean
-    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor() {
+    @DependsOn(value = {"securityManager"})
+    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(DefaultSecurityManager securityManager) {
         AuthorizationAttributeSourceAdvisor aASA = new AuthorizationAttributeSourceAdvisor();
-        aASA.setSecurityManager(securityManager());
+        aASA.setSecurityManager(securityManager);
         return aASA;
     }
 
@@ -102,15 +111,22 @@ public class ShiroConfiguration {
      * 它主要保持了三项数据，securityManager，filters，filterChainDefinitionManager。
      */
     @Bean(name = "shiroFilter")
-    public ShiroFilterFactoryBean shiroFilterFactoryBean() {
+    public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
-        shiroFilterFactoryBean.setSecurityManager(securityManager());
+        shiroFilterFactoryBean.setSecurityManager(securityManager);
 
         Map<String, Filter> filters = new LinkedHashMap<String, Filter>();
         LogoutFilter logoutFilter = new LogoutFilter();
         logoutFilter.setRedirectUrl("/login");
         // 添加自己的过滤器并且取名为jwt
         filters.put("jwt",new JWTFilter());
+        // 登录过滤器
+//        FormSignInFilter filter = new FormSignInFilter();
+//        filter.setLoginUrl(properties.getLoginUrl());
+//        filter.setSuccessUrl(properties.getSuccessUrl());
+//        filter.setUsernameParam(signInProperties.getUserParam());
+//        filter.setPasswordParam(signInProperties.getPasswordParam());
+//        filter.setRememberMeParam(signInProperties.getRememberMeParam());
 //        filters.put("logout",null);
         shiroFilterFactoryBean.setFilters(filters);
 
@@ -132,9 +148,86 @@ public class ShiroConfiguration {
 //        filterChainDefinitionManager.put("/**", "anon");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionManager);
 
-
 //        shiroFilterFactoryBean.setSuccessUrl("/");
         shiroFilterFactoryBean.setUnauthorizedUrl("/403");
         return shiroFilterFactoryBean;
     }
+
+    /****************************** shiro cache start ********************************/
+
+    /**
+     * (基于内存的)用户授权信息Cache
+     * @ConditionalOnMissingBean（仅仅在当前上下文中不存在某个对象时，才会实例化一个Bean）
+     */
+    @Bean(name = "shiroCacheManager")
+    @ConditionalOnMissingBean(name = "shiroCacheManager")
+    public CacheManager memoryCacheManager() {
+        return new MemoryConstrainedCacheManager();
+    }
+
+    /**
+     * (基于redis的)用户授权信息Cache
+     */
+//    @Bean(name = "shiroCacheManager")
+//    @ConditionalOnMissingBean(name="shiroCacheManager")
+//    public CacheManager redisCacheManager(RedisTemplate<String, Object> redisTemplate) {
+//        return new RedisCacheManager(redisTemplate);
+//    }
+
+    /**
+     * (基于ehcache的)用户授权信息Cache
+     */
+//    @Bean(name = "shiroCacheManager")
+//    @ConditionalOnClass(name = {"org.apache.shiro.cache.ehcache.EhCacheManager"})
+//    @ConditionalOnMissingBean(name = "shiroCacheManager")
+//    public CacheManager ehcacheCacheManager() {
+//        EhCacheManager ehCacheManager = new EhCacheManager();
+//        ShiroProperties.Ehcache ehcache = properties.getEhcache();
+//        if (ehcache.getCacheManagerConfigFile() != null) {
+//            ehCacheManager.setCacheManagerConfigFile(ehcache.getCacheManagerConfigFile());
+//        }
+//        return ehCacheManager;
+//    }
+
+    /**
+     * EhCacheManager，缓存管理，用户登陆成功后，把用户信息和权限信息缓存起来，
+     * 然后每次用户请求时，放入用户的session中，如果不设置这个bean，每个请求都会查询一次数据库。
+     */
+//    @Bean(name = "ehCacheManager")
+//    @DependsOn("lifecycleBeanPostProcessor")
+//    public EhCacheManager ehCacheManager() {
+//        return new EhCacheManager();
+//    }
+
+    /****************************** shiro cache end ********************************/
+
+    /****************************** shiro session start ********************************/
+
+    /**
+     *
+     * 注释掉该方法时 ，shiro的登录会话session由ehcache保持。
+     * 打开该方法时，shiro的登录回话session由redis保持。
+     * @paramjedisShiroSessionRepository
+     * @return
+     */
+//    @Bean
+//    @DependsOn(value = { "jedisShiroSessionRepository" })
+//    public SessionDAO sessionDAO(JedisShiroSessionRepository jedisShiroSessionRepository) {
+//        final CustomShiroSessionDAO customShiroSessionDAO = new CustomShiroSessionDAO();
+//        customShiroSessionDAO.setShiroSessionRepository(jedisShiroSessionRepository);
+//        return customShiroSessionDAO;
+//    }
+
+
+
+//    @Bean
+//    @DependsOn(value = { "objectRedisTemplate" })
+//    public JedisShiroSessionRepository jedisShiroSessionRepository(RedisTemplate<String, Object> objectRedisTemplate) {
+//        final JedisShiroSessionRepository jedisShiroSessionRepository = new JedisShiroSessionRepository();
+//        jedisShiroSessionRepository.setObjectRedisTemplate(objectRedisTemplate);
+//        return jedisShiroSessionRepository;
+//    }
+
+    /****************************** shiro session end ********************************/
+
 }

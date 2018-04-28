@@ -1,7 +1,7 @@
 package com.wyb.shiro.service;
 
 /**
- * @author kunzite
+ * @author Kunzite
  */
 public interface RoleMenuService {
 }

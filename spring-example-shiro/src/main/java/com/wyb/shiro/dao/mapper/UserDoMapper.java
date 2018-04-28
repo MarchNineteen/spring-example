@@ -5,7 +5,7 @@ import com.wyb.shiro.dao.model.UserDo;
 import org.springframework.stereotype.Repository;
 
 /**
- * @author kunzite
+ * @author Kunzite
  */
 @Repository
 public interface UserDoMapper extends BaseMapper<UserDo> {

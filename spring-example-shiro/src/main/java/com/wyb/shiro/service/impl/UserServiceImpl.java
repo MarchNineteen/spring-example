@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 
 /**
- * @author kunzite
+ * @author Kunzite
  */
 @Service
 public class UserServiceImpl implements UserService {

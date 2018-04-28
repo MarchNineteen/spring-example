@@ -10,7 +10,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * @author kunzite
+ * @author Kunzite
  */
 @Service
 public class MenuServiceImpl implements MenuService {
