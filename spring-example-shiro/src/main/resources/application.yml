@@ -18,7 +18,7 @@ spring:
     poolPreparedStatements: true
     maxPoolPreparedStatementPerConnectionSize: 20
     #通过connectionProperties属性来打开mergeSql功能；慢SQL记录
-    #connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=1000
     minIdle: 1
     timeBetweenEvictionRunsMillis: 60000
     minEvictableIdleTimeMillis: 300000
