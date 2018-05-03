@@ -1,7 +1,9 @@
 package com.wyb.shiro.config;
 
 import com.wyb.shiro.config.properties.*;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.crypto.CipherService;
 import org.apache.shiro.io.Serializer;
@@ -27,9 +29,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
+import org.springframework.context.annotation.Import;
 
 import javax.sql.DataSource;
 import java.util.Collection;
@@ -41,13 +45,14 @@ import java.util.Collection;
  */
 //@EnableShiroWebSupport
 //@ConditionalOnWebApplication
-//@Import(ShiroConfiguration.class)
-//@EnableConfigurationProperties({
-//        ShiroProperties.class, ShiroSignInProperties.class,
-//        ShiroCookieProperties.class, ShiroSessionProperties.class,
-//        ShiroJdbcRealmProperties.class
-//})
+@EnableConfigurationProperties({
+        ShiroProperties.class, ShiroSignInProperties.class,
+        ShiroCookieProperties.class, ShiroSessionProperties.class,
+        ShiroJdbcRealmProperties.class
+})
+@Import(ShiroConfiguration.class)
 @Configuration
+@Slf4j
 public class ShiroAutoConfiguration {
 
     @Autowired
@@ -74,7 +79,7 @@ public class ShiroAutoConfiguration {
     @Autowired(required = false)
     private Collection<SessionListener> listeners;
 
-
+    /****************************** shiro Realm start ********************************/
     @Bean(name = "mainRealm")
     @ConditionalOnMissingBean(name = "mainRealm")
     @ConditionalOnProperty(prefix = "shiro.realm.jdbc", name = "enabled", havingValue = "true")
@@ -103,13 +108,28 @@ public class ShiroAutoConfiguration {
     @DependsOn(value = {"lifecycleBeanPostProcessor", "credentialsMatcher"})
     public Realm realm(CredentialsMatcher credentialsMatcher) {
         Class<?> realmClass = properties.getRealmClass();
-        Realm realm = (Realm) BeanUtils.instantiate(realmClass);
+        Realm realm = (Realm) BeanUtils.instantiateClass(realmClass);
         if (realm instanceof AuthenticatingRealm) {
             ((AuthenticatingRealm) realm).setCredentialsMatcher(credentialsMatcher);
         }
         return realm;
     }
+    /**
+     * ShiroRealm，这是个自定义的认证类，继承自AuthorizingRealm，
+     * 负责用户的认证和权限的处理，可以参考JdbcRealm的实现。
+     */
+//    @Bean(name = "shiroRealm")
+//    @DependsOn("lifecycleBeanPostProcessor")
+//    public ShiroRealm shiroRealm() {
+//        log.info("开始加载shiroRealm\n");
+//
+//        ShiroRealm realm = new ShiroRealm();
+////        realm.setCredentialsMatcher(hashedCredentialsMatcher());
+//        return realm;
+//    }
+    /****************************** shiro Realm end ********************************/
 
+    /****************************** shiro RememberMeManager start ********************************/
 
     @Bean
     @ConditionalOnMissingBean(Cookie.class)
@@ -144,6 +164,8 @@ public class ShiroAutoConfiguration {
         return cookieRememberMeManager;
     }
 
+    /****************************** shiro RememberMeManager end ********************************/
+
     @Bean
     @ConditionalOnMissingBean
     public SessionDAO sessionDAO(CacheManager cacheManager) {
@@ -163,6 +185,8 @@ public class ShiroAutoConfiguration {
     @ConditionalOnClass(name = {"org.quartz.Scheduler"})
     @ConditionalOnMissingBean(SessionValidationScheduler.class)
     public SessionValidationScheduler quartzSessionValidationScheduler(DefaultWebSessionManager sessionManager) {
+        log.info("开始加载SessionValidationScheduler\n");
+
         QuartzSessionValidationScheduler quartzSessionValidationScheduler = new QuartzSessionValidationScheduler(sessionManager);
         quartzSessionValidationScheduler.setSessionValidationInterval(shiroSessionProperties.getValidationInterval());
         quartzSessionValidationScheduler.enableSessionValidation();
@@ -177,6 +201,8 @@ public class ShiroAutoConfiguration {
     @DependsOn(value = {"sessionManager"})
     @ConditionalOnMissingBean(SessionValidationScheduler.class)
     public SessionValidationScheduler sessionValidationScheduler(DefaultWebSessionManager sessionManager) {
+        log.info("开始加载SessionValidationScheduler\n");
+
         ExecutorServiceSessionValidationScheduler validationScheduler = new ExecutorServiceSessionValidationScheduler(sessionManager);
         sessionManager.setDeleteInvalidSessions(shiroSessionProperties.isDeleteInvalidSessions());
         sessionManager.setSessionValidationInterval(shiroSessionProperties.getValidationInterval());
@@ -197,6 +223,23 @@ public class ShiroAutoConfiguration {
         return sessionManager;
     }
 
-
+    /**
+     * 凭证匹配器
+     * （由于我们的密码校验交给Shiro的SimpleAuthenticationInfo进行处理了）
+     * HashedCredentialsMatcher，这个类是为了对密码进行编码的，
+     * 防止密码在数据库里明码保存，当然在登陆认证的时候，
+     * 这个类也负责对form里输入的密码进行编码。
+     */
+    @Bean(name = "credentialsMatcher")
+    public HashedCredentialsMatcher hashedCredentialsMatcher() {
+        log.info("开始加载credentialsMatcher\n");
+        HashedCredentialsMatcher credentialsMatcher = new HashedCredentialsMatcher();
+        //散列算法:这里使用MD5算法;
+        credentialsMatcher.setHashAlgorithmName("MD5");
+        //散列的次数，比如散列两次，相当于 md5(md5(""));
+        credentialsMatcher.setHashIterations(2);
+        credentialsMatcher.setStoredCredentialsHexEncoded(true);
+        return credentialsMatcher;
+    }
 
 }

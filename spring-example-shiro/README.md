@@ -11,3 +11,11 @@
 -  ShiroProperties.class只能ShiroAutoConfiguration加载得到，ShiroConfiguration
 一直加载不到，不知道为什么，快疯了（看日志ShiroAutoConfiguration加载时，properties类会加载，
 而ShiroConfiguration加载时却不会去加载properties类）**经测试是lifecycleBeanPostProcessor这个bean的原因 有这个bean就加载不到没有就可以，和他的生命周期有关**
+
+- 错误解决：在lifecycleBeanPostProcessor方法上添加static (要在lifecycleBeanPostProcessor拥有这个方法的类中引入其他配置文件必须加static，不引用则不需要)
+- > https://blog.csdn.net/wuxuyang_7788/article/details/70141812
+
+springboot中的动态代理设置 
+> https://www.cnblogs.com/tuifeideyouran/p/7696055.html
+
+> https://zhuanlan.zhihu.com/p/29161098
