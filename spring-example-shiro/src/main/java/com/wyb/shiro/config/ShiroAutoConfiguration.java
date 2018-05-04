@@ -8,7 +8,6 @@ import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.crypto.CipherService;
 import org.apache.shiro.io.Serializer;
 import org.apache.shiro.mgt.RememberMeManager;
-import org.apache.shiro.realm.AuthenticatingRealm;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.realm.jdbc.JdbcRealm;
 import org.apache.shiro.session.SessionListener;
@@ -99,7 +98,7 @@ public class ShiroAutoConfiguration {
             jdbcRealm.setSaltStyle(shiroJdbcRealmProperties.getSalt());
         }
         jdbcRealm.setDataSource(dataSource);
-        jdbcRealm.setCredentialsMatcher(credentialsMatcher);
+//        jdbcRealm.setCredentialsMatcher(credentialsMatcher);
         return jdbcRealm;
     }
 
@@ -109,9 +108,9 @@ public class ShiroAutoConfiguration {
     public Realm realm(CredentialsMatcher credentialsMatcher) {
         Class<?> realmClass = properties.getRealmClass();
         Realm realm = (Realm) BeanUtils.instantiateClass(realmClass);
-        if (realm instanceof AuthenticatingRealm) {
-            ((AuthenticatingRealm) realm).setCredentialsMatcher(credentialsMatcher);
-        }
+//        if (realm instanceof AuthenticatingRealm) {
+//            ((AuthenticatingRealm) realm).setCredentialsMatcher(credentialsMatcher);
+//        }
         return realm;
     }
     /**
@@ -229,16 +228,17 @@ public class ShiroAutoConfiguration {
      * HashedCredentialsMatcher，这个类是为了对密码进行编码的，
      * 防止密码在数据库里明码保存，当然在登陆认证的时候，
      * 这个类也负责对form里输入的密码进行编码。
+     * 需要使用时，在reaml类中加载这个bean
      */
     @Bean(name = "credentialsMatcher")
     public HashedCredentialsMatcher hashedCredentialsMatcher() {
         log.info("开始加载credentialsMatcher\n");
         HashedCredentialsMatcher credentialsMatcher = new HashedCredentialsMatcher();
         //散列算法:这里使用MD5算法;
-        credentialsMatcher.setHashAlgorithmName("MD5");
+        credentialsMatcher.setHashAlgorithmName(properties.getHashAlgorithmName());
         //散列的次数，比如散列两次，相当于 md5(md5(""));
-        credentialsMatcher.setHashIterations(2);
-        credentialsMatcher.setStoredCredentialsHexEncoded(true);
+        credentialsMatcher.setHashIterations(properties.getHashIterations());
+        credentialsMatcher.setStoredCredentialsHexEncoded(properties.isStoredCredentialsHexEncoded());
         return credentialsMatcher;
     }
 

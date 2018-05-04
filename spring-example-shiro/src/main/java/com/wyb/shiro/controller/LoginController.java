@@ -46,7 +46,7 @@ public class LoginController {
         try {
             subject.login(new UserToken(token));
         } catch (AuthenticationException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
             WebResult webResult = WebResult.illegalArgument("username",e.getMessage());
             return webResult;
 //            rediect.addFlashAttribute("errorText", "您的账号或密码输入错误!");

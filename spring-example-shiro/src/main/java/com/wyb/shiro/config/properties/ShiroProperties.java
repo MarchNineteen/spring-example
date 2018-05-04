@@ -34,7 +34,7 @@ public class ShiroProperties {
 
     private String hashAlgorithmName = "MD5";
 
-    private int hashIterations = 1;
+    private int hashIterations = 0;
 
     /**
      * 密码重试次数上限
