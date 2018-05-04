@@ -7,6 +7,7 @@ import com.wyb.shiro.filter.JWTFilter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.cache.MemoryConstrainedCacheManager;
+import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.mgt.DefaultSecurityManager;
 import org.apache.shiro.mgt.RememberMeManager;
 import org.apache.shiro.mgt.SecurityManager;
@@ -19,6 +20,7 @@ import org.apache.shiro.web.filter.authc.LogoutFilter;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.DependsOn;
@@ -47,7 +49,7 @@ public class ShiroConfiguration {
      */
     @Bean(name = "lifecycleBeanPostProcessor")
     public static LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
-        log.info("开始加载lifecycleBeanPostProcessor\n");
+        log.info("开始加载lifecycleBeanPostProcessor");
         return new LifecycleBeanPostProcessor();
     }
 
@@ -59,7 +61,7 @@ public class ShiroConfiguration {
     @ConditionalOnMissingBean
     @DependsOn("lifecycleBeanPostProcessor")
     public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {
-        log.info("开始加载DefaultAdvisorAutoProxyCreator\n");
+        log.info("开始加载DefaultAdvisorAutoProxyCreator");
         DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator = new DefaultAdvisorAutoProxyCreator();
         // 强制使用cglib，防止重复代理和可能引起代理出错的问题
         // https://zhuanlan.zhihu.com/p/29161098
@@ -77,7 +79,7 @@ public class ShiroConfiguration {
     @ConditionalOnMissingBean
     @DependsOn(value = {"securityManager"})
     public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(DefaultSecurityManager securityManager) {
-        log.info("开始加载AuthorizationAttributeSourceAdvisor\n");
+        log.info("开始加载AuthorizationAttributeSourceAdvisor");
         AuthorizationAttributeSourceAdvisor aASA = new AuthorizationAttributeSourceAdvisor();
         aASA.setSecurityManager(securityManager);
         return aASA;
@@ -92,7 +94,7 @@ public class ShiroConfiguration {
     @DependsOn(value = {"shiroCacheManager", "rememberMeManager", "mainRealm"})
     public DefaultWebSecurityManager securityManager(CacheManager cacheManager, Realm realm,
                                                      RememberMeManager rememberMeManager, SessionManager sessionManager) {
-        log.info("开始加载securityManager\n");
+        log.info("开始加载securityManager");
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         securityManager.setRealm(realm);
         securityManager.setCacheManager(cacheManager);
@@ -107,26 +109,33 @@ public class ShiroConfiguration {
      */
     @Bean(name = "shiroFilter")
     public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager) {
-        log.info("开始加载shiroFilter\n");
-
+        log.info("开始加载shiroFilter");
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
 
+        /******************** 创建过滤器 start **********************/
         Map<String, Filter> filters = new LinkedHashMap<String, Filter>();
+        // 退出过滤器
         LogoutFilter logoutFilter = new LogoutFilter();
-        logoutFilter.setRedirectUrl("/login");
-        // 添加自己的过滤器并且取名为jwt
-        filters.put("jwt", new JWTFilter());
+        logoutFilter.setRedirectUrl("/logout");
+        // jwt过滤器
+        JWTFilter jwtFilter = new JWTFilter();
         // 登录过滤器
-        FormSignInFilter filter = new FormSignInFilter();
-        filter.setLoginUrl(properties.getLoginUrl());
-        filter.setSuccessUrl(properties.getSuccessUrl());
-        filter.setUsernameParam(signInProperties.getUserParam());
-        filter.setPasswordParam(signInProperties.getPasswordParam());
-        filter.setRememberMeParam(signInProperties.getRememberMeParam());
-//        filters.put("logout", null);
-        shiroFilterFactoryBean.setFilters(filters);
+        FormSignInFilter signInFilter = new FormSignInFilter();
+        signInFilter.setLoginUrl(properties.getLoginUrl());
+        signInFilter.setSuccessUrl(properties.getSuccessUrl());
+        signInFilter.setUsernameParam(signInProperties.getUserParam());
+        signInFilter.setPasswordParam(signInProperties.getPasswordParam());
+        signInFilter.setRememberMeParam(signInProperties.getRememberMeParam());
 
+        filters.put("logout", logoutFilter);
+        filters.put("sign", signInFilter);
+        filters.put("jwt", jwtFilter);
+        shiroFilterFactoryBean.setFilters(filters);
+        /******************** 创建过滤器 end **********************/
+
+        // 过滤器过滤哪些url
+        // 自定义url规则 http://shiro.apache.org/web.html#urls-
         Map<String, String> filterChainDefinitionManager = new LinkedHashMap<String, String>();
         //配置退出 过滤器,其中的具体的退出代码Shiro已经替我们实现了
         filterChainDefinitionManager.put("/logout", "logout");
@@ -135,21 +144,19 @@ public class ShiroConfiguration {
 //        filterChainDefinitionManager.put("/user/edit/**", "authc,perms[user:edit]");// 这里为了测试，固定写死的值，也可以从数据库或其他配置中读取
         //<!-- 过滤链定义，从上向下顺序执行，一般将/**放在最为下边 -->:这是一个坑呢，一不小心代码就不好使了;
         //<!-- authc:所有url都必须认证通过才可以访问; anon:所有url都可以匿名访问-->
-        filterChainDefinitionManager.put("login", "anon");
+        filterChainDefinitionManager.put("login", "sign");
         filterChainDefinitionManager.put("/user/**", "jwt");
         // 静态资源
         filterChainDefinitionManager.put("/css/**", "anon");
         filterChainDefinitionManager.put("/img/**", "anon");
         filterChainDefinitionManager.put("/js/**", "anon");
         filterChainDefinitionManager.put("/favicon.ico", "anon");
-//        filterChainDefinitionManager.put("/**", "anon");
+        filterChainDefinitionManager.put("/**", "authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionManager);
-
 //        shiroFilterFactoryBean.setSuccessUrl("/");
         shiroFilterFactoryBean.setUnauthorizedUrl("/403");
         return shiroFilterFactoryBean;
     }
-
 
 //    public FormSignInFilter formSignInFilter() {
 //        FormSignInFilter filter = new FormSignInFilter();
@@ -206,8 +213,7 @@ public class ShiroConfiguration {
     @Bean(name = "shiroCacheManager")
     @ConditionalOnMissingBean(name = "shiroCacheManager")
     public CacheManager memoryCacheManager() {
-        log.info("开始加载MemoryConstrainedCacheManager\n");
-
+        log.info("开始加载MemoryConstrainedCacheManager");
         return new MemoryConstrainedCacheManager();
     }
 
@@ -223,17 +229,18 @@ public class ShiroConfiguration {
     /**
      * (基于ehcache的)用户授权信息Cache
      */
-//    @Bean(name = "shiroCacheManager")
-//    @ConditionalOnClass(name = {"org.apache.shiro.cache.ehcache.EhCacheManager"})
-//    @ConditionalOnMissingBean(name = "shiroCacheManager")
-//    public CacheManager ehcacheCacheManager() {
-//        EhCacheManager ehCacheManager = new EhCacheManager();
-//        ShiroProperties.Ehcache ehcache = properties.getEhcache();
-//        if (ehcache.getCacheManagerConfigFile() != null) {
-//            ehCacheManager.setCacheManagerConfigFile(ehcache.getCacheManagerConfigFile());
-//        }
-//        return ehCacheManager;
-//    }
+    @Bean(name = "shiroCacheManager")
+    @ConditionalOnClass(name = {"org.apache.shiro.cache.ehcache.EhCacheManager"})
+    @ConditionalOnMissingBean(name = "shiroCacheManager")
+    public CacheManager ehcacheCacheManager() {
+        log.info("开始加载EhCacheManager");
+        EhCacheManager ehCacheManager = new EhCacheManager();
+        ShiroProperties.Ehcache ehcache = properties.getEhcache();
+        if (ehcache.getCacheManagerConfigFile() != null) {
+            ehCacheManager.setCacheManagerConfigFile(ehcache.getCacheManagerConfigFile());
+        }
+        return ehCacheManager;
+    }
 
     /**
      * EhCacheManager，缓存管理，用户登陆成功后，把用户信息和权限信息缓存起来，

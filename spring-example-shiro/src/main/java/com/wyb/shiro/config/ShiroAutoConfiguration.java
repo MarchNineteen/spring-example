@@ -84,6 +84,7 @@ public class ShiroAutoConfiguration {
     @ConditionalOnProperty(prefix = "shiro.realm.jdbc", name = "enabled", havingValue = "true")
     @DependsOn(value = {"dataSource", "lifecycleBeanPostProcessor", "credentialsMatcher"})
     public Realm jdbcRealm(DataSource dataSource, CredentialsMatcher credentialsMatcher) {
+        log.info("开始加载jdbcRealm");
         JdbcRealm jdbcRealm = new JdbcRealm();
         if (shiroJdbcRealmProperties.getAuthenticationQuery() != null) {
             jdbcRealm.setAuthenticationQuery(shiroJdbcRealmProperties.getAuthenticationQuery());
@@ -106,6 +107,7 @@ public class ShiroAutoConfiguration {
     @ConditionalOnMissingBean(name = "mainRealm")
     @DependsOn(value = {"lifecycleBeanPostProcessor", "credentialsMatcher"})
     public Realm realm(CredentialsMatcher credentialsMatcher) {
+        log.info("开始加载自定义Realm");
         Class<?> realmClass = properties.getRealmClass();
         Realm realm = (Realm) BeanUtils.instantiateClass(realmClass);
 //        if (realm instanceof AuthenticatingRealm) {
@@ -120,7 +122,7 @@ public class ShiroAutoConfiguration {
 //    @Bean(name = "shiroRealm")
 //    @DependsOn("lifecycleBeanPostProcessor")
 //    public ShiroRealm shiroRealm() {
-//        log.info("开始加载shiroRealm\n");
+//        log.info("开始加载shiroRealm");
 //
 //        ShiroRealm realm = new ShiroRealm();
 ////        realm.setCredentialsMatcher(hashedCredentialsMatcher());
@@ -133,6 +135,7 @@ public class ShiroAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean(Cookie.class)
     public Cookie rememberMeCookie() {
+        log.info("开始加载Cookie");
         SimpleCookie rememberMeCookie = new SimpleCookie();
         rememberMeCookie.setName(signInProperties.getRememberMeParam());
         rememberMeCookie.setMaxAge(shiroCookieProperties.getMaxAge());
@@ -146,6 +149,7 @@ public class ShiroAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean(RememberMeManager.class)
     public RememberMeManager rememberMeManager(Cookie cookie) {
+        log.info("开始加载RememberMeManager");
         CookieRememberMeManager cookieRememberMeManager = new CookieRememberMeManager();
         cookieRememberMeManager.setCookie(cookie);
         cookieRememberMeManager.setCipherService(cipherService);
@@ -168,6 +172,7 @@ public class ShiroAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean
     public SessionDAO sessionDAO(CacheManager cacheManager) {
+        log.info("开始加载sessionDAO");
         EnterpriseCacheSessionDAO sessionDAO = new EnterpriseCacheSessionDAO();
         sessionDAO.setActiveSessionsCacheName(shiroSessionProperties.getActiveSessionsCacheName());
         Class<? extends SessionIdGenerator> idGenerator = shiroSessionProperties.getIdGenerator();
@@ -184,8 +189,7 @@ public class ShiroAutoConfiguration {
     @ConditionalOnClass(name = {"org.quartz.Scheduler"})
     @ConditionalOnMissingBean(SessionValidationScheduler.class)
     public SessionValidationScheduler quartzSessionValidationScheduler(DefaultWebSessionManager sessionManager) {
-        log.info("开始加载SessionValidationScheduler\n");
-
+        log.info("开始加载SessionValidationScheduler");
         QuartzSessionValidationScheduler quartzSessionValidationScheduler = new QuartzSessionValidationScheduler(sessionManager);
         quartzSessionValidationScheduler.setSessionValidationInterval(shiroSessionProperties.getValidationInterval());
         quartzSessionValidationScheduler.enableSessionValidation();
@@ -200,8 +204,7 @@ public class ShiroAutoConfiguration {
     @DependsOn(value = {"sessionManager"})
     @ConditionalOnMissingBean(SessionValidationScheduler.class)
     public SessionValidationScheduler sessionValidationScheduler(DefaultWebSessionManager sessionManager) {
-        log.info("开始加载SessionValidationScheduler\n");
-
+        log.info("开始加载SessionValidationScheduler");
         ExecutorServiceSessionValidationScheduler validationScheduler = new ExecutorServiceSessionValidationScheduler(sessionManager);
         sessionManager.setDeleteInvalidSessions(shiroSessionProperties.isDeleteInvalidSessions());
         sessionManager.setSessionValidationInterval(shiroSessionProperties.getValidationInterval());
@@ -213,10 +216,10 @@ public class ShiroAutoConfiguration {
     @Bean
     @DependsOn(value = {"shiroCacheManager", "sessionDAO"})
     public WebSessionManager sessionManager(CacheManager cacheManager, SessionDAO sessionDAO) {
+        log.info("开始加载WebSessionManager");
         DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
         sessionManager.setCacheManager(cacheManager);
         sessionManager.setGlobalSessionTimeout(shiroSessionProperties.getGlobalSessionTimeout());
-
         sessionManager.setSessionDAO(sessionDAO);
         sessionManager.setSessionListeners(listeners);
         return sessionManager;
@@ -232,7 +235,7 @@ public class ShiroAutoConfiguration {
      */
     @Bean(name = "credentialsMatcher")
     public HashedCredentialsMatcher hashedCredentialsMatcher() {
-        log.info("开始加载credentialsMatcher\n");
+        log.info("开始加载credentialsMatcher");
         HashedCredentialsMatcher credentialsMatcher = new HashedCredentialsMatcher();
         //散列算法:这里使用MD5算法;
         credentialsMatcher.setHashAlgorithmName(properties.getHashAlgorithmName());

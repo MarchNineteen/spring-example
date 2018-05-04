@@ -4,6 +4,7 @@ import com.wyb.shiro.realm.UserToken;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.ServletRequest;
@@ -16,6 +17,7 @@ import java.io.IOException;
  * Created by Kunzite on 2018/4/20.
  */
 @Slf4j
+@Component
 public class JWTFilter extends BasicHttpAuthenticationFilter {
 
     /**
