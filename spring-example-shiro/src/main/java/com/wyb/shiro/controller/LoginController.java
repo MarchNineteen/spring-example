@@ -34,7 +34,7 @@ public class LoginController {
             @RequestParam(value = "username", required = true) String userName,
             @RequestParam(value = "password", required = true) String password
     ) {
-        log.info("==========" + userName + password);
+        log.info("登录账号：{},密码：{}" ,userName , password);
         Subject subject = SecurityUtils.getSubject();
         UserDo user = userService.getByUserName(userName);
         if (null == user) {

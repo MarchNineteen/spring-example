@@ -19,3 +19,5 @@ springboot中的动态代理设置
 > https://www.cnblogs.com/tuifeideyouran/p/7696055.html
 
 > https://zhuanlan.zhihu.com/p/29161098
+
+- 集成FormAuthenticationFilter的过滤器添加的名称一定为authc，否则无法拦截

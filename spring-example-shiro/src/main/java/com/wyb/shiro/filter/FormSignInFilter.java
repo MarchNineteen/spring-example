@@ -2,7 +2,6 @@ package com.wyb.shiro.filter;
 
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
-import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -16,7 +15,6 @@ import java.io.PrintWriter;
  *
  * @author Kunzite
  */
-@Component
 public class FormSignInFilter extends FormAuthenticationFilter {
 
     @Override

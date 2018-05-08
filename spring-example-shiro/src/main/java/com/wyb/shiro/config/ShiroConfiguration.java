@@ -129,7 +129,7 @@ public class ShiroConfiguration {
         signInFilter.setRememberMeParam(signInProperties.getRememberMeParam());
 
         filters.put("logout", logoutFilter);
-        filters.put("sign", signInFilter);
+        filters.put("authc", signInFilter);
         filters.put("jwt", jwtFilter);
         shiroFilterFactoryBean.setFilters(filters);
         /******************** 创建过滤器 end **********************/
@@ -144,16 +144,16 @@ public class ShiroConfiguration {
 //        filterChainDefinitionManager.put("/user/edit/**", "authc,perms[user:edit]");// 这里为了测试，固定写死的值，也可以从数据库或其他配置中读取
         //<!-- 过滤链定义，从上向下顺序执行，一般将/**放在最为下边 -->:这是一个坑呢，一不小心代码就不好使了;
         //<!-- authc:所有url都必须认证通过才可以访问; anon:所有url都可以匿名访问-->
-        filterChainDefinitionManager.put("login", "sign");
         filterChainDefinitionManager.put("/user/**", "jwt");
         // 静态资源
         filterChainDefinitionManager.put("/css/**", "anon");
         filterChainDefinitionManager.put("/img/**", "anon");
         filterChainDefinitionManager.put("/js/**", "anon");
         filterChainDefinitionManager.put("/favicon.ico", "anon");
+        filterChainDefinitionManager.put("login", "authc");
         filterChainDefinitionManager.put("/**", "authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionManager);
-//        shiroFilterFactoryBean.setSuccessUrl("/");
+//        shiroFilterFactoryBean.setSuccessUrl("/user/list");
         shiroFilterFactoryBean.setUnauthorizedUrl("/403");
         return shiroFilterFactoryBean;
     }
