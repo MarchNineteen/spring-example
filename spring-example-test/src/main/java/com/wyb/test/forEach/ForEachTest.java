@@ -76,9 +76,9 @@ public class ForEachTest {
 
     public static void main(String[] args) {
         ForEachTest test = new ForEachTest();
-//        test.testOne();
-//        test.testTwo();
-//        test.testThree();
+//        Test.testOne();
+//        Test.testTwo();
+//        Test.testThree();
         test.correctRemove();
     }
 }
