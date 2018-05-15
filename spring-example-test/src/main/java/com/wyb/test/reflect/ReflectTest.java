@@ -14,7 +14,7 @@ public class ReflectTest {
         Class clazz = UserDo.class;
         Class c = null;
         try {
-            c = Class.forName("com.wyb.core.Dao.Do.UserDo");
+            c = Class.forName("com.wyb.test.reflect.UserDo");
         } catch (ClassNotFoundException e) {
             throw new RuntimeException("Can not class for userDo "+ e);
         }
