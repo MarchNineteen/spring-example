@@ -13,15 +13,15 @@
     <!-- 声明通知类 -->
     <!--<bean id="aspectBean" class="com.wyb.aop.aop.OperateAspect" />-->
 
-    <aop:config>
-        <aop:aspect ref="operateAspect" order="2">
-            <aop:pointcut id="pointcut" expression="execution(* com.wyb.aop.controller..*(..))"/>
+    <!--<aop:config>-->
+        <!--<aop:aspect ref="operateAspect" order="2">-->
+            <!--<aop:pointcut id="pointcut" expression="execution(* com.wyb.aop.controller..*(..))"/>-->
 
-            <aop:before method="doBefore" pointcut-ref="pointcut"/>
-            <aop:after-returning method="doAfterReturning" pointcut-ref="pointcut" returning="result"/>
-            <aop:after method="doAfter" pointcut-ref="pointcut" />
-            <aop:around method="doAround" pointcut-ref="pointcut"/>
-            <aop:after-throwing method="doAfterThrowing" pointcut-ref="pointcut" throwing="ex"/>
-        </aop:aspect>
-    </aop:config>
+            <!--<aop:before method="doBefore" pointcut-ref="pointcut"/>-->
+            <!--<aop:after-returning method="doAfterReturning" pointcut-ref="pointcut" returning="result"/>-->
+            <!--<aop:after method="doAfter" pointcut-ref="pointcut" />-->
+            <!--<aop:around method="doAround" pointcut-ref="pointcut"/>-->
+            <!--<aop:after-throwing method="doAfterThrowing" pointcut-ref="pointcut" throwing="ex"/>-->
+        <!--</aop:aspect>-->
+    <!--</aop:config>-->
 </beans>

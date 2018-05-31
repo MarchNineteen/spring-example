@@ -16,6 +16,7 @@ public class ForEachTest {
         arrayList.add("1");
         arrayList.add("2");
         arrayList.add("3");
+        arrayList.add(null);// array可以为空
     }
 
     // 普通的for循环遍历
@@ -76,9 +77,9 @@ public class ForEachTest {
 
     public static void main(String[] args) {
         ForEachTest test = new ForEachTest();
-//        Test.testOne();
-//        Test.testTwo();
-//        Test.testThree();
-        test.correctRemove();
+//        test.testOne();
+//        test.testTwo();
+        test.testThree();
+//        test.correctRemove();
     }
 }

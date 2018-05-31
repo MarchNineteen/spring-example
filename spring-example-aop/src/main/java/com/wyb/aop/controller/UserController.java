@@ -1,6 +1,7 @@
 package com.wyb.aop.controller;
 
 
+import com.wyb.aop.annotation.Log;
 import com.wyb.aop.dao.model.UserDo;
 import com.wyb.aop.service.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +24,8 @@ public class UserController {
     @Resource
     private UserService userService;
 
+    @Log(value = "add")
+    @Log(value = "update")
     @GetMapping("/list")
     public List<UserDo> list(){
         System.out.println("controller start");
