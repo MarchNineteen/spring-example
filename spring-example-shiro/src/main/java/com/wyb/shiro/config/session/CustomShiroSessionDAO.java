@@ -11,7 +11,7 @@ import java.util.Collection;
 /**
  * 自定义sessionDao
  *
- * @author user
+ * @author Kunzite
  */
 @Slf4j
 public class CustomShiroSessionDAO extends AbstractSessionDAO {
