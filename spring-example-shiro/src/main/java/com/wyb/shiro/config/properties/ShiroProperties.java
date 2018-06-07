@@ -22,11 +22,11 @@ public class ShiroProperties {
     /**
      * URL of login
      */
-    private String loginUrl = "/login";
+    private String loginUrl = "admin/login";
     /**
      * URL of success
      */
-    private String successUrl = "/index";
+    private String successUrl = "admin/index";
     /**
      * URL of unauthorized
      */
