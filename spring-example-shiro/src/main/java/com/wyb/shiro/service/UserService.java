@@ -1,7 +1,7 @@
 package com.wyb.shiro.service;
 
 import com.github.pagehelper.PageInfo;
-import com.wyb.shiro.dao.model.UserDo;
+import com.wyb.shiro.dao.dto.UserDto;
 
 /**
  * @author Kunzite
@@ -15,7 +15,7 @@ public interface UserService {
      * @param pageSize
      * @return
      */
-    PageInfo<UserDo> listByPage(int pageNum, int pageSize);
+    PageInfo<UserDto> listByPage(int pageNum, int pageSize);
 
     /**
      * 根据username获取用户
@@ -23,7 +23,7 @@ public interface UserService {
      * @param userName
      * @return
      */
-    UserDo getByUserName(String userName);
+    UserDto getByUserName(String userName);
 
     /**
      * 根据id获取用户
@@ -31,5 +31,5 @@ public interface UserService {
      * @param uid
      * @return
      */
-    UserDo getById(Integer uid);
+    UserDto getById(Long uid);
 }

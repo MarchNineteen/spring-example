@@ -1,6 +1,7 @@
 package com.wyb.shiro.config;
 
 import com.wyb.shiro.config.properties.ShiroProperties;
+import com.wyb.shiro.config.properties.ShiroSessionProperties;
 import com.wyb.shiro.config.properties.ShiroSignInProperties;
 import com.wyb.shiro.filter.FormSignInFilter;
 import com.wyb.shiro.filter.JWTFilter;
@@ -12,13 +13,22 @@ import org.apache.shiro.mgt.DefaultSecurityManager;
 import org.apache.shiro.mgt.RememberMeManager;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.realm.Realm;
+import org.apache.shiro.session.SessionListener;
+import org.apache.shiro.session.mgt.ExecutorServiceSessionValidationScheduler;
 import org.apache.shiro.session.mgt.SessionManager;
+import org.apache.shiro.session.mgt.SessionValidationScheduler;
+import org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO;
+import org.apache.shiro.session.mgt.eis.SessionDAO;
+import org.apache.shiro.session.mgt.eis.SessionIdGenerator;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.filter.authc.LogoutFilter;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
+import org.apache.shiro.web.session.mgt.WebSessionManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -26,6 +36,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.DependsOn;
 
 import javax.servlet.Filter;
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -41,6 +52,12 @@ public class ShiroConfiguration {
 
     @Autowired
     private ShiroSignInProperties signInProperties;
+
+    @Autowired
+    private ShiroSessionProperties shiroSessionProperties;
+
+    @Autowired(required = false)
+    private Collection<SessionListener> listeners;
 
     /**
      * LifecycleBeanPostProcessor，这是个DestructionAwareBeanPostProcessor的子类，
@@ -280,6 +297,62 @@ public class ShiroConfiguration {
 //        jedisShiroSessionRepository.setObjectRedisTemplate(objectRedisTemplate);
 //        return jedisShiroSessionRepository;
 //    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public SessionDAO sessionDAO(CacheManager cacheManager) {
+        log.info("开始加载sessionDAO");
+        EnterpriseCacheSessionDAO sessionDAO = new EnterpriseCacheSessionDAO();
+        sessionDAO.setActiveSessionsCacheName(shiroSessionProperties.getActiveSessionsCacheName());
+        Class<? extends SessionIdGenerator> idGenerator = shiroSessionProperties.getIdGenerator();
+        if (idGenerator != null) {
+            SessionIdGenerator sessionIdGenerator = BeanUtils.instantiate(idGenerator);
+            sessionDAO.setSessionIdGenerator(sessionIdGenerator);
+        }
+        sessionDAO.setCacheManager(cacheManager);
+        return sessionDAO;
+    }
+
+//    @Bean(name = "sessionValidationScheduler")
+//    @DependsOn(value = {"sessionManager"})
+//    @ConditionalOnClass(name = {"org.quartz.Scheduler"})
+//    @ConditionalOnMissingBean(SessionValidationScheduler.class)
+//    public SessionValidationScheduler quartzSessionValidationScheduler(DefaultWebSessionManager sessionManager) {
+//        log.info("开始加载quartzSessionValidationScheduler");
+//        QuartzSessionValidationScheduler quartzSessionValidationScheduler = new QuartzSessionValidationScheduler(sessionManager);
+//        quartzSessionValidationScheduler.setSessionValidationInterval(shiroSessionProperties.getValidationInterval());
+//        quartzSessionValidationScheduler.enableSessionValidation();
+//        sessionManager.setDeleteInvalidSessions(shiroSessionProperties.isDeleteInvalidSessions());
+//        sessionManager.setSessionValidationInterval(shiroSessionProperties.getValidationInterval());
+//        sessionManager.setSessionValidationSchedulerEnabled(shiroSessionProperties.isValidationSchedulerEnabled());
+//        sessionManager.setSessionValidationScheduler(quartzSessionValidationScheduler);
+//        return quartzSessionValidationScheduler;
+//    }
+
+    @Bean(name = "sessionValidationScheduler")
+    @DependsOn(value = {"sessionManager"})
+    @ConditionalOnMissingBean(SessionValidationScheduler.class)
+    public SessionValidationScheduler sessionValidationScheduler(DefaultWebSessionManager sessionManager) {
+        log.info("开始加载SessionValidationScheduler");
+        ExecutorServiceSessionValidationScheduler validationScheduler = new ExecutorServiceSessionValidationScheduler(sessionManager);
+        sessionManager.setDeleteInvalidSessions(shiroSessionProperties.isDeleteInvalidSessions());
+        sessionManager.setSessionValidationInterval(shiroSessionProperties.getValidationInterval());
+        sessionManager.setSessionValidationSchedulerEnabled(shiroSessionProperties.isValidationSchedulerEnabled());
+        sessionManager.setSessionValidationScheduler(validationScheduler);
+        return validationScheduler;
+    }
+
+    @Bean
+    @DependsOn(value = {"shiroCacheManager", "sessionDAO"})
+    public WebSessionManager sessionManager(CacheManager cacheManager, SessionDAO sessionDAO) {
+        log.info("开始加载WebSessionManager");
+        DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
+        sessionManager.setCacheManager(cacheManager);
+        sessionManager.setGlobalSessionTimeout(shiroSessionProperties.getGlobalSessionTimeout());
+        sessionManager.setSessionDAO(sessionDAO);
+        sessionManager.setSessionListeners(listeners);
+        return sessionManager;
+    }
 
     /****************************** shiro session end ********************************/
 

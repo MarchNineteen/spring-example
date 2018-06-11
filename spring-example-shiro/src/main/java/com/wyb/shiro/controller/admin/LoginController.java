@@ -1,9 +1,9 @@
 package com.wyb.shiro.controller.admin;
 
 import com.wyb.shiro.config.JWTConfig;
-import com.wyb.shiro.dao.model.UserDo;
+import com.wyb.shiro.dao.dto.UserDto;
 import com.wyb.shiro.realm.UserToken;
-import com.wyb.shiro.result.WebResult;
+import com.wyb.shiro.result.web.WebResult;
 import com.wyb.shiro.service.UserService;
 import com.wyb.shiro.utils.JWTUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -37,13 +37,13 @@ public class LoginController {
     ) {
         log.info("登录账号：{},密码：{}" ,userName , password);
         Subject subject = SecurityUtils.getSubject();
-        UserDo user = userService.getByUserName(userName);
-        if (null == user) {
+        UserDto userDto = userService.getByUserName(userName);
+        if (null == userDto) {
             return WebResult.success("用户不存在");
         }
 //        UsernamePasswordToken token = new UsernamePasswordToken(userName, password);
 //        token.setRememberMe(rememberMe);
-        String token = JWTUtil.sign(user.getId(), password, jwtConfig.getIssure());
+        String token = JWTUtil.sign(userDto.getId(), password, jwtConfig.getIssure());
         try {
             subject.login(new UserToken(token));
         } catch (AuthenticationException e) {

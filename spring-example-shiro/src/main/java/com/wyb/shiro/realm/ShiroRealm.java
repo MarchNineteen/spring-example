@@ -1,8 +1,6 @@
 package com.wyb.shiro.realm;
 
 import com.wyb.shiro.config.JWTConfig;
-import com.wyb.shiro.dao.model.MenuDo;
-import com.wyb.shiro.dao.model.RoleDo;
 import com.wyb.shiro.dao.model.UserDo;
 import com.wyb.shiro.service.MenuService;
 import com.wyb.shiro.service.UserService;
@@ -14,7 +12,6 @@ import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authz.AuthorizationInfo;
-import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
@@ -44,30 +41,30 @@ public class ShiroRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         log.info("doGetAuthorizationInfo+" + principalCollection.toString());
-        UserDo user = userService.getByUserName((String) principalCollection.getPrimaryPrincipal());
-        if (null != user) {
-            //把principals放session中 key=userId value=principals
-            SecurityUtils.getSubject().getSession().setAttribute(String.valueOf(user.getId()), SecurityUtils.getSubject().getPrincipals());
-
-            //权限信息对象info,用来存放查出的用户的所有的角色（role）及权限（permission）
-            SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-            //赋予角色
-            for (RoleDo userRole : user.getRoles()) {
-                info.addRole(userRole.getRoleName());
-
-            }
-            //赋予权限
-//            menuService.getByRoleIds(user.getRoles());
-            //赋予权限
-            for (MenuDo menu : menuService.getByUserId(user.getId())) {
-//            if(StringUtils.isNotBlank(permission.getPermCode()))
-                info.addStringPermission(menu.getMenuName());
-            }
-
-            //设置登录次数、时间
-//        userService.updateUserLogin(user);
-            return info;
-        }
+//        UserDo user = userService.getByUserName((String) principalCollection.getPrimaryPrincipal());
+//        if (null != user) {
+//            //把principals放session中 key=userId value=principals
+//            SecurityUtils.getSubject().getSession().setAttribute(String.valueOf(user.getId()), SecurityUtils.getSubject().getPrincipals());
+//
+//            //权限信息对象info,用来存放查出的用户的所有的角色（role）及权限（permission）
+//            SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+//            //赋予角色
+//            for (RoleDo userRole : user.getRoles()) {
+//                info.addRole(userRole.getRoleName());
+//
+//            }
+//            //赋予权限
+////            menuService.getByRoleIds(user.getRoles());
+//            //赋予权限
+//            for (MenuDo menu : menuService.getByUserId(user.getId())) {
+////            if(StringUtils.isNotBlank(permission.getPermCode()))
+//                info.addStringPermission(menu.getMenuName());
+//            }
+//
+//            //设置登录次数、时间
+////        userService.updateUserLogin(user);
+//            return info;
+//        }
         // 返回null的话，就会导致任何用户访问被拦截的请求时，都会自动跳转到unauthorizedUrl指定的地址
         return null;
     }
@@ -86,7 +83,7 @@ public class ShiroRealm extends AuthorizingRealm {
         String token = (String) authenticationToken.getCredentials();
         log.info("验证当前Subject时获取到token为：" + token);
 
-        Integer uid = JWTUtil.getUid(token);
+        Long uid = JWTUtil.getUid(token);
         log.info(String.valueOf(uid));
 
         UserDo user = userService.getById(uid);
@@ -94,7 +91,7 @@ public class ShiroRealm extends AuthorizingRealm {
             throw new AuthenticationException("User didn't existed!");
 
         }
-        if (!JWTUtil.verify(token, uid, user.getPassword(),jwtConfig.getIssure())) {
+        if (!JWTUtil.verify(token, uid, user.getPassword(), jwtConfig.getIssure())) {
             throw new AuthenticationException("Username or password error");
         }
         //设置用户session

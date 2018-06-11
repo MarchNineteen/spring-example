@@ -1,17 +1,16 @@
 package com.wyb.shiro.dao.model;
 
-import com.wyb.shiro.dao.BaseEntity;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Table(name = "shiro.user_role")
 @Data
-public class UserRoleDo extends BaseEntity implements Serializable {
+@Table(name = "shiro.user_role")
+public class UserRoleDo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     /**
      * 角色id
@@ -26,5 +25,4 @@ public class UserRoleDo extends BaseEntity implements Serializable {
     private Integer userId;
 
     private static final long serialVersionUID = 1L;
-
 }

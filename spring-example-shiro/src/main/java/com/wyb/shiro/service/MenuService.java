@@ -9,5 +9,5 @@ import java.util.List;
  */
 public interface MenuService {
 
-    List<MenuDo> getByUserId(Integer id);
+    List<MenuDo> getByUserId(Long id);
 }

@@ -1,15 +1,18 @@
 package com.wyb.shiro.dao.model;
 
-import com.wyb.shiro.dao.BaseEntity;
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
-@Table(name = "shiro.role")
 @Data
-public class RoleDo extends BaseEntity implements Serializable {
+@Table(name = "shiro.role")
+public class RoleDo implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     /**
      * 角色名称
      */
@@ -21,6 +24,14 @@ public class RoleDo extends BaseEntity implements Serializable {
      */
     private String description;
 
-    private static final long serialVersionUID = 1L;
+    @Column(name = "is_delete")
+    private Integer isDelete;
 
+    @Column(name = "create_time")
+    private Date createTime;
+
+    @Column(name = "update_time")
+    private Date updateTime;
+
+    private static final long serialVersionUID = 1L;
 }

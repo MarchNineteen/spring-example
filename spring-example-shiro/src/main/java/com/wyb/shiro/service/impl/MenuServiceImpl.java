@@ -19,7 +19,7 @@ public class MenuServiceImpl implements MenuService {
     private MenuDoMapper menuDoMapper;
 
     @Override
-    public List<MenuDo> getByUserId(Integer id) {
+    public List<MenuDo> getByUserId(Long id) {
         Example example = new Example(MenuDo.class);
         example.createCriteria().andEqualTo("user_id",id);
         return menuDoMapper.selectByExample(example);

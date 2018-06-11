@@ -1,4 +1,4 @@
-package com.wyb.shiro.result;
+package com.wyb.shiro.result.web;
 
 import com.alibaba.fastjson.JSONObject;
 
@@ -80,7 +80,7 @@ public class WebResult<T> implements Serializable {
      * @param codeEnum 错误码
      */
     public WebResult(WebResultEnum codeEnum) {
-        this(String.valueOf(codeEnum.getCodeNumber()), codeEnum.getDescription(), codeEnum == WebResultEnum.SUCCESS);
+        this(String.valueOf(codeEnum.getCode()), codeEnum.getMessage(), codeEnum == WebResultEnum.SUCCESS);
     }
 
     /**

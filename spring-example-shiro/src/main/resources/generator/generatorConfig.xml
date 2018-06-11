@@ -4,11 +4,9 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
-    <!-- 数据库驱动 -->
-    <classPathEntry
-            location="C:\Users\user\.m2\repository\mysql\mysql-connector-java\5.1.44/mysql-connector-java-5.1.44.jar"/>
     <context id="DB2Tables" targetRuntime="MyBatis3Simple" defaultModelType="flat">
         <property name="javaFileEncoding" value="UTF-8"/>
+        <plugin type="com.github.dongfg.plugin.LombokPlugin" />
         <!-- 生成 JavaBean 对象继承 Serializable 类 -->
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
         <!-- 指定生成 Mapper 的继承模板 -->
@@ -24,7 +22,7 @@
 
         <!--数据库链接URL，用户名、密码 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://127.0.0.1:3306/shiro?zeroDateTimeBehavior=convertToNull&amp;characterEncoding=utf8&amp;allowMultiQueries=true&amp;useSSL=false"
+                        connectionURL="jdbc:mysql://111.231.85.51:3306/shiro?zeroDateTimeBehavior=convertToNull&amp;characterEncoding=utf8&amp;allowMultiQueries=true&amp;useSSL=false"
                         userId="root"
                         password="123456">
         </jdbcConnection>
@@ -40,6 +38,7 @@
         targetProject     指定在该项目下所在的路径
          -->
         <javaModelGenerator targetPackage="com.wyb.shiro.dao.model" targetProject="src/main/java">
+            <!--<property name="rootClass" value="com.wyb.test.common.BaseEntity"/>-->
             <!-- 是否允许子包，即targetPackage.schemaName.tableName-->
             <property name="enableSubPackages" value="false"/>
             <!-- 是否对类CHAR类型的列的数据进行trim操作 -->
@@ -49,7 +48,6 @@
             <!-- 建立的Model对象是否 不可改变  即生成的Model对象不会有 setter方法，只有构造方法-->
             <!--<property name="immutable" value="false"/>-->
             <!-- 给Model添加一个父类 -->
-            <property name="rootClass" value="com.wyb.shiro.dao.BaseEntity"/>
         </javaModelGenerator>
 
 
@@ -76,32 +74,37 @@
         </javaClientGenerator>
 
         <!-- 要生成哪些表 -->
-        <!--<table tableName="user" domainObjectName="UserDo">-->
-            <!--<property name="runtimeSchema" value="shiro"/>-->
-            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-            <!--<columnOverride column="id" property="id" javaType="java.lang.Long"/>-->
-            <!--<columnOverride column="is_delete" property="isDelete" javaType="java.lang.Integer"/>-->
-        <!--</table>-->
+        <table tableName="user" domainObjectName="UserDo">
+            <property name="runtimeSchema" value="shiro"/>
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+            <columnOverride column="id" property="id" javaType="java.lang.Long"/>
+            <columnOverride column="is_delete" property="isDelete" javaType="java.lang.Integer"/>
+        </table>
 
-        <!--<table tableName="menu" domainObjectName="MenuDo">-->
-            <!--<property name="runtimeSchema" value="shiro"/>-->
-            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-            <!--<columnOverride column="is_delete" property="isDelete" javaType="java.lang.Integer"/>-->
-        <!--</table>-->
+        <table tableName="menu" domainObjectName="MenuDo">
+            <property name="runtimeSchema" value="shiro"/>
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+            <columnOverride column="id" property="id" javaType="java.lang.Long"/>
+            <columnOverride column="is_delete" property="isDelete" javaType="java.lang.Integer"/>
+        </table>
 
         <table tableName="role" domainObjectName="RoleDo">
             <property name="runtimeSchema" value="shiro"/>
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+            <columnOverride column="id" property="id" javaType="java.lang.Long"/>
             <columnOverride column="is_delete" property="isDelete" javaType="java.lang.Integer"/>
         </table>
 
         <table tableName="user_role" domainObjectName="UserRoleDo">
             <property name="runtimeSchema" value="shiro"/>
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+            <columnOverride column="id" property="id" javaType="java.lang.Long"/>
         </table>
+
         <table tableName="role_menu" domainObjectName="RoleMenuDo">
             <property name="runtimeSchema" value="shiro"/>
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+            <columnOverride column="id" property="id" javaType="java.lang.Long"/>
         </table>
 
     </context>

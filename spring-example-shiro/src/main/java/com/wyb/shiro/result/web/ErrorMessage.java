@@ -1,4 +1,4 @@
-package com.wyb.shiro.result;
+package com.wyb.shiro.result.web;
 
 
 import org.springframework.util.StringUtils;

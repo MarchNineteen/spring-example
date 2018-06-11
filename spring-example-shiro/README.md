@@ -21,3 +21,5 @@ springboot中的动态代理设置
 > https://zhuanlan.zhihu.com/p/29161098
 
 - 集成FormAuthenticationFilter的过滤器添加的名称一定为authc，否则无法拦截
+
+- mybatis-generator rootClass BaseEntity一定要添加到项目的依赖中，即添加到generator的classpath中，springbootWeb项目无法加载到，所以添加到其他的模块中再进行依赖
