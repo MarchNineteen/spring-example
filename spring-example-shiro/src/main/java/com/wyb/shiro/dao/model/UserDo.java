@@ -1,13 +1,22 @@
 package com.wyb.shiro.dao.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * @author Kunzite
+ */
 @Data
+@Builder(toBuilder=true)
 @Table(name = "shiro.user")
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserDo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,4 +63,16 @@ public class UserDo implements Serializable {
     private Date updateTime;
 
     private static final long serialVersionUID = 1L;
+
+    /**
+     * 初始化常量
+     *
+     * @return
+     */
+    public UserDo init() {
+        this.setIsDelete(0);
+        this.setCreateTime(new Date());
+        this.setUpdateTime(new Date());
+        return this;
+    }
 }

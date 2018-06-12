@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.wyb.shiro.dao.dto.UserDto;
 import com.wyb.shiro.dao.mapper.UserDoMapper;
 import com.wyb.shiro.dao.model.UserDo;
+import com.wyb.shiro.help.UserPasswordHelper;
 import com.wyb.shiro.service.UserService;
 import com.wyb.shiro.utils.BeanUtil;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,9 @@ public class UserServiceImpl implements UserService {
     @Resource
     private UserDoMapper userDoMapper;
 
+    @Resource
+    private UserPasswordHelper userPasswordHelper;
+
     @Override
     public PageInfo<UserDto> listByPage(int pageNum, int pageSize) {
         PageInfo<UserDo> pageInfo = PageHelper.startPage(pageNum, pageSize).doSelectPageInfo(() -> userDoMapper.selectAll());
@@ -36,15 +40,28 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto getByUserName(String userName) {
         Example example = new Example(UserDo.class);
-        example.createCriteria().andEqualTo("is_delete", 0).andEqualTo("username", userName);
+        example.createCriteria().andEqualTo("isDelete", 0).andEqualTo("username", userName);
         return BeanUtil.copyProperties(userDoMapper.selectByExample(example).get(0), UserDto.class);
     }
 
     @Override
     public UserDto getById(Long uid) {
         Example example = new Example(UserDo.class);
-        example.createCriteria().andEqualTo("is_delete", 0).andEqualTo("id", uid);
+        example.createCriteria().andEqualTo("isDelete", 0).andEqualTo("id", uid);
         return BeanUtil.copyProperties(userDoMapper.selectByExample(example).get(0), UserDto.class);
+    }
+
+    @Override
+    public int addUser(String userName, String password) {
+        UserDo userDo = UserDo.builder()
+                .username(userName)
+                .address("杭州")
+                .phone("12345678971")
+                .password(password)
+                .build();
+        userDo.init();
+        userDo.setPassword(userPasswordHelper.encryptPassword(userDo));
+        return userDoMapper.insert(userDo);
     }
 
 }

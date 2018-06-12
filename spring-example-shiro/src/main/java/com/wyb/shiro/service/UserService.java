@@ -32,4 +32,13 @@ public interface UserService {
      * @return
      */
     UserDto getById(Long uid);
+
+    /**
+     * 添加用户
+     *
+     * @param userName
+     * @param password
+     * @return
+     */
+    int addUser(String userName, String password);
 }

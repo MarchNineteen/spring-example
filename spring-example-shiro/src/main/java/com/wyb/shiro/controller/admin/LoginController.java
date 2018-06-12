@@ -2,6 +2,7 @@ package com.wyb.shiro.controller.admin;
 
 import com.wyb.shiro.config.JWTConfig;
 import com.wyb.shiro.dao.dto.UserDto;
+import com.wyb.shiro.help.UserPasswordHelper;
 import com.wyb.shiro.realm.UserToken;
 import com.wyb.shiro.result.web.WebResult;
 import com.wyb.shiro.service.UserService;
@@ -25,9 +26,31 @@ public class LoginController {
 
     @Resource
     private JWTConfig jwtConfig;
-
     @Resource
     private UserService userService;
+    @Resource
+    private UserPasswordHelper passwordHelper;
+
+    /**
+     * 跳转登录
+     *
+     * @return
+     */
+    @GetMapping(value = "/login")
+    public String login() {
+        return "admin/login";
+    }
+
+    /**
+     * 登录成功跳转
+     *
+     * @return
+     */
+    @GetMapping(value = "/index")
+    public String index() {
+        return "admin/index";
+    }
+
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
@@ -35,7 +58,7 @@ public class LoginController {
             @RequestParam(value = "username", required = true) String userName,
             @RequestParam(value = "password", required = true) String password
     ) {
-        log.info("登录账号：{},密码：{}" ,userName , password);
+        log.info("登录账号：{},密码：{}", userName, password);
         Subject subject = SecurityUtils.getSubject();
         UserDto userDto = userService.getByUserName(userName);
         if (null == userDto) {
@@ -48,7 +71,7 @@ public class LoginController {
             subject.login(new UserToken(token));
         } catch (AuthenticationException e) {
 //            e.printStackTrace();
-            WebResult webResult = WebResult.illegalArgument("username",e.getMessage());
+            WebResult webResult = WebResult.illegalArgument("username", e.getMessage());
             return webResult;
 //            rediect.addFlashAttribute("errorText", "您的账号或密码输入错误!");
 //            return "{\"Msg\":\"您的账号或密码输入错误\",\"state\":\"failed\"}";
@@ -56,13 +79,10 @@ public class LoginController {
         return WebResult.success(token);
     }
 
-    @GetMapping(value = "/login")
-    public String login() {
-        return "admin/login";
+    @GetMapping(value = "admin/register")
+    public String register() {
+        return "admin/register";
     }
 
-    @GetMapping(value = "/index")
-    public String index() {
-        return "admin/index";
-    }
+
 }

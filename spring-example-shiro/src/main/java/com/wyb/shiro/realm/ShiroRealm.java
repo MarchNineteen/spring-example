@@ -1,7 +1,7 @@
 package com.wyb.shiro.realm;
 
 import com.wyb.shiro.config.JWTConfig;
-import com.wyb.shiro.dao.model.UserDo;
+import com.wyb.shiro.dao.dto.UserDto;
 import com.wyb.shiro.service.MenuService;
 import com.wyb.shiro.service.UserService;
 import com.wyb.shiro.utils.JWTUtil;
@@ -86,17 +86,17 @@ public class ShiroRealm extends AuthorizingRealm {
         Long uid = JWTUtil.getUid(token);
         log.info(String.valueOf(uid));
 
-        UserDo user = userService.getById(uid);
-        if (user == null) {
+        UserDto userDto = userService.getById(uid);
+        if (userDto == null) {
             throw new AuthenticationException("User didn't existed!");
 
         }
-        if (!JWTUtil.verify(token, uid, user.getPassword(), jwtConfig.getIssure())) {
+        if (!JWTUtil.verify(token, uid, userDto.getPassword(), jwtConfig.getIssure())) {
             throw new AuthenticationException("Username or password error");
         }
         //设置用户session
         Session session = SecurityUtils.getSubject().getSession();
-        session.setAttribute("user", user);
+        session.setAttribute("user", userDto);
         session.setAttribute("Authorization", token);
         return new SimpleAuthenticationInfo(token, token, getName());
 //        return null;

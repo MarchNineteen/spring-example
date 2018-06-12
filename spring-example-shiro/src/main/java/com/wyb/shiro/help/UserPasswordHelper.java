@@ -7,6 +7,9 @@ import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author Kunzite
+ */
 @Component
 public class UserPasswordHelper {
 
