@@ -48,6 +48,10 @@ spring:
     templateEncoding: UTF-8
     templateLoaderPath: classpath:/templates/
 
+  redis:
+    host: 127.0.0.1
+    port: 6379
+
 mybatis:
   mapper-locations: classpath:mapping/*Mapper.xml
   type-aliases-package: com.wyb.shiro.dao.model

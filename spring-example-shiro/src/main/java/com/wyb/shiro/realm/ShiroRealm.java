@@ -4,17 +4,12 @@ import com.wyb.shiro.config.JWTConfig;
 import com.wyb.shiro.dao.dto.UserDto;
 import com.wyb.shiro.service.MenuService;
 import com.wyb.shiro.service.UserService;
-import com.wyb.shiro.utils.JWTUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
-import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.Resource;
@@ -79,26 +74,22 @@ public class ShiroRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-        log.info("进行 shiro 认证 doGetAuthenticationInfo +" + authenticationToken.toString());
-        String token = (String) authenticationToken.getCredentials();
-        log.info("验证当前Subject时获取到token为：" + token);
+        UserToken token = (UserToken) authenticationToken;
+        log.info("验证当前Subject时获取到token为：" + token.toString());
+        String username = (String) authenticationToken.getPrincipal();
+        log.info("验证当前Subject时获取到用户名为：" + username);
 
-        Long uid = JWTUtil.getUid(token);
-        log.info(String.valueOf(uid));
+//        Long uid = JWTUtil.getUid(token);
+//        log.info(String.valueOf(uid));
 
-        UserDto userDto = userService.getById(uid);
+        UserDto userDto = userService.getByUserName(username);
         if (userDto == null) {
-            throw new AuthenticationException("User didn't existed!");
-
+            throw new UnknownAccountException("用户不存在");
         }
-        if (!JWTUtil.verify(token, uid, userDto.getPassword(), jwtConfig.getIssure())) {
-            throw new AuthenticationException("Username or password error");
-        }
-        //设置用户session
-        Session session = SecurityUtils.getSubject().getSession();
-        session.setAttribute("user", userDto);
-        session.setAttribute("Authorization", token);
-        return new SimpleAuthenticationInfo(token, token, getName());
-//        return null;
+//        if (!JWTUtil.verify(token, uid, userDto.getPassword(), jwtConfig.getIssure())) {
+//            throw new AuthenticationException("Username or password error");
+//        }
+        return new SimpleAuthenticationInfo(userDto.getUsername(), userDto.getPassword(), ByteSource.Util.bytes(userDto.getSalt()),
+                getName());
     }
 }

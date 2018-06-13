@@ -1,6 +1,5 @@
 package com.wyb.shiro.filter;
 
-import com.wyb.shiro.realm.UserToken;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
 import org.springframework.http.HttpStatus;
@@ -40,9 +39,9 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         String authorization = httpServletRequest.getHeader("Authorization");
 
-        UserToken token = new UserToken(authorization);
+//        UserToken token = new UserToken(authorization);
         // 提交给realm进行登入，如果错误他会抛出异常并被捕获
-        getSubject(request, response).login(token);
+//        getSubject(request, response).login(token);
         // 如果没有抛出异常则代表登入成功，返回true
         return true;
     }

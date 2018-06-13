@@ -275,21 +275,20 @@ public class ShiroConfiguration {
     /****************************** shiro session start ********************************/
 
     /**
-     *
-     * 注释掉该方法时 ，shiro的登录会话session由ehcache保持。
      * 打开该方法时，shiro的登录回话session由redis保持。
-     * @paramjedisShiroSessionRepository
+     *
      * @return
+     * @paramjedisShiroSessionRepository
      */
 //    @Bean
 //    @DependsOn(value = { "jedisShiroSessionRepository" })
+//    @ConditionalOnMissingBean
 //    public SessionDAO sessionDAO(JedisShiroSessionRepository jedisShiroSessionRepository) {
 //        final CustomShiroSessionDAO customShiroSessionDAO = new CustomShiroSessionDAO();
 //        customShiroSessionDAO.setShiroSessionRepository(jedisShiroSessionRepository);
 //        return customShiroSessionDAO;
 //    }
-
-
+//
 //    @Bean
 //    @DependsOn(value = { "objectRedisTemplate" })
 //    public JedisShiroSessionRepository jedisShiroSessionRepository(RedisTemplate<String, Object> objectRedisTemplate) {
@@ -297,7 +296,6 @@ public class ShiroConfiguration {
 //        jedisShiroSessionRepository.setObjectRedisTemplate(objectRedisTemplate);
 //        return jedisShiroSessionRepository;
 //    }
-
     @Bean
     @ConditionalOnMissingBean
     public SessionDAO sessionDAO(CacheManager cacheManager) {

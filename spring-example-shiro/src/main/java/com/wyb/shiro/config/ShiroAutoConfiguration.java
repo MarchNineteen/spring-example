@@ -7,6 +7,7 @@ import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.crypto.CipherService;
 import org.apache.shiro.io.Serializer;
 import org.apache.shiro.mgt.RememberMeManager;
+import org.apache.shiro.realm.AuthenticatingRealm;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.realm.jdbc.JdbcRealm;
 import org.apache.shiro.subject.PrincipalCollection;
@@ -97,9 +98,9 @@ public class ShiroAutoConfiguration {
         log.info("开始加载自定义Realm");
         Class<?> realmClass = properties.getRealmClass();
         Realm realm = (Realm) BeanUtils.instantiateClass(realmClass);
-//        if (realm instanceof AuthenticatingRealm) {
-//            ((AuthenticatingRealm) realm).setCredentialsMatcher(credentialsMatcher);
-//        }
+        if (realm instanceof AuthenticatingRealm) {
+            ((AuthenticatingRealm) realm).setCredentialsMatcher(credentialsMatcher);
+        }
         return realm;
     }
     /**
@@ -110,7 +111,6 @@ public class ShiroAutoConfiguration {
 //    @DependsOn("lifecycleBeanPostProcessor")
 //    public ShiroRealm shiroRealm() {
 //        log.info("开始加载shiroRealm");
-//
 //        ShiroRealm realm = new ShiroRealm();
 ////        realm.setCredentialsMatcher(hashedCredentialsMatcher());
 //        return realm;

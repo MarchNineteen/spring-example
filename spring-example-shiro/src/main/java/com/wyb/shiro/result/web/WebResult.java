@@ -27,7 +27,7 @@ public class WebResult<T> implements Serializable {
     private String message;
 
     /**
-     * 错误的字段信息
+     * 错误的字段信息 暂不使用
      */
     private List<ErrorMessage> errorMessage = new ArrayList<ErrorMessage>();
 
@@ -70,6 +70,11 @@ public class WebResult<T> implements Serializable {
 
     public WebResult(Integer resultCode, String message, boolean success) {
         this.resultCode = resultCode.toString();
+        this.message = message;
+        this.success = success;
+    }
+
+    public WebResult(String message, boolean success) {
         this.message = message;
         this.success = success;
     }
