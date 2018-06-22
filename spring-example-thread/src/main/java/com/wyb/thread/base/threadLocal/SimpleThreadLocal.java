@@ -1,4 +1,4 @@
-package com.wyb.test.thread.threadLocal;
+package com.wyb.thread.base.threadLocal;
 
 import java.util.Collections;
 import java.util.HashMap;

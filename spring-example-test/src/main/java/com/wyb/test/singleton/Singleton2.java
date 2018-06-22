@@ -1,4 +1,4 @@
-package com.wyb.test.thread.singleton;
+package com.wyb.test.singleton;
 
 /**
  * <p>

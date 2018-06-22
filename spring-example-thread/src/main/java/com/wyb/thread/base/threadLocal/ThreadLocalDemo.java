@@ -1,4 +1,4 @@
-package com.wyb.test.thread.threadLocal;
+package com.wyb.thread.base.threadLocal;
 
 
 /**
@@ -28,6 +28,7 @@ public class ThreadLocalDemo {
             this.sn = sn;
         }
 
+        @Override
         public void run() {
             for (int i = 0; i < 3; i++) {
                 //④每个线程打出3个序列值

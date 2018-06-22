@@ -1,4 +1,4 @@
-# Spring boot 集成mybatis
+# Spring boot 集成mybatis swagger log4j2
 
 集成日志系统 log4j2 详见配置文件 
 注意：去掉原来默认的日志依赖

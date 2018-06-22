@@ -1,4 +1,4 @@
-package com.wyb.test.thread.thread;
+package com.wyb.thread.base.synchronize;
 
 
 class NumberPrint implements Runnable {
@@ -11,6 +11,7 @@ class NumberPrint implements Runnable {
         res = a;
     }
 
+    @Override
     public void run() {
         synchronized (res) {
             while (count-- > 0) {

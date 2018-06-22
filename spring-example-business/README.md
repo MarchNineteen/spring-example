@@ -5,10 +5,10 @@
 @ImportResource({"classpath*:spring/spring-mybatis-*.xml"})
 引入xml配置文件
 
-编程式事务配置
-- 1.spring-mybatis-anno 注解形式配置
+编程式事务配置(在 Spring 出现以前，编程式事务管理对基于 POJO 的应用来说是唯一选择。用过 Hibernate 的人都知道，我们需要在代码中显式调用beginTransaction()、commit()、rollback()等事务管理相关的方法，这就是编程式事务管理。通过 Spring 提供的事务管理 API，我们可以在代码中灵活控制事务的执行。在底层，Spring 仍然将事务操作委托给底层的持久化框架来执行。)
 
-声明式事务的配置
+声明式事务的配置(底层是建立在 AOP 的基础之上的。其本质是对方法前后进行拦截，然后在目标方法开始之前创建或者加入一个事务，在执行完目标方法之后根据执行情况提交或者回滚事务。)
+- 1.spring-mybatis-anno 注解形式配置
 - 2.spring-mybatis-tx 使用tx标签配置的拦截器
 注意添加aop maven依赖
 - 3.spring-mybatis-proxy 所有Bean共享一个代理基类
@@ -22,6 +22,8 @@
 - 3，4，5很少使用
 
 > 参考：https://www.cnblogs.com/longshiyVip/p/5061547.html
+
+> 参考：https://mp.weixin.qq.com/s?__biz=MzU4NDQ4MzU5OA==&mid=2247483994&idx=1&sn=770af2a712c9a7efe2391bd23dddeea2&chksm=fd98543bcaefdd2d24f433f412e7046ebddf8791cbb0f45693192a6f6312ac1e1679aa783ad4#rd
 
 ### 事务隔离级别（定义了一个事务可能受其他并发事务影响的程度）
 
