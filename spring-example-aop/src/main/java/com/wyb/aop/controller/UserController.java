@@ -4,11 +4,11 @@ package com.wyb.aop.controller;
 import com.wyb.aop.annotation.Log;
 import com.wyb.aop.dao.model.UserDo;
 import com.wyb.aop.service.UserService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -21,7 +21,7 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
 
-    @Resource
+    @Qualifier(value = "userServiceImpl")
     private UserService userService;
 
     @Log(value = "add")

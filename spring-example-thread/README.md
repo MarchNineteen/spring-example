@@ -35,7 +35,7 @@ Thread线程方法：
 2.原子类（AtomicInteger、AtomicBoolean……）
 
 3.Lock类　
-- LockWithCondition
+- Condition
 - ReentrantLock
 - ReentrantReadWriteLock.ReadLock
 - ReentrantReadWriteLock.WriteLock

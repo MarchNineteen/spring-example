@@ -1,12 +1,11 @@
 package com.wyb.thread.base.lock;
 
-import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * @author Kunzite
  */
-public class Condition1Test {
+public class ConditionDemo {
 
     public static void main(String[] args) {
         final BusinessLock business = new BusinessLock();
@@ -35,7 +34,7 @@ public class Condition1Test {
         private boolean bShouldSub = true;
 
         ReentrantLock lock = new ReentrantLock();
-        Condition condition = lock.newCondition();
+        java.util.concurrent.locks.Condition condition = lock.newCondition();
 
         public void sub(int i) {
             lock.lock();

@@ -16,7 +16,7 @@ import java.util.List;
  * @author: Kunzite
  * @Date: 2018-01-07 19:23
  */
-@Service
+@Service(value = "userServiceImpl")
 public class UserServiceImpl implements UserService {
 
     @Resource
