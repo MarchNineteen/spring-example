@@ -1,7 +1,7 @@
 package com.wyb.shiro.controller.admin;
 
 import com.wyb.shiro.config.JWTConfig;
-import com.wyb.shiro.dao.dto.UserDto;
+import com.wyb.shiro.dao.model.UserDo;
 import com.wyb.shiro.help.UserPasswordHelper;
 import com.wyb.shiro.realm.UserToken;
 import com.wyb.shiro.result.web.WebResult;
@@ -61,12 +61,6 @@ public class LoginController {
             @RequestParam(value = "username", required = true) String username,
             @RequestParam(value = "password", required = true) String password
     ) {
-        log.info("登录账号：{},密码：{}", username, password);
-//        UserDto userDto = userService.getByUserName(username);
-//        if (null == userDto) {
-//            return WebResult.illegalArgument("username", "用户不存在");
-//        }
-//        token.setRememberMe(rememberMe);
         UserToken userToken = new UserToken(username, password);
         Subject currentUser = SecurityUtils.getSubject();
         String message = "";
@@ -83,11 +77,11 @@ public class LoginController {
             message = "用户名或密码不正确";
         }
         if (currentUser.isAuthenticated()) {
-            UserDto userDto = userService.getByUserName(username);
-            String token = JWTUtil.sign(userDto.getId(), password, jwtConfig.getIssure());
+            UserDo userDo = userService.getByUserName(username);
+            String token = JWTUtil.sign(userDo.getId(), password, jwtConfig.getIssure());
             //设置用户session
             Session session = currentUser.getSession();
-            session.setAttribute("user", userDto);
+            session.setAttribute("user", userDo);
             session.setAttribute("Authorization", token);
             return WebResult.success();
         } else {
@@ -95,10 +89,26 @@ public class LoginController {
         }
     }
 
-    @GetMapping(value = "admin/register")
+    /**
+     * 注册页面跳转
+     *
+     * @return
+     */
+    @GetMapping(value = "/register")
     public String register() {
         return "admin/register";
     }
 
+    /**
+     * 退出 跳转
+     *
+     * @return
+     */
+//    @GetMapping(value = "/logout")
+//    public String logout() {
+//        Subject currentUser = SecurityUtils.getSubject();
+//        currentUser.logout();
+//        return "admin/login";
+//    }
 
 }

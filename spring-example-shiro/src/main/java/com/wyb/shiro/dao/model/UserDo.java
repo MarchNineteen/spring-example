@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author Kunzite
@@ -61,6 +62,8 @@ public class UserDo implements Serializable {
 
     @Column(name = "update_time")
     private Date updateTime;
+
+    private List<RoleDo> roles;
 
     private static final long serialVersionUID = 1L;
 

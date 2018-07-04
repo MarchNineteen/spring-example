@@ -13,7 +13,8 @@
 
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-
+    <!-- Sweet Alert -->
+    <link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet"/>
 </head>
 
 <body class="gray-bg">
@@ -71,7 +72,7 @@
                         } else {
                             swal({
                                 title : "温馨提示",
-                                text : data.errorMessage[0]
+                                text : data.message
                             });
                         }
                     }

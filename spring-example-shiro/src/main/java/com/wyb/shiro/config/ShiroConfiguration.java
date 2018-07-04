@@ -134,7 +134,7 @@ public class ShiroConfiguration {
         Map<String, Filter> filters = new LinkedHashMap<String, Filter>();
         // 退出过滤器
         LogoutFilter logoutFilter = new LogoutFilter();
-        logoutFilter.setRedirectUrl("/logout");
+        logoutFilter.setRedirectUrl("/admin/login");
         // jwt过滤器
         JWTFilter jwtFilter = new JWTFilter();
         // 登录过滤器
@@ -155,7 +155,7 @@ public class ShiroConfiguration {
         // 自定义url规则 http://shiro.apache.org/web.html#urls-
         Map<String, String> filterChainDefinitionManager = new LinkedHashMap<String, String>();
         //配置退出 过滤器,其中的具体的退出代码Shiro已经替我们实现了
-        filterChainDefinitionManager.put("/logout", "logout");
+        filterChainDefinitionManager.put("/admin/logout", "logout");
 //        filterChainDefinitionManager.put("/user/**", "authc,roles[ROLE_USER]");
         filterChainDefinitionManager.put("/events/**", "authc,roles[ROLE_ADMIN]");
 //        filterChainDefinitionManager.put("/user/edit/**", "authc,perms[user:edit]");// 这里为了测试，固定写死的值，也可以从数据库或其他配置中读取

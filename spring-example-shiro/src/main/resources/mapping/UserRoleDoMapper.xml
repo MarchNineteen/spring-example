@@ -9,4 +9,5 @@
     <result column="role_id" jdbcType="INTEGER" property="roleId" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
   </resultMap>
+
 </mapper>

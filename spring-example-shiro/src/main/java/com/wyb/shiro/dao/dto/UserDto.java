@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
 
+import java.util.List;
+
 /**
  * @author Kunzite
  */
@@ -45,8 +47,12 @@ public class UserDto extends BaseDto {
      */
     private String phone;
 
+    /**
+     * 角色
+     */
+    private List<RoleDto> roleDtoList;
+
     public UserDto(UserDo userDo) {
         BeanUtils.copyProperties(userDo, this);
     }
-
 }

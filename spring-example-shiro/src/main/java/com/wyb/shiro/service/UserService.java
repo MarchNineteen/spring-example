@@ -2,6 +2,7 @@ package com.wyb.shiro.service;
 
 import com.github.pagehelper.PageInfo;
 import com.wyb.shiro.dao.dto.UserDto;
+import com.wyb.shiro.dao.model.UserDo;
 
 /**
  * @author Kunzite
@@ -23,7 +24,7 @@ public interface UserService {
      * @param userName
      * @return
      */
-    UserDto getByUserName(String userName);
+    UserDo getByUserName(String userName);
 
     /**
      * 根据id获取用户

@@ -43,12 +43,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto getByUserName(String userName) {
+    public UserDo getByUserName(String userName) {
         Example example = new Example(UserDo.class);
         example.createCriteria().andEqualTo("isDelete", 0).andEqualTo("username", userName);
         List<UserDo> list = userDoMapper.selectByExample(example);
         if (CollectionUtils.isNotEmpty(list)) {
-            return BeanUtil.copyProperties(list.get(0), UserDto.class);
+            return list.get(0);
         }
         return null;
     }

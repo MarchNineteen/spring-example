@@ -14,4 +14,8 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
+  <select id="getByRoleIds" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select m.* from role_menu rm,menu m where m.id = rm.menu_id and rm.role_id in (#{s})
+  </select>
+
 </mapper>
