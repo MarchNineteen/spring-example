@@ -16,7 +16,7 @@ public interface UserService {
      * @param pageSize
      * @return
      */
-    PageInfo<UserDto> listByPage(int pageNum, int pageSize);
+    PageInfo<UserDo> listByPage(int pageNum, int pageSize);
 
     /**
      * 根据username获取用户

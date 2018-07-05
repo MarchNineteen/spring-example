@@ -1,6 +1,5 @@
 package com.wyb.shiro.service.impl;
 
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.wyb.shiro.dao.dto.UserDto;
@@ -15,7 +14,6 @@ import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @author Kunzite
@@ -30,16 +28,16 @@ public class UserServiceImpl implements UserService {
     private UserPasswordHelper userPasswordHelper;
 
     @Override
-    public PageInfo<UserDto> listByPage(int pageNum, int pageSize) {
-        Page<UserDo> page = PageHelper.startPage(pageNum, pageSize).doSelectPage(() -> userDoMapper.selectAll());
-        List<UserDto> userDtoList = page.getResult().stream().map(UserDto::new).collect(Collectors.toList());
-        // todo 数据处理
-        PageInfo<UserDto> pageInfo = new PageInfo<UserDto>();
-        pageInfo.setPageNum(page.getPageNum());
-        pageInfo.setPageSize(page.getPageSize());
-        pageInfo.setTotal(page.getTotal());
-        pageInfo.setList(userDtoList);
-        return pageInfo;
+    public PageInfo<UserDo> listByPage(int pageNum, int pageSize) {
+        PageInfo<UserDo> page = PageHelper.startPage(pageNum, pageSize).doSelectPageInfo(() -> userDoMapper.selectAll());
+//        List<UserDto> userDtoList = page.getResult().stream().map(UserDto::new).collect(Collectors.toList());
+//        // todo 数据处理
+//        PageInfo<UserDto> pageInfo = new PageInfo<UserDto>();
+//        pageInfo.setPageNum(page.getPageNum());
+//        pageInfo.setPageSize(page.getPageSize());
+//        pageInfo.setTotal(page.getTotal());
+//        pageInfo.setList(userDtoList);
+        return page;
     }
 
     @Override
