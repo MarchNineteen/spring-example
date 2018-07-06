@@ -1,5 +1,6 @@
 package com.wyb.shiro.service;
 
+import com.github.pagehelper.PageInfo;
 import com.wyb.shiro.dao.model.RoleDo;
 
 import java.util.List;
@@ -12,4 +13,20 @@ public interface RoleService {
      * @return
      */
     List<RoleDo> getRolesByUserID(Long userId);
+
+    /**
+     * 获取所有角色
+     *
+     * @return
+     * @param pageCurrent
+     * @param pageSize
+     */
+    PageInfo<RoleDo> listRole(Integer pageCurrent, Integer pageSize);
+
+    /**
+     * 添加角色
+     *
+     * @param roleDo
+     */
+    void saveRole(RoleDo roleDo);
 }

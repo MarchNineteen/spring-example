@@ -11,7 +11,9 @@ import com.wyb.shiro.result.BaseEnum;
 public enum WebResultEnum implements BaseEnum {
 
     /* 操作成功 */
-    SUCCESS(1000, "操作成功");
+    SUCCESS(1000, "操作成功"),
+    /* 操作成功 */
+    ERROR_PARAMS(1001, "参数错误");
 
     /**
      * 数值型错误码

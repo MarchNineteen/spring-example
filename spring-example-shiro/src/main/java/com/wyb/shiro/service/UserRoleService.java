@@ -5,6 +5,11 @@ package com.wyb.shiro.service;
  */
 public interface UserRoleService {
 
-
-
+    /**
+     * 为用户添加角色
+     *
+     * @param userId
+     * @param roleIds
+     */
+    int update(Long userId, Long[] roleIds);
 }

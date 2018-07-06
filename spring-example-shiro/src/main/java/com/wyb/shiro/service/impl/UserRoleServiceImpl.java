@@ -15,4 +15,9 @@ public class UserRoleServiceImpl implements UserRoleService {
     @Resource
     private UserRoleDoMapper userRoleDoMapper;
 
+    @Override
+    public int update(Long userId, Long[] roleIds) {
+        userRoleDoMapper.deleteRoleByUserId(userId);
+        return userRoleDoMapper.insertBatch(userId, roleIds);
+    }
 }

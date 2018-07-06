@@ -45,6 +45,21 @@
             </li>
         </@shiro.hasPermission>
 
+        <@shiro.hasPermission name = "系统管理">
+            <span class="fa arrow"></span>
+            <li>
+                <a href="${adminDomain}/user/list"><i class="fa fa-th-large"></i><span class="nav-label">系统管理</span></a>
+                <ul class="nav nav-second-level">
+                <@shiro.hasPermission name = "角色管理">
+                    <li><a href="dashboard_2.html">角色管理</a></li>
+                </@shiro.hasPermission>
+                <@shiro.hasPermission name = "权限管理">
+                    <li><a href="dashboard_3.html">权限管理</a></li>
+                </@shiro.hasPermission>
+                </ul>
+            </li>
+        </@shiro.hasPermission>
+
         </ul>
 
     </div>

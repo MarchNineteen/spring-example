@@ -6,6 +6,9 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * @author Kunzite
+ */
 @Data
 @Table(name = "shiro.role")
 public class RoleDo implements Serializable {
@@ -34,4 +37,16 @@ public class RoleDo implements Serializable {
     private Date updateTime;
 
     private static final long serialVersionUID = 1L;
+
+    /**
+     * 初始化常量
+     *
+     * @return
+     */
+    public RoleDo init() {
+        this.setIsDelete(0);
+        this.setCreateTime(new Date());
+        this.setUpdateTime(new Date());
+        return this;
+    }
 }
