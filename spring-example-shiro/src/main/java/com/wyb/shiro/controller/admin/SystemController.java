@@ -64,19 +64,19 @@ public class SystemController {
      *
      * @return
      */
-    @RequestMapping(value = "/role/list", method = RequestMethod.GET)
-    public String listRole(RoleDo roleDo, @PathVariable Integer pageCurrent,
+    @RequestMapping(value = "/role/list_{pageCurrent}_{pageSize}_{pageCount}", method = RequestMethod.GET)
+    public String listRole(RoleDo role, @PathVariable Integer pageCurrent,
                            @PathVariable Integer pageSize,
                            @PathVariable Integer pageCount,
                            Model model) {
         if (pageSize == 0) pageSize = 20;
         if (pageCurrent == 0) pageCurrent = 1;
-        PageInfo<RoleDo> pageInfo = roleService.listRole(pageCurrent, pageSize);
-        pageInfo.getPages();
-        String pageHTML = PageUtil.getPageContent("/admin/sys/role/list/{pageCurrent}_{pageSize}_{pageCount}?title=" + roleDo.getRoleName(), pageCurrent, pageSize, pageCount);
-        model.addAttribute("list", pageInfo.getList());
-        model.addAttribute("role", roleDo);
-        model.addAttribute("pageHTML", roleService.listRole(pageCurrent, pageSize));
+        PageInfo<RoleDo> page = roleService.listRole(pageCurrent, pageSize);
+        page.getPages();
+        String pageHTML = PageUtil.getPageContent("/admin/sys/role/list/{pageCurrent}_{pageSize}_{pageCount}?title=" + role.getRoleName(), page.getPageNum(), page.getPageSize(), page.getPages());
+        model.addAttribute("list", page.getList());
+        model.addAttribute("role", role);
+        model.addAttribute("pageHTML", pageHTML);
         return "admin/sys/roleList";
     }
 
