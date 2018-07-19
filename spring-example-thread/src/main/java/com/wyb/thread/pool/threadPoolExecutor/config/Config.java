@@ -29,7 +29,7 @@ public class Config implements Cloneable {
      */
     private String userAgent = UserAgent.CHROME_FOR_MAC;
 
-    private int queueSize;
+    private int queueSize = 2;
 
     public static Config me() {
         return new Config();

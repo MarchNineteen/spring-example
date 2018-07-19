@@ -46,4 +46,8 @@ Thread线程方法：
 
 5.管理类
 - ThreadPoolExecutor
+
+核心线程满了，接下来进队列，队列也满了，创建新线程，直到达到最大线程数，之后再超出，会进入拒绝rejectedExecution
+
+
 - JMX框架下的系统级管理类 ThreadMXBean

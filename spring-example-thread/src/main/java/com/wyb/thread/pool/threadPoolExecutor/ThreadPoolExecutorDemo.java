@@ -28,7 +28,7 @@ public class ThreadPoolExecutorDemo {
     }
 
     public void run(String url) {
-        for (int num = 0; num < 90; num += 30) {
+        for (int num = 0; num < 300; num += 30) {
             String newUrl = url + num;
             log.info("{},请求的路径为：{}", Thread.currentThread(), newUrl);
             executorService.submit(new DownloadThread(new Request(newUrl, config)));

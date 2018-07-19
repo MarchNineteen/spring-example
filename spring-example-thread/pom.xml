@@ -56,7 +56,12 @@
 			<artifactId>oh-my-request</artifactId>
 			<version>0.0.1</version>
 		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+			<version>3.4</version>
+        </dependency>
+    </dependencies>
 
 	<build>
 		<plugins>
