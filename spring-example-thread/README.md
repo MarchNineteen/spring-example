@@ -33,6 +33,13 @@ Thread线程方法：
 1.ThreadLocal类:
 
 2.原子类（AtomicInteger、AtomicBoolean……）
+```
+// cas方法
+public final boolean compareAndSet(int expect, int update) {
+//使用unsafe的native方法，实现高效的硬件级别CAS
+return unsafe.compareAndSwapInt(this, valueOffset, expect, update);
+}
+```
 
 3.Lock类　
 - Condition
