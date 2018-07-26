@@ -1,6 +1,7 @@
 package com.wyb.shiro.config;
 
 import com.wyb.shiro.config.properties.*;
+import com.wyb.shiro.config.redis.ShiroRedisCacheManager;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
@@ -65,7 +66,6 @@ public class ShiroAutoConfiguration {
     private Serializer<PrincipalCollection> serializer;
 
 
-
     /****************************** shiro Realm start ********************************/
     @Bean(name = "mainRealm")
     @ConditionalOnMissingBean(name = "mainRealm")
@@ -93,13 +93,14 @@ public class ShiroAutoConfiguration {
 
     @Bean(name = "mainRealm")
     @ConditionalOnMissingBean(name = "mainRealm")
-    @DependsOn(value = {"lifecycleBeanPostProcessor", "credentialsMatcher"})
-    public Realm realm(CredentialsMatcher credentialsMatcher) {
+    @DependsOn(value = {"lifecycleBeanPostProcessor", "credentialsMatcher", "shiroCacheManager"})
+    public Realm realm(CredentialsMatcher credentialsMatcher, ShiroRedisCacheManager shiroRedisCacheManager) {
         log.info("开始加载自定义Realm");
         Class<?> realmClass = properties.getRealmClass();
         Realm realm = (Realm) BeanUtils.instantiateClass(realmClass);
         if (realm instanceof AuthenticatingRealm) {
             ((AuthenticatingRealm) realm).setCredentialsMatcher(credentialsMatcher);
+            ((AuthenticatingRealm) realm).setCacheManager(shiroRedisCacheManager);
         }
         return realm;
     }

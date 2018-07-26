@@ -13,9 +13,12 @@ public class Constants {
 	 */
 	public final static String REDIS_SHIRO_SESSION = "shiro-session:";
 	/***************************************** shiro redis 管理设置 end*********************************************************/
-	 
-	
-	
+
+
+	/**
+	 * DS LOCK key
+	 */
+	public static final String DS_LOCK = "dslock.";
 	
 	
 }

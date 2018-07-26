@@ -14,6 +14,8 @@ import org.springframework.beans.BeanUtils;
 @AllArgsConstructor
 public class RoleDto extends BaseDto{
 
+    private static final long serialVersionUID = -3912334563594692068L;
+
     /**
      * 角色名称
      */

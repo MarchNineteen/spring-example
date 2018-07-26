@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
+import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
@@ -33,6 +34,8 @@ public class ShiroRealm extends AuthorizingRealm {
     private RoleService roleService;
     @Resource
     private JWTConfig jwtConfig;
+    @Resource
+    private CacheManager shiroCacheManager;
 
     /**
      * 授权方法，为当前登录的Subject授予角色和权限
@@ -81,10 +84,16 @@ public class ShiroRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
+
         UserToken token = (UserToken) authenticationToken;
         log.info("验证当前Subject时获取到token为：" + token.toString());
         String username = (String) authenticationToken.getPrincipal();
-
+        // 获取缓存
+        AuthenticationInfo authenticationInfo = (AuthenticationInfo) shiroCacheManager.getCache(username).get(username);
+        if (null != authenticationInfo) {
+            log.info("缓存存在账户为{}的账户信息",username);
+            return authenticationInfo;
+        }
 //        Long uid = JWTUtil.getUid(token);
 //        log.info(String.valueOf(uid));
 
@@ -95,7 +104,9 @@ public class ShiroRealm extends AuthorizingRealm {
 //        if (!JWTUtil.verify(token, uid, userDto.getPassword(), jwtConfig.getIssure())) {
 //            throw new AuthenticationException("Username or password error");
 //        }
-        return new SimpleAuthenticationInfo(userDo.getUsername(), userDo.getPassword(), ByteSource.Util.bytes(userDo.getSalt()),
+        SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(userDo.getUsername(), userDo.getPassword(), ByteSource.Util.bytes(userDo.getSalt()),
                 getName());
+        shiroCacheManager.getCache(username).put(username, simpleAuthenticationInfo);
+        return simpleAuthenticationInfo;
     }
 }

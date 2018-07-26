@@ -3,12 +3,13 @@ package com.wyb.shiro.config;
 import com.wyb.shiro.config.properties.ShiroProperties;
 import com.wyb.shiro.config.properties.ShiroSessionProperties;
 import com.wyb.shiro.config.properties.ShiroSignInProperties;
+import com.wyb.shiro.config.redis.ShiroRedisCacheManager;
+import com.wyb.shiro.config.session.CustomShiroSessionDAO;
+import com.wyb.shiro.config.session.JedisShiroSessionRepository;
 import com.wyb.shiro.filter.FormSignInFilter;
 import com.wyb.shiro.filter.JWTFilter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.cache.CacheManager;
-import org.apache.shiro.cache.MemoryConstrainedCacheManager;
-import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.mgt.DefaultSecurityManager;
 import org.apache.shiro.mgt.RememberMeManager;
 import org.apache.shiro.mgt.SecurityManager;
@@ -17,9 +18,7 @@ import org.apache.shiro.session.SessionListener;
 import org.apache.shiro.session.mgt.ExecutorServiceSessionValidationScheduler;
 import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.session.mgt.SessionValidationScheduler;
-import org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO;
 import org.apache.shiro.session.mgt.eis.SessionDAO;
-import org.apache.shiro.session.mgt.eis.SessionIdGenerator;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -28,12 +27,11 @@ import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.apache.shiro.web.session.mgt.WebSessionManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.DependsOn;
+import org.springframework.data.redis.core.RedisTemplate;
 
 import javax.servlet.Filter;
 import java.util.Collection;
@@ -228,37 +226,37 @@ public class ShiroConfiguration {
      *
      * @ConditionalOnMissingBean（仅仅在当前上下文中不存在某个对象时，才会实例化一个Bean）
      */
-    @Bean(name = "shiroCacheManager")
-    @ConditionalOnMissingBean(name = "shiroCacheManager")
-    public CacheManager memoryCacheManager() {
-        log.info("开始加载MemoryConstrainedCacheManager");
-        return new MemoryConstrainedCacheManager();
-    }
+//    @Bean(name = "shiroCacheManager")
+//    @ConditionalOnMissingBean(name = "shiroCacheManager")
+//    public CacheManager memoryCacheManager() {
+//        log.info("开始加载MemoryConstrainedCacheManager");
+//        return new MemoryConstrainedCacheManager();
+//    }
 
     /**
      * (基于redis的)用户授权信息Cache
      */
-//    @Bean(name = "shiroCacheManager")
-//    @ConditionalOnMissingBean(name="shiroCacheManager")
-//    public CacheManager redisCacheManager(RedisTemplate<String, Object> redisTemplate) {
-//        return new RedisCacheManager(redisTemplate);
-//    }
+    @Bean(name = "shiroCacheManager")
+    @ConditionalOnMissingBean(name="shiroCacheManager")
+    public CacheManager redisCacheManager(RedisTemplate<String, Object> redisTemplate) {
+        return new ShiroRedisCacheManager(redisTemplate);
+    }
 
     /**
      * (基于ehcache的)用户授权信息Cache
      */
-    @Bean(name = "shiroCacheManager")
-    @ConditionalOnClass(name = {"org.apache.shiro.cache.ehcache.EhCacheManager"})
-    @ConditionalOnMissingBean(name = "shiroCacheManager")
-    public CacheManager ehcacheCacheManager() {
-        log.info("开始加载EhCacheManager");
-        EhCacheManager ehCacheManager = new EhCacheManager();
-        ShiroProperties.Ehcache ehcache = properties.getEhcache();
-        if (ehcache.getCacheManagerConfigFile() != null) {
-            ehCacheManager.setCacheManagerConfigFile(ehcache.getCacheManagerConfigFile());
-        }
-        return ehCacheManager;
-    }
+//    @Bean(name = "shiroCacheManager")
+//    @ConditionalOnClass(name = {"org.apache.shiro.cache.ehcache.EhCacheManager"})
+//    @ConditionalOnMissingBean(name = "shiroCacheManager")
+//    public CacheManager ehcacheCacheManager() {
+//        log.info("开始加载EhCacheManager");
+//        EhCacheManager ehCacheManager = new EhCacheManager();
+//        ShiroProperties.Ehcache ehcache = properties.getEhcache();
+//        if (ehcache.getCacheManagerConfigFile() != null) {
+//            ehCacheManager.setCacheManagerConfigFile(ehcache.getCacheManagerConfigFile());
+//        }
+//        return ehCacheManager;
+//    }
 
     /**
      * EhCacheManager，缓存管理，用户登陆成功后，把用户信息和权限信息缓存起来，
@@ -280,36 +278,37 @@ public class ShiroConfiguration {
      * @return
      * @paramjedisShiroSessionRepository
      */
-//    @Bean
-//    @DependsOn(value = { "jedisShiroSessionRepository" })
-//    @ConditionalOnMissingBean
-//    public SessionDAO sessionDAO(JedisShiroSessionRepository jedisShiroSessionRepository) {
-//        final CustomShiroSessionDAO customShiroSessionDAO = new CustomShiroSessionDAO();
-//        customShiroSessionDAO.setShiroSessionRepository(jedisShiroSessionRepository);
-//        return customShiroSessionDAO;
-//    }
-//
-//    @Bean
-//    @DependsOn(value = { "objectRedisTemplate" })
-//    public JedisShiroSessionRepository jedisShiroSessionRepository(RedisTemplate<String, Object> objectRedisTemplate) {
-//        final JedisShiroSessionRepository jedisShiroSessionRepository = new JedisShiroSessionRepository();
-//        jedisShiroSessionRepository.setObjectRedisTemplate(objectRedisTemplate);
-//        return jedisShiroSessionRepository;
-//    }
     @Bean
+    @DependsOn(value = { "jedisShiroSessionRepository" })
     @ConditionalOnMissingBean
-    public SessionDAO sessionDAO(CacheManager cacheManager) {
-        log.info("开始加载sessionDAO");
-        EnterpriseCacheSessionDAO sessionDAO = new EnterpriseCacheSessionDAO();
-        sessionDAO.setActiveSessionsCacheName(shiroSessionProperties.getActiveSessionsCacheName());
-        Class<? extends SessionIdGenerator> idGenerator = shiroSessionProperties.getIdGenerator();
-        if (idGenerator != null) {
-            SessionIdGenerator sessionIdGenerator = BeanUtils.instantiate(idGenerator);
-            sessionDAO.setSessionIdGenerator(sessionIdGenerator);
-        }
-        sessionDAO.setCacheManager(cacheManager);
-        return sessionDAO;
+    public SessionDAO sessionDAO(JedisShiroSessionRepository jedisShiroSessionRepository) {
+        final CustomShiroSessionDAO customShiroSessionDAO = new CustomShiroSessionDAO();
+        customShiroSessionDAO.setShiroSessionRepository(jedisShiroSessionRepository);
+        return customShiroSessionDAO;
     }
+
+    @Bean
+    @DependsOn(value = { "objectRedisTemplate" })
+    public JedisShiroSessionRepository jedisShiroSessionRepository(RedisTemplate<String, Object> objectRedisTemplate) {
+        final JedisShiroSessionRepository jedisShiroSessionRepository = new JedisShiroSessionRepository();
+        jedisShiroSessionRepository.setObjectRedisTemplate(objectRedisTemplate);
+        return jedisShiroSessionRepository;
+    }
+
+//    @Bean
+//    @ConditionalOnMissingBean
+//    public SessionDAO sessionDAO(CacheManager cacheManager) {
+//        log.info("开始加载sessionDAO");
+//        EnterpriseCacheSessionDAO sessionDAO = new EnterpriseCacheSessionDAO();
+//        sessionDAO.setActiveSessionsCacheName(shiroSessionProperties.getActiveSessionsCacheName());
+//        Class<? extends SessionIdGenerator> idGenerator = shiroSessionProperties.getIdGenerator();
+//        if (idGenerator != null) {
+//            SessionIdGenerator sessionIdGenerator = BeanUtils.instantiate(idGenerator);
+//            sessionDAO.setSessionIdGenerator(sessionIdGenerator);
+//        }
+//        sessionDAO.setCacheManager(cacheManager);
+//        return sessionDAO;
+//    }
 
 //    @Bean(name = "sessionValidationScheduler")
 //    @DependsOn(value = {"sessionManager"})

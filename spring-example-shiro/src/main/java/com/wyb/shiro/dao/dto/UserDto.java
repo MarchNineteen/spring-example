@@ -17,6 +17,8 @@ import java.util.List;
 @AllArgsConstructor
 public class UserDto extends BaseDto {
 
+    private static final long serialVersionUID = -5530231434340956140L;
+
     /**
      * 用户名
      */

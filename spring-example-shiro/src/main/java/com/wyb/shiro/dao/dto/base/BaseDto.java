@@ -11,6 +11,8 @@ import java.util.Date;
 @Data
 public abstract class BaseDto implements Serializable {
 
+    private static final long serialVersionUID = 4238308494801159506L;
+
     private Long id;
 
     /**
