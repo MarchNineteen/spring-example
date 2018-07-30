@@ -7,6 +7,7 @@ import org.apache.shiro.cache.CacheException;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.util.SerializationUtils;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Collection;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -37,7 +38,7 @@ public class RedisCache<K, V> implements Cache<K, V> {
     @Override
     public V get(K key) throws CacheException {
         //return redisTemplate.opsForValue().get(key);
-        log.info("将权限信息加入缓存中{}", new String(SerializationUtils.serialize(getCacheKey(key))));
+        log.info("通过key来获取对应的缓存对象{}", new String(SerializationUtils.serialize(getCacheKey(key))));
         V obj = redisTemplate.opsForValue().get(name + new String(SerializationUtils.serialize(getCacheKey(key))));
         if (obj != null) {
             System.out.println(obj.toString());
@@ -52,8 +53,13 @@ public class RedisCache<K, V> implements Cache<K, V> {
     public V put(K key, V value) throws CacheException {
 
         // redisTemplate.opsForValue().set(key, value, this.expireTime, TimeUnit.SECONDS);
-        log.info("将权限信息加入缓存中{}", new String(SerializationUtils.serialize(getCacheKey(key))));
-        redisTemplate.opsForValue().set(new String(SerializationUtils.serialize(getCacheKey(key))), value, this.expireTime, TimeUnit.SECONDS);
+//        redisTemplate.opsForValue().set(new String(SerializationUtils.serialize(getCacheKey(key))), value, this.expireTime, TimeUnit.SECONDS);
+        try {
+            log.info("将权限信息加入缓存中{}", String.valueOf(getCacheKey(key)).getBytes("UTF-8"));
+            redisTemplate.opsForValue().set(String.valueOf(getCacheKey(key).getBytes("UTF-8")), value, this.expireTime, TimeUnit.SECONDS);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
 
         return value;
     }
