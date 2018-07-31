@@ -52,7 +52,7 @@ public class ShiroProperties {
      * 权限 缓存过期时间 （该参数仅适用于 redis管理cache）
      */
 
-    private int AuthorizationExpireTimeRedis = 10;
+    private int AuthorizationExpireTimeRedis = 60 * 30;
 
 
     public int getRetryExpireTimeRedis() {

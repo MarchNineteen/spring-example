@@ -61,8 +61,8 @@ public class RedisConfig extends CachingConfigurerSupport {
         om.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         jackson2JsonRedisSerializer.setObjectMapper(om);
 
-        // 设置value的序列化规则和 key的序列化规则
-        template.setValueSerializer(jackson2JsonRedisSerializer);
+        // 设置value的序列化规则和 key的序列化规则   shiro的 simpleSession 存入json格式 反序列化会报错
+        template.setValueSerializer(new JdkSerializationRedisSerializer());
         template.setKeySerializer(new StringRedisSerializer());
 
         template.setHashKeySerializer(new StringRedisSerializer());

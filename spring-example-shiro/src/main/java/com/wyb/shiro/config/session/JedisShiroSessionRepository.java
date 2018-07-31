@@ -15,6 +15,7 @@ import java.util.Set;
 
 /**
  * @author Kunzite
+ * 这里有个小BUG，因为Redis使用序列化后，Key反序列化回来发现前面有一段乱码，解决的办法是存储缓存不序列化
  */
 @Slf4j
 public class JedisShiroSessionRepository implements ShiroSessionRepository {
@@ -31,13 +32,14 @@ public class JedisShiroSessionRepository implements ShiroSessionRepository {
 		// 所以为保证该事件的触发,需要确保在本地中的session超时的时候,redis中的session还依然存在,
 		// 此处X2是为了保证该session在自动回话管理中能够删除
 		String session_key = getRedisSessionKey(session.getId());
+		log.info("保存session,id为{}",session_key);
 		long timeOut = session.getTimeout() / 1000 * 2;
 		RedisUtil.set(objectRedisTemplate, session_key, session, timeOut);
 	}
 
 	@Override
 	public void deleteSession(Serializable sessionId) {
-		log.debug("删除session:" + sessionId);
+		log.info("删除session,id为{}" + sessionId);
 		if (sessionId == null) {
 			log.error("id为空");
 			return;
@@ -49,7 +51,7 @@ public class JedisShiroSessionRepository implements ShiroSessionRepository {
 
 	@Override
 	public Session getSession(Serializable sessionId) {
-		// log.debug("取得session:" + sessionId);
+		log.info("取得session,id为{}:" + sessionId);
 		if (sessionId == null) {
 			log.error("id为空");
 			return null;
@@ -65,7 +67,7 @@ public class JedisShiroSessionRepository implements ShiroSessionRepository {
 
 	@Override
 	public Collection<Session> getAllSessions() {
-		log.debug("取得所有session");
+		log.info("取得所有session");
 		Set<Session> sessions = new HashSet<Session>();
 		String session_ids = Constants.REDIS_SHIRO_SESSION + "*";
 		Set<String> keys = objectRedisTemplate.keys(session_ids);

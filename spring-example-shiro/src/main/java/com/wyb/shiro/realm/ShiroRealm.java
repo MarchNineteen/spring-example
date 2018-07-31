@@ -48,6 +48,7 @@ public class ShiroRealm extends AuthorizingRealm {
         log.info("执行Shiro权限认证 doGetAuthorizationInfo+" + principalCollection.toString());
         UserDo userDo = userService.getByUserName((String) principalCollection.getPrimaryPrincipal());
         if (null != userDo) {
+
             //把principals放session中 key=userId value=principals
 //            SecurityUtils.getSubject().getSession().setAttribute(String.valueOf(userDto.getId()), SecurityUtils.getSubject().getPrincipals());
             userDo.setRoles(roleService.getRolesByUserID(userDo.getId()));
@@ -65,9 +66,8 @@ public class ShiroRealm extends AuthorizingRealm {
 //            if(StringUtils.isNotBlank(permission.getPermCode()))
                 info.addStringPermission(menu.getMenuName());
             }
-//
-//            //设置登录次数、时间
-////        userService.updateUserLogin(user);
+            //设置登录次数、时间
+//        userService.updateUserLogin(user);
             return info;
         }
         // 返回null的话，就会导致任何用户访问被拦截的请求时，都会自动跳转到unauthorizedUrl指定的地址
@@ -88,12 +88,7 @@ public class ShiroRealm extends AuthorizingRealm {
         UserToken token = (UserToken) authenticationToken;
         log.info("验证当前Subject时获取到token为：" + token.toString());
         String username = (String) authenticationToken.getPrincipal();
-        // 获取缓存
-//        AuthenticationInfo authenticationInfo = (AuthenticationInfo) shiroCacheManager.getCache(username).get(username);
-//        if (null != authenticationInfo) {
-//            log.info("缓存存在账户为{}的账户信息",username);
-//            return authenticationInfo;
-//        }
+
 //        Long uid = JWTUtil.getUid(token);
 //        log.info(String.valueOf(uid));
 
@@ -104,9 +99,7 @@ public class ShiroRealm extends AuthorizingRealm {
 //        if (!JWTUtil.verify(token, uid, userDto.getPassword(), jwtConfig.getIssure())) {
 //            throw new AuthenticationException("Username or password error");
 //        }
-        SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(userDo.getUsername(), userDo.getPassword(), ByteSource.Util.bytes(userDo.getSalt()),
+        return new SimpleAuthenticationInfo(userDo.getUsername(), userDo.getPassword(), ByteSource.Util.bytes(userDo.getSalt()),
                 getName());
-//        shiroCacheManager.getCache(username).put(username, simpleAuthenticationInfo);
-        return simpleAuthenticationInfo;
     }
 }

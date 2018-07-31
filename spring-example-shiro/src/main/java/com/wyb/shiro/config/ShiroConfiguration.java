@@ -159,7 +159,7 @@ public class ShiroConfiguration {
 //        filterChainDefinitionManager.put("/user/edit/**", "authc,perms[user:edit]");// 这里为了测试，固定写死的值，也可以从数据库或其他配置中读取
         //<!-- 过滤链定义，从上向下顺序执行，一般将/**放在最为下边 -->:这是一个坑呢，一不小心代码就不好使了;
         //<!-- authc:所有url都必须认证通过才可以访问; anon:所有url都可以匿名访问-->
-        filterChainDefinitionManager.put("/user/**", "jwt");
+//        filterChainDefinitionManager.put("/user/**", "jwt");
         // 静态资源 start
         filterChainDefinitionManager.put("/css/**", "anon");
         filterChainDefinitionManager.put("/img/**", "anon");
