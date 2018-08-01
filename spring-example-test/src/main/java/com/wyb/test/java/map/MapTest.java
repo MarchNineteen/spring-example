@@ -1,4 +1,4 @@
-package com.wyb.test.map;
+package com.wyb.test.java.map;
 
 import java.util.HashMap;
 import java.util.Iterator;

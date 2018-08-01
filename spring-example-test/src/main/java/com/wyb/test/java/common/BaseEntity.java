@@ -1,4 +1,4 @@
-package com.wyb.test.common;
+package com.wyb.test.java.common;
 
 import java.io.Serializable;
 import java.util.Date;

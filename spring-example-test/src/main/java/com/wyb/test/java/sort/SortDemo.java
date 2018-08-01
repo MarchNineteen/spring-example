@@ -1,4 +1,4 @@
-package com.wyb.test.sort;
+package com.wyb.test.java.sort;
 
 /**
  * java 排序demo

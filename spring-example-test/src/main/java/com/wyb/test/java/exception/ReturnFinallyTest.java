@@ -1,4 +1,4 @@
-package com.wyb.test.exception;
+package com.wyb.test.java.exception;
 
 /**
  * try.catch 中的return在执行完finally的代码后再执行，若finally有return不执行之前的  return返回的值为各模块的值 互不影响

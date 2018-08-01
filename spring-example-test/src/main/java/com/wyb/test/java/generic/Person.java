@@ -1,4 +1,4 @@
-package com.wyb.test.generic;
+package com.wyb.test.java.generic;
 
 /**
  * @author Kunzite

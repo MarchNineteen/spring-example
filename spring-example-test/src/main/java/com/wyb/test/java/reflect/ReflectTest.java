@@ -1,4 +1,4 @@
-package com.wyb.test.reflect;
+package com.wyb.test.java.reflect;
 
 import java.lang.reflect.Method;
 
@@ -14,7 +14,7 @@ public class ReflectTest {
         Class clazz = UserDo.class;
         Class c = null;
         try {
-            c = Class.forName("com.wyb.test.reflect.UserDo");
+            c = Class.forName("com.wyb.test.java.reflect.UserDo");
         } catch (ClassNotFoundException e) {
             throw new RuntimeException("Can not class for userDo "+ e);
         }

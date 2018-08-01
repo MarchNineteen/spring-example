@@ -38,7 +38,7 @@
         targetProject     指定在该项目下所在的路径
          -->
         <javaModelGenerator targetPackage="com.wyb.shiro.dao.model" targetProject="src/main/java">
-            <!--<property name="rootClass" value="com.wyb.test.common.BaseEntity"/>-->
+            <!--<property name="rootClass" value="com.wyb.test.java.common.BaseEntity"/>-->
             <!-- 是否允许子包，即targetPackage.schemaName.tableName-->
             <property name="enableSubPackages" value="false"/>
             <!-- 是否对类CHAR类型的列的数据进行trim操作 -->

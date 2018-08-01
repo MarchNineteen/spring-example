@@ -1,4 +1,4 @@
-package com.wyb.test.forEach;
+package com.wyb.test.java.forEach;
 
 import java.util.ArrayList;
 import java.util.Iterator;

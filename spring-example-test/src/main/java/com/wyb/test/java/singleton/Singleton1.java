@@ -1,4 +1,4 @@
-package com.wyb.test.singleton;
+package com.wyb.test.java.singleton;
 
 /**
  * @author Kunzite

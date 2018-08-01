@@ -1,4 +1,4 @@
-package com.wyb.test.reflect;
+package com.wyb.test.java.reflect;
 
 import java.io.Serializable;
 import java.util.Date;

@@ -1,6 +1,7 @@
 package com.wyb.shiro.controller.admin;
 
 import com.github.pagehelper.PageInfo;
+import com.wyb.shiro.config.annotation.SessionUser;
 import com.wyb.shiro.dao.model.RoleDo;
 import com.wyb.shiro.result.web.WebResult;
 import com.wyb.shiro.result.web.WebResultEnum;
@@ -8,6 +9,7 @@ import com.wyb.shiro.service.MenuService;
 import com.wyb.shiro.service.RoleService;
 import com.wyb.shiro.service.UserRoleService;
 import com.wyb.shiro.utils.PageUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +22,7 @@ import javax.annotation.Resource;
  */
 @RequestMapping("/admin/sys")
 @Controller
+@Slf4j
 public class SystemController {
 
     @Resource
@@ -65,10 +68,11 @@ public class SystemController {
      * @return
      */
     @RequestMapping(value = "/role/list_{pageCurrent}_{pageSize}_{pageCount}", method = RequestMethod.GET)
-    public String listRole(RoleDo role, @PathVariable Integer pageCurrent,
+    public String listRole(@SessionUser String userName, RoleDo role, @PathVariable Integer pageCurrent,
                            @PathVariable Integer pageSize,
                            @PathVariable Integer pageCount,
                            Model model) {
+        log.info(userName);
         if (pageSize == 0) pageSize = 20;
         if (pageCurrent == 0) pageCurrent = 1;
         PageInfo<RoleDo> page = roleService.listRole(pageCurrent, pageSize);

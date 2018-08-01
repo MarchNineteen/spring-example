@@ -1,4 +1,4 @@
-package com.wyb.test.xml;
+package com.wyb.test.java.xml;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentException;

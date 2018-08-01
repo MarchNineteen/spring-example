@@ -1,4 +1,4 @@
-package com.wyb.test.db;
+package com.wyb.test.java.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
