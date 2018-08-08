@@ -11,18 +11,20 @@ import java.util.Map;
 
 
 /**
- * xml
+ * dom解析xml
+ *
  * @author Kunzite
  */
 public class XmlUtil {
 
     /**
      * String 类型的xml 转化成 map
+     *
      * @param xml
      * @return
      */
-    public static Map<String,String> transferToObject(String xml){
-        Map<String,String> hashMap = new HashMap<>();
+    public static Map<String, String> transferToObject(String xml) {
+        Map<String, String> hashMap = new HashMap<>();
         try {
             Document document = DocumentHelper.parseText(xml);
             //得到xml根元素
@@ -31,8 +33,8 @@ public class XmlUtil {
 
 //            Element body = root.element("Request");
             List<Element> sonRoot = root.elements();
-            for (Element element :sonRoot){
-                hashMap.put(element.getName(),element.getText());
+            for (Element element : sonRoot) {
+                hashMap.put(element.getName(), element.getText());
             }
         } catch (DocumentException e) {
             e.printStackTrace();
@@ -40,16 +42,16 @@ public class XmlUtil {
         return hashMap;
     }
 
-    public static String transToXml(HashMap<String,String> map){
+    public static String transToXml(HashMap<String, String> map) {
         Document document = DocumentHelper.createDocument();
-        Element body  = document.addElement("Request");
+        Element body = document.addElement("Request");
         for (Map.Entry<String, String> entry : map.entrySet()) {
             body.addElement(entry.getKey()).setText(entry.getValue());
         }
-       return body.asXML();
+        return body.asXML();
     }
 
-    public static void addCDATA(){
+    public static void addCDATA() {
         //二级XML
         Document second = DocumentHelper.createDocument();
 
@@ -61,7 +63,8 @@ public class XmlUtil {
         Document document = DocumentHelper.createDocument();
         Element body = document.addElement("Request");
         body.addElement("data").setText("22");
-        body.addElement("BankTradeInfo").add(DocumentHelper.createCDATA(secondXml));;//添加二级xml的CDATA
+        body.addElement("BankTradeInfo").add(DocumentHelper.createCDATA(secondXml));
+        //添加二级xml的CDATA
         System.out.println(body.asXML());
 
     }
@@ -69,7 +72,6 @@ public class XmlUtil {
     public static void main(String[] args) {
         addCDATA();
     }
-
 
 
 }
