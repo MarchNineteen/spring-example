@@ -1,5 +1,5 @@
 # 框架学习之 spring实例
-- [mybatis springboot 集成mybatis](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-mybatis)
+- [mybatis springboot 集成mybatis swagger log4j2 admin-UI 配置文件切换](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-mybatis)
 - [business spring事务配置](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-business)
 - [timer spring定时器](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-timer)
 - [cache 缓存配置](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-cache) 完成 redis 未完成 memcached
