@@ -4,13 +4,13 @@
             <i class="fa fa-cogs fa-spin"></i>
         </div>
         <div class="skin-settings">
-            <div class="title">Configuration <br/>
+            <div class="title">配置 <br/>
             <small style="text-transform: none;font-weight: 400">
-                Config box designed for demo purpose. All options available via code.
+                配置框设计用于演示目的。所有选项都可通过代码获得。
             </small></div>
             <div class="setings-item">
                     <span>
-                        Collapse menu
+                        折叠菜单
                     </span>
 
                 <div class="switch">
@@ -25,7 +25,7 @@
             </div>
             <div class="setings-item">
                     <span>
-                        Fixed sidebar
+                        固定侧栏
                     </span>
 
                 <div class="switch">
@@ -40,7 +40,7 @@
             </div>
             <div class="setings-item">
                     <span>
-                        Top navbar
+                        顶级导航栏
                     </span>
 
                 <div class="switch">
@@ -55,9 +55,7 @@
             </div>
             <div class="setings-item">
                     <span>
-                        Top navbar v.2
-                        <br/>
-                        <small>*Primary layout</small>
+                        顶级导航栏v.2 
                     </span>
 
                 <div class="switch">
@@ -72,7 +70,7 @@
             </div>
             <div class="setings-item">
                     <span>
-                        Boxed layout
+                        盒子布局
                     </span>
 
                 <div class="switch">
@@ -87,7 +85,7 @@
             </div>
             <div class="setings-item">
                     <span>
-                        Fixed footer
+                        固定页脚
                     </span>
 
                 <div class="switch">
@@ -101,32 +99,32 @@
                 </div>
             </div>
 
-            <div class="title">Skins</div>
+            <div class="title">皮肤</div>
             <div class="setings-item default-skin">
                     <span class="skin-name ">
                          <a href="#" class="s-skin-0">
-                             Default
+                             默认
                          </a>
                     </span>
             </div>
             <div class="setings-item blue-skin">
                     <span class="skin-name ">
                         <a href="#" class="s-skin-1">
-                            Blue light
+                            蓝色
                         </a>
                     </span>
             </div>
             <div class="setings-item yellow-skin">
                     <span class="skin-name ">
                         <a href="#" class="s-skin-3">
-                            Yellow/Purple
+                            黄色
                         </a>
                     </span>
             </div>
             <div class="setings-item ultra-skin">
                     <span class="skin-name ">
-                        <a href="md_skin/" class="md-skin">
-                            Material Design
+                        <a href="md-skin.html" class="md-skin">
+                            新布局
                         </a>
                     </span>
             </div>
@@ -209,7 +207,7 @@
                 localStorage.setItem("fixedsidebar",'on');
             }
         } else{
-            $('.sidebar-collapse').slimscroll({destroy: true});
+            $('.sidebar-collapse').slimScroll({destroy: true});
             $('.sidebar-collapse').attr('style', '');
             $("body").removeClass('fixed-sidebar');
 

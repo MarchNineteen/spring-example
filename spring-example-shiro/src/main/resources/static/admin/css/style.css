@@ -2,8 +2,8 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,300,500,700");
 /*
  *
- *   INSPINIA - Responsive Admin Theme
- *   version 2.7
+ *   INSPINIA - 响应式管理主题
+ *   version 2.7.1
  *
 */
 h1,
@@ -531,7 +531,7 @@ body.canvas-menu.mini-navbar nav.navbar-static-side {
   background: #fff;
   color: #1ab394;
 }
-.top-navigation .nav > li.active {
+.top-navigation .navbar .nav > li.active {
   background: #fff;
   border: none;
 }
@@ -1070,10 +1070,13 @@ button.dim:active:before {
   background-color: #d1dade;
   color: #5e5e5e;
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 10px;
   font-weight: 600;
   padding: 3px 8px;
   text-shadow: none;
+}
+.nav .label,
+.ibox .label {
+  font-size: 10px;
 }
 .badge {
   background-color: #d1dade;
@@ -1240,12 +1243,12 @@ button.dim:active:before {
   padding: 3px 20px 3px 5px;
   position: relative;
 }
-/* Tags Input Plugin */
+/* 标签输入插件 */
 .bootstrap-tagsinput {
   border: 1px solid #e5e6e7;
   box-shadow: none;
 }
-/* PAGINATIN */
+/* 分页 */
 .pagination > .active > a,
 .pagination > .active > span,
 .pagination > .active > a:hover,
@@ -1270,7 +1273,7 @@ button.dim:active:before {
   position: relative;
   text-decoration: none;
 }
-/* TOOLTIPS */
+/* 工具提示 */
 .tooltip-inner {
   background-color: #2F4050;
 }
@@ -1286,7 +1289,7 @@ button.dim:active:before {
 .tooltip.left .tooltip-arrow {
   border-left-color: #2F4050;
 }
-/* EASY PIE CHART*/
+/* 简单的图表*/
 .easypiechart {
   position: relative;
   text-align: center;
@@ -1375,9 +1378,9 @@ button.dim:active:before {
 .fc-event a {
   padding: 4px 6px;
   background-color: #1ab394;
-  /* background color */
+  /* 背景颜色 */
   border-color: #1ab394;
-  /* border color */
+  /* 边框颜色 */
 }
 .fc-event-time,
 .fc-event-title {
@@ -1388,7 +1391,7 @@ button.dim:active:before {
 .ui-calendar .fc-event-title {
   color: #fff;
 }
-/* Chat */
+/* 聊天 */
 .chat-activity-list .chat-element {
   border-bottom: 1px solid #e7eaec;
 }
@@ -1471,7 +1474,7 @@ button.dim:active:before {
   height: 350px;
   overflow-y: scroll;
 }
-/* LIST GROUP */
+/* 列表组 */
 a.list-group-item.active,
 a.list-group-item.active:hover,
 a.list-group-item.active:focus {
@@ -1626,7 +1629,7 @@ a.list-group-item.active:focus {
   margin-top: 15px;
   position: relative;
 }
-/* DATATABLES */
+/* 数据表 */
 table.dataTable thead .sorting,
 table.dataTable thead .sorting_asc:after,
 table.dataTable thead .sorting_desc,
@@ -1672,7 +1675,7 @@ div.dt-button-info {
     float: none;
   }
 }
-/* CIRCLE */
+/* 圈 */
 .img-circle {
   border-radius: 50%;
 }
@@ -1710,7 +1713,7 @@ div.dt-button-info {
 .show-grid {
   margin: 15px 0;
 }
-/* ANIMATION */
+/* 动画 */
 .css-animation-box h1 {
   font-size: 44px;
 }
@@ -1749,7 +1752,7 @@ div.dt-button-info {
   font-size: 12px;
   text-transform: uppercase;
 }
-/* PEACE */
+/* 和平 */
 .pace {
   -webkit-pointer-events: none;
   pointer-events: none;
@@ -1772,7 +1775,7 @@ div.dt-button-info {
 .pace-inactive {
   display: none;
 }
-/* WIDGETS */
+/* 窗口小部件 */
 .widget {
   border-radius: 5px;
   padding: 15px 20px;
@@ -1864,7 +1867,7 @@ div.dt-button-info {
 .glyphicon.fa {
   font-family: "FontAwesome";
 }
-/* INPUTS */
+/* 敲入 */
 .inline {
   display: inline-block !important;
 }
@@ -1891,7 +1894,6 @@ div.dt-button-info {
   padding: 6px 12px;
   transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
   width: 100%;
-  font-size: 14px;
 }
 .form-control:focus,
 .single-line:focus {
@@ -1943,7 +1945,7 @@ div.dt-button-info {
   background: none repeat scroll 0 0 #ed5565;
   box-shadow: none;
 }
-/* UI Sortable */
+/* UI可排序 */
 .ui-sortable .ibox-title {
   cursor: move;
 }
@@ -1955,7 +1957,7 @@ div.dt-button-info {
 .ibox.ui-sortable-placeholder {
   margin: 0 0 23px !important;
 }
-/* SWITCHES */
+/* 开关 */
 .onoffswitch {
   position: relative;
   width: 54px;
@@ -2221,7 +2223,7 @@ div.dt-button-info {
 .ui-jqdialog > .ui-resizable-se {
   position: absolute;
 }
-/* Nestable list */
+/* 可嵌套列表 */
 .dd {
   position: relative;
   display: block;
@@ -2351,7 +2353,7 @@ div.dt-button-info {
   box-shadow: 2px 4px 6px 0 rgba(0, 0, 0, 0.1);
 }
 /**
-* Nestable Extras
+* 可嵌套附加功能
 */
 .nestable-lists {
   display: block;
@@ -2401,11 +2403,11 @@ div.dt-button-info {
   overflow-y: hidden;
   overflow-x: auto;
 }
-/* Google Maps */
+/* 谷歌地图 */
 .google-map {
   height: 300px;
 }
-/* Validation */
+/* 验证 */
 label.error {
   color: #cc5965;
   display: inline-block;
@@ -2450,7 +2452,7 @@ label.error {
 .ngHeaderCell {
   border-right: none;
 }
-/* Toastr custom style */
+/* Toastr定制风格 */
 #toast-container > .toast {
   background-image: none !important;
 }
@@ -2537,7 +2539,7 @@ label.error {
 .inspinia-notify.alert-info {
   border-left: 6px solid #1ab394;
 }
-/* Image cropper style */
+/* 图像裁剪器样式 */
 .img-container,
 .img-preview {
   overflow: hidden;
@@ -2548,7 +2550,7 @@ label.error {
   height: 130px;
   width: 200px;
 }
-/* Forum styles  */
+/* 论坛风格  */
 .forum-post-container .media {
   margin: 10px 10px 10px 10px;
   padding: 20px 10px 20px 10px;
@@ -2657,16 +2659,16 @@ a.forum-item-title:hover {
 @media (max-width: 992px) {
   .forum-info {
     margin: 15px 0 10px 0;
-    /* Comment this is you want to show forum info in small devices */
+    /* 评论这是您想在小型设备中显示论坛信息 */
     display: none;
   }
   .forum-desc {
     float: none !important;
   }
 }
-/* New Timeline style */
+/* 新时间线风格 */
 .vertical-container {
-  /* this class is used to give a max-width to the element it is applied to, and center it horizontally when it reaches that max-width */
+  /* 此类用于给予其应用的元素的最大宽度，并在达到该最大宽度时水平居中 */
   width: 90%;
   max-width: 1170px;
   margin: 0 auto;
@@ -2882,7 +2884,7 @@ a.forum-item-title:hover {
     visibility: hidden;
   }
 }
-/* Tabs */
+/* 标签 */
 .tabs-container .panel-body {
   background: #fff;
   border: 1px solid #e7eaec;
@@ -3132,12 +3134,12 @@ a.forum-item-title:hover {
   line-height: 20px;
   padding-left: 3px;
 }
-/*Slick Carousel */
+/*Slick旋转木马 */
 .slick-prev:before,
 .slick-next:before {
   color: #1ab394 !important;
 }
-/* Payments */
+/* 支付 */
 .payment-card {
   background: #ffffff;
   padding: 20px;
@@ -3209,7 +3211,7 @@ a.forum-item-title:hover {
 body.tour-open .animated {
   animation-fill-mode: initial;
 }
-/* Resizable */
+/* 可调整大小 */
 .resizable-panels .ibox {
   clear: none;
   margin: 10px;
@@ -3224,16 +3226,16 @@ body.tour-open .animated {
 .ui-resizable-helper {
   background: rgba(211, 211, 211, 0.4);
 }
-/* Wizard step fix */
+/* 向导步骤修复 */
 .wizard > .content > .body {
   position: relative;
 }
-/* PDF js style */
+/* PDF js风格 */
 .pdf-toolbar {
   max-width: 600px;
   margin: 0 auto;
 }
-/* Dropzone */
+/* 拖放区 */
 .dropzone {
   min-height: 140px;
   border: 1px dashed #1ab394;
@@ -3243,7 +3245,7 @@ body.tour-open .animated {
 .dropzone .dz-message {
   font-size: 16px;
 }
-/* Activity stream */
+/* 活动流 */
 .stream {
   position: relative;
   padding: 10px 0;
@@ -3461,6 +3463,10 @@ body.tour-open .animated {
 .sidebar-container .sidebar-message {
   padding: 15px 20px;
 }
+.sidebar-container .sidebar-message .media-body {
+  display: block;
+  width: auto;
+}
 .sidebar-container .sidebar-message .message-avatar {
   height: 38px;
   width: 38px;
@@ -3553,16 +3559,16 @@ video {
   width: 100% !important;
   height: auto !important;
 }
-/* GALLERY */
+/* 相册 */
 .gallery > .row > div {
   margin-bottom: 15px;
 }
 .fancybox img {
   margin-bottom: 5px;
-  /* Only for demo */
+  /* 仅用于演示 */
   width: 24%;
 }
-/* Summernote text editor  */
+/* Summernote文本编辑器  */
 .note-editor {
   height: auto !important;
 }
@@ -3621,7 +3627,7 @@ video {
 .modal-footer {
   margin-top: 0;
 }
-/* WRAPPERS */
+/* 包装纸 */
 #wrapper {
   width: 100%;
   overflow-x: hidden;
@@ -3669,7 +3675,7 @@ ol.unstyled {
   font-size: 160px !important;
   color: #e5e6e7;
 }
-/* FOOTER */
+/* 页脚 */
 .footer {
   background: none repeat scroll 0 0 white;
   border-top: 1px solid #e7eaec;
@@ -3714,7 +3720,7 @@ body.fixed-sidebar.body-small.mini-navbar .footer.fixed {
 body.body-small .footer.fixed {
   margin-left: 0;
 }
-/* PANELS */
+/* 面板 */
 .page-heading {
   border-top: 0;
   padding: 0 10px 20px 10px;
@@ -3723,7 +3729,7 @@ body.body-small .footer.fixed {
 .panel-heading h2 {
   margin-bottom: 5px;
 }
-/* TABLES */
+/* 表格 */
 .table-bordered {
   border: 1px solid #EBEBEB;
 }
@@ -3755,7 +3761,7 @@ body.body-small .footer.fixed {
   padding: 8px;
   vertical-align: top;
 }
-/* PANELS */
+/* 面板 */
 .panel.blank-panel {
   background: none;
   margin: 0;
@@ -3776,7 +3782,7 @@ body.body-small .footer.fixed {
 .ui-tab .tab-content {
   padding: 20px 0;
 }
-/* GLOBAL  */
+/* 全局  */
 .no-padding {
   padding: 0 !important;
 }
@@ -4020,7 +4026,7 @@ table.table-mail tr td {
   left: auto;
   right: 0;
 }
-/* BACKGROUNDS */
+/* 背景 */
 .gray-bg,
 .bg-muted {
   background-color: #f3f3f4;
@@ -4136,7 +4142,7 @@ table.table-mail tr td {
 .jumbotron h1 {
   margin-top: 0;
 }
-/* COLORS */
+/* 颜色 */
 .text-navy {
   color: #1ab394;
 }
@@ -4177,7 +4183,7 @@ table.table-mail tr td {
   -moz-box-shadow: 0 0 3px 0 #919191;
   box-shadow: 0 0 3px 0 #919191;
 }
-/* For handle diferent bg color in AngularJS version */
+/* 在AngularJS版本中处理不同的bgcolor */
 .dashboards\.dashboard_2 nav.navbar,
 .dashboards\.dashboard_3 nav.navbar,
 .mailbox\.inbox nav.navbar,
@@ -4189,7 +4195,7 @@ table.table-mail tr td {
 .dashboards\.dashboard_5 nav.navbar {
   background: #fff;
 }
-/* For handle diferent bg color in MVC version */
+/* 在MVC版本中处理不同的bgcolor */
 .Dashboard_2 .navbar.navbar-static-top,
 .Dashboard_3 .navbar.navbar-static-top,
 .Dashboard_4_1 .navbar.navbar-static-top,
@@ -4249,7 +4255,7 @@ a.close-canvas-menu:hover {
   height: 200px;
   padding-top: 70px;
 }
-/* MARGINS & PADDINGS */
+/* 标签和包装 */
 .p-xxs {
   padding: 5px;
 }
@@ -4591,7 +4597,7 @@ body.modal-open .animated {
   animation-fill-mode: initial;
   z-index: inherit;
 }
-/* Show profile dropdown on fixed sidebar */
+/* 在固定侧栏上显示配置文件下拉列表 */
 body.mini-navbar.fixed-sidebar .profile-element,
 .block {
   display: block !important;
@@ -4605,7 +4611,7 @@ body.mini-navbar.fixed-sidebar .logo-element {
 .fullscreen-video .animated {
   animation: none;
 }
-/* SEARCH PAGE */
+/* 搜索页 */
 .search-form {
   margin-top: 10px;
 }
@@ -4620,7 +4626,7 @@ body.mini-navbar.fixed-sidebar .logo-element {
   font-size: 12px;
   margin-top: 5px;
 }
-/* CONTACTS */
+/* 好友 */
 .contact-box {
   background-color: #ffffff;
   border: 1px solid #e7eaec;
@@ -4655,7 +4661,7 @@ body.mini-navbar.fixed-sidebar .logo-element {
   border-top: 1px solid #e7eaec;
   padding: 15px 20px;
 }
-/* INVOICE */
+/* 发票 */
 .invoice-table tbody > tr > td:last-child,
 .invoice-table tbody > tr > td:nth-child(4),
 .invoice-table tbody > tr > td:nth-child(3),
@@ -4679,7 +4685,7 @@ body.mini-navbar.fixed-sidebar .logo-element {
   text-align: right;
   width: 15%;
 }
-/* ERROR & LOGIN & LOCKSCREEN*/
+/* 错误和登录和锁定 */
 .middle-box {
   max-width: 400px;
   z-index: 100;
@@ -4732,7 +4738,7 @@ body.mini-navbar.fixed-sidebar .logo-element {
 .lock-word .first-word {
   margin-right: 160px;
 }
-/* DASBOARD */
+/* 主页 */
 .dashboard-header {
   border-top: 0;
   padding: 20px 20px 20px 20px;
@@ -4788,7 +4794,7 @@ ul.clear-list:first-child {
 .timeline-item .content:hover {
   background: #f6f6f6;
 }
-/* PIN BOARD */
+/* 针板 */
 ul.notes li,
 ul.tag-list li {
   list-style: none;
@@ -4834,9 +4840,9 @@ ul.notes li div {
   height: 140px;
   width: 140px;
   padding: 1em;
-  /* Firefox */
+  /* 火狐 */
   -moz-box-shadow: 5px 5px 2px #212121;
-  /* Safari+Chrome */
+  /* Safari浏览器+浏览器 */
   -webkit-box-shadow: 5px 5px 2px rgba(33, 33, 33, 0.7);
   /* Opera */
   box-shadow: 5px 5px 2px rgba(33, 33, 33, 0.7);
@@ -4895,7 +4901,7 @@ ul.notes li div {
   -o-transition: -o-transform 0.15s linear;
   -webkit-transition: -webkit-transform 0.15s linear;
 }
-/* FILE MANAGER */
+/* 文件管理器 */
 .file-box {
   float: left;
   width: 220px;
@@ -5107,7 +5113,7 @@ a.compose-mail {
   margin-bottom: 5px;
   margin-right: 5px;
 }
-/* MAILBOX */
+/* 邮箱 */
 .mail-box {
   background-color: #ffffff;
   border: 1px solid #e7eaec;
@@ -5156,7 +5162,7 @@ a.compose-mail {
 .mail-ontact {
   width: 23%;
 }
-/* PROJECTS */
+/* 项目 */
 .project-people,
 .project-actions {
   text-align: right;
@@ -5198,7 +5204,7 @@ dd.project-people {
   margin-left: 10px;
   line-height: 22px;
 }
-/* FAQ */
+/* 常问问题 */
 .faq-item {
   padding: 20px;
   margin-bottom: 2px;
@@ -5226,7 +5232,7 @@ dd.project-people {
   font-size: 10px;
   text-transform: uppercase;
 }
-/* Chat view */
+/* 聊天视图 */
 .message-input {
   height: 90px !important;
 }
@@ -5330,7 +5336,7 @@ dd.project-people {
 .jstree-default .jstree-icon.none {
   width: 0;
 }
-/* CLIENTS */
+/* 客户 */
 .clients-list {
   margin-top: 20px;
 }
@@ -5380,7 +5386,7 @@ dd.project-people {
 .clients-list .nav-tabs > li.active > a:focus {
   border-bottom: 1px solid #fff;
 }
-/* BLOG ARTICLE */
+/* 博客文章 */
 .blog h2 {
   font-weight: 700;
 }
@@ -5406,7 +5412,7 @@ dd.project-people {
 .article .ibox-content {
   padding: 40px;
 }
-/* ISSUE TRACKER */
+/* 问题追踪器 */
 .issue-tracker .btn-link {
   color: #1ab394;
 }
@@ -5433,7 +5439,7 @@ table.issue-tracker tbody tr td {
   height: 42px;
   margin-bottom: 5px;
 }
-/* AGILE BOARD */
+/* 敏捷板 */
 .sortable-list {
   padding: 10px 0;
 }
@@ -5476,7 +5482,7 @@ ins {
 del {
   background-color: #ffc6c6;
 }
-/* E-commerce */
+/* 电子商务 */
 .product-box {
   padding: 0;
   border: 1px solid #e7eaec;
@@ -5570,7 +5576,7 @@ table.shoping-cart-table tr td:last-child {
 .product-images {
   margin: 0 20px;
 }
-/* Social feed */
+/* 社交资料 */
 .social-feed-separated .social-feed-box {
   margin-left: 62px;
 }
@@ -5647,7 +5653,7 @@ table.shoping-cart-table tr td:last-child {
 .social-comment textarea {
   font-size: 12px;
 }
-/* Vote list */
+/* 投票表 */
 .vote-item {
   padding: 20px 25px;
   background: #ffffff;
@@ -5817,11 +5823,11 @@ body.body-small .vote-icon {
 }
 /*
  * metismenu - v2.0.2
- * A jQuery menu plugin
+ * 一个jQuery菜单插件
  * https://github.com/onokumus/metisMenu
  *
- * Made by Osman Nuri Okumus
- * Under MIT License
+ * 由Osman Nuri Okumus制造
+ * 麻省理工学院许可证下
  */
 .metismenu .plus-minus,
 .metismenu .plus-times {
@@ -5891,7 +5897,7 @@ body.body-small .vote-icon {
   display: block;
 }
 /*
- *  Usage:
+ *  用法:
  *
  *    <div class="sk-spinner sk-spinner-rotating-plane"></div>
  *
@@ -5933,7 +5939,7 @@ body.body-small .vote-icon {
   }
 }
 /*
- *  Usage:
+ *  用法:
  *
  *    <div class="sk-spinner sk-spinner-double-bounce">
  *      <div class="sk-double-bounce1"></div>
@@ -5987,7 +5993,7 @@ body.body-small .vote-icon {
   }
 }
 /*
- *  Usage:
+ *  用法:
  *
  *    <div class="sk-spinner sk-spinner-wave">
  *      <div class="sk-rect1"></div>
@@ -6054,7 +6060,7 @@ body.body-small .vote-icon {
   }
 }
 /*
- *  Usage:
+ *  用法:
  *
  *    <div class="sk-spinner sk-spinner-wandering-cubes">
  *      <div class="sk-cube1"></div>
@@ -6089,7 +6095,7 @@ body.body-small .vote-icon {
     transform: translateX(42px) rotate(-90deg) scale(0.5);
   }
   50% {
-    /* Hack to make FF rotate in the right direction */
+    /* 使FF旋转方向正确 */
     -webkit-transform: translateX(42px) translateY(42px) rotate(-179deg);
     transform: translateX(42px) translateY(42px) rotate(-179deg);
   }
@@ -6112,7 +6118,7 @@ body.body-small .vote-icon {
     transform: translateX(42px) rotate(-90deg) scale(0.5);
   }
   50% {
-    /* Hack to make FF rotate in the right direction */
+    /* 使FF旋转方向正确 */
     -webkit-transform: translateX(42px) translateY(42px) rotate(-179deg);
     transform: translateX(42px) translateY(42px) rotate(-179deg);
   }
@@ -6130,7 +6136,7 @@ body.body-small .vote-icon {
   }
 }
 /*
- *  Usage:
+ *  用法:
  *
  *    <div class="sk-spinner sk-spinner-pulse"></div>
  *
@@ -6167,7 +6173,7 @@ body.body-small .vote-icon {
   }
 }
 /*
- *  Usage:
+ *  用法:
  *
  *    <div class="sk-spinner sk-spinner-chasing-dots">
  *      <div class="sk-dot1"></div>
@@ -6237,7 +6243,7 @@ body.body-small .vote-icon {
   }
 }
 /*
- *  Usage:
+ *  用法:
  *
  *    <div class="sk-spinner sk-spinner-three-bounce">
  *      <div class="sk-bounce1"></div>
@@ -6259,7 +6265,7 @@ body.body-small .vote-icon {
   display: inline-block;
   -webkit-animation: sk-threeBounceDelay 1.4s infinite ease-in-out;
   animation: sk-threeBounceDelay 1.4s infinite ease-in-out;
-  /* Prevent first frame from flickering when animation starts */
+  /* 动画启动时防止第一帧闪烁 */
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
 }
@@ -6296,7 +6302,7 @@ body.body-small .vote-icon {
   }
 }
 /*
- *  Usage:
+ *  用法:
  *
  *    <div class="sk-spinner sk-spinner-circle">
  *      <div class="sk-circle1 sk-circle"></div>
@@ -6337,7 +6343,7 @@ body.body-small .vote-icon {
   border-radius: 100%;
   -webkit-animation: sk-circleBounceDelay 1.2s infinite ease-in-out;
   animation: sk-circleBounceDelay 1.2s infinite ease-in-out;
-  /* Prevent first frame from flickering when animation starts */
+  /* 动画启动时防止第一帧闪烁 */
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
 }
@@ -6465,7 +6471,7 @@ body.body-small .vote-icon {
   }
 }
 /*
- *  Usage:
+ *  用法:
  *
  *    <div class="sk-spinner sk-spinner-cube-grid">
  *      <div class="sk-cube"></div>
@@ -6482,7 +6488,7 @@ body.body-small .vote-icon {
  */
 .sk-spinner-cube-grid {
   /*
-   * Spinner positions
+   * 微调职位
    * 1 2 3
    * 4 5 6
    * 7 8 9
@@ -6562,7 +6568,7 @@ body.body-small .vote-icon {
   }
 }
 /*
- *  Usage:
+ *  用法:
  *
  *    <div class="sk-spinner sk-spinner-wordpress">
  *      <span class="sk-inner-circle"></span>
@@ -6610,7 +6616,7 @@ body.body-small .vote-icon {
   }
 }
 /*
- *  Usage:
+ *  用法:
  *
  *    <div class="sk-spinner sk-spinner-fading-circle">
  *      <div class="sk-circle1 sk-circle"></div>
@@ -6651,7 +6657,7 @@ body.body-small .vote-icon {
   border-radius: 100%;
   -webkit-animation: sk-circleFadeDelay 1.2s infinite ease-in-out;
   animation: sk-circleFadeDelay 1.2s infinite ease-in-out;
-  /* Prevent first frame from flickering when animation starts */
+  /* 动画启动时防止第一帧闪烁 */
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
 }
@@ -6799,11 +6805,11 @@ body.body-small .vote-icon {
 }
 /*
  *
- *   INSPINIA Landing Page - Responsive Admin Theme
+ *   INSPINIA着陆页 - 响应式管理主题
  *   Copyright 2014 Webapplayers.com
  *
 */
-/* GLOBAL STYLES
+/* 全局风格
 -------------------------------------------------- */
 /* PACE PLUGIN
 -------------------------------------------------- */
@@ -6828,21 +6834,21 @@ body.landing-page {
   background-color: #fff;
 }
 .landing-page {
-  /* CUSTOMIZE THE NAVBAR
+  /* 自定义NAVBAR
   -------------------------------------------------- */
-  /* Flip around the padding for proper display in narrow viewports */
-  /* BACKGROUNDS SLIDER
+  /* 翻转填充物，以便在狭窄的视口中正确显示 */
+  /* 背景滑块
   -------------------------------------------------- */
-  /* CUSTOMIZE THE CAROUSEL
+  /* 自定义CAROUSEL
   -------------------------------------------------- */
-  /* Carousel base class */
-  /* Since positioning the image, we need to help out the caption */
-  /* Declare heights because of positioning of img element */
+  /* 旋转木马基础课 */
+  /* 自定位图像后，我们需要帮助标题 */
+  /* 由于img元素的定位而声明高度 */
   /* Sections
   ------------------------- */
-  /* Buttons - only primary custom button
+  /* 按钮 - 只有主要的自定义按钮
   ------------------------- */
-  /* RESPONSIVE CSS
+  /* 响应CSS
   -------------------------------------------------- */
 }
 .landing-page .container {
@@ -7311,9 +7317,9 @@ body.landing-page {
 }
 @media (min-width: 768px) {
   .landing-page {
-    /* Navbar positioning foo */
-    /* The navbar becomes detached from the top, so we round the corners */
-    /* Bump up size of carousel content */
+    /* 导航棒定位foo */
+    /* 导航栏从顶部脱离，所以我们围绕角落 */
+    /* 转盘旋转木马的内容大小 */
   }
   .landing-page .navbar-wrapper {
     margin-top: 20px;
@@ -7418,7 +7424,7 @@ body.landing-page {
   }
 }
 body.rtls {
-  /* Theme config */
+  /* 主题配置 */
 }
 body.rtls #page-wrapper {
   margin: 0 220px 0 0;
@@ -7641,8 +7647,8 @@ body.rtls.top-navigation .footer.fixed {
 }
 /*
  *
- *   This is style for skin config
- *   Use only in demo theme
+ *   这是皮肤配置的风格
+ *   仅在演示主题中使用
  *
 */
 .theme-config {
@@ -7738,8 +7744,8 @@ body.rtls.top-navigation .footer.fixed {
 }
 /*
  *
- *   SKIN 1 - INSPINIA - Responsive Admin Theme
- *   NAME - Blue light
+ *   皮肤1 - INSPINIA - 响应管理主题
+ *   NAME - 蓝光
  *
 */
 .skin-1 .minimalize-styl-2 {
@@ -7844,7 +7850,7 @@ body.skin-1 {
 }
 /*
  *
- *   SKIN 2 - INSPINIA - Responsive Admin Theme
+ *   皮肤2 - INSPINIA - 响应式管理主题
  *   NAME - Inspinia Ultra
  *
 */
@@ -7994,7 +8000,7 @@ body.skin-2 #wrapper {
 }
 /*
  *
- *   SKIN 3 - INSPINIA - Responsive Admin Theme
+ *   皮肤3 - INSPINIA - 响应管理主题
  *   NAME - Yellow/purple
  *
 */
@@ -8398,6 +8404,9 @@ body.md-skin {
   color: #1ab394;
   background: #ffffff;
 }
+.md-skin.fixed-nav #side-menu {
+  background-color: #fff;
+}
 .md-skin.fixed-nav #wrapper.top-navigation #page-wrapper {
   margin-top: 0;
 }
@@ -8428,7 +8437,7 @@ body.md-skin {
   #page-wrapper {
     position: inherit;
     margin: 0 0 0 220px;
-    min-height: 1200px;
+    min-height: 100vh;
   }
   .navbar-static-side {
     z-index: 2001;
@@ -8445,7 +8454,7 @@ body.md-skin {
   #page-wrapper {
     position: inherit;
     margin: 0 0 0 0;
-    min-height: 1000px;
+    min-height: 100vh;
   }
   .body-small .navbar-static-side {
     display: none;
@@ -8534,7 +8543,7 @@ body.md-skin {
     display: inline-block;
   }
 }
-/* Only demo */
+/* 只演示 */
 @media (max-width: 1000px) {
   .welcome-message {
     display: none;

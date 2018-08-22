@@ -343,7 +343,7 @@ public class ShiroConfiguration {
     @DependsOn(value = {"shiroCacheManager", "sessionDAO"})
     public WebSessionManager sessionManager(CacheManager cacheManager, SessionDAO sessionDAO) {
         log.info("开始加载WebSessionManager");
-        DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
+        ShiroSessionManager sessionManager = new ShiroSessionManager();
         sessionManager.setCacheManager(cacheManager);
         sessionManager.setGlobalSessionTimeout(shiroSessionProperties.getGlobalSessionTimeout());
         sessionManager.setSessionDAO(sessionDAO);
