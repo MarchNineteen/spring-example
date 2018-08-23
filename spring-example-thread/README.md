@@ -9,6 +9,9 @@
 - volatile：多线程的内存模型：main memory（主存）、working memory（线程栈），在处理数据时，线程会把值从主存load到本地栈，完成操作后再save回去(volatile关键词的作用：每次针对该变量的操作都激发一次load and save)。
 针对多线程使用的变量如果不是volatile或者final修饰的，很有可能产生不可预知的结果（另一个线程修改了这个值，但是之后在某线程看到的是修改之前的值）。其实道理上讲同一实例的同一属性本身只有一个副本。但是多线程是会缓存值的，本质上，volatile就是不去缓存，直接取值。在线程安全的情况下加volatile会牺牲性能。
 
+![多线程内存原型](https://github.com/MarchNineteen/spring-example/blob/master/spring-example-thread/src/main/resources/static/多线程内存原型.jpg) 
+
+
 ### 线程状态&状态切换
 
 ![线程状态转换](http://upload-images.jianshu.io/upload_images/4942449-8f4ad7b6ac7009c6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240) 
@@ -44,6 +47,13 @@ return unsafe.compareAndSwapInt(this, valueOffset, expect, update);
 3.Lock类　
 - Condition
 - ReentrantLock
+
+![非公平锁获取锁过程](https://github.com/MarchNineteen/spring-example/blob/master/spring-example-thread/src/main/resources/static/非公平锁获取锁过程.jpg)
+
+公平锁和非公平锁不同之处在于，公平锁在获取锁的时候，不会先去检查state状态，而是直接执行aqcuire(1),即直接进入队列
+
+so:由于公平锁需要关心队列的情况，得按照队列里的先后顺序来获取锁(会造成大量的线程上下文切换)，而非公平锁则没有这个限制。所以也就能解释非公平锁的效率会被公平锁更高。
+
 - ReentrantReadWriteLock.ReadLock
 - ReentrantReadWriteLock.WriteLock
 
