@@ -16,12 +16,15 @@
 
 ![线程状态转换](http://upload-images.jianshu.io/upload_images/4942449-8f4ad7b6ac7009c6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240) 
 
-对象方法：
+##### 对象方法：
 - wait()：当前线程放弃对象锁，使该线程处于**等待池**(wait blocked pool),直到notify()/notifyAll()，线程被唤醒被放到**锁定池**(lock blocked pool )，释放同步锁使线程回到可运行状态（Runnable）。
 - notify():从对象的等待池中移走一个任意的线程并放到锁标志等待池中，只有锁标志等待池中线程能够获取锁标志；如果锁标志等待池中没有线程，则notify()不起作用。
 - notifyAll(): notifyAll()则从对象等待池中移走所有等待那个对象的线程并放到锁标志等待池中。
 
-Thread线程方法：
+注意点：
+- **notify() notifyAll() 本身不会释放锁，仅仅是通知，当同步块执行完毕之后才会释放锁**。
+
+#####  Thread线程方法：
 - yield():正在执行的线程把运行机会交给线程池中拥有相同优先级的线程，无法保证迅速转换，运行状态转到可运行状态.
 - join():使得一个线程在另一个线程结束后再执行。在一个线程中调用other.join(),将等待other执行完后才继续本线程。
 - sleep():不会释放对象锁，暂停一段时间。
@@ -33,9 +36,9 @@ Thread线程方法：
 - signalAll()类似notifyAll
 
 ### 高级多线程控制类：
-1.ThreadLocal类:
+#####  1.ThreadLocal类:
 
-2.原子类（AtomicInteger、AtomicBoolean……）
+#####  2.原子类（AtomicInteger、AtomicBoolean……）
 ```
 // cas方法
 public final boolean compareAndSet(int expect, int update) {
@@ -44,7 +47,7 @@ return unsafe.compareAndSwapInt(this, valueOffset, expect, update);
 }
 ```
 
-3.Lock类　
+#####  3.Lock类　
 - Condition
 - ReentrantLock
 
@@ -57,11 +60,11 @@ so:由于公平锁需要关心队列的情况，得按照队列里的先后顺�
 - ReentrantReadWriteLock.ReadLock
 - ReentrantReadWriteLock.WriteLock
 
-4.容器类
+#####  4.容器类
 - BlockingQueue
 - ConcurrentHashMap
 
-5.管理类
+#####  5.管理类
 - ThreadPoolExecutor
 
 核心线程满了，接下来进队列，队列也满了，创建新线程，直到达到最大线程数，之后再超出，会进入拒绝rejectedExecution
