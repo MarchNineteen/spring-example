@@ -21,7 +21,8 @@
 - notify():从对象的等待池中移走一个任意的线程并放到锁标志等待池中，只有锁标志等待池中线程能够获取锁标志；如果锁标志等待池中没有线程，则notify()不起作用。
 - notifyAll(): notifyAll()则从对象等待池中移走所有等待那个对象的线程并放到锁标志等待池中。
 
-注意点：
+注意点：[源码](https://github.com/MarchNineteen/spring-example/blob/master/spring-example-thread/src/main/java/com/wyb/thread/base/synchronize)
+- **wait()当前线程立即释放对象锁，notify() notifyAll() 之后 才会执行剩下代码**
 - **notify() notifyAll() 本身不会释放锁，仅仅是通知，当同步块执行完毕之后才会释放锁**。
 
 #####  Thread线程方法：
