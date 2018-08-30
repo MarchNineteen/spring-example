@@ -3,6 +3,11 @@ package com.wyb.thread.base.synchronize;
 
 /**
  * @author Kunzite
+ * <p>
+ *  同步普通方法，锁的是当前对象。对象锁，对同一个对象实例访问同步，多个对象实例访问不同步
+ *  同步静态方法，锁的是当前 Class 对象。即类锁，对多个对象访问，同步
+ *  同步块，锁的是 () 中的对象。
+ * </p>
  */
 public class Syn implements Runnable {
 

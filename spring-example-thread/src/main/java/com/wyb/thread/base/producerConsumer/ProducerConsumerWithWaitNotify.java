@@ -3,8 +3,9 @@ package com.wyb.thread.base.producerConsumer;
 /**
  * @author Kunzite
  * 生产者消费者 synchronized、wait和notify 实现
+ * https://www.cnblogs.com/fankongkong/p/7339848.html
  */
-public class ProducerConsumerWithWaitNofity  {
+public class ProducerConsumerWithWaitNotify  {
     public static void main(String[] args) {
         CommonResource resource = new CommonResource();
         Produce p1 = new Produce(resource);
