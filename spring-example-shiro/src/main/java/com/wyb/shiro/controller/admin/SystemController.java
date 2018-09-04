@@ -67,7 +67,7 @@ public class SystemController {
      *
      * @return
      */
-    @RequestMapping(value = "/role/list_{pageCurrent}_{pageSize}_{pageCount}", method = RequestMethod.GET)
+    @RequestMapping(value = "/role/list_{pageCurrent}_{pageSize}_{pageCount}")
     public String listRole(@SessionUser String userName, RoleDo role, @PathVariable Integer pageCurrent,
                            @PathVariable Integer pageSize,
                            @PathVariable Integer pageCount,
@@ -75,9 +75,9 @@ public class SystemController {
         log.info(userName);
         if (pageSize == 0) pageSize = 20;
         if (pageCurrent == 0) pageCurrent = 1;
-        PageInfo<RoleDo> page = roleService.listRole(pageCurrent, pageSize);
+        PageInfo<RoleDo> page = roleService.listRole(pageCurrent, pageSize, role);
         page.getPages();
-        String pageHTML = PageUtil.getPageContent("/admin/sys/role/list/{pageCurrent}_{pageSize}_{pageCount}?title=" + role.getRoleName(), page.getPageNum(), page.getPageSize(), page.getPages());
+        String pageHTML = PageUtil.getPageContent("/admin/sys/role/list_${pageCurrent}_${pageSize}_${pageCount}?role.roleName=" + role.getRoleName(), page.getPageNum(), page.getPageSize(), page.getPages());
         model.addAttribute("list", page.getList());
         model.addAttribute("role", role);
         model.addAttribute("pageHTML", pageHTML);

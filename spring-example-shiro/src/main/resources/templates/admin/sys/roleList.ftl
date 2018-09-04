@@ -60,10 +60,10 @@
                         </div>
                     </div>
                     <div class="ibox-content" style="display: block;">
-                        <form action="${adminDomain}/admin/sys/role/list/{pageCurrent}_{pageSize}_{pageCount}">
+                        <form action="${adminDomain}/sys/role/list_${pageCurrent}_${pageSize}_${pageCount}" method="get">
                             <div class="row">
                                 <div class="col-sm-3 m-b-xs">
-                                    <input name="role.name" value="${role.roleName}" placeholder="角色名称"
+                                    <input name="roleName" value="${role.roleName!}" placeholder="角色名称"
                                            class="form-control" type="text"/>
                                 </div>
                             <#--<div class="col-sm-4">-->
@@ -128,7 +128,6 @@
 </div>
 
 <!-- Mainly scripts -->
-<script src="${adminDomain}/js/jquery-3.1.1.min.js"></script>
 <script src="${adminDomain}/js/bootstrap.min.js"></script>
 <script src="${adminDomain}/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 <script src="${adminDomain}/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
@@ -140,12 +139,12 @@
 
 <!-- Page-Level Scripts -->
 <script type="text/javascript">
-
-    var pageHTML = ${pageHTML};
+    var pageHTML = '${pageHTML}';
     $(document).ready(function () {
-        $("#pageHTML").html(pageHTML);
-        $('.footable').footable();
-        $('.footable2').footable();
+        $(document).ready(function() {
+            $('#pageHTML').html(pageHTML);
+            $('.footable').footable();
+        });
     });
 
 </script>

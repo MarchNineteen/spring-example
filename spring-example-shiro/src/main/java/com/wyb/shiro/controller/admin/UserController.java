@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.wyb.shiro.dao.model.UserDo;
 import com.wyb.shiro.result.web.WebResult;
 import com.wyb.shiro.service.UserService;
+import com.wyb.shiro.utils.PageUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +26,9 @@ public class UserController {
             @RequestParam(value = "pageSize", defaultValue = "20") int pageSize,
             Map<String, Object> map) {
         PageInfo<UserDo> page = userService.listByPage(pageNum, pageSize);
-        map.put("page", page);
+        String pageHTML = PageUtil.getPageContent("/admin/sys/role/list_${pageCurrent}_${pageSize}_${pageCount}", page.getPageNum(), page.getPageSize(), page.getPages());
+        map.put("pageHTML", pageHTML);
+        map.put("list", page.getList());
         return "admin/user/userList";
     }
 

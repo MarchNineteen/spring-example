@@ -20,8 +20,9 @@ public interface RoleService {
      * @return
      * @param pageCurrent
      * @param pageSize
+     * @param role
      */
-    PageInfo<RoleDo> listRole(Integer pageCurrent, Integer pageSize);
+    PageInfo<RoleDo> listRole(Integer pageCurrent, Integer pageSize, RoleDo role);
 
     /**
      * 添加角色
