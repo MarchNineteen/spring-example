@@ -193,11 +193,11 @@ public class SortDemo {
     public static void main(String[] args) {
         int a[] = {100, -2, 144, -44, 0, 44545646, -5544544, 3};
         SortDemo SortDemo = new SortDemo();
-        SortDemo.bigToSmall(a);
-        SortDemo.smallToBig(a);
-        SortDemo.insertSort(a);
-        SortDemo.Hill(a);
-        SortDemo.choose(a);
+//        SortDemo.bigToSmall(a);
+//        SortDemo.smallToBig(a);
+//        SortDemo.insertSort(a);
+//        SortDemo.Hill(a);
+//        SortDemo.choose(a);
         SortDemo.sort(a);
     }
 }
