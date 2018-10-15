@@ -1,4 +1,4 @@
-package com.wyb.test.java.singleton;
+package com.wyb.test.design.singleton;
 
 
 import java.util.HashMap;
