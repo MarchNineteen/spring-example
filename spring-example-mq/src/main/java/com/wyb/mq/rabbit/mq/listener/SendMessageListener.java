@@ -21,9 +21,9 @@ public class SendMessageListener {
 
     private final Logger logger = LoggerFactory.getLogger(SendMessageListener.class);
 
-    @RabbitListener(queues = RabbitConstants.MQ_EXCHANGE_SEND_AWARD)
+    @RabbitListener(queues = RabbitConstants.QUEUE_NAME_SEND_COUPON)
     public void process(SendMessage sendMessage, Channel channel, Message message) throws Exception {
-        logger.info("[{}]处理死信队列消息队列接收数据，消息体：{}", RabbitConstants.QUEUE_NAME_DEAD_QUEUE, JSON.toJSONString(sendMessage));
+        logger.info("[{}]处理优惠券队列消息队列接收数据，消息体：{}", RabbitConstants.QUEUE_NAME_SEND_COUPON, JSON.toJSONString(sendMessage));
 
         System.out.println(message.getMessageProperties().getDeliveryTag());
 

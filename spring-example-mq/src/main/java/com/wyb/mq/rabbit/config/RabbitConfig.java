@@ -7,8 +7,6 @@ import org.springframework.amqp.core.FanoutExchange;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -21,7 +19,7 @@ import java.util.Map;
  * @author Kunzite
  */
 @Configuration
-@ConditionalOnBean({RabbitTemplate.class})
+//@ConditionalOnBean({RabbitTemplate.class})
 public class RabbitConfig {
 
     /**
@@ -32,7 +30,7 @@ public class RabbitConfig {
         // 生成服务端
         RabbitAdmin rabbitAdmin = new RabbitAdmin(connectionFactory);
 
-        //声明死信队列（Fanout类型的exchange）
+        // 声明死信队列（Fanout类型的exchange）
         Queue deadQueue = new Queue(RabbitConstants.QUEUE_NAME_DEAD_QUEUE);
         // 死信队列交换机
         FanoutExchange deadExchange = new FanoutExchange(RabbitConstants.MQ_EXCHANGE_DEAD_QUEUE);
