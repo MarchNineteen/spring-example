@@ -22,7 +22,7 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.wyb.mq.rabbit.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.wyb.mq"))
                 .paths(PathSelectors.any())
                 .build();
     }
