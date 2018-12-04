@@ -20,15 +20,14 @@ import java.util.function.Supplier;
 @Slf4j
 public class ActiveListener {
 
-
     @Resource
     private ObjectMapper objectMapper;
 
     // 异步操作
     Function<MessageDTO, MessageDTO> testMsg = messageDTO -> {
         try {
-            String s = objectMapper.readValue((String) messageDTO.getData(), String.class);
-            System.out.printf(s);
+            String s = objectMapper.readValue(messageDTO.getData(), String.class);
+            System.out.println(s);
         } catch (Exception ex) {
             ex.printStackTrace();
             log.error("[RequsetQueue][test]error, msgId {}", messageDTO.getId());

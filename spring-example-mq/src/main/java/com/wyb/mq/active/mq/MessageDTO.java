@@ -16,7 +16,7 @@ public class MessageDTO<T> implements Serializable {
 
     private Boolean isSucceed;// 是否成功
 
-    private T data;// 消息发送对象
+    private String data;// 消息发送对象
 
     public String getId() {
         return id;
@@ -42,11 +42,11 @@ public class MessageDTO<T> implements Serializable {
         isSucceed = succeed;
     }
 
-    public T getData() {
+    public String getData() {
         return data;
     }
 
-    public void setData(T data) {
+    public void setData(String data) {
         this.data = data;
     }
 }

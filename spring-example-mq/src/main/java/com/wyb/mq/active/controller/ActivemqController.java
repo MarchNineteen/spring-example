@@ -1,5 +1,7 @@
 package com.wyb.mq.active.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wyb.mq.active.mq.ActiveSender;
 import com.wyb.mq.active.mq.MessageDTO;
 import io.swagger.annotations.Api;
@@ -21,6 +23,8 @@ import javax.annotation.Resource;
 public class ActivemqController {
 
     @Resource
+    private ObjectMapper objectMapper;
+    @Resource
     ActiveSender activeSender;
 
     @ApiOperation(value = "发送ActiveMQ消息接口", notes = "发送ActiveMQ消息接口", response = Object.class)
@@ -28,9 +32,9 @@ public class ActivemqController {
             @ApiImplicitParam(name = "msg", value = "发送消息", required = false, dataType = "String", paramType = "query")})
     @PostMapping(value = "active/sendMsg", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    public Object sendMsg(String msg) {
+    public Object sendMsg(String msg) throws JsonProcessingException {
         MessageDTO messageDTO = new MessageDTO();
-        messageDTO.setData(msg);
+        messageDTO.setData(objectMapper.writeValueAsString(msg));
         messageDTO.setTopic("testMsg");
         activeSender.sender(messageDTO);
         return "发送成功" + messageDTO.toString();
