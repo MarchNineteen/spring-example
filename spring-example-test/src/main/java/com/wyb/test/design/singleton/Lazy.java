@@ -21,7 +21,7 @@ public class Lazy {
 }
 
 /*
-* 懒汉式-线程不安全
+* 懒汉式-线程安全 对方法加锁 影响了性能
  */
 class LazySecurity {
 
