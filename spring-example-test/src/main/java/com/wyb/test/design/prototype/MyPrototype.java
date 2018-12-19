@@ -1,7 +1,7 @@
 package com.wyb.test.design.prototype;
 
 /**
- * @author wangyb
+ * @author Kunzite
  */
 public class MyPrototype extends Prototype {
 
