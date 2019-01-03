@@ -1,24 +1,5 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-<#include "/admin/common/constant.ftl" />
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>INSPINIA | 用户管理</title>
-
-    <link href="${adminDomain}/css/bootstrap.min.css" rel="stylesheet">
-    <link href="${adminDomain}/font-awesome/css/font-awesome.css" rel="stylesheet">
-
-    <!-- FooTable -->
-    <link href="${adminDomain}/css/plugins/footable/footable.core.css" rel="stylesheet">
-
-    <link href="${adminDomain}/css/animate.css" rel="stylesheet">
-    <link href="${adminDomain}/css/style.css" rel="stylesheet">
-
-</head>
-
 <body>
 
 <div id="wrapper">
@@ -135,19 +116,6 @@
 
     </div>
 </div>
-
-
-<!-- Mainly scripts -->
-<script src="${adminDomain}/js/bootstrap.min.js"></script>
-<script src="${adminDomain}/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="${adminDomain}/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-
-<!-- FooTable -->
-<script src="${adminDomain}/js/plugins/footable/footable.all.min.js"></script>
-
-<!-- Custom and plugin javascript -->
-<script src="${adminDomain}/js/inspinia.js"></script>
-<script src="${adminDomain}/js/plugins/pace/pace.min.js"></script>
 
 <script>
     var pageHTML = '${pageHTML}';

@@ -13,4 +13,6 @@ public interface MenuService {
     List<MenuDo> getByUserId(Long id);
 
     List<MenuDo> getByRoleIds(List<RoleDo> roles);
+
+    List<MenuDo> listMenus();
 }

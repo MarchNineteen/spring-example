@@ -1,5 +1,43 @@
 <#include "/admin/common/constant.ftl" />
 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="${adminDomain}/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${adminDomain}/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <link href="${adminDomain}/plugins/bootstrap-treetable/bootstrap-treetable.css" rel="stylesheet"/>
+
+    <!-- FooTable -->
+    <link href="${adminDomain}/css/plugins/footable/footable.core.css" rel="stylesheet">
+    <link href="${adminDomain}/css/animate.css" rel="stylesheet">
+    <link href="${adminDomain}/css/style.css" rel="stylesheet">
+
+    <!-- Mainly scripts -->
+    <script src="${adminDomain}/js/jquery-3.1.1.min.js"></script>
+    <script src="${adminDomain}/js/bootstrap.min.js"></script>
+    <script src="${adminDomain}/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="${adminDomain}/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <!-- FooTable -->
+    <script src="${adminDomain}/js/plugins/footable/footable.all.min.js"></script>
+    <!-- Custom and plugin javascript -->
+    <script src="${adminDomain}/js/inspinia.js"></script>
+    <script src="${adminDomain}/js/plugins/pace/pace.min.js"></script>
+    <script src="${adminDomain}/js/web/common.js"></script>
+
+    <script src="${adminDomain}/plugins/jquery-ztree/3.5/js/jquery.ztree.all-3.5.js"></script>
+    <script src="${adminDomain}/plugins/bootstrap-treetable/bootstrap-treetable.js"></script>
+    <script src="${adminDomain}/plugins/fullscreen/jquery.fullscreen.js"></script>
+
+    <!-- Bootstrap table -->
+    <script src="${adminDomain}/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="${adminDomain}/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="${adminDomain}/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <script src="${adminDomain}/js/plugins/bootstrap-table/extensions/toolbar/bootstrap-table-toolbar.min.js"></script>
+
+</head>
+
 <nav class="navbar-default navbar-static-side" role="navigation">
     <div class="sidebar-collapse">
         <ul class="nav metismenu" id="side-menu">
@@ -48,13 +86,13 @@
         <@shiro.hasPermission name = "系统管理">
             <span class="fa arrow"></span>
             <li>
-                <a href="${adminDomain}/user/list"><i class="fa fa-th-large"></i><span class="nav-label">系统管理</span></a>
+                <a href="javascript:;"><i class="fa fa-th-large"></i><span class="nav-label">系统管理</span></a>
                 <ul class="nav nav-second-level">
                 <@shiro.hasPermission name = "角色管理">
                     <li><a href="${adminDomain}/sys/role/list_0_0_0">角色管理</a></li>
                 </@shiro.hasPermission>
                 <@shiro.hasPermission name = "权限管理">
-                    <li><a href="dashboard_3.html">权限管理</a></li>
+                    <li><a href="${adminDomain}/sys/menu/list">权限管理</a></li>
                 </@shiro.hasPermission>
                 </ul>
             </li>
@@ -65,7 +103,6 @@
     </div>
 </nav>
 
-<script src="${adminDomain}/js/jquery-3.1.1.min.js"></script>
 <script type="text/javascript">
     $(function () {
 //       $('.sidebar-collapse li').on('click',function () {
@@ -77,6 +114,9 @@
             var path = window.location.pathname;//当前URL的路径部分
             if ($(this).find('a').attr("href") == path) {
                 $(this).addClass('active').siblings().removeClass('active');
+                if ($(this).parent('ul')) {
+                    $(this).parent('ul').addClass('in');
+                }
                 return;
             }
         });

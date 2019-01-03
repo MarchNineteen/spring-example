@@ -40,4 +40,9 @@ public class MenuServiceImpl implements MenuService {
         return menuDoMapper.getByRoleIds(StringUtils.strip(roleIds.toString(), "[]"));
     }
 
+    @Override
+    public List<MenuDo> listMenus() {
+        return menuDoMapper.selectAll();
+    }
+
 }

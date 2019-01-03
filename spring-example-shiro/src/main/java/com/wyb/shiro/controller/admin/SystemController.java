@@ -2,6 +2,7 @@ package com.wyb.shiro.controller.admin;
 
 import com.github.pagehelper.PageInfo;
 import com.wyb.shiro.config.annotation.SessionUser;
+import com.wyb.shiro.dao.model.MenuDo;
 import com.wyb.shiro.dao.model.RoleDo;
 import com.wyb.shiro.result.web.WebResult;
 import com.wyb.shiro.result.web.WebResultEnum;
@@ -16,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author Kunzite
@@ -85,16 +87,26 @@ public class SystemController {
     }
 
     /**
-     * 角色列表
+     * 资源列表跳转
      *
      * @return
      */
-//    @ResponseBody
-//    @RequestMapping(value = "/role/list", method = RequestMethod.GET)
-//    public WebResult<List<RoleDo>> listRole() {
-//        return WebResult.success(roleService.listRole());
-//    }
+    @RequestMapping(value = "/menu/list", method = RequestMethod.GET)
+    public String listMenu() {
+        return "admin/sys/menuList";
+    }
 
+    /**
+     * 资源列表
+     *
+     * @return
+     */
+    @RequestMapping(value = "/menu/list", method = RequestMethod.POST)
+    @ResponseBody
+    public List<MenuDo> listMenu(Model model) {
+//        return WebResult.success(menuService.listMenus());
+        return menuService.listMenus();
+    }
 
     /**
      * 根据角色查询角色拥有的权限

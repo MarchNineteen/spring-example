@@ -13,11 +13,8 @@ public class MenuDo implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    /**
-     * 父级菜单id
-     */
     @Column(name = "p_id")
-    private Integer pId;
+    private Integer pid;
 
     /**
      * 访问路径
@@ -29,6 +26,9 @@ public class MenuDo implements Serializable {
      */
     @Column(name = "menu_name")
     private String menuName;
+
+    @Column(name = "is_show")
+    private Integer isShow;
 
     /**
      * 描述

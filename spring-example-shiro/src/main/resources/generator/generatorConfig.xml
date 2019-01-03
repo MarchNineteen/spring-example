@@ -86,6 +86,7 @@
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
             <columnOverride column="id" property="id" javaType="java.lang.Long"/>
             <columnOverride column="is_delete" property="isDelete" javaType="java.lang.Integer"/>
+            <columnOverride column="is_show" property="isShow" javaType="java.lang.Integer"/>
         </table>
 
         <table tableName="role" domainObjectName="RoleDo">
