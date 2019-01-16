@@ -1,8 +1,3 @@
-/*
- * @(#)Light    Created on 2018/12/28
- * Copyright (c) 2018 ZDSoft Networks, Inc. All rights reserved.
- * $$ Id$$
- */
 package com.wyb.test.design.behavioral.command;
 
 /**
