@@ -2,7 +2,6 @@ package com.wyb.test.design.structure.bridge;
 
 /**
  * @author Kunzite
- * @version $$ Revision: 1.0 $$, $$ Date: 2018/12/19 15:03 $$
  */
 public abstract class Tv {
 

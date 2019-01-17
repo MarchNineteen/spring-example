@@ -9,6 +9,8 @@ package com.wyb.test.design.behavioral.observer;
  * java.util.EventListener
  * javax.servlet.http.HttpSessionBindingListener
  * RxJava
+ *
+ * 主题依赖了观察者的一个集合，观察者依赖了一个主题，生成一个观察者需要在主题进行注册，主题更新后对每个观察者进行推送
  */
 public class Client {
 

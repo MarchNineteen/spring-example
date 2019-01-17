@@ -13,8 +13,8 @@ public class Client {
 
     public static void main(String[] args) {
         Beverage beverage = new DarkRoast();// 一杯饮料
-        beverage = new Milk(beverage);// 饮料里加牛奶
         beverage = new Mocha(beverage);// 饮料里加mocha
+        beverage = new Milk(beverage);// 饮料里加牛奶
         System.out.println(beverage.cost());//总价
     }
 }
