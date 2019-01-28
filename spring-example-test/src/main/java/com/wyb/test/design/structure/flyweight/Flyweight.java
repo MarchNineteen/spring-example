@@ -6,7 +6,7 @@ package com.wyb.test.design.structure.flyweight;
 public interface Flyweight {
 
     /**
-     * 内部状态，享元对象共享内部状态
+     * 外部状态，每个享元对象的外部状态不同
      *
      * @param extrinsicState
      */

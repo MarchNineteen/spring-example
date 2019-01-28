@@ -17,5 +17,9 @@ public class Client {
 
         Request request2 = new Request(RequestType.TYPE2, "request2");
         handler2.handleRequest(request2);
+
+        Handler handler3 = new ConcreteHandler3(handler2);
+        Request request3 = new Request(RequestType.TYPE3, "request3");
+        handler3.handleRequest(request1);
     }
 }
