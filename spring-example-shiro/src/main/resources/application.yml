@@ -7,8 +7,8 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://111.231.85.51:3306/shiro?characterEncoding=utf8&useSSL=false
 #    url: jdbc:mysql://127.0.0.1:3306/shiro?characterEncoding=utf8&useSSL=false
-    username: root
-    password: 123456
+    username: shiro
+    password: shiroPwd
     #最大活跃数
     maxActive: 20
     #初始化数量

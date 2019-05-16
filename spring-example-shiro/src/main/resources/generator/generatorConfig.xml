@@ -23,8 +23,8 @@
         <!--数据库链接URL，用户名、密码 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
                         connectionURL="jdbc:mysql://111.231.85.51:3306/shiro?zeroDateTimeBehavior=convertToNull&amp;characterEncoding=utf8&amp;allowMultiQueries=true&amp;useSSL=false"
-                        userId="root"
-                        password="123456">
+                        userId="shiro"
+                        password="shiroPwd">
         </jdbcConnection>
 
         <!-- 非必需，类型处理器，在数据库类型和java类型之间的转换控制-->
