@@ -51,6 +51,7 @@ create table user
   username varchar(255) default '' not null comment '用户名',
   real_name varchar(255) default '' null comment '真实姓名',
   password varchar(255) default '' not null comment '密码',
+  salt  VARCHAR(64)  default '' comment  '密码盐' ,
   address varchar(255) default '' null comment '地址',
   phone varchar(16) default '' not null comment '联系方式',
   is_delete tinyint default '0' not null,
@@ -73,8 +74,8 @@ create table user_role
   comment '用户角色表'
 ;
 
-ALTER table user add COLUMN salt  VARCHAR(32) COMMENT '密码盐' after password;
-INSERT into user (username, real_name, password, address, phone, is_delete, create_time, update_time) VALUE ('admin','管理员','123456','杭州','1378741577',0,now(),now());
+INSERT into user (username, real_name, password, salt, address, phone, is_delete, create_time, update_time) VALUE
+('admin','管理员','ba47acae2165830aa685f9c3014b0e62','2730341d5348b75c739a88edf4bf7a57', '杭州','1378741577',0,now(),now());
 
 INSERT into role (role_name, description, is_delete, create_time, update_time) VALUE ('超级管理员','超级管理员-最高权限',0,now(),now());
 INSERT into role (role_name, description, is_delete, create_time, update_time) VALUE ('系统管理员','系统管理员-系统管理模块权限',0,now(),now());
