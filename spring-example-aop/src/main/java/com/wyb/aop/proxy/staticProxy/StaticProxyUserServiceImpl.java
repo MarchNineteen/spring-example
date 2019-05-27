@@ -1,9 +1,13 @@
 package com.wyb.aop.proxy.staticProxy;
 
+import com.wyb.aop.dao.mapper.UserDoMapper;
 import com.wyb.aop.dao.model.UserDo;
 import com.wyb.aop.service.UserService;
 import com.wyb.aop.service.impl.UserServiceImpl;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -12,18 +16,17 @@ import java.util.List;
  *
  * @author Kunzite
  */
-//@Service(value = "staticProxyUserServiceImpl")
+@Service(value = "staticProxyUserServiceImpl")
 public class StaticProxyUserServiceImpl implements UserService {
 
+    @Qualifier(value = "userServiceImpl")
+    @Resource
     private UserService userService;
 
-    public StaticProxyUserServiceImpl() {
-        userService = new UserServiceImpl();
-    }
 
     @Override
     public List<UserDo> listAll(int pageNum, int pageSize) {
-        System.out.println("Proxy doSomethings before)");
+        System.out.println("Proxy doSomethings before");
         //实际调用
         return userService.listAll(pageNum, pageSize);
     }

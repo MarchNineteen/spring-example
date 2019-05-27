@@ -11,7 +11,7 @@ import java.lang.reflect.Method;
 /**
  * @author Kunzite
  */
-public class CglibDynamicProxy implements MethodInterceptor {
+public class  CglibDynamicProxy implements MethodInterceptor {
 
     private Object targetObject;// CGLib需要代理的目标对象
 
