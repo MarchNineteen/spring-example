@@ -9,8 +9,8 @@
 - [shiro](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-shiro) springboot集成tkmybatis，shiro，jwt 实现权限登录系统
 - [java&spring test](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-test) java&spring 学习验证demo
 - [thread 多线程编程](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-thread) 未完成 
-- 计划：
 - [mq spring消息队列](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-mq) 
+- 计划：
 - 日志文件配置详解
 
 
