@@ -5,6 +5,7 @@
  */
 package com.wyb.test.java.list;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,5 +19,10 @@ public class ListTest {
         List<Integer> list = new ArrayList();
         list.add(1);
         list.add(2);
+
+        Field[] fields = list.getClass().getDeclaredFields();
+        for (Field field : fields) {
+            System.out.println(field.getGenericType());
+        }
     }
 }

@@ -48,3 +48,6 @@ pagehelper:
   supportMethodsArguments: true
   params: count=countSql
 
+memcache:
+  ip: 127.0.0.1
+  port: 11211
