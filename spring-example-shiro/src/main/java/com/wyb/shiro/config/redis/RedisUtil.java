@@ -11,45 +11,55 @@ import java.util.concurrent.TimeUnit;
  */
 public class RedisUtil<T> {
 
-	public static <T> void set(RedisTemplate<String, T> template, String key, T value) {
-		ValueOperations<String, T> vopt = template.opsForValue();
+	private RedisTemplate<String, T> template;
+
+	public RedisTemplate<String, T> getTemplate() {
+		return template;
+	}
+
+	public void setTemplate(RedisTemplate<String, T> template) {
+		this.template = template;
+	}
+
+	public <T> void set(String key, T value) {
+		ValueOperations<String, T> vopt = (ValueOperations<String, T>) template.opsForValue();
 		vopt.set(key, value);
 	}
 
-	public static <T> void set(RedisTemplate<String, T> template, String key, T value, long time) {
-		ValueOperations<String, T> vopt = template.opsForValue();
+	public <T> void set(String key, T value, long time) {
+		ValueOperations<String, T> vopt = (ValueOperations<String, T>) template.opsForValue();
 		vopt.set(key, value, time, TimeUnit.SECONDS);
 	}
 
-	public static <T> T get(RedisTemplate<String, T> template, String key) {
-		ValueOperations<String, T> vopt = template.opsForValue();
+	public <T> T get(String key) {
+		ValueOperations<String, T> vopt = (ValueOperations<String, T>) template.opsForValue();
 		return vopt.get(key);
 	}
 
-	public static <T> void del(RedisTemplate<String, T> template, String key) {
+	public <T> void del(String key) {
 		template.delete(key);
 	}
 
-	public static <T> boolean hasKey(RedisTemplate<String, T> template, String key) {
+	public <T> boolean hasKey(String key) {
 		return template.hasKey(key);
 	}
 
-	public static <T> void hset(RedisTemplate<String, T> template, String key, String field, T value) {
+	public <T> void hset(String key, String field, T value) {
 		HashOperations<String, String, T> hopt = template.opsForHash();
 		hopt.put(key, field, value);
 	}
 
-	public static <T> T hmget(RedisTemplate<String, T> template, String key, String field) {
+	public <T> T hmget(String key, String field) {
 		HashOperations<String, String, T> hopt = template.opsForHash();
 		return hopt.get(key, field);
 	}
 
-	public static <T> void hdel(RedisTemplate<String, T> template, String key, String field) {
+	public <T> void hdel(String key, String field) {
 		HashOperations<String, String, T> hopt = template.opsForHash();
 		hopt.delete(key, field, field);
 	}
 
-	public static <T> boolean hexists(RedisTemplate<String, T> template, String key, String field) {
+	public <T> boolean hexists(String key, String field) {
 		HashOperations<String, String, T> hopt = template.opsForHash();
 		return hopt.hasKey(key, field);
 	}

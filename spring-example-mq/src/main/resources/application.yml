@@ -7,25 +7,25 @@ spring:
     addresses: 111.231.85.51:5672
     #spring.rabbitmq.connection-timeout=50000
     #rabbitmq listetner
-    # Ïû·ÑÕß×îĞ¡ÊıÁ¿
+    # æ¶ˆè´¹è€…æœ€å°æ•°é‡
     listener:
       concurrency: 10
-      # Ïû·ÑÕß×î´óÊıÁ¿
+      # æ¶ˆè´¹è€…æœ€å¤§æ•°é‡
       max-concurrency: 20
-      # ÏûÏ¢µÄÈ·ÈÏÄ£Ê½
+      # æ¶ˆæ¯çš„ç¡®è®¤æ¨¡å¼
       acknowledge-mode: MANUAL
-      # Ã¿Ò»´Î·¢ËÍµ½Ïû·ÑÕßµÄÏûÏ¢ÊıÁ¿£¬ËüÓ¦¸Ã´óÓÚ»òµÈÓÚÊÂÎñ´óĞ¡£¨Èç¹ûÊ¹ÓÃ£©¡£
+      # æ¯ä¸€æ¬¡å‘é€åˆ°æ¶ˆè´¹è€…çš„æ¶ˆæ¯æ•°é‡ï¼Œå®ƒåº”è¯¥å¤§äºæˆ–ç­‰äºäº‹åŠ¡å¤§å°ï¼ˆå¦‚æœä½¿ç”¨ï¼‰ã€‚
       prefetch: 10
-      # Ïû·ÑÕß¶ËµÄÖØÊÔ
+      # æ¶ˆè´¹è€…ç«¯çš„é‡è¯•
       retry.enabled: true
     #rabbitmq publisher
-    # Éú²úÕß¶ËµÄÖØÊÔ
+    # ç”Ÿäº§è€…ç«¯çš„é‡è¯•
     template:
       retry:
         enabled: true
-    #¿ªÆô·¢ËÍÏûÏ¢µ½exchangeÈ·ÈÏ»úÖÆ
+    #å¼€å¯å‘é€æ¶ˆæ¯åˆ°exchangeç¡®è®¤æœºåˆ¶
     publisher-confirms: true
-    #¿ªÆô·¢ËÍÏûÏ¢µ½exchangeµ«ÊÇexchangeÃ»ÓĞºÍ¶ÓÁĞ°ó¶¨µÄÈ·ÈÏ»úÖÆ
+    #å¼€å¯å‘é€æ¶ˆæ¯åˆ°exchangeä½†æ˜¯exchangeæ²¡æœ‰å’Œé˜Ÿåˆ—ç»‘å®šçš„ç¡®è®¤æœºåˆ¶
     publisher-returns: true
 
     # Activemq

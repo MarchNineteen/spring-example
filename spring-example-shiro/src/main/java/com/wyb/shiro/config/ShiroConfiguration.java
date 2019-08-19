@@ -3,6 +3,7 @@ package com.wyb.shiro.config;
 import com.wyb.shiro.config.properties.ShiroProperties;
 import com.wyb.shiro.config.properties.ShiroSessionProperties;
 import com.wyb.shiro.config.properties.ShiroSignInProperties;
+import com.wyb.shiro.config.redis.RedisUtil;
 import com.wyb.shiro.config.redis.ShiroRedisCacheManager;
 import com.wyb.shiro.config.session.CustomShiroSessionDAO;
 import com.wyb.shiro.config.session.JedisShiroSessionRepository;
@@ -290,11 +291,19 @@ public class ShiroConfiguration {
     }
 
     @Bean
-    @DependsOn(value = { "objectRedisTemplate" })
-    public JedisShiroSessionRepository jedisShiroSessionRepository(RedisTemplate<String, Object> objectRedisTemplate) {
+    @DependsOn(value = { "redisUtil" })
+    public JedisShiroSessionRepository jedisShiroSessionRepository(RedisUtil redisUtil) {
         final JedisShiroSessionRepository jedisShiroSessionRepository = new JedisShiroSessionRepository();
-        jedisShiroSessionRepository.setObjectRedisTemplate(objectRedisTemplate);
+        jedisShiroSessionRepository.setRedisUtil(redisUtil);
         return jedisShiroSessionRepository;
+    }
+
+    @Bean
+    @DependsOn(value = { "objectRedisTemplate" })
+    public RedisUtil redisUtil(RedisTemplate<String, Object> objectRedisTemplate) {
+        final RedisUtil redisUtil = new RedisUtil();
+        redisUtil.setTemplate(objectRedisTemplate);
+        return redisUtil;
     }
 
 //    @Bean

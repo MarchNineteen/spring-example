@@ -1,4 +1,4 @@
-package com.wyb.shiro.config;
+package com.wyb.shiro.config.freemarker;
 
 import com.wyb.shiro.config.freemarker.ShiroTagFreeMarkerConfigurer;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -13,17 +13,17 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
-public class RedisCache<K, V> implements Cache<K, V> {
+public class ShiroRedisCache<K, V> implements Cache<K, V> {
 
-    private long expireTime = 120;// 缓存的超时时间，单位为s  
+    private long expireTime = 120;// 缓存的超时时间，单位为s
     private RedisTemplate<String, V> redisTemplate;// 通过构造方法注入该对象
     // private RedisTemplate<K, V> redisTemplate;// 通过构造方法注入该对象
 
-    public RedisCache() {
+    public ShiroRedisCache() {
         super();
     }
 
-    public RedisCache(long expireTime, RedisTemplate<String, V> redisTemplate) {
+    public ShiroRedisCache(long expireTime, RedisTemplate<String, V> redisTemplate) {
         super();
         this.expireTime = expireTime;
         this.redisTemplate = redisTemplate;

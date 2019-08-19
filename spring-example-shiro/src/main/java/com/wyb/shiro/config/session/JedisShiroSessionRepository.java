@@ -5,8 +5,6 @@ import com.wyb.shiro.constants.Constants;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.SimpleSession;
-import org.springframework.data.redis.core.RedisTemplate;
-
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
@@ -20,7 +18,8 @@ import java.util.Set;
 @Slf4j
 public class JedisShiroSessionRepository implements ShiroSessionRepository {
 
-	private RedisTemplate<String, Object> objectRedisTemplate;
+//	private RedisTemplate<String, Object> objectRedisTemplate;
+	private RedisUtil redisUtil;
 
 	@Override
 	public void saveSession(Session session) {
@@ -34,7 +33,7 @@ public class JedisShiroSessionRepository implements ShiroSessionRepository {
 		String session_key = getRedisSessionKey(session.getId());
 		log.info("保存session,id为{}",session_key);
 		long timeOut = session.getTimeout() / 1000 * 2;
-		RedisUtil.set(objectRedisTemplate, session_key, session, timeOut);
+		redisUtil.set(session_key, session, timeOut);
 	}
 
 	@Override
@@ -45,7 +44,7 @@ public class JedisShiroSessionRepository implements ShiroSessionRepository {
 			return;
 		}
 		String session_key = getRedisSessionKey(sessionId);
-		RedisUtil.del(objectRedisTemplate, session_key);
+		redisUtil.del(session_key);
 		//TODO 更新数据库在线状态
 	}
 
@@ -57,10 +56,10 @@ public class JedisShiroSessionRepository implements ShiroSessionRepository {
 			return null;
 		}
 		String session_key = getRedisSessionKey(sessionId);
-		// if(!RedisUtil.hasKey(objectRedisTemplate, session_key)){
+		// if(!redisUtil.hasKey(objectRedisTemplate, session_key)){
 		// return null;
 		// }
-		Session session = (SimpleSession) RedisUtil.get(objectRedisTemplate, session_key);
+		Session session = (SimpleSession) redisUtil.get(session_key);
 
 		return session;
 	}
@@ -70,8 +69,8 @@ public class JedisShiroSessionRepository implements ShiroSessionRepository {
 		log.info("取得所有session");
 		Set<Session> sessions = new HashSet<Session>();
 		String session_ids = Constants.REDIS_SHIRO_SESSION + "*";
-		Set<String> keys = objectRedisTemplate.keys(session_ids);
-		List<Object> objs = objectRedisTemplate.opsForValue().multiGet(keys);
+		Set<String> keys = redisUtil.getTemplate().keys(session_ids);
+		List<Object> objs = redisUtil.getTemplate().opsForValue().multiGet(keys);
 		for (Object obj : objs) {
 			Session s = (Session) obj;
 			sessions.add(s);
@@ -89,12 +88,11 @@ public class JedisShiroSessionRepository implements ShiroSessionRepository {
 		return Constants.REDIS_SHIRO_SESSION + sessionId;
 	}
 
-	public RedisTemplate<String, Object> getObjectRedisTemplate() {
-		return objectRedisTemplate;
+	public RedisUtil getRedisUtil() {
+		return redisUtil;
 	}
 
-	public void setObjectRedisTemplate(RedisTemplate<String, Object> objectRedisTemplate) {
-		this.objectRedisTemplate = objectRedisTemplate;
+	public void setRedisUtil(RedisUtil redisUtil) {
+		this.redisUtil = redisUtil;
 	}
-
 }

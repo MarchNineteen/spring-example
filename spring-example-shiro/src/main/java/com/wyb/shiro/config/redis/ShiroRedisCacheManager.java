@@ -11,7 +11,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-/**   
+/**
 * @desc 该类提供redis cache。缓存 登录失败次数和用户权限。
  * 过期时间分别对应application.yml 中的
  * retry-expire-time-redis
@@ -25,14 +25,14 @@ public class ShiroRedisCacheManager implements CacheManager, Destroyable {
 
     private RedisTemplate redisTemplate;
     private long expireTime;
-    
+
     @Autowired
     private ShiroProperties properties;
 
     // 注入Spring的缓存管理器
     @Autowired
     private org.springframework.cache.CacheManager cacheManager;
-    
+
     public ShiroRedisCacheManager(RedisTemplate redisTemplateTemp){
     	redisTemplate = redisTemplateTemp;
     }
@@ -46,14 +46,14 @@ public class ShiroRedisCacheManager implements CacheManager, Destroyable {
                 expireTime = properties.getAuthorizationExpireTimeRedis();
             }
 //            org.springframework.cache.Cache springCache = cacheManager.getCache(name);
-            cache = new RedisCache<K, V>(expireTime, redisTemplate);// 为了简化代码的编写，此处直接new一个Cache
+            cache = new ShiroRedisCache<K, V>(expireTime, redisTemplate);// 为了简化代码的编写，此处直接new一个Cache
         }
         return cache;
-    }  
-    
-    @Override  
-    public void destroy() throws Exception {  
-     
-    }  
+    }
 
-}  
+    @Override
+    public void destroy() throws Exception {
+
+    }
+
+}
