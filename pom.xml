@@ -22,6 +22,7 @@
     <module>spring-example-exception</module>
     <module>spring-example-test</module>
     <module>spring-example-shiro</module>
+    <module>spring-example-log</module>
   </modules>
 
   <properties>
