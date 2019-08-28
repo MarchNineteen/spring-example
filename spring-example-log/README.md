@@ -22,7 +22,7 @@ Spring Boot默认的日志系统
 
 ### 总结
 
-![](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-log/src/main/resources/static/all-log.jpg)
+![111](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-log/src/main/resources/static/all-log.jpg)
 
 接口：将所有日志实现适配到了一起，用统一的接口调用。 
 实现：目前主流的日志实现 
