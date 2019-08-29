@@ -8,10 +8,11 @@
 - [自定义异常处理解决方案](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-exception)
 - [shiro](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-shiro) springboot集成tkmybatis，shiro，jwt 实现权限登录系统
 - [java&spring test](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-test) java&spring 学习验证demo
-- [thread 多线程编程](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-thread) 未完成 
+- [thread 多线程编程](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-thread) 
 - [mq spring消息队列](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-mq) 
+- [java日志文件体系](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-log)
 - 计划：
-- 日志文件配置详解
+- 
 
 
 **写了几个demo，觉得只知其然而不知其所以然，
