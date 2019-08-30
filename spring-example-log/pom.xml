@@ -24,12 +24,12 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>org.springframework.boot</groupId>
-					<artifactId>spring-boot-starter-logging</artifactId>
-				</exclusion>
-			</exclusions>
+			<!--<exclusions>-->
+				<!--<exclusion>-->
+					<!--<groupId>org.springframework.boot</groupId>-->
+					<!--<artifactId>spring-boot-starter-logging</artifactId>-->
+				<!--</exclusion>-->
+			<!--</exclusions>-->
 		</dependency>
 
 		<dependency>
@@ -39,6 +39,14 @@
 		</dependency>
 
 		<!-- log4j -->
+		<!--<dependency>-->
+			<!--<groupId>log4j</groupId>-->
+			<!--<artifactId>log4j</artifactId>-->
+			<!--<version>1.2.17</version>-->
+		<!--</dependency>-->
+		 <!--log4j-->
+
+		 <!--log4j2-->
 		<!--<dependency>-->
 			<!--<groupId>org.apache.logging.log4j</groupId>-->
 			<!--<artifactId>log4j-core</artifactId>-->
@@ -50,14 +58,22 @@
 			<!--<artifactId>log4j-api</artifactId>-->
 			<!--<version>2.12.1</version>-->
 		<!--</dependency>-->
-		<!-- log4j -->
+		<!-- log4j2 -->
 
+		<!-- log4j2 starter -->
+		<!--<dependency>-->
+			<!--<groupId>org.springframework.boot</groupId>-->
+			<!--<artifactId>spring-boot-starter-log4j2</artifactId>-->
+		<!--</dependency>-->
 		<!-- log4j2 -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-log4j2</artifactId>
-		</dependency>
-		<!-- log4j2 -->
+
+		<!--jcl-->
+		<!--<dependency>-->
+			<!--<groupId>commons-logging</groupId>-->
+			<!--<artifactId>commons-logging</artifactId>-->
+			<!--<version>1.2</version>-->
+		<!--</dependency>-->
+		<!--jcl-->
 
 		<!-- LogBack -->
 		<!--<dependency>-->
