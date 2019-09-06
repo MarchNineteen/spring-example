@@ -1,7 +1,11 @@
 package com.wyb.cache.service.impl;
 
 import com.wyb.cache.service.CacheService;
+import lombok.extern.slf4j.Slf4j;
+import net.spy.memcached.MemcachedClient;
+import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -13,20 +17,26 @@ import java.util.concurrent.TimeUnit;
  * @author: Kunzite
  * @version: 2018-02-01 15:53
  */
+@Slf4j
+@Service("memcacheService")
 public class MemcachedServiceImpl implements CacheService {
+
+    @Resource
+    private MemcachedClient memcachedClient;
+
     @Override
     public void putCache(String key, Object value) {
-
+        memcachedClient.set(key, 1000, value);
     }
 
     @Override
     public void putCache(String key, Object value, int expire) {
-
+        memcachedClient.set(key, expire, value);
     }
 
     @Override
     public Object getCache(String key) {
-        return null;
+        return memcachedClient.get(key);
     }
 
     @Override

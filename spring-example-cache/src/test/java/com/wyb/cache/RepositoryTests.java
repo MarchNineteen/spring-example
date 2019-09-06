@@ -1,6 +1,6 @@
 package com.wyb.cache;
 
-import com.wyb.cache.config.MemcachedRunner;
+import com.wyb.cache.config.MemcacheConfig;
 import net.spy.memcached.MemcachedClient;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,11 +14,11 @@ import javax.annotation.Resource;
 public class RepositoryTests {
 
 	@Resource
-    private MemcachedRunner memcachedRunner;
+    private MemcacheConfig memcacheConfig;
 
 	@Test
 	public void testSetGet()  {
-		MemcachedClient memcachedClient = memcachedRunner.getClient();
+		MemcachedClient memcachedClient = memcacheConfig.client();
 		memcachedClient.set("testkey",1000,"666666");
 		System.out.println("***********  "+memcachedClient.get("testkey").toString());
 	}

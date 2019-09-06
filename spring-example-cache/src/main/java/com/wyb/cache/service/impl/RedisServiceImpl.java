@@ -21,7 +21,7 @@ import static com.wyb.cache.constant.CacheKeyContant.DS_LOCK;
  * @version: 2018-02-01 15:26
  */
 @Slf4j
-@Service
+@Service("redisService")
 public class RedisServiceImpl implements CacheService {
 
 //    @Resource

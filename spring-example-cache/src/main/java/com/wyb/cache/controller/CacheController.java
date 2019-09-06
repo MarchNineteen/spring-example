@@ -1,6 +1,8 @@
 package com.wyb.cache.controller;
 
+import com.wyb.cache.constant.CacheType;
 import com.wyb.cache.dao.model.UserDo;
+import com.wyb.cache.factory.CacheFactory;
 import com.wyb.cache.service.CacheService;
 import com.wyb.cache.service.UserService;
 import com.wyb.cache.utils.SpringContextHolder;
@@ -23,24 +25,23 @@ import javax.annotation.Resource;
 public class CacheController {
 
     @Resource
-    UserService userService;
+    private UserService userService;
 
-//    public CacheService cache = CacheFactory.getCache("REDIS");
-
-//    @Resource
-//    CacheService cache;
+    @Resource
+    private CacheFactory cacheFactory;
 
     @GetMapping("/add")
     public UserDo addById(){
         UserDo userDo = userService.getById("1");
-        CacheService cache = SpringContextHolder.getBean("redisServiceImpl");
+        CacheService cache = cacheFactory.getCache(CacheType.REDIS);
         cache.putCache(String.valueOf(userDo.getId()),userDo);
+        userDo = (UserDo) cache.getCache(userDo.getId().toString());
         return userDo;
     }
 
     @GetMapping("/get")
     public UserDo getById(){
-        CacheService cache = SpringContextHolder.getBean("redisServiceImpl");
+        CacheService cache = cacheFactory.getCache(CacheType.REDIS);
         return (UserDo) cache.getCache("1");
     }
 }
