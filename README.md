@@ -11,6 +11,7 @@
 - [thread 多线程编程](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-thread) 
 - [mq spring消息队列](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-mq) 
 - [java日志文件体系](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-log)
+- [docker整合](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-docker) springboot整合docker完成自动构建镜像
 - 计划：
 - 
 

@@ -23,6 +23,7 @@
     <module>spring-example-test</module>
     <module>spring-example-shiro</module>
     <module>spring-example-log</module>
+    <module>spring-example-docker</module>
   </modules>
 
   <properties>

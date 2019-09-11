@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.0.1.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.wyb</groupId>
+    <artifactId>spring-example-docker</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>spring-example-docker</name>
+    <description>Demo project for spring-example-docker</description>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <docker.image.prefix>yingbowang</docker.image.prefix>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>${project.artifactId}-${project.version}</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.yml</include>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                    <include>**</include>
+                </includes>
+                <!--很重要 如果没有这个  "${project.build.finalName}.jar": missing ':' 无法使用占位符-->
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!--docker -->
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>1.2.0</version>
+                <!--将插件绑定在package这个phase上。也就是说，用户只需执行mvn package ，就会自动执行mvn docker:build-->
+                <executions>
+                    <execution>
+                        <id>build-image</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!--在此设置host无效  需要在环境变量值设置-->
+                    <dockerHost>http://192.168.31.128:2375</dockerHost>
+
+                    <imageName>${docker.image.prefix}/${project.artifactId}:${project.version}-${git.commit.id.abbrev}</imageName>
+                    <!--<imageTags>-->
+                    <!--&lt;!&ndash;<imageTag>${project.version}</imageTag>&ndash;&gt;-->
+                    <!--<imageTag>${project.version}-${git.commit.id.abbrev}</imageTag>-->
+                    <!--</imageTags>-->
+                    <!--<forceTags>true</forceTags>-->
+                    <dockerDirectory>${project.build.directory}/classes/build</dockerDirectory>
+                    <resources>
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.jar</include>
+                            <include>*/Dockerfile</include>
+                        </resource>
+                    </resources>
+                    <!-- 与maven配置文件settings.xml中配置的server.id一致，用于推送镜像 -->
+                    <serverId>docker-hub</serverId>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>pl.project13.maven</groupId>
+                <artifactId>git-commit-id-plugin</artifactId>
+                <version>3.0.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>revision</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!--日期格式;默认值:dd.MM.yyyy '@' HH:mm:ss z;-->
+                    <dateFormat>yyyyMMddHHmmss</dateFormat>
+                    <!--,构建过程中,是否打印详细信息;默认值:false;-->
+                    <verbose>false</verbose>
+                    <!-- ".git"文件路径;默认值:${project.basedir}/.git; -->
+                    <dotGitDirectory>${project.basedir}/../.git</dotGitDirectory>
+                    <!--若项目打包类型为pom,是否取消构建;默认值:true;-->
+                    <skipPoms>false</skipPoms>
+                    <!--是否生成"git.properties"文件;默认值:false;-->
+                    <generateGitPropertiesFile>false</generateGitPropertiesFile>
+                    <!--指定"git.properties"文件的存放路径(相对于${project.basedir}的一个路径);-->
+                    <generateGitPropertiesFilename>git.properties</generateGitPropertiesFilename>
+                    <!--".git"文件夹未找到时,构建是否失败;若设置true,则构建失败;若设置false,则跳过执行该目标;默认值:true;-->
+                    <failOnNoGitDirectory>true</failOnNoGitDirectory>
+                    <!--git描述配置,可选;由JGit提供实现;-->
+                    <gitDescribe>
+                        <!--是否生成描述属性-->
+                        <skip>false</skip>
+                        <!--提交操作未发现tag时,仅打印提交操作ID,-->
+                        <always>false</always>
+                        <!--提交操作ID显式字符长度,最大值为:40;默认值:7;0代表特殊意义;后面有解释;-->
+                        <abbrev>7</abbrev>
+                        <!--构建触发时,代码有修改时(即"dirty state"),添加指定后缀;默认值:"";-->
+                        <dirty>-dirty</dirty>
+                        <forceLongFormat>false</forceLongFormat>
+                    </gitDescribe>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>
