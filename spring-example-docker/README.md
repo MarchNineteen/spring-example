@@ -5,7 +5,7 @@
                 
 - 直接继承springboot-start 使用@@ 自己的parent${}
 
-#推送
+# 推送
 - maven setting文件 配置server
 ```
 <server>
