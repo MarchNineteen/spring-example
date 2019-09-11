@@ -2,7 +2,7 @@
 - [mybatis springboot 集成mybatis swagger log4j2 admin-UI 配置文件切换](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-mybatis)
 - [business spring事务配置](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-business)
 - [timer spring定时器](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-timer)
-- [cache 缓存配置](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-cache) 完成 redis 未完成 memcached
+- [cache 缓存配置](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-cache) redis&memcached
 - [freemarker springboot集成freemarker及 springboot热部署](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-freemarker) 
 - [aop springAOP面向切面编程](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-aop) 注解 代理
 - [自定义异常处理解决方案](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-exception)
