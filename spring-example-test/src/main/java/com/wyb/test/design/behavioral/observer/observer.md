@@ -1,7 +1,7 @@
 ---
-title: Java设计模式：责任链模式
+title: Java设计模式：观察者模式
 date: 2019-01-24 
-keywords: chainOfResponsibility
+keywords: observer
 categories: [java-design-patterns]
 ---
 # 定义(目的)
