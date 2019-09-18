@@ -1,7 +1,7 @@
 # 构建
 
 ### Dockerfile占位符
-- resources 添加 <filtering>true</filtering> 
+- resources 添加 `<filtering>`true`</filtering>`
                 
 - 直接继承springboot-start 使用@@ 自己的parent${}
 
