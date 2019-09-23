@@ -5,7 +5,7 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.31.128:3306/springboot?characterEncoding=utf8&useSSL=false
+    url: jdbc:mysql://127.0.0.1:3306/springboot?characterEncoding=utf8&useSSL=false
     username: root
     password: 123456
     #最大活跃数
@@ -49,5 +49,5 @@ pagehelper:
   params: count=countSql
 
 memcache:
-  ip: 192.168.31.128
+  ip: 127.0.0.1
   port: 11211

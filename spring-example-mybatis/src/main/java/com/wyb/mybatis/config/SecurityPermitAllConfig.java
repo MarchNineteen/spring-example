@@ -5,7 +5,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 /**
- * @author Kunizte
+ * @author Marcher丶
  * <p>
  * 使执行器端点可访问
  * 安全性参考：http://codecentric.github.io/spring-boot-admin/2.0.2/#securing-spring-boot-admin

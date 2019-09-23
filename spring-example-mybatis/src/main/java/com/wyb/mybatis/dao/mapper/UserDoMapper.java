@@ -1,30 +1,7 @@
 package com.wyb.mybatis.dao.mapper;
 
+import com.wyb.mybatis.dao.BaseMapper;
 import com.wyb.mybatis.dao.model.UserDo;
-import com.wyb.mybatis.dao.model.UserDoExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
-public interface UserDoMapper {
-    long countByExample(UserDoExample example);
-
-    int deleteByExample(UserDoExample example);
-
-    int deleteByPrimaryKey(Integer id);
-
-    int insert(UserDo record);
-
-    int insertSelective(UserDo record);
-
-    List<UserDo> selectByExample(UserDoExample example);
-
-    UserDo selectByPrimaryKey(Integer id);
-
-    int updateByExampleSelective(@Param("record") UserDo record, @Param("example") UserDoExample example);
-
-    int updateByExample(@Param("record") UserDo record, @Param("example") UserDoExample example);
-
-    int updateByPrimaryKeySelective(UserDo record);
-
-    int updateByPrimaryKey(UserDo record);
+public interface UserDoMapper extends BaseMapper<UserDo> {
 }

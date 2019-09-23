@@ -40,7 +40,7 @@ public class ReflectTest {
         if (modifiers.length() > 0) {
             System.out.println(modifiers + " ");
         }
-        System.out.println("class " + employeeClass.getName());// 打印父类
+        System.out.println("class " + employeeClass.getName());
         if (personClass5 != null && personClass5 != Object.class) {
             System.out.println(" extends " + personClass5.getName());// 打印父类
         }
@@ -94,16 +94,19 @@ public class ReflectTest {
     }
 
     /**
-     * 打印Class对象的所有方法
+     * 打印Class的所有属性
      */
     public static void printFields(Class clazz) {
         Field[] declaredFields = clazz.getDeclaredFields();
         Field[] fields = clazz.getFields();
-        for (Field f : declaredFields) {
-            System.out.println();
-            System.out.print(" 修饰符 " + Modifier.toString(f.getModifiers()) + " ");
-            System.out.print(" 类型 " + f.getType() + " ");
-            System.out.print(" 方法名称" + f.getName());
+        for (Field f: declaredFields) {
+            Class type = f.getType();
+            System.out.print("  ");
+            String modifiers = Modifier.toString(f.getModifiers());
+            if (modifiers.length()> 0) {
+                System.out.print(modifiers + " ");
+            }
+            System.out.println(type.getName() + " " + f.getName() + ";");
         }
     }
 

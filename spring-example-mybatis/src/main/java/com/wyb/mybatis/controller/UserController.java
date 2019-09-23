@@ -11,10 +11,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * Description:
- *
- * @author: Kunzite
- * @Date: 2018-01-07 19:57
+ * @author: Marcher丶
  */
 @Slf4j
 @RestController
@@ -24,17 +21,29 @@ public class UserController {
     @Resource
     private UserService userService;
 
+    @ApiOperation(value = "获取用户列表")
+    @GetMapping("/list")
+    public List<UserDo> list() {
+        return userService.selectAll();
+    }
+
     @ApiOperation(value = "获取用户详细信息", notes = "根据url的id来获取用户详细信息")
     @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "Long")
-    @GetMapping("/list")
-    public List<UserDo> list(){
-        return userService.listAll(1,10);
+    @GetMapping("/getById")
+    public UserDo getById(@RequestParam Long id) {
+        return userService.selectByKey(id);
+    }
+
+    @ApiOperation(value = "添加用户")
+    @PostMapping("/add")
+    public int add(@RequestBody UserDo userDo) {
+        return userService.save(userDo);
     }
 
     @PostMapping("/login")
-    public boolean login(@RequestParam("username")String name,
-                               @RequestParam("pwd")String pwd){
-        if (name.equals("111111") && pwd.equals("123456")){
+    public boolean login(@RequestParam("username") String name,
+                         @RequestParam("pwd") String pwd) {
+        if (name.equals("111111") && pwd.equals("123456")) {
             log.info("登录请求");
             return true;
         }
