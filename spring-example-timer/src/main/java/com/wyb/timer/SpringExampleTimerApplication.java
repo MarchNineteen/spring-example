@@ -1,9 +1,9 @@
 package com.wyb.timer;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ImportResource;
+import tk.mybatis.spring.annotation.MapperScan;
 
 @SpringBootApplication
 @MapperScan(basePackages = "com.wyb.timer.dao.mapper")
@@ -11,7 +11,7 @@ import org.springframework.context.annotation.ImportResource;
 //@EnableScheduling
 public class SpringExampleTimerApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(SpringExampleTimerApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(SpringExampleTimerApplication.class, args);
+    }
 }

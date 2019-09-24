@@ -11,19 +11,19 @@
   <url>http://maven.apache.org</url>
 
   <modules>
-    <module>spring-example-business</module>
-    <module>spring-example-mybatis</module>
-    <module>spring-example-timer</module>
-    <module>spring-example-cache</module>
-    <module>spring-example-freemarker</module>
-    <module>spring-example-mq</module>
     <module>spring-example-aop</module>
-    <module>spring-example-thread</module>
-    <module>spring-example-exception</module>
-    <module>spring-example-test</module>
-    <module>spring-example-shiro</module>
-    <module>spring-example-log</module>
+    <module>spring-example-business</module>
+    <module>spring-example-cache</module>
     <module>spring-example-docker</module>
+    <module>spring-example-exception</module>
+    <module>spring-example-freemarker</module>
+    <module>spring-example-log</module>
+    <module>spring-example-mq</module>
+    <module>spring-example-mybatis</module>
+    <module>spring-example-shiro</module>
+    <module>spring-example-test</module>
+    <module>spring-example-thread</module>
+    <module>spring-example-timer</module>
   </modules>
 
   <properties>

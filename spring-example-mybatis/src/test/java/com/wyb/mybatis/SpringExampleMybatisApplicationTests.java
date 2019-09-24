@@ -1,6 +1,7 @@
 package com.wyb.mybatis;
 
 import com.github.pagehelper.PageInfo;
+import com.wyb.mybatis.dao.mapper.UserDoMapper;
 import com.wyb.mybatis.dao.model.UserDo;
 import com.wyb.mybatis.service.UserService;
 import org.junit.Assert;
@@ -18,6 +19,8 @@ public class SpringExampleMybatisApplicationTests {
 
     @Resource
     UserService userService;
+    @Resource
+    private UserDoMapper userDoMapper;
 
     @Test
     public void testAddUser() {
@@ -32,6 +35,20 @@ public class SpringExampleMybatisApplicationTests {
         user.setUpdateTime(new Date());
         user.setStatus(0);
         Assert.assertEquals(1, userService.save(user));
+    }
+
+    @Test
+    public void testAddUserSelective() {
+        UserDo user = new UserDo();
+        user.setUsername("scott");
+        user.setPassword("ac089b11709f9b9e9980e7c497268dfa");
+        user.setPhone("12321");
+        user.setSex(1);
+        user.setAge(12);
+        user.setCreateTime(new Date());
+        user.setUpdateTime(new Date());
+        user.setStatus(0);
+        Assert.assertEquals(1, userDoMapper.insertSelective(user));
     }
 
     @Test
