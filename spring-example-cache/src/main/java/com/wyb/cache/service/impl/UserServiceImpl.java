@@ -3,7 +3,6 @@ package com.wyb.cache.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.wyb.cache.dao.mapper.UserDoMapper;
 import com.wyb.cache.dao.model.UserDo;
-import com.wyb.cache.dao.model.UserDoExample;
 import com.wyb.cache.service.UserService;
 import org.springframework.stereotype.Service;
 
@@ -23,10 +22,9 @@ public class UserServiceImpl implements UserService {
     private UserDoMapper userDoMapper;
 
     @Override
-    public List<UserDo> listAll(int pageNum, int pageSize){
-        PageHelper.startPage(pageNum,pageSize);
-        UserDoExample example = new UserDoExample();
-        return userDoMapper.selectByExample(example);
+    public List<UserDo> listAll(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        return userDoMapper.selectAll();
     }
 
     @Override

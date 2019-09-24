@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @MapperScan(basePackages = "com.wyb.freemarker.dao.mapper")
 public class SpringExampleFreemarkerApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(SpringExampleFreemarkerApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(SpringExampleFreemarkerApplication.class, args);
+    }
 }

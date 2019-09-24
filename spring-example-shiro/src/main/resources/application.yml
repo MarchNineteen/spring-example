@@ -58,7 +58,7 @@ spring:
     baseline-on-migrate: true
 
 mybatis:
-  mapper-locations: classpath:mapping/*Mapper.xml
+  mapper-locations: classpath:mapper/*Mapper.xml
   type-aliases-package: com.wyb.shiro.dao.model
 
 #mapper:

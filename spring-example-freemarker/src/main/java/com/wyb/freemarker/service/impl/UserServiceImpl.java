@@ -1,10 +1,9 @@
 package com.wyb.freemarker.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.wyb.freemarker.dao.mapper.UserDoMapper;
 import com.wyb.freemarker.dao.model.UserDo;
-import com.wyb.freemarker.dao.model.UserDoExample;
 import com.wyb.freemarker.service.UserService;
-import com.github.pagehelper.PageHelper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -23,16 +22,14 @@ public class UserServiceImpl implements UserService {
     private UserDoMapper userDoMapper;
 
     @Override
-    public List<UserDo> listAll(int pageNum, int pageSize){
-        PageHelper.startPage(pageNum,pageSize);
-        UserDoExample example = new UserDoExample();
-        return userDoMapper.selectByExample(example);
+    public List<UserDo> listAll(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        return userDoMapper.selectAll();
     }
 
     @Override
     public UserDo getByName(String username) {
-        UserDoExample example = new UserDoExample();
-        example.createCriteria().andUsernameEqualTo(username);
-        return userDoMapper.selectByExample(example).get(0);
+        UserDo userDo = UserDo.builder().username(username).build();
+        return userDoMapper.selectOne(userDo);
     }
 }

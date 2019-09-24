@@ -4,7 +4,6 @@ package com.wyb.timer.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.wyb.timer.dao.mapper.UserDoMapper;
 import com.wyb.timer.dao.model.UserDo;
-import com.wyb.timer.dao.model.UserDoExample;
 import com.wyb.timer.service.UserService;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +25,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserDo> listAll(int pageNum, int pageSize){
         PageHelper.startPage(pageNum,pageSize);
-        UserDoExample example = new UserDoExample();
-        return userDoMapper.selectByExample(example);
+        return userDoMapper.selectAll();
     }
 }

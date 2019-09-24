@@ -16,9 +16,9 @@
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
         <!-- 指定生成 Mapper 的继承模板 -->
         <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
-            <property name="mappers" value="com.wyb.business.dao.BaseMapper"/>
+            <property name="mappers" value="com.wyb.timer.dao.BaseMapper"/>
         </plugin>
-        <!-- optional，旨在创建class时，对注释进行控制-->
+        <!-- optional，旨在创建class时，对注释    进行控制-->
         <commentGenerator type="org.mybatis.generator.internal.DefaultCommentGenerator">
             <property name="suppressDate" value="true" />
             <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
@@ -42,7 +42,7 @@
         targetPackage     指定生成的model生成所在的包名
         targetProject     指定在该项目下所在的路径
          -->
-        <javaModelGenerator targetPackage="com.wyb.business.dao.model" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="com.wyb.timer.dao.model" targetProject="src/main/java">
             <!-- 是否允许子包，即targetPackage.schemaName.tableName-->
             <property name="enableSubPackages" value="false" />
             <!-- 是否对类CHAR类型的列的数据进行trim操作 -->
@@ -68,7 +68,7 @@
         type="XMLMAPPER",生成SQLMap XML文件和独立的Mapper接口
         -->
         <!-- 生成DAO的包名和位置 -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.wyb.business.dao.mapper" targetProject="src/main/java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.wyb.timer.dao.mapper" targetProject="src/main/java">
             <property name="enableSubPackages" value="false" />
             <!--定义Maper.java 源代码中的ByExample()方法的可视性，可选的值有：      public;     private;protected;default  注意：如果targetRuntime="MyBatis3",此参数被忽略 -->
             <!--<property name="exampleMethodVisibility" value=""/>-->

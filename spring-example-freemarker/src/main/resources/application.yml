@@ -37,7 +37,7 @@ spring:
       enabled: true
 
 mybatis:
-  mapper-locations: classpath:mapping/*Mapper.xml
+  mapper-locations: classpath:mapper/*Mapper.xml
   type-aliases-package: com.wyb.freemarker.dao.model
 
 #pagehelper分页插件
