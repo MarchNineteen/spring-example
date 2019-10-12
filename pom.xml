@@ -20,6 +20,7 @@
     <module>spring-example-log</module>
     <module>spring-example-mq</module>
     <module>spring-example-mybatis</module>
+    <module>spring-example-mybatis-multidatasource</module>
     <module>spring-example-shiro</module>
     <module>spring-example-test</module>
     <module>spring-example-thread</module>
