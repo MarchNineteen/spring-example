@@ -30,4 +30,12 @@ public class TestServiceImpl {
         System.out.println(1/0);
         System.out.println("分布式事务同步成功");
     }
+
+//    @Transactional(transactionManager = "test2TransactionManager", propagation = Propagation.REQUIRED, rollbackFor = { java.lang.RuntimeException.class })
+    public void testCommonTransaction(UserDo userDo) {
+        user2Mapper.insert(userDo);
+
+        System.out.println(1/0);
+        System.out.println("普通事务同步成功");
+    }
 }

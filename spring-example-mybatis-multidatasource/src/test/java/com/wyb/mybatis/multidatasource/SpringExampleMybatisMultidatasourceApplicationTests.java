@@ -37,9 +37,8 @@ public class SpringExampleMybatisMultidatasourceApplicationTests {
 
     @Test
     public void getUser() {
-        Long id = 1L;
-        UserDo user1=user1Mapper.getOne(id);
-        UserDo user2=user2Mapper.getOne(id);
+        UserDo user1=user1Mapper.getOne(1L);
+        UserDo user2=user2Mapper.getOne(7L);
         System.out.println(user1.toString());
         System.out.println(user2.toString());
     }
@@ -53,6 +52,17 @@ public class SpringExampleMybatisMultidatasourceApplicationTests {
         user.setUpdateTime(new Date());
         user.setCreateTime(new Date());
         user2Mapper.insert(user);
+    }
+
+    @Test
+    public void tetsCoommonTras() {
+        UserDo user = new UserDo();
+        user.setUsername("test1 useranme");
+        user.setPassword("12345611");
+        user.setSex(1);
+        user.setUpdateTime(new Date());
+        user.setCreateTime(new Date());
+        testService.testCommonTransaction(user);
     }
 
     @Test
