@@ -7,17 +7,19 @@ spring:
     addresses: 111.231.85.51:5672
     #spring.rabbitmq.connection-timeout=50000
     #rabbitmq listetner
-    # 消费者最小数量
     listener:
-      concurrency: 10
-      # 消费者最大数量
-      max-concurrency: 20
-      # 消息的确认模式
-      acknowledge-mode: MANUAL
-      # 每一次发送到消费者的消息数量，它应该大于或等于事务大小（如果使用）。
-      prefetch: 10
-      # 消费者端的重试
-      retry.enabled: true
+      simple:
+        # 消费者最小数量
+        concurrency: 10
+        # 消费者最大数量
+        max-concurrency: 20
+        # 消息的确认模式
+        acknowledge-mode: MANUAL
+        # 每一次发送到消费者的消息数量，它应该大于或等于事务大小（如果使用）。
+        prefetch: 1
+        # 消费者端的重试
+        retry.enabled: true
+
     #rabbitmq publisher
     # 生产者端的重试
     template:
