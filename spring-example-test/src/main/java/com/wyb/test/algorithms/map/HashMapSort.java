@@ -18,6 +18,7 @@ public class HashMapSort {
 
     public static void main(String[] args) {
 
+        // 根据key排序
         Map<String, String> oldTmp = new HashMap<>();
         oldTmp.put("1","1");
         oldTmp.put("3","3");
@@ -28,11 +29,12 @@ public class HashMapSort {
 
 
         Map<String, String> myMap = new LinkedHashMap<String, String>();
-        List<String> keyList = new ArrayList<String>();
-        Iterator<String> it = oldTmp.keySet().iterator();
-        while (it.hasNext()) {
-            keyList.add(it.next());
-        }
+        List<String> keyList = new ArrayList<String>(myMap.keySet());
+//        Iterator<String> it = oldTmp.keySet().iterator();
+//        while (it.hasNext()) {
+//            keyList.add(it.next());
+//        }
+
         Collections.sort(keyList);
 
         Iterator<String> it2 = keyList.iterator();
