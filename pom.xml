@@ -25,6 +25,7 @@
     <module>spring-example-test</module>
     <module>spring-example-thread</module>
     <module>spring-example-timer</module>
+    <module>spring-example-vue</module>
   </modules>
 
   <properties>

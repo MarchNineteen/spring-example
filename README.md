@@ -13,6 +13,7 @@
 - [mq spring消息队列](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-mq) 
 - [java日志文件体系](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-log)
 - [docker整合](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-docker) springboot整合docker完成自动构建镜像
+- [springboot+vue实现前后端分离](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-vue) springboot+vue实现前后端分离
 - 计划：
 - 
 
