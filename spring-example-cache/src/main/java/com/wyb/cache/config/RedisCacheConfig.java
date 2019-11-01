@@ -19,6 +19,9 @@ import org.springframework.data.redis.cache.RedisCacheWriter;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.listener.PatternTopic;
+import org.springframework.data.redis.listener.RedisMessageListenerContainer;
+import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
@@ -92,5 +95,16 @@ public class RedisCacheConfig extends CachingConfigurerSupport {
             }
             return sb.toString();
         };
+    }
+
+    @Bean
+    public RedisMessageListenerContainer container(RedisConnectionFactory connectionFactory,
+                                                   MessageListenerAdapter redisSubscriber, MessageListenerAdapter redisSubscriber2) {
+        RedisMessageListenerContainer container = new RedisMessageListenerContainer();
+        container.setConnectionFactory(connectionFactory);
+        container.addMessageListener(redisSubscriber, new PatternTopic("channel 1"));
+        container.addMessageListener(redisSubscriber2, new PatternTopic("channel 1"));
+        container.addMessageListener(redisSubscriber, new PatternTopic("channel 2"));//配置要订阅的订阅项
+        return container;
     }
 }

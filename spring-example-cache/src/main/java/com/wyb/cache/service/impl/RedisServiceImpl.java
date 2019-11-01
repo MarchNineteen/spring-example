@@ -419,6 +419,15 @@ public class RedisServiceImpl implements CacheService {
     }
 
     @Override
+    public void publish(String channel, Object object) {
+        try {
+            redisTemplate.convertAndSend(channel, object);
+        } catch (Exception e) {
+            log.error("publish  exception [channel=" + channel + "].", e);
+        }
+    }
+
+    @Override
     public void lock(String key) {
         lock(key, 10000);
     }

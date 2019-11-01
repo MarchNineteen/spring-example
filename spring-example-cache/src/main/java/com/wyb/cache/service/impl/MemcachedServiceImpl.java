@@ -215,6 +215,11 @@ public class MemcachedServiceImpl implements CacheService {
     }
 
     @Override
+    public void publish(String channel, Object object) {
+
+    }
+
+    @Override
     public void lock(String key) {
 
     }
