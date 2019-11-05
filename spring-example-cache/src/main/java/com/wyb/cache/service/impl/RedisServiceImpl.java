@@ -1,5 +1,6 @@
 package com.wyb.cache.service.impl;
 
+import com.wyb.cache.constant.CacheKeyContant;
 import com.wyb.cache.service.CacheService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -12,7 +13,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-import static com.wyb.cache.constant.CacheKeyContant.DS_LOCK;
 
 /**
  * Description:
@@ -448,7 +448,7 @@ public class RedisServiceImpl implements CacheService {
             throw new IllegalArgumentException("the cache key to be locked can not be null");
         }
         long t = System.currentTimeMillis();
-        String _lockKey = String.format("%s%s", DS_LOCK, key);
+        String _lockKey = String.format("%s%s", CacheKeyContant.DS_LOCK, key);
         while (true) {
             if (redisTemplate.opsForValue().setIfAbsent(_lockKey, t + lockTimeoutMS + 1)) {
                 redisTemplate.expire(_lockKey, lockTimeoutMS, TimeUnit.MILLISECONDS);
@@ -477,7 +477,7 @@ public class RedisServiceImpl implements CacheService {
 
     @Override
     public void unlock(String key) {
-        String _lockKey = String.format("%s%s", DS_LOCK, key);
+        String _lockKey = String.format("%s%s", CacheKeyContant.DS_LOCK, key);
         removeCache(_lockKey);
     }
 
