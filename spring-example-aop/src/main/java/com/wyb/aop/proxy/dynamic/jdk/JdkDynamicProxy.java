@@ -46,6 +46,9 @@ public class JdkDynamicProxy implements InvocationHandler {
          * 第二个参数 userService.getClass().getInterfaces()，我们这里为代理对象提供的接口是真实对象所实行的接口，表示我要代理的是该真实对象，这样我就能调用这组接口中的方法了
          * 第三个参数 handler， 我们这里将这个代理对象关联到了上方的 InvocationHandler 这个对象上
          */
+        // 1、生成$Proxy0的class文件
+        System.getProperties().put("sun.misc.ProxyGenerator.saveGeneratedFiles", "true");
+
         UserService proxyUserService = (UserService) Proxy.newProxyInstance(handler.getClass().getClassLoader(), realUserService
                 .getClass().getInterfaces(), handler);
         System.out.println("-----------JdkProxy-------------");
