@@ -1,6 +1,20 @@
 <template>
     <div>
         <div>
+            <el-upload
+                    class="upload-demo"
+                    action="http://localhost:8181/book/upload/"
+                    :on-preview="handlePreview"
+                    :on-remove="handleRemove"
+                    :before-remove="beforeRemove"
+                    multiple
+                    :limit="3"
+                    :on-exceed="handleExceed"
+                    :file-list="fileList">
+                <el-button size="small" type="primary">点击上传</el-button>
+                <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+            </el-upload>
+
             <el-table
                     :data="tableData"
                     border
@@ -109,6 +123,37 @@
                         message: '已取消删除'
                     });
                 });
+            },
+            getFile(event){
+                var file = event.target.files;
+                for(var i = 0;i<file.length;i++){
+                    //    上传类型判断
+                    var imgName = file[i].name;
+                    var idx = imgName.lastIndexOf(".");
+                    if (idx != -1){
+                        var ext = imgName.substr(idx+1).toUpperCase();
+                        ext = ext.toLowerCase( );
+                        if (ext!='pdf' && ext!='doc' && ext!='docx'){
+
+                        }else{
+                            this.addArr.push(file[i]);
+                        }
+                    }else{
+
+                    }
+                }
+            },
+            handleRemove(file, fileList) {
+                console.log(file, fileList);
+            },
+            handlePreview(file) {
+                console.log(file);
+            },
+            handleExceed(files, fileList) {
+                this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
+            },
+            beforeRemove(file, fileList) {
+                return this.$confirm(`确定移除 ${ file.name }？`);
             }
         },
 
@@ -117,10 +162,11 @@
                 total:0,
                 pageSize:5,
                 tableData: [],
-                currentPage:0
+                currentPage:0,
+                addArr:[],
+                fileList: []
             }
         },
-
         created() {
             const _this = this
             axios.get('http://localhost:8181/book/findByPage/1').then(function (resp) {
