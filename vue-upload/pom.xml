@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.wyb</groupId>
-    <artifactId>upload</artifactId>
+    <artifactId>vue-upload</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>upload</name>
+    <name>vue-upload</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
