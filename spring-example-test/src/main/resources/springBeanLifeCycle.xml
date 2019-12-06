@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="lifeCycle" class="com.wyb.test.spring.bean.LifeCycle" init-method="customInit" destroy-method="customDestroy" scope="singleton">
+        <property name="attr" value="测试bean生命周期哦哦" />
+    </bean>
+
+    <bean id="myBeanPostProcessor" class="com.wyb.test.spring.bean.MyBeanPostProcessor"/>
+</beans>
