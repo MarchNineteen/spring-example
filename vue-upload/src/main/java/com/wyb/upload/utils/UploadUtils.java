@@ -1,4 +1,4 @@
-package cn.attackme.myuploader.utils;
+package com.wyb.upload.utils;
 
 import java.util.HashMap;
 import java.util.Map;

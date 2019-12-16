@@ -11,8 +11,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.Date;
 
-import static cn.attackme.myuploader.utils.UploadUtils.*;
 import static com.wyb.upload.utils.FileUtils.generateFileName;
+import static com.wyb.upload.utils.UploadUtils.*;
 
 /**
  * 文件上传服务
@@ -25,6 +25,7 @@ public class FileService {
 
     /**
      * 上传文件
+     *
      * @param md5
      * @param file
      */
@@ -38,6 +39,7 @@ public class FileService {
 
     /**
      * 分块上传文件
+     *
      * @param md5
      * @param size
      * @param chunks
@@ -53,15 +55,16 @@ public class FileService {
                                 MultipartFile file) throws IOException {
         String fileName = getFileName(md5, chunks);
         FileUtils.writeWithBlok(UploadConfig.path + fileName, size, file.getInputStream(), file.getSize(), chunks, chunk);
-        addChunk(md5,chunk);
+        addChunk(md5, chunk);
         if (isUploaded(md5)) {
             removeKey(md5);
-            fileDao.save(new File(name, md5,UploadConfig.path + fileName, new Date()));
+            fileDao.save(new File(name, md5, UploadConfig.path + fileName, new Date()));
         }
     }
 
     /**
      * 检查Md5判断文件是否已上传
+     *
      * @param md5
      * @return
      */

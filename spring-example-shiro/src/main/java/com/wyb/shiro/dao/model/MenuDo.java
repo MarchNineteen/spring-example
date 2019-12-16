@@ -27,8 +27,8 @@ public class MenuDo implements Serializable {
     @Column(name = "menu_name")
     private String menuName;
 
-    @Column(name = "is_show")
-    private Integer isShow;
+//    @Column(name = "is_show")
+//    private Integer isShow;
 
     /**
      * 描述

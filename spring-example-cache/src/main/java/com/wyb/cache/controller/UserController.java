@@ -2,6 +2,7 @@ package com.wyb.cache.controller;
 
 import com.wyb.cache.dao.model.UserDo;
 import com.wyb.cache.service.UserService;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,6 +24,7 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/list")
+    @Cacheable(value = "user")
     public List<UserDo> list(){
         return userService.listAll(1,10);
     }
