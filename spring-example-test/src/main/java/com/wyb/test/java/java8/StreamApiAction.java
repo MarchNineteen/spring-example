@@ -1,9 +1,6 @@
 package com.wyb.test.java.java8;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -18,40 +15,53 @@ public class StreamApiAction {
     public static void main(String[] args) {
         List<Integer> list = Arrays.asList(1, 2, 3, 4, 5);
 //        map(list);
-
         List<Integer> list1 = Arrays.asList(1, 2, 3, 4, 5);
         List<Integer> list2 = Arrays.asList(6, 7, 8, 9, 10);
         List<List<Integer>> allList = new ArrayList<>();
         allList.add(list1);
         allList.add(list2);
 //        flatMap(allList);
-
         // 留下偶数
 //        filter(list);
-
         List<Integer> list3 = Arrays.asList(1, 2, 2, 2, 5);
 //        distinct(list3);
-
 //        sorted(list);
-
 //        peek(list);
-
 //        limit(list);
-
 //        skip(list);
-
 //        parallel(list);
-
 //        sequential(list);
-
 //        unordered(list);
-
 //        Long[] aa = list.stream().map(value -> value * value).toArray(Long[]::new);
-        System.out.println(list.stream().reduce(0, Integer::sum));
-        Optional<Integer> optional = list.stream().reduce(Integer::sum);
-        System.out.println(optional.get());
+//        System.out.println(list.stream().reduce(0, Integer::sum));
+//        Optional<Integer> optional = list.stream().reduce(Integer::sum);
+//        System.out.println(optional.get());
 
-//        list.stream().collect(Collectors.)
+        // Collectors
+        List<String> strList = Arrays.asList("aaaa", "bb", "cc", "dd", "ee");
+        strList.stream().collect(Collectors.toList());
+        String s = strList.stream().collect(Collectors.joining());
+        System.out.println(s);
+        // 逗号连接
+        s = strList.stream().collect(Collectors.joining(","));
+        System.out.println(s);
+        // 逗号连接
+        s = strList.stream().collect(Collectors.joining(",", "[", "]"));
+        System.out.println(s);
+
+        s = strList.stream().collect(Collectors.collectingAndThen(Collectors.joining(","), String::toUpperCase));
+        System.out.println(s);
+
+        Map<Integer, List<String>> map = strList.stream().collect(Collectors.groupingBy(String::length));
+        map.keySet().forEach(v -> map.get(v).forEach(System.out::println));
+
+        Map<Integer, Set<String>> map1 = strList.stream().collect(Collectors.groupingBy(String::length, Collectors.toSet()));
+        map.keySet().forEach(v -> map1.get(v).forEach(System.out::println));
+
+        Map<Boolean, List<Integer>> mapBoolean = list.stream().collect(Collectors.partitioningBy(v -> v % 2 == 0));
+        mapBoolean.keySet().forEach(v -> mapBoolean.get(v).forEach(System.out::println));
+
+        Integer num = list.stream().mapToInt(Integer::intValue).sum();
     }
 
     private static void map(List<Integer> list) {
