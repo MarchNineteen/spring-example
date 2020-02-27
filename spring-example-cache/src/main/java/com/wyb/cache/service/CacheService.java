@@ -315,10 +315,11 @@ public interface CacheService {
      */
     Set<String> fuzzyQuery(String pattern);
 
+    void publish(String channel, Object object);
+
     /************************************************************
      * ***************** distribute lock ***************
      ************************************************************/
-    void publish(String channel, Object object);
 
     /**
      * 缓存锁，默认锁超时时间为10秒，超过10秒未释放锁，锁会失效，在大量锁争用时会进入不稳定状态

@@ -3,7 +3,7 @@
     <uploader
       ref="uploader"
       browse_button="browse_button"
-      :url="server_config.url+'/File/'"
+      :url="server_config.url+'/file/total/'"
       :filters="{prevent_duplicates:true}"
       @inputUploader="inputUploader"
     />
