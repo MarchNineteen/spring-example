@@ -4,9 +4,9 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="lifeCycle" class="com.wyb.test.spring.bean.LifeCycle" init-method="customInit" destroy-method="customDestroy" scope="singleton">
+    <bean id="lifeCycle" class="com.wyb.test.spring.beanLifeCycle.LifeCycle" init-method="customInit" destroy-method="customDestroy" scope="singleton">
         <property name="attr" value="测试bean生命周期哦哦" />
     </bean>
 
-    <bean id="myBeanPostProcessor" class="com.wyb.test.spring.bean.MyBeanPostProcessor"/>
+    <bean id="myBeanPostProcessor" class="com.wyb.test.spring.beanLifeCycle.MyBeanPostProcessor"/>
 </beans>

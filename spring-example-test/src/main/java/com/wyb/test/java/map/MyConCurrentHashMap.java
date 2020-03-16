@@ -12,6 +12,9 @@ public class MyConCurrentHashMap {
     public static void main(String[] args) {
         ConcurrentHashMap<String, String> chm = new ConcurrentHashMap<>();
 //        chm.put();
-
+//        chm.size();
+//        HashMap map = new HashMap();
+//        map.size()
     }
 }
+

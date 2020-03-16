@@ -17,7 +17,7 @@
 
 ### rabbitmq
 
-> https://my.oschina.net/u/3748347?tab=newest&catalogId=5740269
+> https://my.oschina.net/xiaolyuh?tab=newest&catalogId=5740269
 
 activemq
 
