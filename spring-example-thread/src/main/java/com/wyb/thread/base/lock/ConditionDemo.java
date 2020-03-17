@@ -1,79 +1,91 @@
 package com.wyb.thread.base.lock;
 
+import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * @author Kunzite
+ * @author Marcher丶
+ * 编写程序实现,子线程循环10次,接着主线程循环20次,接着再子线程循环10次,主线程循环20次,如此反复,循环50次.
+ * <p>
+ * 把线程和功能拆分  抽象一个执行功能class
+ * 定义一个变量轮到谁执行和谁先执行
  */
 public class ConditionDemo {
 
+
     public static void main(String[] args) {
-        final BusinessLock business = new BusinessLock();
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                for (int i = 1; i <= 50; i++) {
-                    business.sub(i);
-                }
+        Function function = new Function();
+        Thread t1 = new Thread(() -> {
+            for (int i = 1; i <= 50; i++) {
+                function.successorFun(i);
             }
-        }).start();
-
-//        new Thread( () -> {
-//            for (int i = 1; i <= 50; i++){
-//                business.sub(i);
-//            }
-//        }).start();
+        });
+        t1.start();
 
         for (int i = 1; i <= 50; i++) {
-            business.main(i);
+            function.mianFun(i);
         }
+
     }
 
-    static class BusinessLock {
-        private boolean bShouldSub = true;
 
+    static class Function {
+
+        private boolean flag = true;// 子线程是否执行标识
         ReentrantLock lock = new ReentrantLock();
-        java.util.concurrent.locks.Condition condition = lock.newCondition();
+        Condition condition = lock.newCondition();
 
-        public void sub(int i) {
+        /**
+         * 子线程功能
+         */
+        public void successorFun(int loop) {
             lock.lock();
             try {
-                while (!bShouldSub) {
+                // flag = false 子线程不能执行 执行阻塞等待主线程signal
+                while (!flag) {
                     try {
                         condition.await();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
-                for (int j = 1; j <= 10; j++) {
-                    System.out.println("sub thread sequence of " + j + ",loop of " + i);
+                for (int i = 1; i <= 10; i++) {
+                    System.out.println("子线程第" + loop + "次循环的第" + i + "号");
                 }
-                bShouldSub = false;
+                // 执行完之后 标识改变 唤醒主线程
+                flag = false;
                 condition.signal();
             } finally {
                 lock.unlock();
             }
+
         }
 
-        public void main(int i) {
+
+        /**
+         * 主线程功能
+         */
+        public void mianFun(int loop) {
+
             lock.lock();
             try {
-                while (bShouldSub) {
+                // 先执行子线程
+                while (flag) {
                     try {
                         condition.await();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
-                for (int j = 1; j <= 100; j++) {
-                    System.out.println("main thread sequence of " + j + ",loop of " + i);
+                for (int i = 1; i <= 20; i++) {
+                    System.out.println("主线程第" + loop + "次循环的第" + i + "号");
                 }
-                bShouldSub = true;
+                flag = true;
                 condition.signal();
             } finally {
                 lock.unlock();
             }
+
         }
     }
 }
