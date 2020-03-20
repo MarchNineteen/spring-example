@@ -40,14 +40,14 @@ public class DeadLockingDiningPhilosopher {
             sticks[i] = new Chopstick();
         }
         //产生死锁
-//        for (int i = 0; i < size; i++) {
-////            exec.execute(new Philosopher(sticks[i], sticks[(i + 1) % size], i, 0)); //n个哲学家n支筷子循坏使用
-//            exec.execute(new Philosopher(sticks[i], sticks[(i+1)%size], i, 0));
-//        }
+        for (int i = 0; i < size; i++) {
+//            exec.execute(new Philosopher(sticks[i], sticks[(i + 1) % size], i, 0)); //n个哲学家n支筷子循坏使用
+            exec.execute(new Philosopher(sticks[i], sticks[(i+1)%size], i, 0));
+        }
         //不会死锁
-        for(int i=0;i<size-1;i++)
-            exec.execute(new Philosopher(sticks[i], sticks[i+1], i, 0));
-        exec.execute(new Philosopher(sticks[0], sticks[size-1], size, 0));//更改第五个哲学家获得筷子的顺序
+//        for(int i=0;i<size-1;i++)
+//            exec.execute(new Philosopher(sticks[i], sticks[i+1], i, 0));
+//        exec.execute(new Philosopher(sticks[0], sticks[size-1], size, 0));//更改第五个哲学家获得筷子的顺序
         Thread.sleep(4*1000);
         exec.shutdownNow();
     }

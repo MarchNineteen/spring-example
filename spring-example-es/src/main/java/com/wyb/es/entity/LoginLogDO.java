@@ -1,8 +1,3 @@
-/*
- * @(#)LoginLogDO    Created on 2020/3/5
- * Copyright (c) 2020 ZDSoft Networks, Inc. All rights reserved.
- * $$ Id$$
- */
 package com.wyb.es.entity;
 
 import org.springframework.data.annotation.Id;
@@ -15,7 +10,6 @@ import java.util.Date;
 
 /**
  * @author Marcher丶
- * @version $$ Revision: 1.0 $$, $$ Date: 2020/3/5 10:29 $$
  */
 @Document(indexName = "testindex")
 public class LoginLogDO implements Serializable {

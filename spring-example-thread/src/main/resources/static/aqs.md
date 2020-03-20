@@ -90,3 +90,20 @@ Node nextWaiter;
 ```
 
 
+
+## ps
+
+### lock tryLock lockInterruptibly
+
+lock：加锁，获取不到会加入队列，进行阻塞。阻塞时不会处理中断状态，（改变状态后一直循坏）再被唤醒后，返回阻塞标识，由外部调用方自己处理。
+tryLock：加锁，获取不到，直接返回状态，不会阻塞。
+lockInterruptibly：可中断加锁，想比较lock，它会直接返回标识状态，线程由阻塞状态被唤醒去处理中断信号。
+
+获得锁的线程无法被中断。
+
+### interrupt（）  interrupted（） isInterrupted（）
+
+interrupt： 设置线程中断标识，并不直接中断线程。
+interrupted： 返回线程中断标识，并清空。
+isInterrupted： 返回线程中断标识，不清空。
+
