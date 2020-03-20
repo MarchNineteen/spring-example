@@ -75,6 +75,21 @@ public class ForEachTest {
         }
     }
 
+    public void correct2Remove() {
+        for (int i = 0; i < arrayList.size(); i++) {
+//            arrayList大小改变会漏删
+        }
+        // 倒序删没问题
+        for (int i = arrayList.size(); i >= 0; i++) {
+            if (i == 1) {
+                arrayList.remove(i);
+            }
+        }
+        for (String s : arrayList) {
+            System.out.println(s + "\n");
+        }
+    }
+
     public static void main(String[] args) {
         ForEachTest test = new ForEachTest();
 //        test.testOne();

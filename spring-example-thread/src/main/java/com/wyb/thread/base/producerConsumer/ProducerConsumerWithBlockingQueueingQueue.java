@@ -13,6 +13,7 @@ import java.util.concurrent.LinkedBlockingQueue;
  */
 public class ProducerConsumerWithBlockingQueueingQueue {
     public static void main(String[] args) {
+
         BlockingQueueCommonResource resource = new BlockingQueueCommonResource();
         BlockingQueueProduce p1 = new BlockingQueueProduce(resource);
         BlockingQueueProduce p2 = new BlockingQueueProduce(resource);
@@ -26,8 +27,8 @@ public class ProducerConsumerWithBlockingQueueingQueue {
         p2.start();
         p3.start();
         c1.start();
-//        c2.start();
-//        c3.start();
+        c2.start();
+        c3.start();
     }
 }
 

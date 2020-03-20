@@ -18,11 +18,11 @@ public class ProducerConsumerWithWaitNotify  {
         Consume c3 = new Consume(resource);
 
         p1.start();
-//        p2.start();
-//        p3.start();
+        p2.start();
+        p3.start();
         c1.start();
-//        c2.start();
-//        c3.start();
+        c2.start();
+        c3.start();
     }
 
 }

@@ -51,11 +51,11 @@ class LockCommonResource {
             if (num < maxNum) {
                 num++;
                 System.out.println(Thread.currentThread().getName() + "生产一个资源，当前资源池有" + num + "个");
-                consumeCondition.signalAll();//通知消费者消费资源
+                consumeCondition.signalAll();//唤醒消费者等待线程
             } else {
                 try {
                     System.out.println("生产者" + Thread.currentThread().getName() + "线程进入等待状态");
-                    consumeCondition.await();//生产者线程进入等待池
+                    produceCondition.await();//生产者线程进入等待池
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
