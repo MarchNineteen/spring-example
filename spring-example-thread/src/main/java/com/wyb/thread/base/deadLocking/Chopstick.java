@@ -28,7 +28,7 @@ public class Chopstick {
     public synchronized void drop() {
         //当持有筷子的任务drop时，taken赋值false，在该筷子对象的taken()上等待的任务就可以获得该筷子
         taken = false;
-        taken.notifyAll();
+        notifyAll();
     }
 
 }
