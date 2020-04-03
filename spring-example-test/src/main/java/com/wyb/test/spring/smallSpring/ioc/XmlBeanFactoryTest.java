@@ -11,11 +11,11 @@ public class XmlBeanFactoryTest {
     public static void main(String[] args) throws Exception {
 
         System.out.println("--------- IOC test ----------");
-        String location = XmlBeanFactoryTest.class.getClassLoader().getResource("miniSpring.xml").getFile();
+        String location = XmlBeanFactoryTest.class.getClassLoader().getResource("smallSpring.xml").getFile();
 
         XmlBeanFactory bf = new XmlBeanFactory(location);
-        MiniBean miniBean = (MiniBean) bf.getBean("miniBean");
-//        System.out.println(miniBean);
+        MiniBean miniBean = (MiniBean) bf.getBean("miniBean1");
+        System.out.println(miniBean.toString());
 //        MiniBean miniBean1 = (MiniBean) bf.getBean("miniBean1");
 //        System.out.println(miniBean1);
     }

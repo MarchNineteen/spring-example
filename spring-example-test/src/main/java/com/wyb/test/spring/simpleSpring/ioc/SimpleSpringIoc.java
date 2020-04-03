@@ -25,7 +25,7 @@ public class SimpleSpringIoc {
 
 
     public static void main(String[] args) throws Exception {
-        String url = Objects.requireNonNull(SimpleSpringIoc.class.getClassLoader().getResource("miniSpring.xml")).getFile();
+        String url = Objects.requireNonNull(SimpleSpringIoc.class.getClassLoader().getResource("smallSpring.xml")).getFile();
         SimpleSpringIoc ioc = new SimpleSpringIoc(url);
         MiniBean miniBean = (MiniBean) ioc.getBean("miniBean");
         System.out.println(miniBean.getName());
