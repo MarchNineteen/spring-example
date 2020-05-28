@@ -32,10 +32,17 @@ public class RedisMqTests {
             System.out.println("获取第" + i + "个用户，名字是" + userDo.getUsername());
         }
     }
+//
+//    @Test
+//    public void testDelayMq() {
+//        redisService.("channel 1" , "msg 1");
+//    }
 
     @Test
     public void testMqPublishAndSubscribe() {
         redisService.publish("channel 1" , "msg 1");
     }
+
+
 
 }

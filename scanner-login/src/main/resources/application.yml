@@ -1,0 +1,33 @@
+server:
+  port: 8080
+
+spring:
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    lettuce:
+      pool:
+        max-idle: 20
+        max-wait:
+        min-idle: 1
+        max-active: 20
+
+  freemarker:
+    cache: false
+    charset: UTF-8
+    check-template-location: true
+    content-type: text/html
+    expose-request-attributes: true
+    expose-session-attributes: true
+    expose-spring-macro-helpers: true
+    request-context-attribute: request
+    #default-encoding: UTF-8
+    settings.template_update_delay: 0
+    settings.number_format: 0.##########
+    settings.datetime_format: yyyy-MM-dd HH:mm:ss
+    settings.classic_compatible: true
+    settings.template_exception_handler: ignore
+    suffix: .ftl
+    templateEncoding: UTF-8
+    templateLoaderPath: classpath:/ftl/
+

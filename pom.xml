@@ -26,8 +26,10 @@
     <module>spring-example-thread</module>
     <module>spring-example-timer</module>
     <module>spring-example-vue</module>
+    <module>spring-example-vue-upload</module>
     <module>spring-example-es</module>
-    <module>vue-upload</module>
+    <module>scanner-login</module>
+    <module>easy-rpc</module>
   </modules>
 
   <properties>

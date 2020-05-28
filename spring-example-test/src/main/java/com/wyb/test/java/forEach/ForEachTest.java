@@ -90,11 +90,18 @@ public class ForEachTest {
         }
     }
 
+    public void correct3Remove() {
+        arrayList.removeIf(x -> "1".equals(x) || "2".equals(x));
+    }
+
     public static void main(String[] args) {
         ForEachTest test = new ForEachTest();
 //        test.testOne();
 //        test.testTwo();
-        test.testThree();
+//        test.testThree();
 //        test.correctRemove();
+        test.testThree();
+        test.correct3Remove();
+        test.testThree();
     }
 }
