@@ -1,5 +1,7 @@
 package com.wyb.test.java.map;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -19,36 +21,44 @@ public class MapTest {
      Set<Map.Entry<K,V>> entrySet() //返回此映射中包含的映射关系的 Set 视图。 Map.Entry表示映射关系。entrySet()：迭代后可以e.getKey()，e.getValue()取key和value。返回的是Entry接口 。
      * @param args
      */
-    public static void main(String[] args) {
-        Map<String,String> map = new HashMap<>();
-        for(int i =0;i<10;i++){
-            map.put(String.valueOf(i),"value"+i);
-        }
-        //第一种遍历 map
-        System.out.println("通过Map.keySet遍历key和value：");
-        for (String key:map.keySet()){
-            System.out.println("key= "+ key + " and value= " + map.get(key));
+    public static void main(String[] args) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        HashMap<Integer, Integer> map = new HashMap<>(100);
+        for (int i = 0; i < 100; i++) {
+            map.put(i, i);
+            Method method = map.getClass().getDeclaredMethod("capacity");
+            method.setAccessible(true);
+            System.out.println("map大小:" + method.invoke(map));
         }
 
-        //第二种
-        System.out.println("通过Map.entrySet使用iterator遍历key和value：");
-        Iterator<Map.Entry<String, String>> iterator = map.entrySet().iterator();
-//        Map.Entry<String, String> entry1 = map.entrySet();
-        while (iterator.hasNext()){
-            Map.Entry<String, String> entry = iterator.next();
-            System.out.println("key= " + entry.getKey() + " and value= " + entry.getValue());
-        }
-
-        //第三种：推荐，尤其是容量大时
-        System.out.println("通过Map.entrySet遍历key和value");
-        for (Map.Entry<String, String> entry : map.entrySet()) {
-            System.out.println("key= " + entry.getKey() + " and value= " + entry.getValue());
-        }
-
-        //第四种
-        System.out.println("通过Map.values()遍历所有的value，但不能遍历key");
-        for (String v : map.values()) {
-            System.out.println("value= " + v);
-        }
+//        Map<String,String> map = new HashMap<>();
+//        for(int i =0;i<10;i++){
+//            map.put(String.valueOf(i),"value"+i);
+//        }
+//        //第一种遍历 map
+//        System.out.println("通过Map.keySet遍历key和value：");
+//        for (String key:map.keySet()){
+//            System.out.println("key= "+ key + " and value= " + map.get(key));
+//        }
+//
+//        //第二种
+//        System.out.println("通过Map.entrySet使用iterator遍历key和value：");
+//        Iterator<Map.Entry<String, String>> iterator = map.entrySet().iterator();
+////        Map.Entry<String, String> entry1 = map.entrySet();
+//        while (iterator.hasNext()){
+//            Map.Entry<String, String> entry = iterator.next();
+//            System.out.println("key= " + entry.getKey() + " and value= " + entry.getValue());
+//        }
+//
+//        //第三种：推荐，尤其是容量大时
+//        System.out.println("通过Map.entrySet遍历key和value");
+//        for (Map.Entry<String, String> entry : map.entrySet()) {
+//            System.out.println("key= " + entry.getKey() + " and value= " + entry.getValue());
+//        }
+//
+//        //第四种
+//        System.out.println("通过Map.values()遍历所有的value，但不能遍历key");
+//        for (String v : map.values()) {
+//            System.out.println("value= " + v);
+//        }
     }
 }

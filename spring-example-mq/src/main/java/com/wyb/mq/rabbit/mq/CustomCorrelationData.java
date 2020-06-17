@@ -1,13 +1,24 @@
 package com.wyb.mq.rabbit.mq;
 
+import lombok.Data;
+import org.slf4j.MDC;
 import org.springframework.amqp.rabbit.support.CorrelationData;
+
+import java.util.Map;
 
 /**
  * 发送消息的相关数据 扩展
  *
  * @author Kunzite
  */
+@Data
 public class CustomCorrelationData extends CorrelationData {
+
+    /**
+     * MDC容器
+     * 获取父线程MDC中的内容，做日志链路
+     */
+    private Map<String, String> mdcContainer = MDC.getCopyOfContextMap();
 
     /**
      * 消息体
@@ -41,37 +52,4 @@ public class CustomCorrelationData extends CorrelationData {
         this(id);
         this.message = data;
     }
-
-    public Object getMessage() {
-        return message;
-    }
-
-    public void setMessage(Object message) {
-        this.message = message;
-    }
-
-    public int getRetryCount() {
-        return retryCount;
-    }
-
-    public void setRetryCount(int retryCount) {
-        this.retryCount = retryCount;
-    }
-
-    public String getExchange() {
-        return exchange;
-    }
-
-    public void setExchange(String exchange) {
-        this.exchange = exchange;
-    }
-
-    public String getRoutingKey() {
-        return routingKey;
-    }
-
-    public void setRoutingKey(String routingKey) {
-        this.routingKey = routingKey;
-    }
-
 }

@@ -27,6 +27,8 @@ public class RabbitConfig {
      */
     @Bean
     public RabbitAdmin rabbitAdmin(ConnectionFactory connectionFactory){
+        connectionFactory.addConnectionListener(new RabbitMQConnectionListener());
+
         // 生成服务端
         RabbitAdmin rabbitAdmin = new RabbitAdmin(connectionFactory);
 

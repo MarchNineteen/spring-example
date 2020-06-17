@@ -30,12 +30,12 @@ public class RabbitmqController {
     @ResponseBody
     public Object sendMsg(String name) {
         SendMessage sendMessage = new SendMessage();
-        sendMessage.setId(1);
+        sendMessage.setId("1");
         sendMessage.setAge(20);
         sendMessage.setName(name);
 
         rabbitSender.sendMessage(RabbitConstants.MQ_EXCHANGE_SEND_AWARD, RabbitConstants.MQ_ROUTING_KEY_SEND_COUPON, sendMessage);
-        return "发送成";
+        return "发送成功";
     }
 
 }
