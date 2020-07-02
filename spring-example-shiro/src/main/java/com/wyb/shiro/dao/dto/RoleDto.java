@@ -10,7 +10,6 @@ import org.springframework.beans.BeanUtils;
  * @author Kunzite
  */
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 public class RoleDto extends BaseDto{
 
@@ -25,6 +24,9 @@ public class RoleDto extends BaseDto{
      * 描述
      */
     private String description;
+
+    public RoleDto() {
+    }
 
     public RoleDto(RoleDto roleDto) {
         BeanUtils.copyProperties(roleDto, this);

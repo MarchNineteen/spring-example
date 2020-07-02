@@ -19,7 +19,7 @@ public class LogAspect {
      * @param joinPoint
      * @param ex
      */
-    @AfterThrowing(throwing = "ex", pointcut = "execution(* com.wyb.upload.controller.*.*.*(..)))")
+    @AfterThrowing(throwing = "ex", pointcut = "execution(* com.wyb.vue.upload.controller.*.*.*(..)))")
     public void logPoint(JoinPoint joinPoint, Throwable ex) {
         logToFile(joinPoint,ex);
     }

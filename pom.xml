@@ -48,6 +48,18 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter</artifactId>
                 <version>${spring.boot.verion}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-starter-logging</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-log4j2</artifactId>
+                <version>${spring.boot.verion}</version>
             </dependency>
 
             <dependency>
@@ -56,11 +68,6 @@
                 <version>${spring.boot.verion}</version>
             </dependency>
 
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-log4j2</artifactId>
-                <version>${spring.boot.verion}</version>
-            </dependency>
 
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -133,9 +140,8 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context-support</artifactId>
-                <version>4.3.14.RELEASE</version>
+                <version>5.0.5.RELEASE</version>
             </dependency>
-
 
             <!--mybatis-->
             <dependency>
@@ -189,14 +195,13 @@
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>1.16.22</version>
-                <optional>true</optional>
             </dependency>
 
             <!--quartz整合-->
             <dependency>
                 <groupId>org.quartz-scheduler</groupId>
                 <artifactId>quartz</artifactId>
-                <version>2.3.0</version>
+                <version>2.3.2</version>
                 <exclusions>
                     <exclusion>
                         <artifactId>slf4j-api</artifactId>
@@ -242,17 +247,17 @@
             </dependency>
             <!--swagger end-->
 
-            <dependency>
-                <groupId>de.codecentric</groupId>
-                <artifactId>spring-boot-admin-starter-server</artifactId>
-                <version>2.0.2</version>
-            </dependency>
+            <!--<dependency>-->
+                <!--<groupId>de.codecentric</groupId>-->
+                <!--<artifactId>spring-boot-admin-starter-server</artifactId>-->
+                <!--<version>1.5.7</version>-->
+            <!--</dependency>-->
 
-            <dependency>
-                <groupId>de.codecentric</groupId>
-                <artifactId>spring-boot-admin-starter-client</artifactId>
-                <version>2.0.2</version>
-            </dependency>
+            <!--<dependency>-->
+                <!--<groupId>de.codecentric</groupId>-->
+                <!--<artifactId>spring-boot-admin-starter-client</artifactId>-->
+                <!--<version>1.5.7</version>-->
+            <!--</dependency>-->
 
             <dependency>
                 <groupId>joda-time</groupId>

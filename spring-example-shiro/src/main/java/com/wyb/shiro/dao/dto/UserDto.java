@@ -13,7 +13,6 @@ import java.util.List;
  * @author Kunzite
  */
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 public class UserDto extends BaseDto {
 
@@ -56,5 +55,8 @@ public class UserDto extends BaseDto {
 
     public UserDto(UserDo userDo) {
         BeanUtils.copyProperties(userDo, this);
+    }
+
+    public UserDto() {
     }
 }
