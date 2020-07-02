@@ -8,7 +8,7 @@
     <!--导入属性配置 -->
     <!--<properties resource="\conf\generator.properties" />-->
     <!-- 数据库驱动 -->
-    <classPathEntry location="C:\Users\user\.m2\repository\mysql\mysql-connector-java\5.1.44\mysql-connector-java-5.1.44.jar" />
+    <classPathEntry location="C:\Users\user\.m2\repository\mysql\mysql-connector-java\8.0.20\mysql-connector-java-8.0.20.jar" />
     <context id="DB2Tables" targetRuntime="MyBatis3Simple" defaultModelType="flat">
         <!-- 这里引入扩展插件 -->
         <!--<plugin type="com.wyb.core.plugin.pagination.PaginationPlugin"/>-->
@@ -26,7 +26,7 @@
 
         <!--数据库链接URL，用户名、密码 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://127.0.0.1:3306/springboot?zeroDateTimeBehavior=convertToNull&amp;characterEncoding=utf-8&amp;allowMultiQueries=true"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/springboot?zeroDateTimeBehavior=convertToNull&amp;characterEncoding=utf-8&amp;allowMultiQueries=true&amp;serverTimezone=GMT%2B8"
                         userId="root"
                         password="123456">
         </jdbcConnection>

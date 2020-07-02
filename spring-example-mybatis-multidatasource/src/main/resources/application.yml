@@ -4,13 +4,13 @@ server:
 spring:
   datasource:
     test1:
-      url: jdbc:mysql://127.0.0.1:3306/springboot?characterEncoding=utf8&useSSL=false
-      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://127.0.0.1:3306/springboot?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
+      driver-class-name: com.mysql.cj.jdbc.Driver
       username: root
       password: 123456
     test2:
-      url: jdbc:mysql://127.0.0.1:3306/test1?characterEncoding=utf8&useSSL=false
-      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://127.0.0.1:3306/test1?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
+      driver-class-name: com.mysql.cj.jdbc.Driver
       username: root
       password: 123456
 

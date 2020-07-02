@@ -4,8 +4,8 @@ server:
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://111.231.85.51:3306/shiro?characterEncoding=utf8&useSSL=false
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://111.231.85.51:3306/shiro?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
 #    url: jdbc:mysql://127.0.0.1:3306/shiro?characterEncoding=utf8&useSSL=false
     username: shiro
     password: shiroPwd

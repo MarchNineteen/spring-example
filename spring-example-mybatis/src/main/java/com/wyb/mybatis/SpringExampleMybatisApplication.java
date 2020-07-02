@@ -7,7 +7,7 @@ import tk.mybatis.spring.annotation.MapperScan;
 
 @SpringBootApplication
 @MapperScan(basePackages = "com.wyb.mybatis.dao.mapper")
-@EnableAdminServer
+//@EnableAdminServer
 public class SpringExampleMybatisApplication {
 
 	public static void main(String[] args) {

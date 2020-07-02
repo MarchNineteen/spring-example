@@ -24,10 +24,14 @@ public class MapTest {
     public static void main(String[] args) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         HashMap<Integer, Integer> map = new HashMap<>(100);
         for (int i = 0; i < 100; i++) {
-            map.put(i, i);
             Method method = map.getClass().getDeclaredMethod("capacity");
             method.setAccessible(true);
-            System.out.println("map大小:" + method.invoke(map));
+            System.out.println("put 前 map大小:" + method.invoke(map));
+
+            map.put(i, i);
+            Method method1 = map.getClass().getDeclaredMethod("capacity");
+            method1.setAccessible(true);
+            System.out.println("map大小:" + method1.invoke(map));
         }
 
 //        Map<String,String> map = new HashMap<>();
