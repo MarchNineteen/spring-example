@@ -1,13 +1,15 @@
-package com.wyb.vue.upload;
+package com.wyb.vue;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class UploadApplication {
+@MapperScan("com.wyb.vue.repository")
+public class VueApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(UploadApplication.class, args);
+        SpringApplication.run(VueApplication.class, args);
     }
 
 }

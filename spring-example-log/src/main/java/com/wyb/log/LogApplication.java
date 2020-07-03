@@ -10,27 +10,22 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import java.io.IOException;
-
 
 @SpringBootApplication
-public class SpringExampleLogApplication {
+public class LogApplication {
 
 //    private static Logger jdkLogger = Logger.getLogger("SpringExampleLogApplication.class");
 //    log4j
 //    private static Logger log4jLogger = LogManager.getLogger(SpringExampleLogApplication.class);
 //    log4j2
-    private static Logger log4j2Logger = LogManager.getLogger(SpringExampleLogApplication.class);
+    private static Logger log4j2Logger = LogManager.getLogger(LogApplication.class);
 //    logback
 //    private static Logger logbackLogger = LoggerFactory.getLogger(SpringExampleLogApplication.class);
 //    jcl
 //    private static Log jclLogger = LogFactory.getLog(SpringExampleLogApplication.class);
 
     public static void main(String[] args) {
-        ConfigurableApplicationContext context = SpringApplication.run(SpringExampleLogApplication.class, args);
+        ConfigurableApplicationContext context = SpringApplication.run(LogApplication.class, args);
 //        jdkLogger.info("jdk log ");
 //        log4jLogger.info("log4j log ");
         log4j2Logger.info("log4j2 log ", "11");

@@ -15,7 +15,7 @@ import javax.annotation.Resource;
 @SpringBootTest
 //@MybatisTest
 //@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-public class SpringExampleAopApplicationTests {
+public class AopApplicationTests {
 
 	@Qualifier(value = "staticProxyUserServiceImpl")
 	@Resource

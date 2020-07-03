@@ -26,7 +26,7 @@ public class WebMVCConfig extends WebMvcConfigurerAdapter {
 
 ### springboot Admin-UI 
 
-> 官方文档配置基于springboot2.x  http://codecentric.github.io/spring-boot-admin/2.0.2/3
+> 官方文档配置基于springboot2.x  http://codecentric.github.io/spring-boot-admin/2.0.2
 
 ### 配置文件切换
 

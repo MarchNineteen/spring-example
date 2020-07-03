@@ -16,9 +16,9 @@ import tk.mybatis.spring.annotation.MapperScan;
 @EnableTransactionManagement
 @MapperScan(basePackages = "com.wyb.business.dao.mapper")
 @ImportResource({"classpath*:spring/spring-mybatis-*.xml"})
-public class SpringExampleBusinessApplication {
+public class BusinessApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringExampleBusinessApplication.class, args);
+        SpringApplication.run(BusinessApplication.class, args);
     }
 }

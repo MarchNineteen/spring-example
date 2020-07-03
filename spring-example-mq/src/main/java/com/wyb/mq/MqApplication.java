@@ -1,12 +1,12 @@
-package com.wyb.thread;
+package com.wyb.mq;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringExampleThreadApplication {
+public class MqApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringExampleThreadApplication.class, args);
+		SpringApplication.run(MqApplication.class, args);
 	}
 }

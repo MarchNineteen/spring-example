@@ -15,7 +15,7 @@ import java.util.Date;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class SpringExampleMybatisApplicationTests {
+public class MybatisApplicationTests {
 
     @Resource
     UserService userService;

@@ -8,9 +8,9 @@ import tk.mybatis.spring.annotation.MapperScan;
 @EnableCaching
 @SpringBootApplication
 @MapperScan(basePackages = "com.wyb.shiro.dao.mapper")
-public class SpringExampleShiroApplication {
+public class ShiroApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringExampleShiroApplication.class, args);
+		SpringApplication.run(ShiroApplication.class, args);
 	}
 }

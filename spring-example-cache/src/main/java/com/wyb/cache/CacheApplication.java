@@ -13,9 +13,9 @@ import tk.mybatis.spring.annotation.MapperScan;
 @SpringBootApplication
 @MapperScan(basePackages = "com.wyb.cache.dao.mapper")
 @ImportResource({"classpath*:spring/spring-redis.xml"})
-public class SpringExampleCacheApplication {
+public class CacheApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringExampleCacheApplication.class, args);
+		SpringApplication.run(CacheApplication.class, args);
 	}
 }

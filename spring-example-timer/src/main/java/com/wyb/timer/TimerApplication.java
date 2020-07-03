@@ -9,9 +9,9 @@ import tk.mybatis.spring.annotation.MapperScan;
 @MapperScan(basePackages = "com.wyb.timer.dao.mapper")
 @ImportResource({"classpath*:spring/spring-*.xml"})
 //@EnableScheduling
-public class SpringExampleTimerApplication {
+public class TimerApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringExampleTimerApplication.class, args);
+        SpringApplication.run(TimerApplication.class, args);
     }
 }

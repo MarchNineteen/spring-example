@@ -8,9 +8,9 @@ import tk.mybatis.spring.annotation.MapperScan;
 @SpringBootApplication
 @MapperScan(basePackages = "com.wyb.aop.dao.mapper")
 @ImportResource({"classpath*:spring/spring-*.xml"})
-public class SpringExampleAopApplication {
+public class AopApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringExampleAopApplication.class, args);
+        SpringApplication.run(AopApplication.class, args);
     }
 }

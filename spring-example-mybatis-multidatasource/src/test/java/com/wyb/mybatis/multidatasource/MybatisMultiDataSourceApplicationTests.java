@@ -19,7 +19,7 @@ import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class SpringExampleMybatisMultidatasourceApplicationTests {
+public class MybatisMultiDataSourceApplicationTests {
 
     @Autowired
     private User1Mapper user1Mapper;

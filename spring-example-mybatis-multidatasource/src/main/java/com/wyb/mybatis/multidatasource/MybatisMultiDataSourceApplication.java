@@ -1,13 +1,13 @@
-package com.wyb.es;
+package com.wyb.mybatis.multidatasource;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringExampleEsApplication {
+public class MybatisMultiDataSourceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringExampleEsApplication.class, args);
+        SpringApplication.run(MybatisMultiDataSourceApplication.class, args);
     }
 
 }

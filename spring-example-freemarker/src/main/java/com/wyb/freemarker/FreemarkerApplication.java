@@ -6,9 +6,9 @@ import tk.mybatis.spring.annotation.MapperScan;
 
 @SpringBootApplication
 @MapperScan(basePackages = "com.wyb.freemarker.dao.mapper")
-public class SpringExampleFreemarkerApplication {
+public class FreemarkerApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringExampleFreemarkerApplication.class, args);
+        SpringApplication.run(FreemarkerApplication.class, args);
     }
 }
