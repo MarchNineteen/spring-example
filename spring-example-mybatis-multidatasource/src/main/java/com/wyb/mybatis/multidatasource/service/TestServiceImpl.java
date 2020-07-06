@@ -21,21 +21,28 @@ public class TestServiceImpl {
     @Resource
     User2Mapper user2Mapper;
 
-    @Transactional(transactionManager = "xatx", propagation = Propagation.REQUIRED, rollbackFor = { java.lang.RuntimeException.class })
+    /**
+     * 老版本必须指定事务
+     * 由于使用jta+atomikos解决分布式事务，所以此处不必再指定事务
+     *
+     * @param userDo
+     */
+//    @Transactional(transactionManager = "xatx", propagation = Propagation.REQUIRED, rollbackFor = {java.lang.RuntimeException.class})
+    @Transactional
     public void testTransaction(UserDo userDo) {
         user2Mapper.insert(userDo);
 
         user1Mapper.insert(userDo);
 
-        System.out.println(1/0);
+        System.out.println(1 / 0);
         System.out.println("分布式事务同步成功");
     }
 
-//    @Transactional(transactionManager = "test2TransactionManager", propagation = Propagation.REQUIRED, rollbackFor = { java.lang.RuntimeException.class })
+    //    @Transactional(transactionManager = "test2TransactionManager", propagation = Propagation.REQUIRED, rollbackFor = { java.lang.RuntimeException.class })
     public void testCommonTransaction(UserDo userDo) {
         user2Mapper.insert(userDo);
 
-        System.out.println(1/0);
+        System.out.println(1 / 0);
         System.out.println("普通事务同步成功");
     }
 }

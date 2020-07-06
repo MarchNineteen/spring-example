@@ -132,6 +132,12 @@
             </dependency>
 
             <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-jta-atomikos</artifactId>
+                <version>${spring.boot.verion}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context-support</artifactId>
                 <version>5.0.5.RELEASE</version>

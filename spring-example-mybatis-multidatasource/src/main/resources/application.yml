@@ -4,19 +4,52 @@ server:
 spring:
   datasource:
     test1:
+      #      jdbc-url,url,jdbcurl哪个合适用哪个
       url: jdbc:mysql://127.0.0.1:3306/springboot?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
+      #  下面是最新的mysql8版本推荐的驱动
       driver-class-name: com.mysql.cj.jdbc.Driver
+      type: com.alibaba.druid.pool.DruidDataSource
       username: root
       password: 123456
+      initial-size: 1
+      min-idle: 1
+      max-active: 20
+      test-on-borrow: true
+      #  下面是另外加的配置数据源的参数
+      minPoolSize: 3
+      maxPoolSize: 25
+      maxLifetime: 20000
+      borrowConnectionTimeout: 30
+      loginTimeout: 30
+      maintenanceInterval: 60
+      maxIdleTime: 60
+
     test2:
       url: jdbc:mysql://127.0.0.1:3306/test1?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
       driver-class-name: com.mysql.cj.jdbc.Driver
+      type: com.alibaba.druid.pool.DruidDataSource
       username: root
       password: 123456
+
+      minPoolSize: 3
+      maxPoolSize: 25
+      maxLifetime: 20000
+      borrowConnectionTimeout: 30
+      loginTimeout: 30
+      maintenanceInterval: 60
+      maxIdleTime: 60
+
 
 mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml
   type-aliases-package: com.wyb.mybatis.multidatasource.dao.model
 
+#设置静态资源路径，多个以逗号分隔
+spring.resources.static-locations: classpath:static/,file:static/
 
-
+# 日志配置
+logging:
+  level:
+    com.wyb: debug
+    org.springframework: WARN
+    org.spring.springboot.dao: debug
