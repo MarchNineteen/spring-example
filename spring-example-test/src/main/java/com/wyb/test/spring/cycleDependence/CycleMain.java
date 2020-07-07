@@ -9,6 +9,8 @@ public class CycleMain {
 
     public static void main(String[] args) {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(CycleConfig.class);
+        CdA cdA = (CdA) context.getBean("CdA");
+        System.out.println(cdA);
     }
 
 //    public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements SingletonBeanRegistry {

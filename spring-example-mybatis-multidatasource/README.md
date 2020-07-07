@@ -8,7 +8,9 @@
 
 ### 分布式事务开源框架
 
-采用jta-atomikos
+> https://www.cnblogs.com/coloz/p/10845058.html
+
+[采用jta-atomikos](https://github.com/ColoZhu/springbootmanyDatasource)
 
 ### 问题
 

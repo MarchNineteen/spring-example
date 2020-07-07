@@ -3,6 +3,7 @@ package com.wyb.mybatis.multidatasource.service;
 import com.wyb.mybatis.multidatasource.dao.mapper.test1.User1Mapper;
 import com.wyb.mybatis.multidatasource.dao.mapper.test2.User2Mapper;
 import com.wyb.mybatis.multidatasource.dao.model.UserDo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,6 +13,7 @@ import javax.annotation.Resource;
 /**
  * @author Marcher丶
  */
+@Slf4j
 @Service
 public class TestServiceImpl {
 
@@ -34,8 +36,8 @@ public class TestServiceImpl {
 
         user1Mapper.insert(userDo);
 
-        System.out.println(1 / 0);
-        System.out.println("分布式事务同步成功");
+//        System.out.println(1 / 0);
+        log.error("分布式事务同步成功");
     }
 
     //    @Transactional(transactionManager = "test2TransactionManager", propagation = Propagation.REQUIRED, rollbackFor = { java.lang.RuntimeException.class })

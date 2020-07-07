@@ -7,6 +7,7 @@
     <Property name="logging.file.name">${logging.file.path}/${project.name}.log</Property>
     <Property name="logging.file.warn.name">${logging.file.path}/${project.name}-warn.log</Property>
     <Property name="logging.file.error.name">${logging.file.path}/${project.name}-error.log</Property>
+    <!--VM options:-Dlog4j.skipJansi=false  %highlight-->
     <Property name="layout">%d %p [%t] %c{10}:%M:%L %m%n</Property>
   </Properties>
 
