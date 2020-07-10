@@ -4,6 +4,7 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
+    <classPathEntry location="C:\Users\user\.m2\repository\mysql\mysql-connector-java\8.0.20\mysql-connector-java-8.0.20.jar" />
     <context id="DB2Tables" targetRuntime="MyBatis3Simple" defaultModelType="flat">
         <property name="javaFileEncoding" value="UTF-8"/>
         <plugin type="com.github.dongfg.plugin.LombokPlugin" />
@@ -21,8 +22,8 @@
         </commentGenerator>
 
         <!--数据库链接URL，用户名、密码 -->
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://111.231.85.51:3306/shiro?zeroDateTimeBehavior=convertToNull&amp;characterEncoding=utf8&amp;allowMultiQueries=true&amp;useSSL=false"
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql://111.231.85.51:3306/shiro?zeroDateTimeBehavior=convertToNull&amp;characterEncoding=utf8&amp;allowMultiQueries=true&amp;useSSL=false&amp;serverTimezone=GMT%2B8"
                         userId="shiro"
                         password="shiroPwd">
         </jdbcConnection>

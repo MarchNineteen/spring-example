@@ -46,6 +46,5 @@ public class CyclicBarrierDemo {
         } catch (Exception e) {
             System.out.println("-----CyclicBarrierException------");
         }
-        System.out.println("threadnum:" + threadnum + "is finish");
     }
 }

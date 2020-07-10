@@ -3,8 +3,6 @@ package com.wyb.test.java.map;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 
 /**
  * @author Kunzite
@@ -14,11 +12,12 @@ public class MapTest {
 
     /**
      * 在Map集合中
-     values():方法是获取集合中的所有的值----没有键，没有对应关系，
-     KeySet():
-     将Map中所有的键存入到set集合中。因为set具备迭代器。所有可以迭代方式取出所有的键，再根据get方法。获取每一个键对应的值。 keySet():迭代后只能通过get()取key
-     entrySet()：
-     Set<Map.Entry<K,V>> entrySet() //返回此映射中包含的映射关系的 Set 视图。 Map.Entry表示映射关系。entrySet()：迭代后可以e.getKey()，e.getValue()取key和value。返回的是Entry接口 。
+     * values():方法是获取集合中的所有的值----没有键，没有对应关系，
+     * KeySet():
+     * 将Map中所有的键存入到set集合中。因为set具备迭代器。所有可以迭代方式取出所有的键，再根据get方法。获取每一个键对应的值。 keySet():迭代后只能通过get()取key
+     * entrySet()：
+     * Set<Map.Entry<K,V>> entrySet() //返回此映射中包含的映射关系的 Set 视图。 Map.Entry表示映射关系。entrySet()：迭代后可以e.getKey()，e.getValue()取key和value。返回的是Entry接口 。
+     *
      * @param args
      */
     public static void main(String[] args) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
