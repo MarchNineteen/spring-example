@@ -23,7 +23,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDo> listAll(int pageNum, int pageSize){
-        PageHelper.startPage(pageNum,pageSize);
-        return userDoMapper.selectAll();
+//        PageHelper.startPage(pageNum,pageSize);
+//        return userDoMapper.selectAll();
+        return null;
     }
 }

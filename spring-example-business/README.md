@@ -23,7 +23,9 @@
 
 > 参考：https://www.cnblogs.com/longshiyVip/p/5061547.html
 
-> 参考：https://mp.weixin.qq.com/s?__biz=MzU4NDQ4MzU5OA==&mid=2247483994&idx=1&sn=770af2a712c9a7efe2391bd23dddeea2&chksm=fd98543bcaefdd2d24f433f412e7046ebddf8791cbb0f45693192a6f6312ac1e1679aa783ad4#rd
+> 参考：https://github.com/Snailclimb/JavaGuide/blob/master/docs/system-design/framework/spring/spring-transaction.md
+
+### 并发一致性问题（）
 
 ### 事务隔离级别（定义了一个事务可能受其他并发事务影响的程度）
 
