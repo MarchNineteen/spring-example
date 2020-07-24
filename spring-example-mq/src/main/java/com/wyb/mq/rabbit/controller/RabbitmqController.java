@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,6 +36,19 @@ public class RabbitmqController {
         sendMessage.setName(name);
 
         rabbitSender.sendMessage(RabbitConstants.MQ_EXCHANGE_SEND_AWARD, RabbitConstants.MQ_ROUTING_KEY_SEND_COUPON, sendMessage);
+        return "发送成功";
+    }
+
+    @ApiOperation(value = "发送延时消息", notes = "内容", response = Object.class)
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "name", value = "用户名称", required = false, dataType = "String", paramType = "query")})
+    @PostMapping(value = "sendDelayMsg", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    public Object sendDelayMsg(String name) {
+        SendMessage sendMessage = new SendMessage();
+        sendMessage.setName(StringUtils.isEmpty(name) ? "消息将在5s后发送到延迟队列" : name);
+
+        rabbitSender.sendMessage(RabbitConstants.MQ_EXCHANGE_DELAY_QUEUE, RabbitConstants.MQ_ROUTING_KEY_DELAY_QUEUE, sendMessage);
         return "发送成功";
     }
 

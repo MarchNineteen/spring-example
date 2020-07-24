@@ -49,6 +49,13 @@ public class RabbitConfig {
         rabbitAdmin.declareBinding(BindingBuilder.bind(couponQueue).to(exchange).with(RabbitConstants.MQ_ROUTING_KEY_SEND_COUPON));
 
 
+        // 声明延时队列（Direct类型的exchange）
+        Queue delayQueue = queue(RabbitConstants.QUEUE_NAME_DELAY_QUEUE);
+        // 延时队列交换机
+        DirectExchange delayExchange = new DirectExchange(RabbitConstants.MQ_EXCHANGE_DELAY_QUEUE);
+        rabbitAdmin.declareQueue(delayQueue);
+        rabbitAdmin.declareExchange(delayExchange);
+        rabbitAdmin.declareBinding(BindingBuilder.bind(delayQueue).to(delayExchange).with(RabbitConstants.MQ_ROUTING_KEY_DELAY_QUEUE));
 
         return rabbitAdmin;
     }

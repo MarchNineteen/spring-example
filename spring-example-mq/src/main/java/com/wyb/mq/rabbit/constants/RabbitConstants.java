@@ -23,6 +23,21 @@ public final class RabbitConstants {
     public static final String MQ_ROUTING_KEY_DEAD_QUEUE = "test-routing-key-dead-queue";
 
     /**
+     * 延时队列EXCHANGE名称
+     */
+    public static final String MQ_EXCHANGE_DELAY_QUEUE = "test-delay-queue-exchange";
+
+    /**
+     * 延时队列名称
+     */
+    public static final String QUEUE_NAME_DELAY_QUEUE = "test-delay-queue";
+
+    /**
+     * 延时队列路由名称
+     */
+    public static final String MQ_ROUTING_KEY_DELAY_QUEUE = "test-routing-key-delay-queue";
+
+    /**
      * 发放奖励EXCHANGE名称
      */
     public static final String MQ_EXCHANGE_SEND_AWARD = "test-send-award-exchange";
