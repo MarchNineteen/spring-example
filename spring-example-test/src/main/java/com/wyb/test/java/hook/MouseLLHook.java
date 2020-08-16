@@ -1,115 +1,115 @@
-package com.wyb.test.java.hook;
-
-import com.sun.jna.platform.win32.Kernel32;
-import com.sun.jna.platform.win32.User32;
-import com.sun.jna.platform.win32.WinDef.HMODULE;
-import com.sun.jna.platform.win32.WinUser;
-import com.sun.jna.platform.win32.WinUser.HHOOK;
-import com.sun.jna.platform.win32.WinUser.MSG;
-
-import java.awt.*;
-
-public class MouseLLHook {
-
-    // Êó±ê¹³×Óº¯ÊýÀïÅÐ¶Ï°´¼üÀàÐÍµÄ³£Êý
-    public static Point mousepoint;
-    public static MouseInfo mouseInfo = null;
-    static Color pixel = new Color(0, 0, 0);
-    static Integer R = 0, G = 0, B = 0;
-    static Integer X = 0, Y = 0;
-    public static final int WM_LBUTTONUP = 514;
-    public static final int WM_LBUTTONDBLCLK = 515;
-    public static final int WM_LBUTTONDOWN = 513;
-    public static final int WM_RBUTTONUP = 517;
-    public static final int WM_CLOSE = 16;
-    public static final int WM_RBUTTONDOWN = 516;
-    public static final int WM_MOUSEHWHEEL = 526;
-    public static final int WM_MOUSEWHEEL = 522;
-    public static final int WM_MOUSEMOVE = 512;
-    public static final int WM_DESTROY = 2;
-    public static final int SC_CLOSE = 0xF060;
-
-    static HHOOK mouseHHK, keyboardHHK, windowHHK;// Êó±ê¡¢¼üÅÌ¹³×ÓµÄ¾ä±ú
-    static LowLevelMouseProc mouseHook;// Êó±ê¹³×Óº¯Êý
-
-    // °²×°¹³×Ó
-    void setHook() {
-        HMODULE hMod = Kernel32.INSTANCE.GetModuleHandle(null); // Handle to a module. The value is the base address of
-        // the module.
-        mouseHHK = User32.INSTANCE.SetWindowsHookEx(WinUser.WH_MOUSE_LL, // °²×°ÀàÐÍµÄ¹³×Ó£¬WinUser.WH_MOUSE_LLÊÇ³£Á¿Öµ
-                mouseHook, hMod, 0);
-    }
-
-    // Ð¶ÔØ¹³×Ó
-    void unhook() {
-        User32.INSTANCE.UnhookWindowsHookEx(mouseHHK);
-    }
-
-    public void listener() {
-        // ¸Ãº¯Êý²ÎÊýµÄÒâË¼²Î¿¼£ºhttp://msdn.microsoft.com/en-us/library/windows/desktop/ms644986(v=vs.85).aspx
-        mouseHook = (nCode, wParam, lParam) -> { // wParam£ºÖ¸¶¨Êó±êÏûÏ¢µÄ±êÊ¶·û
-            // lParam£ºÖ¸ÏòMOUSEHOOKSTRUCT½á¹¹
-            switch (wParam.intValue()) { // ÀàNumberÖÐµÄintValue
-
-                // µ±¹â±êÒÆ¶¯Ê±£¬WM_MOUSEMOVEÏûÏ¢»á·¢²¼µ½´°¿Ú¡£Èç¹ûÎ´²¶»ñÊó±ê£¬Ôò»á½«ÏûÏ¢·¢²¼µ½°üº¬¹â±êµÄ´°¿Ú¡£·ñÔò£¬ÏûÏ¢½«·¢²¼µ½ÒÑ²¶»ñÊó±êµÄ´°¿Ú
-                // case WM_MOUSEMOVE:
-                // System.out.print("mouse moved:");
-                // colorFrame.getOutputTextTop().setText("mouse moved:");//setText(String text)£º¶¨Òå´Ë×é¼þ½«ÒªÏÔÊ¾µÄµ¥ÐÐÎÄ±¾
-                // break;
-                case WM_LBUTTONDBLCLK: // Êó±êË«»÷
-                    System.out.println("mouse left button double click");
-//                    colorFrame.getOutputTextTop().setText("mouse left button double click");
-                    break;
-                case WM_LBUTTONDOWN:
-                    System.out.println("mouse left button down");
-//                    colorFrame.getOutputTextTop().setText("mouse left button up");
-                    break;
-                case WM_LBUTTONUP: // µ±ÓÃ»§ÔÚ´°¿ÚµÄ¿Í»§¶ËÇøÓòÖÐÊÍ·ÅÊó±ê×ó¼üÊ±£¬»á·¢²¼WM_LBUTTONUPÏûÏ¢
-                    System.out.println("mouse left button up");
-//                    colorFrame.getOutputTextTop().setText("mouse left button up");
-                    break;
-                case WM_RBUTTONUP: // ÊÍ·ÅÓÒ¼ü
-                    System.out.println("mouse right button up:");
-//                    colorFrame.getOutputTextTop().setText("mouse right button up");
-                    break;
-                case WM_RBUTTONDOWN: // µ±ÓÃ»§ÔÚ´°¿ÚµÄ¿Í»§ÇøÓòÖÐ°´×¡Êó±êÓÒ¼üÊ±£¬»á·¢³öWM_RBUTTONDOWNÏûÏ¢
-                    System.out.println("mouse right button down:");
-//                    colorFrame.getOutputTextTop().setText("mouse right button down:");
-                    break;
-            }
-            // System.out.println("(" + lParam.pt.x + "," + lParam.pt.y + ")");
-            // colorFrame.getOutputTextButtom().setText("(" + lParam.pt.x + "," + lParam.pt.y + ")");
-            return User32.INSTANCE.CallNextHookEx(mouseHHK, nCode, wParam, lParam.getPointer());
-        };
-
-        setHook();
-
-        int result;
-        MSG msg = new MSG(); // public static class WinUser.MSG extends Structure
-        // MSG½á¹¹°üº¬À´×ÔÏß³ÌµÄÏûÏ¢¶ÓÁÐµÄÏûÏ¢ÐÅÏ¢
-        // ÏûÏ¢Ñ­»·
-        while ((result = User32.INSTANCE.GetMessage(msg, null, 0, 0)) != 0) { // msg ¾ßÓÐÏûÏ¢½á¹¹µÄµØÖ·
-            // Èç¹ûº¯Êý¼ìË÷µ½³ýWM_QUITÖ®ÍâµÄÏûÏ¢£¬Ôò·µ»ØÖµ²»ÎªÁã¡£Èç¹ûº¯Êý¼ìË÷WM_QUITÏûÏ¢£¬·µ»ØÖµÎªÁã
-            // Èç¹ûÓÐ´íÎó£¬·µ»ØÖµÎª-1¡£ÀýÈç£¬Èç¹û¡¾µÄhWnd¡¿ÊÇÎÞÐ§µÄ´°¿Ú¾ä±ú£¬Ôò¸Ãº¯Êý½«Ê§°Ü¡£
-            // WM_QUITÏûÏ¢Ö¸Ê¾ÖÕÖ¹Ó¦ÓÃ³ÌÐòµÄÇëÇó£¬²¢ÔÚÓ¦ÓÃ³ÌÐòµ÷ÓÃ{??989796010}º¯ÊýÊ±Éú³É¡£ËüÊ¹GetMessageº¯Êý·µ»ØÁã¡£
-            if (result == -1) {
-                System.err.println("error in GetMessage");
-                unhook();
-                break;
-            } else {
-                User32.INSTANCE.TranslateMessage(msg);// ½«ÐéÄâ¼üÏûÏ¢×ª»»Îª×Ö·ûÏûÏ¢.×Ö·ûÏûÏ¢±»¼ÄËÍµ½µ÷ÓÃÏß³ÌµÄÏûÏ¢¶ÓÁÐÀï£¬µ±ÏÂÒ»´ÎÏß³Ìµ÷ÓÃº¯ÊýGetMessage»òPeekMessageÊ±±»¶Á³ö¡£
-                // Èç¹ûÏûÏ¢±»×ª»»£¨¼´£¬×Ö·ûÏûÏ¢±»¼ÄËÍµ½µ÷ÓÃÏß³ÌµÄÏûÏ¢¶ÓÁÐÀï£©£¬·µ»Ø·ÇÁãÖµ¡£
-                // Èç¹ûÏûÏ¢ÊÇWM_kEYDOWN£¬WM_KEYUP WM_SYSKEYDOWN»òWM_SYSKEYUP£¬·µ»Ø·ÇÁãÖµ£¬²»¿¼ÂÇ×ª»»¡£Èç¹ûÏûÏ¢Ã»±»×ª»»£¨¼´£¬×Ö·ûÏûÏ¢Ã»±»¼ÄËÍµ½µ÷ÓÃÏß³ÌµÄÏûÏ¢¶ÓÁÐÀï£©£¬·µ»ØÖµÊÇÁã¡£
-                User32.INSTANCE.DispatchMessage(msg); // ¸Ãº¯Êýµ÷¶ÈÒ»¸öÏûÏ¢¸ø´°¿Ú³ÌÐò¡£¡£ËüÍ¨³£ÓÃÓÚµ÷¶ÈÓÉGetMessageº¯Êý¼ìË÷µ½µÄÏûÏ¢¡£
-                // ·µ»ØÖµÊÇ´°¿Ú³ÌÐò·µ»ØµÄÖµ¡£¾¡¹Ü·µ»ØÖµµÄº¬ÒåÒÀÀµÓÚ±»µ÷¶ÈµÄÏûÏ¢£¬µ«·µ»ØÖµÍ¨³£±»ºöÂÔ
-                System.out.println(msg);
-            }
-        }
-        unhook();
-    }
-
-    public static void main(String[] args) {
-        MouseLLHook hook = new MouseLLHook();
-        hook.listener();
-    }
-}
+//package com.wyb.test.java.hook;
+//
+//import com.sun.jna.platform.win32.Kernel32;
+//import com.sun.jna.platform.win32.User32;
+//import com.sun.jna.platform.win32.WinDef.HMODULE;
+//import com.sun.jna.platform.win32.WinUser;
+//import com.sun.jna.platform.win32.WinUser.HHOOK;
+//import com.sun.jna.platform.win32.WinUser.MSG;
+//
+//import java.awt.*;
+//
+//public class MouseLLHook {
+//
+//    // ï¿½ï¿½ê¹³ï¿½Óºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶Ï°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÍµÄ³ï¿½ï¿½ï¿½
+//    public static Point mousepoint;
+//    public static MouseInfo mouseInfo = null;
+//    static Color pixel = new Color(0, 0, 0);
+//    static Integer R = 0, G = 0, B = 0;
+//    static Integer X = 0, Y = 0;
+//    public static final int WM_LBUTTONUP = 514;
+//    public static final int WM_LBUTTONDBLCLK = 515;
+//    public static final int WM_LBUTTONDOWN = 513;
+//    public static final int WM_RBUTTONUP = 517;
+//    public static final int WM_CLOSE = 16;
+//    public static final int WM_RBUTTONDOWN = 516;
+//    public static final int WM_MOUSEHWHEEL = 526;
+//    public static final int WM_MOUSEWHEEL = 522;
+//    public static final int WM_MOUSEMOVE = 512;
+//    public static final int WM_DESTROY = 2;
+//    public static final int SC_CLOSE = 0xF060;
+//
+//    static HHOOK mouseHHK, keyboardHHK, windowHHK;// ï¿½ï¿½ê¡¢ï¿½ï¿½ï¿½Ì¹ï¿½ï¿½ÓµÄ¾ï¿½ï¿½
+//    static LowLevelMouseProc mouseHook;// ï¿½ï¿½ê¹³ï¿½Óºï¿½ï¿½ï¿½
+//
+//    // ï¿½ï¿½×°ï¿½ï¿½ï¿½ï¿½
+//    void setHook() {
+//        HMODULE hMod = Kernel32.INSTANCE.GetModuleHandle(null); // Handle to a module. The value is the base address of
+//        // the module.
+//        mouseHHK = User32.INSTANCE.SetWindowsHookEx(WinUser.WH_MOUSE_LL, // ï¿½ï¿½×°ï¿½ï¿½ï¿½ÍµÄ¹ï¿½ï¿½Ó£ï¿½WinUser.WH_MOUSE_LLï¿½Ç³ï¿½ï¿½ï¿½Öµ
+//                mouseHook, hMod, 0);
+//    }
+//
+//    // Ð¶ï¿½Ø¹ï¿½ï¿½ï¿½
+//    void unhook() {
+//        User32.INSTANCE.UnhookWindowsHookEx(mouseHHK);
+//    }
+//
+//    public void listener() {
+//        // ï¿½Ãºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë¼ï¿½Î¿ï¿½ï¿½ï¿½http://msdn.microsoft.com/en-us/library/windows/desktop/ms644986(v=vs.85).aspx
+//        mouseHook = (nCode, wParam, lParam) -> { // wParamï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½Ä±ï¿½Ê¶ï¿½ï¿½
+//            // lParamï¿½ï¿½Ö¸ï¿½ï¿½MOUSEHOOKSTRUCTï¿½á¹¹
+//            switch (wParam.intValue()) { // ï¿½ï¿½Numberï¿½Ðµï¿½intValue
+//
+//                // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½Ê±ï¿½ï¿½WM_MOUSEMOVEï¿½ï¿½Ï¢ï¿½á·¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú¡ï¿½ï¿½ï¿½ï¿½Î´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê£¬ï¿½ï¿½á½«ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä´ï¿½ï¿½Ú¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä´ï¿½ï¿½ï¿½
+//                // case WM_MOUSEMOVE:
+//                // System.out.print("mouse moved:");
+//                // colorFrame.getOutputTextTop().setText("mouse moved:");//setText(String text)ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½Ê¾ï¿½Äµï¿½ï¿½ï¿½ï¿½Ä±ï¿½
+//                // break;
+//                case WM_LBUTTONDBLCLK: // ï¿½ï¿½ï¿½Ë«ï¿½ï¿½
+//                    System.out.println("mouse left button double click");
+////                    colorFrame.getOutputTextTop().setText("mouse left button double click");
+//                    break;
+//                case WM_LBUTTONDOWN:
+//                    System.out.println("mouse left button down");
+////                    colorFrame.getOutputTextTop().setText("mouse left button up");
+//                    break;
+//                case WM_LBUTTONUP: // ï¿½ï¿½ï¿½Ã»ï¿½ï¿½Ú´ï¿½ï¿½ÚµÄ¿Í»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½á·¢ï¿½ï¿½WM_LBUTTONUPï¿½ï¿½Ï¢
+//                    System.out.println("mouse left button up");
+////                    colorFrame.getOutputTextTop().setText("mouse left button up");
+//                    break;
+//                case WM_RBUTTONUP: // ï¿½Í·ï¿½ï¿½Ò¼ï¿½
+//                    System.out.println("mouse right button up:");
+////                    colorFrame.getOutputTextTop().setText("mouse right button up");
+//                    break;
+//                case WM_RBUTTONDOWN: // ï¿½ï¿½ï¿½Ã»ï¿½ï¿½Ú´ï¿½ï¿½ÚµÄ¿Í»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð°ï¿½×¡ï¿½ï¿½ï¿½ï¿½Ò¼ï¿½Ê±ï¿½ï¿½ï¿½á·¢ï¿½ï¿½WM_RBUTTONDOWNï¿½ï¿½Ï¢
+//                    System.out.println("mouse right button down:");
+////                    colorFrame.getOutputTextTop().setText("mouse right button down:");
+//                    break;
+//            }
+//            // System.out.println("(" + lParam.pt.x + "," + lParam.pt.y + ")");
+//            // colorFrame.getOutputTextButtom().setText("(" + lParam.pt.x + "," + lParam.pt.y + ")");
+//            return User32.INSTANCE.CallNextHookEx(mouseHHK, nCode, wParam, lParam.getPointer());
+//        };
+//
+//        setHook();
+//
+//        int result;
+//        MSG msg = new MSG(); // public static class WinUser.MSG extends Structure
+//        // MSGï¿½á¹¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß³Ìµï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½Ï¢ï¿½ï¿½Ï¢
+//        // ï¿½ï¿½Ï¢Ñ­ï¿½ï¿½
+//        while ((result = User32.INSTANCE.GetMessage(msg, null, 0, 0)) != 0) { // msg ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½á¹¹ï¿½Äµï¿½Ö·
+//            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½WM_QUITÖ®ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ò·µ»ï¿½Öµï¿½ï¿½Îªï¿½ã¡£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½WM_QUITï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÖµÎªï¿½ï¿½
+//            // ï¿½ï¿½ï¿½ï¿½Ð´ï¿½ï¿½ó£¬·ï¿½ï¿½ï¿½ÖµÎª-1ï¿½ï¿½ï¿½ï¿½ï¿½ç£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½hWndï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð§ï¿½Ä´ï¿½ï¿½Ú¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ãºï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½Ü¡ï¿½
+//            // WM_QUITï¿½ï¿½Ï¢Ö¸Ê¾ï¿½ï¿½Ö¹Ó¦ï¿½Ã³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ó£¬²ï¿½ï¿½ï¿½Ó¦ï¿½Ã³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½{??989796010}ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½É¡ï¿½ï¿½ï¿½Ê¹GetMessageï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ã¡£
+//            if (result == -1) {
+//                System.err.println("error in GetMessage");
+//                unhook();
+//                break;
+//            } else {
+//                User32.INSTANCE.TranslateMessage(msg);// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢×ªï¿½ï¿½Îªï¿½Ö·ï¿½ï¿½ï¿½Ï¢.ï¿½Ö·ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½Íµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß³Ìµï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï£¬ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ß³Ìµï¿½ï¿½Ãºï¿½ï¿½ï¿½GetMessageï¿½ï¿½PeekMessageÊ±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//                // ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½Íµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß³Ìµï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï£©ï¿½ï¿½ï¿½ï¿½ï¿½Ø·ï¿½ï¿½ï¿½Öµï¿½ï¿½
+//                // ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½WM_kEYDOWNï¿½ï¿½WM_KEYUP WM_SYSKEYDOWNï¿½ï¿½WM_SYSKEYUPï¿½ï¿½ï¿½ï¿½ï¿½Ø·ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢Ã»ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½Ï¢Ã»ï¿½ï¿½ï¿½ï¿½ï¿½Íµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß³Ìµï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï£©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ã¡£
+//                User32.INSTANCE.DispatchMessage(msg); // ï¿½Ãºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½Ú³ï¿½ï¿½ò¡£¡ï¿½ï¿½ï¿½Í¨ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½GetMessageï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½
+//                // ï¿½ï¿½ï¿½ï¿½Öµï¿½Ç´ï¿½ï¿½Ú³ï¿½ï¿½ò·µ»Øµï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½Ü·ï¿½ï¿½ï¿½Öµï¿½Äºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú±ï¿½ï¿½ï¿½ï¿½Èµï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÖµÍ¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//                System.out.println(msg);
+//            }
+//        }
+//        unhook();
+//    }
+//
+//    public static void main(String[] args) {
+//        MouseLLHook hook = new MouseLLHook();
+//        hook.listener();
+//    }
+//}

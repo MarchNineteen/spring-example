@@ -1,30 +1,30 @@
-package com.wyb.test.java.hook;
-
-import com.sun.jna.Structure;
-import com.sun.jna.platform.win32.BaseTSD.ULONG_PTR;
-import com.sun.jna.platform.win32.WinDef.HWND;
-import com.sun.jna.platform.win32.WinDef.LRESULT;
-import com.sun.jna.platform.win32.WinDef.WPARAM;
-import com.sun.jna.platform.win32.WinUser.HOOKPROC;
-import com.sun.jna.platform.win32.WinUser.POINT;
-
-interface LowLevelMouseProc extends HOOKPROC {
-    LRESULT callback(int nCode, WPARAM wParam, MOUSEHOOKSTRUCT lParam);
-}
-
-// Structure£º±íÊ¾¾ßÓÐJava¶ÔµÈÀàµÄ±¾»ú½á¹¹¡£
-public class MOUSEHOOKSTRUCT extends Structure {
-
-    // ±ê¼Ç½Ó¿ÚÎªÁËÖ¸Ê¾½á¹¹ÀàÐÍÊµÀýµÄµØÖ·£¬½«ÔÚ½á¹¹¶¨ÒåÖÐÊ¹ÓÃ£¬¶ø²»ÊÇÇ¶Ì×ÍêÕûµÄ½á¹¹ÄÚÈÝ¡£
-    // Ä¬ÈÏÐÐÎªÊÇÄÚÁª½á¹¹×Ö¶Î¡£
-    public class ByReference extends MOUSEHOOKSTRUCT implements Structure.ByReference {
-    }
-
-    public POINT pt; // POINT½á¹¹¶¨ÒåÁËÒ»¸öµãµÄX×ø±êºÍy×ø±ê
-    public HWND hwnd; // HWND ±êÊ¶½«½ÓÊÕÓëÊó±êÊÂ¼þ¶ÔÓ¦µÄÊó±êÏûÏ¢µÄ´°¿Ú
-    public int wHitTestCode; // Ö¸¶¨ÃüÖÐ²âÊÔÖµ£¿£¿
-    // µ±¹â±êÒÆ¶¯Ê±£¬»òµ±°´ÏÂ»òÊÍ·ÅÊó±ê°´Å¥Ê±£¬WM_NCHITTESTÏûÏ¢½«·¢ËÍµ½´°¿Ú¡£
-    // Èç¹ûÊó±êÎ´±»²¶»ñ£¬Ôò»á½«ÏûÏ¢·¢ËÍµ½¹â±êÏÂ·½µÄ´°¿Ú¡£·ñÔò£¬ÏûÏ¢½«·¢²¼µ½ÒÑ²¶»ñÊó±êµÄ´°¿Ú¡£
-    // ·µ»Ø¹â±êÈÈµãµÄÎ»ÖÃ£¿×ø±êÊÇÏà¶ÔÓÚÆÁÄ»×óÉÏ½ÇµÄ
-    public ULONG_PTR dwExtraInfo; // Ö¸¶¨ÓëÏûÏ¢Ïà¹ØÁªµÄ¶îÍâÐÅÏ¢
-}
+//package com.wyb.test.java.hook;
+//
+//import com.sun.jna.Structure;
+//import com.sun.jna.platform.win32.BaseTSD.ULONG_PTR;
+//import com.sun.jna.platform.win32.WinDef.HWND;
+//import com.sun.jna.platform.win32.WinDef.LRESULT;
+//import com.sun.jna.platform.win32.WinDef.WPARAM;
+//import com.sun.jna.platform.win32.WinUser.HOOKPROC;
+//import com.sun.jna.platform.win32.WinUser.POINT;
+//
+//interface LowLevelMouseProc extends HOOKPROC {
+//    LRESULT callback(int nCode, WPARAM wParam, MOUSEHOOKSTRUCT lParam);
+//}
+//
+//// Structureï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½Javaï¿½Ôµï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½ï¿½á¹¹ï¿½ï¿½
+//public class MOUSEHOOKSTRUCT extends Structure {
+//
+//    // ï¿½ï¿½Ç½Ó¿ï¿½Îªï¿½ï¿½Ö¸Ê¾ï¿½á¹¹ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½Äµï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½Ú½á¹¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä½á¹¹ï¿½ï¿½ï¿½Ý¡ï¿½
+//    // Ä¬ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½á¹¹ï¿½Ö¶Î¡ï¿½
+//    public class ByReference extends MOUSEHOOKSTRUCT implements Structure.ByReference {
+//    }
+//
+//    public POINT pt; // POINTï¿½á¹¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Xï¿½ï¿½ï¿½ï¿½ï¿½yï¿½ï¿½ï¿½ï¿½
+//    public HWND hwnd; // HWND ï¿½ï¿½Ê¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½Ä´ï¿½ï¿½ï¿½
+//    public int wHitTestCode; // Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½Ð²ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½
+//    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½Ê±ï¿½ï¿½ï¿½òµ±°ï¿½ï¿½Â»ï¿½ï¿½Í·ï¿½ï¿½ï¿½ê°´Å¥Ê±ï¿½ï¿½WM_NCHITTESTï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½Íµï¿½ï¿½ï¿½ï¿½Ú¡ï¿½
+//    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½á½«ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Íµï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½Ä´ï¿½ï¿½Ú¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä´ï¿½ï¿½Ú¡ï¿½
+//    // ï¿½ï¿½ï¿½Ø¹ï¿½ï¿½ï¿½Èµï¿½ï¿½Î»ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä»ï¿½ï¿½ï¿½Ï½Çµï¿½
+//    public ULONG_PTR dwExtraInfo; // Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+//}
