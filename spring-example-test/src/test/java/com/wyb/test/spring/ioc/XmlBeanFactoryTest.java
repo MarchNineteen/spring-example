@@ -19,7 +19,7 @@ public class XmlBeanFactoryTest {
 //        System.out.println(car);
 //
         System.out.println("\n--------- AOP test ----------");
-//        com.wyb.test.spring.HelloService helloService = (com.wyb.test.spring.HelloService) bf.getBean("helloService");
-//        helloService.sayHelloWorld();
+        com.wyb.test.spring.HelloService helloService = (com.wyb.test.spring.HelloService) bf.getBean("helloService");
+        helloService.sayHelloWorld();
     }
 }

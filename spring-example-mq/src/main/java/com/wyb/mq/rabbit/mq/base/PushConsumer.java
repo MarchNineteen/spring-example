@@ -1,8 +1,3 @@
-/*
- * @(#)Consumer    Created on 2020/7/21
- * Copyright (c) 2020 ZDSoft Networks, Inc. All rights reserved.
- * $$ Id$$
- */
 package com.wyb.mq.rabbit.mq.base;
 
 import java.io.IOException;
@@ -12,7 +7,10 @@ import com.rabbitmq.client.*;
 
 /**
  * @author Marcher丶
- * @version $$ Revision: 1.0 $$, $$ Date: 2020/7/21 14:49 $$
+ * push模式 服务端主动推送至客户端
+ * 优点:及时性高
+ * 缺点：1.客户端处理能力不足时 容易造成消息堆积，处理缓慢 2.服务端需要维护每次传输状态，以防消息传递失败进行重试。
+ * 使用场景：对于数据实时性要求高的场景，就比较适用与push模式。
  */
 public class PushConsumer {
 

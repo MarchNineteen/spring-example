@@ -37,8 +37,8 @@ public class MybatisMultiDataSourceApplicationTests {
 
     @Test
     public void getUser() {
-        UserDo user1=user1Mapper.getOne(1L);
-        UserDo user2=user2Mapper.getOne(7L);
+        UserDo user1=user1Mapper.getOne(2L);
+        UserDo user2=user2Mapper.getOne(3L);
         System.out.println(user1.toString());
         System.out.println(user2.toString());
     }

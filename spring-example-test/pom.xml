@@ -103,6 +103,22 @@
             <artifactId>aspectjweaver</artifactId>
             <version>1.8.10</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.wyb</groupId>
+            <artifactId>spring-example-test</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/src/main/resources/lib/jna.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.wyb</groupId>
+            <artifactId>spring-example-test</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/src/main/resources/lib/platform.jar</systemPath>
+        </dependency>
+
     </dependencies>
 
     <build>
