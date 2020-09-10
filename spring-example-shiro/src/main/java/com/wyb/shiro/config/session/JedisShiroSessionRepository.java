@@ -38,7 +38,7 @@ public class JedisShiroSessionRepository implements ShiroSessionRepository {
 
 	@Override
 	public void deleteSession(Serializable sessionId) {
-		log.info("删除session,id为{}" + sessionId);
+		log.info("删除session,id为{}" ,sessionId);
 		if (sessionId == null) {
 			log.error("id为空");
 			return;
@@ -50,7 +50,7 @@ public class JedisShiroSessionRepository implements ShiroSessionRepository {
 
 	@Override
 	public Session getSession(Serializable sessionId) {
-		log.info("取得session,id为{}:" + sessionId);
+		log.info("取得session,id为{}" ,sessionId);
 		if (sessionId == null) {
 			log.error("id为空");
 			return null;
