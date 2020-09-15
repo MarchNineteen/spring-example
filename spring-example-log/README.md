@@ -64,6 +64,10 @@ SLF4J（Simple Logging Facade for Java，即Java简单日志记录接口集）�
 这样我们在编写代码的时候只需要看 SLF4J 这个接口文档即可，不需要去理会不同日之框架的区别。
 而当我们需要更换日志组件的时候，我们只需要更换一个具体的日志组件Jar包就可以了。
 
+实现机制：
+Slf4j在编译期间，静态绑定本地的Log库，因此可以在Osgi中正常使用。
+它是通过查找类路径下org.slf4j.impl.StaticLoggerBinder，然后在StaticLoggerBinder中进行绑定。
+
 ![sl4f-api](https://github.com/MarchNineteen/spring-example/blob/master/spring-example-log/src/main/resources/static/sl4f-api.png)
 
 ### JCL
@@ -71,6 +75,11 @@ SLF4J（Simple Logging Facade for Java，即Java简单日志记录接口集）�
 common-logging是apache提供的一个通用的日志接口
 
 JCL默认的配置：如果能找到Log4j 则默认使用log4j 实现，如果没有则使用jul(jdk自带的) 实现，再没有则使用jcl内部提供的SimpleLog 实现。
+
+实现机制：
+Commons Logging是通过动态查找机制，在程序运行时，使用自己的ClassLoader寻找和载入本地具体的实现。
+详细策略可以查看commons-logging-*.jar包中的org.apache.commons.logging.impl.LogFactoryImpl.java文件。
+由于Osgi不同的插件使用独立的ClassLoader，Osgi的这种机制保证了插件互相独立, 其机制限制了Commons Logging在Osgi中的正常使用。
 
 ![jcl](https://github.com/MarchNineteen/spring-example/blob/master/spring-example-log/src/main/resources/static/jcl.png)
 

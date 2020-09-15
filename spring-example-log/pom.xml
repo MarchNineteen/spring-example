@@ -1,99 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>com.wyb</groupId>
-		<artifactId>spring-example</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
-	</parent>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.wyb</groupId>
+        <artifactId>spring-example</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
 
-	<artifactId>spring-example-log</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>spring-example-log</name>
-	<description>Demo project for log</description>
+    <artifactId>spring-example-log</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>spring-example-log</name>
+    <description>Demo project for log</description>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>1.8</java.version>
-	</properties>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+    </properties>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-			<version>${spring.boot.verion}</version>
-		</dependency>
+    <dependencies>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-log4j2</artifactId>
-			<version>${spring.boot.verion}</version>
-		</dependency>
+        <!--log4j2-->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.12.1</version>
+        </dependency>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.12.1</version>
+        </dependency>
+        <!-- log4j2 -->
 
-		<!-- log4j -->
-		<!--<dependency>-->
-			<!--<groupId>log4j</groupId>-->
-			<!--<artifactId>log4j</artifactId>-->
-			<!--<version>1.2.17</version>-->
-		<!--</dependency>-->
-		 <!--log4j-->
+        <!--jcl-->
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.2</version>
+        </dependency>
+        <!--jcl-->
 
-		 <!--log4j2-->
-		<!--<dependency>-->
-			<!--<groupId>org.apache.logging.log4j</groupId>-->
-			<!--<artifactId>log4j-core</artifactId>-->
-			<!--<version>2.12.1</version>-->
-		<!--</dependency>-->
-
-		<!--<dependency>-->
-			<!--<groupId>org.apache.logging.log4j</groupId>-->
-			<!--<artifactId>log4j-api</artifactId>-->
-			<!--<version>2.12.1</version>-->
-		<!--</dependency>-->
-		<!-- log4j2 -->
-
-		<!-- log4j2 starter -->
-		<!--<dependency>-->
-			<!--<groupId>org.springframework.boot</groupId>-->
-			<!--<artifactId>spring-boot-starter-log4j2</artifactId>-->
-		<!--</dependency>-->
-		<!-- log4j2 -->
-
-		<!--jcl-->
-		<!--<dependency>-->
-			<!--<groupId>commons-logging</groupId>-->
-			<!--<artifactId>commons-logging</artifactId>-->
-			<!--<version>1.2</version>-->
-		<!--</dependency>-->
-		<!--jcl-->
-
-		<!-- LogBack -->
-		<!--<dependency>-->
-			<!--<groupId>ch.qos.logback</groupId>-->
-			<!--<artifactId>logback-classic</artifactId>-->
-			<!--<version>1.2.3</version>-->
-		<!--</dependency>-->
-		<!-- LogBack -->
+        <!-- LogBack -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.3</version>
+        </dependency>
+        <!-- LogBack -->
 
 
+    </dependencies>
 
-	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
