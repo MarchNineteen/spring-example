@@ -38,6 +38,11 @@ public class MybatisApplicationTests {
     }
 
     @Test
+    public void testSelectUserNameById() {
+        System.out.println(userService.selectUserNameById(2));
+    }
+
+    @Test
     public void testAddUserSelective() {
         UserDo user = new UserDo();
         user.setUsername("scott");

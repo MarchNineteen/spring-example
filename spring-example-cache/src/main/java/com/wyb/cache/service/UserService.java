@@ -1,9 +1,9 @@
 package com.wyb.cache.service;
 
 
-import com.wyb.cache.dao.model.UserDo;
-
 import java.util.List;
+
+import com.wyb.cache.dao.model.UserDo;
 
 /**
  * Description:
@@ -15,4 +15,8 @@ public interface UserService {
     List<UserDo> listAll(int pageNum, int pageSize);
 
     UserDo getById(String id);
+
+    UserDo updateUserNameById(UserDo userDo);
+
+    Boolean removeUserById(UserDo userDo);
 }

@@ -15,5 +15,8 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
+  <select id="selectUserNameById" parameterType="integer" resultType="string">
+    select username from `user` where id = #{id}
+  </select>
 
 </mapper>

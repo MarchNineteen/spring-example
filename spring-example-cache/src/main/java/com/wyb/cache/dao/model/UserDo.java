@@ -2,12 +2,15 @@ package com.wyb.cache.dao.model;
 
 import java.io.Serializable;
 import java.util.Date;
+
 import javax.persistence.*;
+
 import lombok.Data;
 
 @Data
 @Table(name = "springboot.user")
 public class UserDo implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

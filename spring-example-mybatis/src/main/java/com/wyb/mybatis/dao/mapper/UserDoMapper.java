@@ -4,4 +4,5 @@ import com.wyb.mybatis.dao.BaseMapper;
 import com.wyb.mybatis.dao.model.UserDo;
 
 public interface UserDoMapper extends BaseMapper<UserDo> {
+    String selectUserNameById(Integer id);
 }

@@ -14,7 +14,7 @@ import javax.annotation.Resource;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class RepositoryTests {
+public class MemcachedTests {
 
 	@Resource
     private MemcacheConfig memcacheConfig;
