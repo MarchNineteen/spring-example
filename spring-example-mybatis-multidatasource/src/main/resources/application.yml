@@ -3,13 +3,13 @@ server:
 
 spring:
   datasource:
-    test1:
+    master:
       #      jdbc-url,url,jdbcurl哪个合适用哪个
-      url: jdbc:mysql://127.0.0.1:3306/springboot?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
+      url: jdbc:mysql://111.231.85.51:3306/test2?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
       #  下面是最新的mysql8版本推荐的驱动
       driver-class-name: com.mysql.cj.jdbc.Driver
       type: com.alibaba.druid.pool.DruidDataSource
-      username: root
+      username: test2
       password: 123456
       initial-size: 1
       min-idle: 1
@@ -24,11 +24,11 @@ spring:
       maintenanceInterval: 60
       maxIdleTime: 60
 
-    test2:
-      url: jdbc:mysql://127.0.0.1:3306/test1?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
+    slave:
+      url: jdbc:mysql://111.231.85.51:3307/test2?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
       driver-class-name: com.mysql.cj.jdbc.Driver
       type: com.alibaba.druid.pool.DruidDataSource
-      username: root
+      username: test2
       password: 123456
 
       minPoolSize: 3

@@ -8,14 +8,14 @@ import org.springframework.stereotype.Component;
  * @author Marcher丶
  */
 @Data
-@ConfigurationProperties(prefix = "spring.datasource.test1") // 注意这个前缀要和application.yml文件的前缀一样
+@ConfigurationProperties(prefix = "spring.datasource.master") // 注意这个前缀要和application.yml文件的前缀一样
 @Component
 public class DB1Config {
-    // @Value("${mysql.datasource.test1.jdbcurl}")
+    // @Value("${mysql.datasource.master.jdbcurl}")
     //@Value("${jdbcurl}")
     private String url;
     //private String url;
-    // 比如这个url在properties中是这样子的mysql.datasource.test1.username = root
+    // 比如这个url在properties中是这样子的mysql.datasource.master.username = root
     private String username;
     private String password;
     private int minPoolSize;

@@ -46,16 +46,16 @@ public class MybatisMultiDataSourceApplicationTests {
     @Test
     public void save() {
         UserDo user = new UserDo();
-        user.setUsername("test1 useranme");
+        user.setUsername("master useranme");
         user.setPassword("123456");
         user.setSex(1);
         user.setUpdateTime(new Date());
         user.setCreateTime(new Date());
-        user2Mapper.insert(user);
+        user1Mapper.insert(user);
     }
 
     @Test
-    public void tetsCoommonTras() {
+    public void testCoommonTras() {
         UserDo user = new UserDo();
         user.setUsername("test1 useranme");
         user.setPassword("12345611");
