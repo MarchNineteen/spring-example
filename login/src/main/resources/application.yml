@@ -31,3 +31,8 @@ spring:
     templateEncoding: UTF-8
     templateLoaderPath: classpath:/ftl/
 
+aliyun:
+  mail:
+    app_id: 1232131
+    app_key: 123123
+    url: http://www.baidu.com

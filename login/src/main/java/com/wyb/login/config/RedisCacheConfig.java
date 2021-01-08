@@ -1,4 +1,4 @@
-package com.wyb.scanner.login.config;
+package com.wyb.login.config;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -60,6 +60,7 @@ public class RedisCacheConfig extends CachingConfigurerSupport {
     /**
      * 管理缓存
      */
+    @Override
     @Bean
     public CacheManager cacheManager() {
         //初始化一个RedisCacheWriter

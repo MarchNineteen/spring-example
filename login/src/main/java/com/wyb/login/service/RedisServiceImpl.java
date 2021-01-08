@@ -1,4 +1,4 @@
-package com.wyb.scanner.login.service;
+package com.wyb.login.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;

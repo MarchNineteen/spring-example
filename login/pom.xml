@@ -2,9 +2,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>scanner-login</artifactId>
+    <artifactId>login</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>scanner-login</name>
+    <name>login</name>
     <description>Demo project for Spring Boot</description>
 
     <parent>
@@ -70,6 +70,17 @@
             <artifactId>javase</artifactId>
         </dependency>
 
+        <!--<dependency>-->
+            <!--<groupId>com.tencentcloudapi</groupId>-->
+            <!--<artifactId>tencentcloud-sdk-java</artifactId>-->
+            <!--<version>3.1.192</version>&lt;!&ndash; 注：这里只是示例版本号，请获取并替换为 最新的版本号 &ndash;&gt;-->
+        <!--</dependency>-->
+
+        <dependency>
+            <groupId>com.wyb</groupId>
+            <artifactId>message-server</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
 
     </dependencies>
 

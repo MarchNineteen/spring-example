@@ -1,4 +1,4 @@
-package com.wyb.scanner.login;
+package com.wyb.login;
 
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;

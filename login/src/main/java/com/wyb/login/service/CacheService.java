@@ -1,4 +1,4 @@
-package com.wyb.scanner.login.service;
+package com.wyb.login.service;
 
 import java.util.List;
 import java.util.Map;
