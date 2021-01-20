@@ -65,7 +65,7 @@ public class LogAnnotationAspect {
     }
 
     /**
-     * 环绕通知：目标方法调用前后执s行的通知，可以在方法调用前后完成自定义的行为。
+     * 环绕通知：目标方法调用前后执行的通知，可以在方法调用前后完成自定义的行为。
      * @param pjp
      * @return
      * @throws Throwable

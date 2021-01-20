@@ -16,6 +16,7 @@ public enum LoginType {
             return LoginConstants.DEFAULT_PARAMETER_NAME_CODE_SMS;
         }
     },
+
     /**
      * 图片验证码
      */
@@ -27,9 +28,19 @@ public enum LoginType {
     },
 
     /**
-     * 二维码验证码
+     * 二维码验证码（扫码）
      */
     QR_CODE {
+        @Override
+        public String getParamNameOnValidate() {
+            return null;
+        }
+    },
+
+    /**
+     * 滑块验证
+     */
+    SLIDE {
         @Override
         public String getParamNameOnValidate() {
             return null;

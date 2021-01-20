@@ -57,6 +57,12 @@
             <artifactId>druid</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>1.1.23</version>
+        </dependency>
+
         <!--分布式事务-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -66,6 +72,12 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.9.5</version>
+            <scope>compile</scope>
         </dependency>
 
 

@@ -3,16 +3,12 @@ package com.wyb.mybatis.multidatasource;
 import com.wyb.mybatis.multidatasource.dao.mapper.test1.User1Mapper;
 import com.wyb.mybatis.multidatasource.dao.mapper.test2.User2Mapper;
 import com.wyb.mybatis.multidatasource.dao.model.UserDo;
-import com.wyb.mybatis.multidatasource.service.TestServiceImpl;
+import com.wyb.mybatis.multidatasource.service.impl.TestServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Date;
 import java.util.List;
