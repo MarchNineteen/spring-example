@@ -1,5 +1,7 @@
 server:
   port: 8080
+  servlet:
+    context-path: /captcha-api
 
 spring:
   redis:
@@ -30,6 +32,9 @@ spring:
     suffix: .ftl
     templateEncoding: UTF-8
     templateLoaderPath: classpath:/ftl/
+
+  resources:
+    static-locations: classpath:/testStatic/,classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
 
 aliyun:
   mail:
