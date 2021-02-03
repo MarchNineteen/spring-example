@@ -2,6 +2,8 @@ package com.wyb.aop.aop;
 
 import com.wyb.aop.annotation.Log;
 import com.wyb.aop.annotation.Logs;
+import com.wyb.aop.controller.UserController;
+import com.wyb.aop.utils.SpringContextHolder;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -34,7 +36,7 @@ public class LogAnnotationAspect {
      */
     @Before("catchAll()")
     public void doBefore(JoinPoint jp){
-        System.out.println("=========执行前置通知==========");
+        System.out.println("Logs=========执行前置通知==========");
     }
 
 
@@ -72,6 +74,7 @@ public class LogAnnotationAspect {
      */
     @Around("catchAll()")
     public Object doAround(ProceedingJoinPoint pjp) throws Throwable{
+        UserController userController = (UserController) SpringContextHolder.getBean(pjp.getTarget().getClass());
 
         System.out.println("======执行环绕通知开始=========");
         // 调用方法的参数

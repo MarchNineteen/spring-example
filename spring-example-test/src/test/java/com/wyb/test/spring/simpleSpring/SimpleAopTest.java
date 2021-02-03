@@ -1,14 +1,15 @@
 package com.wyb.test.spring.simpleSpring;
 
+import org.junit.Test;
+
 import com.wyb.test.spring.HelloService;
 import com.wyb.test.spring.HelloServiceImpl;
 import com.wyb.test.spring.simpleSpring.aop.Advice;
 import com.wyb.test.spring.simpleSpring.aop.BeforeAdvice;
 import com.wyb.test.spring.simpleSpring.aop.MethodInvocation;
-import com.wyb.test.spring.simpleSpring.aop.SimpleAOP;
-import org.junit.Test;
+import com.wyb.test.spring.simpleSpring.aop.SimpleAop;
 
-public class SimpleAOPTest {
+public class SimpleAopTest {
 
     @Test
     public void getProxy() throws Exception {
@@ -20,7 +21,7 @@ public class SimpleAOPTest {
         Advice beforeAdvice = new BeforeAdvice(helloServiceImpl, logTask);
 
         // 3. 为目标对象生成代理
-        HelloService helloServiceImplProxy = (HelloService) SimpleAOP.getProxyObject(helloServiceImpl,beforeAdvice);
+        HelloService helloServiceImplProxy = (HelloService) SimpleAop.getProxyObject(helloServiceImpl, beforeAdvice);
 
         helloServiceImplProxy.sayHelloWorld();
     }

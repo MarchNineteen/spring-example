@@ -1,5 +1,8 @@
 package com.wyb.aop.aop;
 
+import com.wyb.aop.controller.UserController;
+import com.wyb.aop.service.UserService;
+import com.wyb.aop.utils.SpringContextHolder;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.After;
@@ -33,6 +36,12 @@ public class TimeLogAspect {
     }
 
     @Before("catchAll()")
+    public void doBefore(JoinPoint jp){
+        log.info("TimeLogAspect=========执行前置通知==========");
+        System.out.println("=========执行前置通知==========");
+    }
+
+    @Before("catchAll()")
     public void doBeforeAdvice(JoinPoint joinPoint) {
 //        Signature signature = joinPoint.getSignature();
 //        log.debug("类:{},方法:{}开始:", signature.getDeclaringTypeName(), signature.getName());
@@ -58,6 +67,8 @@ public class TimeLogAspect {
 
     @After("catchAll()")
     public void doAfterAdvice(JoinPoint joinPoint) {
+        UserController userController = (UserController) SpringContextHolder.getBean(joinPoint.getTarget().getClass());
+
         Signature signature = joinPoint.getSignature();
 //        log.debug("类:{},方法:{}结束", signature.getDeclaringTypeName(), signature.getName());
         Map<String, List<Long>> methodTimeMap = threadMap.get(Thread.currentThread().getId());

@@ -226,7 +226,7 @@ public class BlockPuzzleCaptchaServiceImpl extends AbstractCaptchaService {
             // 将坐标信息存入redis中
             String codeKey = String.format(REDIS_CAPTCHA_KEY, dataVO.getToken());
             CaptchaServiceFactory.getCache(cacheType).set(codeKey, JSONObject.toJSONString(point), EXPIRESIN_SECONDS);
-            logger.debug("token：{},point:{}", dataVO.getToken(), JSONObject.toJSONString(point));
+            logger.info("token：{},point:{}", dataVO.getToken(), JSONObject.toJSONString(point));
             return dataVO;
         }
         catch (Exception e) {

@@ -31,7 +31,7 @@ public class OperateAspect {
      */
     @Before("catchAll()")
     public void doBefore(JoinPoint jp){
-        log.info("=========执行前置通知==========");
+        log.info("OperateAspect=========执行前置通知==========");
         System.out.println("=========执行前置通知==========");
     }
 

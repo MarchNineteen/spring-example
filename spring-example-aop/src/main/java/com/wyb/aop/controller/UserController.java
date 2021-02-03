@@ -2,6 +2,7 @@ package com.wyb.aop.controller;
 
 
 import com.wyb.aop.annotation.Log;
+import com.wyb.aop.annotation.TimeLog;
 import com.wyb.aop.dao.model.UserDo;
 import com.wyb.aop.service.UserService;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -28,6 +29,7 @@ public class UserController {
 
     @Log(value = "add")
     @Log(value = "update")
+    @TimeLog
     @GetMapping("/list")
     public List<UserDo> list(){
         System.out.println("controller start");
