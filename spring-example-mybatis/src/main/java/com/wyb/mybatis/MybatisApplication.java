@@ -1,12 +1,14 @@
 package com.wyb.mybatis;
 
-import de.codecentric.boot.admin.server.config.EnableAdminServer;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
+
+import de.codecentric.boot.admin.server.config.EnableAdminServer;
+import lombok.extern.slf4j.Slf4j;
 import tk.mybatis.spring.annotation.MapperScan;
 
 @SpringBootApplication
@@ -16,7 +18,7 @@ import tk.mybatis.spring.annotation.MapperScan;
 public class MybatisApplication implements CommandLineRunner, ApplicationRunner {
 
     public static void main(String[] args) {
-        SpringApplication.run(MybatisApplication.class, args);
+        ConfigurableApplicationContext applicationContext = SpringApplication.run(MybatisApplication.class, args);
     }
 
     @Override

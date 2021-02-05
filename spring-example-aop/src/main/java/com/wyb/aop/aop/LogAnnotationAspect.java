@@ -9,8 +9,12 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
 
 /**
  * 注解形式实现AOP切面类
@@ -36,6 +40,19 @@ public class LogAnnotationAspect {
      */
     @Before("catchAll()")
     public void doBefore(JoinPoint jp){
+        //获取方法，此处可将signature强转为MethodSignature
+        MethodSignature signature = (MethodSignature) jp.getSignature();
+        String name = signature.getName();
+        Method method = signature.getMethod();
+        Annotation[] annotations = method.getAnnotations();
+        for (Annotation a: annotations) {
+            if (Logs.class == a.annotationType()) {
+                Logs logs = (Logs) a;
+                for (Log log : logs.value()) {
+                    System.out.println("===========执行最终通知============" + log.value());
+                }
+            }
+        }
         System.out.println("Logs=========执行前置通知==========");
     }
 
@@ -58,12 +75,7 @@ public class LogAnnotationAspect {
     @After(value="catchAll()")
     public void doAfter(JoinPoint jp) throws NoSuchMethodException {
         Signature signature = jp.getSignature();
-        // 获取当前方法名称
-        String method = signature.getName();
-        Logs logs = jp.getTarget().getClass().getMethod(method).getAnnotation(Logs.class);
-        for (Log log : logs.value()) {
-            System.out.println("===========执行最终通知============" + log.value());
-        }
+        System.out.println("===========执行最终通知============");
     }
 
     /**
