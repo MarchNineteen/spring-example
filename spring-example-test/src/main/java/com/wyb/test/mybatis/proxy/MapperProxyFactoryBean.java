@@ -1,21 +1,28 @@
 package com.wyb.test.mybatis.proxy;
 
-import com.wyb.test.mybatis.config.Metadata;
+import java.lang.reflect.Proxy;
+
 import org.springframework.beans.factory.FactoryBean;
+
+import com.wyb.test.mybatis.config.Metadata;
 
 /**
  * @author Marcher丶
  */
-public class MapperProxyFactoryBean implements FactoryBean<Object> {
+public class MapperProxyFactoryBean<T> implements FactoryBean<T> {
 
     private Metadata metadata;
 
     /**
      * 代理工厂创建实际bean
      */
+    @SuppressWarnings("unchecked")
     @Override
-    public Object getObject() throws Exception {
-        return MapperJdkProxyCreator.getProxyMapper(metadata.getClazz());
+    public T getObject() throws Exception {
+        // return (T) MapperJdkProxyCreator.getProxyMapper(metadata.getClazz());
+        return (T) Proxy.newProxyInstance(metadata.getClazz().getClassLoader(), new Class[] { metadata.getClazz() },
+                new MyMybatisInvocationHandler());
+
     }
 
     @Override
@@ -29,7 +36,7 @@ public class MapperProxyFactoryBean implements FactoryBean<Object> {
 
     @Override
     public boolean isSingleton() {
-        return false;
+        return true;
     }
 
 }
