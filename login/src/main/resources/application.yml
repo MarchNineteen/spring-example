@@ -34,7 +34,7 @@ spring:
     templateLoaderPath: classpath:/ftl/
 
   resources:
-    static-locations: classpath:/testStatic/,classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
+    static-locations: classpath:/testStatic/,classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,classpath:/html/
 
 aliyun:
   mail:

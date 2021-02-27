@@ -19,8 +19,7 @@ import java.util.List;
 @Service(value = "staticProxyUserServiceImpl")
 public class StaticProxyUserServiceImpl implements UserService {
 
-    @Qualifier(value = "userServiceImpl")
-    @Resource
+    @Resource(name = "userServiceImpl")
     private UserService userService;
 
 

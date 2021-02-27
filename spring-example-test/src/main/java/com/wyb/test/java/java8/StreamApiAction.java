@@ -37,30 +37,6 @@ public class StreamApiAction {
 //        Optional<Integer> optional = list.stream().reduce(Integer::sum);
 //        System.out.println(optional.get());
 
-        // Collectors
-        List<String> strList = Arrays.asList("aaaa", "bb", "cc", "dd", "ee");
-        strList.stream().collect(Collectors.toList());
-        String s = strList.stream().collect(Collectors.joining());
-        System.out.println(s);
-        // 逗号连接
-        s = strList.stream().collect(Collectors.joining(","));
-        System.out.println(s);
-        // 逗号连接
-        s = strList.stream().collect(Collectors.joining(",", "[", "]"));
-        System.out.println(s);
-
-        s = strList.stream().collect(Collectors.collectingAndThen(Collectors.joining(","), String::toUpperCase));
-        System.out.println(s);
-
-        Map<Integer, List<String>> map = strList.stream().collect(Collectors.groupingBy(String::length));
-        map.keySet().forEach(v -> map.get(v).forEach(System.out::println));
-
-        Map<Integer, Set<String>> map1 = strList.stream().collect(Collectors.groupingBy(String::length, Collectors.toSet()));
-        map.keySet().forEach(v -> map1.get(v).forEach(System.out::println));
-
-        Map<Boolean, List<Integer>> mapBoolean = list.stream().collect(Collectors.partitioningBy(v -> v % 2 == 0));
-        mapBoolean.keySet().forEach(v -> mapBoolean.get(v).forEach(System.out::println));
-
         Integer num = list.stream().mapToInt(Integer::intValue).sum();
     }
 

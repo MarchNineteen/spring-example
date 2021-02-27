@@ -17,8 +17,7 @@ import javax.annotation.Resource;
 //@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class AopApplicationTests {
 
-	@Qualifier(value = "staticProxyUserServiceImpl")
-	@Resource
+	@Resource(name = "staticProxyUserServiceImpl")
 	private UserService userService;
 
 	@Test

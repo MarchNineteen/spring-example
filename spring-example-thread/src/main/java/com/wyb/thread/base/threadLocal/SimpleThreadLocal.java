@@ -33,4 +33,53 @@ public class SimpleThreadLocal {
     public void remove() {
         map.remove(Thread.currentThread());
     }
+
+    public static void main(String[] args) {
+        SimpleThreadLocal threadLocal = new SimpleThreadLocal() {
+
+            @Override
+            public Integer initialValue() {
+                return 1;
+            }
+        };
+
+    }
+
+    private static class TestClient extends Thread {
+
+        private ThreadLocalDemo sn;
+
+        public TestClient(ThreadLocalDemo sn) {
+            this.sn = sn;
+        }
+
+        @Override
+        public void run() {
+            for (int i = 0; i < 3; i++) {
+                //④每个线程打出3个序列值
+                System.out.println("thread[" +
+                        Thread.currentThread().getName() + "]sn[" +
+                        sn.getNextNum() + "]");
+            }
+        }
+    }
+
+    private static class TestClient1 extends Thread {
+
+        private ThreadLocalDemo sn;
+
+        public TestClient1(ThreadLocalDemo sn) {
+            this.sn = sn;
+        }
+
+        @Override
+        public void run() {
+            for (int i = 0; i < 5; i++) {
+                //④每个线程打出3个序列值
+                System.out.println("thread[" +
+                        Thread.currentThread().getName() + "]sn[" +
+                        sn.getNextNum() + "]");
+            }
+        }
+    }
 }
