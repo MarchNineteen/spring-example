@@ -1,3 +1,6 @@
+server:
+  port: 8087
+
 spring:
   # Rabbitmq
   rabbitmq:
@@ -35,3 +38,4 @@ spring:
     broker-url: tcp://111.231.85.51:61616
     user: admin
     password: admin
+
