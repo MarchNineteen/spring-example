@@ -1,5 +1,7 @@
 package com.wyb.mybatis;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.CommandLineRunner;
@@ -17,8 +19,11 @@ import tk.mybatis.spring.annotation.MapperScan;
 @Slf4j
 public class MybatisApplication implements CommandLineRunner, ApplicationRunner {
 
+    private static final Logger logger = LoggerFactory.getLogger("printByNameLog");
+
     public static void main(String[] args) {
         ConfigurableApplicationContext applicationContext = SpringApplication.run(MybatisApplication.class, args);
+        logger.error("指定日志名称输出到文件：{}", args);
     }
 
     @Override

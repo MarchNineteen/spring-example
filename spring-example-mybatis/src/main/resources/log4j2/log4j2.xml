@@ -17,6 +17,16 @@
       <PatternLayout pattern="${layout}"/>
     </Console>
 
+    <RollingFile name="printByName" fileName="${logging.file.path}/printByName.log"
+                 filePattern="${logging.file.name}-%d{yyyy-MM-dd-HH}">
+      <PatternLayout>
+        <Pattern>%-5p %d{MM-dd HH:mm:ss} [%m] [%l] %n</Pattern>
+      </PatternLayout>
+      <Policies>
+        <TimeBasedTriggeringPolicy interval="1"/>
+      </Policies>
+    </RollingFile>
+
     <RollingRandomAccessFile name="RollingRandomAccessFile"
                              immediateFlush="true" fileName="${logging.file.name}"
                              filePattern="${logging.file.name}-%d{yyyy-MM-dd-HH}">
@@ -66,6 +76,11 @@
   <Loggers>
 
     <Logger name="com.wyb" level="info"/>
+
+    <Logger name="printByNameLog" level="error">
+      <appender-ref ref="printByName"/>
+    </Logger>>
+
 
     <Root level="info">
       <!--<AppenderRef ref="AsyncMail" level="error"/>-->

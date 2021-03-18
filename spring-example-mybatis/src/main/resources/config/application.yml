@@ -66,8 +66,8 @@ spring:
     admin:
       client:
         instance:
-          service-url: http://localhost:8080
-        url: http://localhost:8080
+          service-url: http://localhost:8088
+        url: http://localhost:8088
         username: admin
         password: admin
 
