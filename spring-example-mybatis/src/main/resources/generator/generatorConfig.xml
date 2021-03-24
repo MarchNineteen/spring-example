@@ -124,6 +124,15 @@
             <columnOverride column="id" property="id" javaType="java.lang.Integer"  />
         </table>
 
+        <table tableName="user_ex" domainObjectName="UserExDo"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true" >
+
+            <property name="runtimeSchema" value="springboot" />
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+            <columnOverride column="id" property="id" javaType="java.lang.Integer"  />
+        </table>
+
     </context>
 
     <!--详见 http://www.cnblogs.com/maanshancss/p/6027999.html  http://blog.csdn.net/a_piaoyouareminemine/article/details/50114721-->

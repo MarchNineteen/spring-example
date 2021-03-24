@@ -15,7 +15,7 @@
 - [docker整合](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-docker) springboot整合docker完成自动构建镜像
 - [springboot+vue实现前后端分离](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-vue) springboot+vue实现前后端分离
 - [springboot+vue-upload](https://github.com/MarchNineteen/spring-example/tree/master/spring-example-vue-upload) springboot+vue实现多功能文件上传
-- [scanner-login](https://github.com/MarchNineteen/spring-example/tree/master/scanner-login) 实现扫码登录
+- [login](https://github.com/MarchNineteen/spring-example/tree/master/login) 扫码登录,滑块登录
 - [easy-rpc](https://github.com/MarchNineteen/spring-example/tree/master/easy-rpc) rcp简单实现，摘录于[yeecode](https://github.com/yeecode/EasyRPC)
 - 计划：
 - 

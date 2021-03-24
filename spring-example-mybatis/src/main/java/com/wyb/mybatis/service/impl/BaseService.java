@@ -9,6 +9,7 @@ import com.github.pagehelper.PageInfo;
 import com.wyb.mybatis.dao.BaseMapper;
 import com.wyb.mybatis.service.IService;
 
+import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
 /**

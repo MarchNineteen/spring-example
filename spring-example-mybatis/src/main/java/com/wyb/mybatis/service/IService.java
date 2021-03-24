@@ -1,10 +1,13 @@
 package com.wyb.mybatis.service;
 
-import com.github.pagehelper.PageInfo;
-import org.springframework.stereotype.Service;
-import tk.mybatis.mapper.entity.Example;
-
 import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.github.pagehelper.PageInfo;
+
+import org.springframework.transaction.annotation.Transactional;
+import tk.mybatis.mapper.entity.Example;
 
 /**
  * @author Marcher丶

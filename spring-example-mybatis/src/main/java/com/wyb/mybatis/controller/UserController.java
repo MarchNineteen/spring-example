@@ -1,6 +1,8 @@
 package com.wyb.mybatis.controller;
 
 import com.wyb.mybatis.dao.model.UserDo;
+import com.wyb.mybatis.dao.model.UserExDo;
+import com.wyb.mybatis.service.UserExService;
 import com.wyb.mybatis.service.UserService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -20,6 +22,8 @@ public class UserController {
 
     @Resource
     private UserService userService;
+    @Resource
+    private UserExService userExService;
 
     @ApiOperation(value = "获取用户列表")
     @GetMapping("/list")
@@ -38,6 +42,20 @@ public class UserController {
     @PostMapping("/add")
     public int add(@RequestBody UserDo userDo) {
         return userService.save(userDo);
+    }
+
+    @ApiOperation(value = "修改用户")
+    @PostMapping("/updateUser")
+    public void update(@RequestBody UserDo userDo) {
+        userService.update(userDo);
+
+    }
+
+    @ApiOperation(value = "修改用户EX")
+    @PostMapping("/updateUserEx")
+    public void updateEx(@RequestBody UserExDo userExDo) {
+        userExService.update(userExDo);
+
     }
 
     @PostMapping("/login")
