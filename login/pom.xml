@@ -71,16 +71,16 @@
         </dependency>
 
         <!--<dependency>-->
-            <!--<groupId>com.tencentcloudapi</groupId>-->
-            <!--<artifactId>tencentcloud-sdk-java</artifactId>-->
-            <!--<version>3.1.192</version>&lt;!&ndash; 注：这里只是示例版本号，请获取并替换为 最新的版本号 &ndash;&gt;-->
+        <!--<groupId>com.tencentcloudapi</groupId>-->
+        <!--<artifactId>tencentcloud-sdk-java</artifactId>-->
+        <!--<version>3.1.192</version>&lt;!&ndash; 注：这里只是示例版本号，请获取并替换为 最新的版本号 &ndash;&gt;-->
         <!--</dependency>-->
 
-        <dependency>
-            <groupId>com.wyb</groupId>
-            <artifactId>message-server</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>com.wyb</groupId>-->
+        <!--            <artifactId>message-server</artifactId>-->
+        <!--            <version>0.0.1-SNAPSHOT</version>-->
+        <!--        </dependency>-->
 
         <dependency>
             <groupId>org.apache.commons</groupId>
