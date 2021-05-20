@@ -38,7 +38,6 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <spring.boot.verion>2.0.8.RELEASE</spring.boot.verion>
-
   </properties>
 
   <dependencyManagement>

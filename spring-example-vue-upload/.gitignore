@@ -29,3 +29,5 @@ build/
 
 ### VS Code ###
 .vscode/
+
+/vue-web/package-lock.json
