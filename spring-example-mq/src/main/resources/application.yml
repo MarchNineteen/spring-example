@@ -40,7 +40,7 @@ spring:
     password: admin
 
   kafka:
-    bootstrap-servers: 192.168.31.128:9092
+    bootstrap-servers: 127.0.0.1:9092
     producer:
       # 发生错误后，消息重发的次数。
       retries: 0
