@@ -4,10 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.annotation.Resource;
 
@@ -50,41 +46,6 @@ public class RedisDataTypeTests {
         }
     }
 
-    @Test
-    public void checkProcessOrderStatus() throws InterruptedException {
-        int requestNum = 20;
-        AtomicInteger num = new AtomicInteger(5);
-        final CountDownLatch countDownLatch = new CountDownLatch(requestNum);
-        ExecutorService threadPool = Executors.newFixedThreadPool(5);
-        for (int i = 0; i < requestNum; i++) {
-            threadPool.execute(() -> {
-                try {
-                    boolean t = redisService.tryLock("LipapayOrderQueryScheduled.checkProcessOrderStatus", 2000, 2000);
-                    System.out.println("线程：" + Thread.currentThread().getName() + "获取锁" + (t ? "成功" : "失败"));
-                    if (!t) {
-                        System.out.println("加锁失败");
-                        return;
-                    }
-                    if (0 == num.get()) {
-                        System.out.println("无库存");
-                        return;
-                    }
-                    num.set(num.get() - 1);
-                    System.out.println(num.get());
-                }
-                catch (Exception e) {
-                    log.error("[LipapayOrderQueryScheduled][checkProcessOrderStatus] process error, e {}", e);
-                }
-                finally {
-                    countDownLatch.countDown();
-                    redisService.unlock("LipapayOrderQueryScheduled.checkProcessOrderStatus");
-                }
-            });
-        }
-        countDownLatch.await();
-        System.out.println("finish");
-    }
-
     private void addUser(UserDo userDo) {
         Map<String, String> map = new HashMap<String, String>();
         map.put("id", String.valueOf(userDo.getId()));
@@ -111,4 +72,5 @@ public class RedisDataTypeTests {
         }
         return list;
     }
+
 }
