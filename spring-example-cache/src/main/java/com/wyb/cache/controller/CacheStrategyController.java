@@ -35,16 +35,14 @@ public class CacheStrategyController {
         String userKey = CACHE_ASIDE_PATTERN_KEY + 1;
         UserDo userDo = (UserDo) redisService.getCache(userKey);
         if (null == userDo) {
+            System.out.println("read redis empty");
             userDo = userDoMapper.selectByPrimaryKey("1");
+            System.out.println("read mysql " + userDo.getUsername());
             redisService.putCache(userKey, userDo);
-        }
-        System.out.println("read oldvalue " + userDo.getUsername());
-        System.out.println("read newvalue " + value);
-        if (!value.equals(userDo.getUsername())) {
-            System.out.println("读取报错");
+            System.out.println("read redis add " + userDo.getUsername());
         }
         else {
-            System.out.println("读取缓存成功");
+            System.out.println("read redis " + userDo.getUsername());
         }
 
     }
@@ -53,14 +51,17 @@ public class CacheStrategyController {
      * 修改:先更新数据库，再直接删除缓存
      */
     @GetMapping("/write")
-    public void cacheAsidePatternWrite(String value) {
+    public void cacheAsidePatternWrite(String value) throws InterruptedException {
         UserDo userDo = new UserDo();
         userDo.setId(1);
         userDo.setUsername(value);
         String userKey = CACHE_ASIDE_PATTERN_KEY + 1;
-        System.out.println("write value " + value);
+
+        System.out.println("write mysql " + value);
         int o = userDoMapper.updateByPrimaryKey(userDo);
+        System.out.println("write mysql over " + o);
         if (0 < o) {
+            System.out.println("write flush redis" );
             redisService.removeCache(userKey);
         }
     }

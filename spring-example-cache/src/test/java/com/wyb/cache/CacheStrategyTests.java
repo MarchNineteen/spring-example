@@ -69,14 +69,13 @@ public class CacheStrategyTests {
          * 7、ResultActions.andReturn表示执行完成后返回相应的结果。
          */
         String value = "read";
-        int requestNum = 10;
+        int requestNum = 1;
         AtomicInteger num = new AtomicInteger(5);
-        final CountDownLatch countDownLatch = new CountDownLatch(requestNum);
+        final CountDownLatch countDownLatch = new CountDownLatch(3);
         ExecutorService writePool = Executors.newFixedThreadPool(5);
         ExecutorService readPool = Executors.newFixedThreadPool(5);
         for (int i = 0; i < requestNum; i++) {
-            value += i;
-            String finalValue = value;
+            final String finalValue = "read" + 0;
 
             readPool.execute(() -> {
                 try {
