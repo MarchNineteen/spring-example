@@ -1,14 +1,16 @@
 package com.wyb.cache.controller;
 
-import com.wyb.cache.dao.mapper.UserDoMapper;
-import com.wyb.cache.dao.model.UserDo;
-import com.wyb.cache.service.CacheService;
-import lombok.extern.slf4j.Slf4j;
+import javax.annotation.Resource;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
+import com.wyb.cache.dao.mapper.UserDoMapper;
+import com.wyb.cache.dao.model.UserDo;
+import com.wyb.cache.service.CacheService;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author Marcher丶
@@ -31,15 +33,15 @@ public class CacheStrategyController {
      * 取值:先取缓存，取不到去数据库查询，再放入缓存。
      */
     @GetMapping("/read")
-    public void cacheAsidePatternRead(String value) {
+    public void cacheAsidePatternRead() {
         String userKey = CACHE_ASIDE_PATTERN_KEY + 1;
         UserDo userDo = (UserDo) redisService.getCache(userKey);
         if (null == userDo) {
             System.out.println("read redis empty");
             userDo = userDoMapper.selectByPrimaryKey("1");
-            System.out.println("read mysql " + userDo.getUsername());
-            redisService.putCache(userKey, userDo);
+            // System.out.println("read mysql " + userDo.getUsername());
             System.out.println("read redis add " + userDo.getUsername());
+            redisService.putCache(userKey, userDo);
         }
         else {
             System.out.println("read redis " + userDo.getUsername());
@@ -51,7 +53,7 @@ public class CacheStrategyController {
      * 修改:先更新数据库，再直接删除缓存
      */
     @GetMapping("/write")
-    public void cacheAsidePatternWrite(String value) throws InterruptedException {
+    public void cacheAsidePatternWrite(String value) {
         UserDo userDo = new UserDo();
         userDo.setId(1);
         userDo.setUsername(value);
@@ -61,8 +63,8 @@ public class CacheStrategyController {
         int o = userDoMapper.updateByPrimaryKey(userDo);
         System.out.println("write mysql over " + o);
         if (0 < o) {
-            System.out.println("write flush redis" );
             redisService.removeCache(userKey);
+            System.out.println("write flush redis");
         }
     }
 }
