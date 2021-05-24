@@ -12,8 +12,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import com.wyb.cache.controller.CacheStrategyController;
-
 import lombok.extern.slf4j.Slf4j;
 
 @RunWith(SpringRunner.class)
@@ -25,9 +23,6 @@ public class CacheStrategyTests {
 
     @Autowired
     private MockMvc mockMvc;
-
-    @Autowired
-    private CacheStrategyController cacheStrategyController;
 
     /**
      * .perform() : 执行一个MockMvcRequestBuilders的请求；MockMvcRequestBuilders有.get()、.post()、.put()、.delete()等请求。 .andDo() :
