@@ -1,4 +1,4 @@
-package com.wyb.mybatis.multidatasource.dao.mapper.test2;
+package com.wyb.mybatis.multidatasource.dao.mapper.slave;
 
 import com.wyb.mybatis.multidatasource.dao.model.UserDo;
 import org.apache.ibatis.annotations.*;
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface User2Mapper {
+public interface SUserMapper {
 
     @Select("SELECT * FROM user")
     @Results({

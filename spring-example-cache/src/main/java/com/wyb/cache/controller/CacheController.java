@@ -47,7 +47,7 @@ public class CacheController {
         return (UserDo) cache.getCache("1");
     }
 
-    @GetMapping("/test")
+    @GetMapping("/lock")
     public void checkProcessOrderStatus() {
         CacheService cache = cacheFactory.getCache(CacheType.REDIS);
 

@@ -1,7 +1,7 @@
 package com.wyb.mybatis.multidatasource.web;
 
-import com.wyb.mybatis.multidatasource.dao.mapper.test1.User1Mapper;
-import com.wyb.mybatis.multidatasource.dao.mapper.test2.User2Mapper;
+import com.wyb.mybatis.multidatasource.dao.mapper.master.MUserMapper;
+import com.wyb.mybatis.multidatasource.dao.mapper.slave.SUserMapper;
 import com.wyb.mybatis.multidatasource.dao.model.UserDo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,37 +16,37 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    private User1Mapper user1Mapper;
+    private MUserMapper mUserMapper;
 
 	@Autowired
-	private User2Mapper user2Mapper;
+	private SUserMapper sUserMapper;
 
 	@RequestMapping("/getUsers")
 	public List<UserDo> getUsers() {
-		List<UserDo> users=user1Mapper.getAll();
+		List<UserDo> users= mUserMapper.getAll();
 		log.info(users.toString());
 		return users;
 	}
 
     @RequestMapping("/getUser")
     public UserDo getUser(Long id) {
-        UserDo user=user2Mapper.getOne(id);
+        UserDo user= sUserMapper.getOne(id);
         return user;
     }
 
     @RequestMapping("/add")
     public void save(UserDo user) {
-        user2Mapper.insert(user);
+        sUserMapper.insert(user);
     }
 
     @RequestMapping(value="update")
     public void update(UserDo user) {
-        user2Mapper.update(user);
+        sUserMapper.update(user);
     }
 
     @RequestMapping(value="/delete/{id}")
     public void delete(@PathVariable("id") Long id) {
-        user1Mapper.delete(id);
+        mUserMapper.delete(id);
     }
 
 }

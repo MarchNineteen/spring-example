@@ -1,11 +1,7 @@
 package com.wyb.cache.config;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.PropertyAccessor;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.extern.slf4j.Slf4j;
+import java.time.Duration;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
@@ -27,7 +23,13 @@ import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.RedisSerializer;
 
-import java.time.Duration;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * RedisCacheConfig
@@ -99,12 +101,15 @@ public class RedisCacheConfig extends CachingConfigurerSupport {
 
     @Bean
     public RedisMessageListenerContainer container(RedisConnectionFactory connectionFactory,
-                                                   MessageListenerAdapter redisSubscriber, MessageListenerAdapter redisSubscriber2) {
+                                                   MessageListenerAdapter redisSubscriber, MessageListenerAdapter redisSubscriber2,
+
+                                                   MessageListenerAdapter zsetDelayQueenSubscriber) {
         RedisMessageListenerContainer container = new RedisMessageListenerContainer();
         container.setConnectionFactory(connectionFactory);
         container.addMessageListener(redisSubscriber, new PatternTopic("channel 1"));
         container.addMessageListener(redisSubscriber2, new PatternTopic("channel 1"));
         container.addMessageListener(redisSubscriber, new PatternTopic("channel 2"));//配置要订阅的订阅项
+        container.addMessageListener(zsetDelayQueenSubscriber, new PatternTopic("zet.delay.channel"));
         return container;
     }
 }
