@@ -35,7 +35,7 @@ public class UserController {
 
     @GetMapping("/getById")
     @Cacheable(value = "user", key = "#id")
-    public UserDo getById(String id) {
+    public UserDo getById(Integer id) {
         return userService.getById(id);
     }
 

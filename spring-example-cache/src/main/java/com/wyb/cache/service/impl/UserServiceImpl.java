@@ -30,14 +30,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDo getById(String id) {
-        return userDoMapper.selectByPrimaryKey(Integer.valueOf(id));
+    public UserDo getById(Integer id) {
+        return userDoMapper.selectByPrimaryKey(id);
     }
 
     @Override
     public UserDo updateUserNameById(UserDo userDo) {
         userDoMapper.updateByPrimaryKeySelective(userDo);
         return userDoMapper.selectByPrimaryKey(userDo.getId());
+    }
+
+    @Override
+    public int updateAgeById(int age, Integer id) {
+        UserDo userDo = UserDo.builder().age(age).id(id).build();
+        return userDoMapper.updateByPrimaryKeySelective(userDo);
     }
 
     @Override

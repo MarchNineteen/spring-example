@@ -1,6 +1,5 @@
 package com.wyb.cache.service;
 
-
 import java.util.List;
 
 import com.wyb.cache.dao.model.UserDo;
@@ -14,9 +13,11 @@ import com.wyb.cache.dao.model.UserDo;
 public interface UserService {
     List<UserDo> listAll(int pageNum, int pageSize);
 
-    UserDo getById(String id);
+    UserDo getById(Integer id);
 
     UserDo updateUserNameById(UserDo userDo);
+
+    int updateAgeById(int age, Integer id);
 
     Boolean removeUserById(UserDo userDo);
 }
