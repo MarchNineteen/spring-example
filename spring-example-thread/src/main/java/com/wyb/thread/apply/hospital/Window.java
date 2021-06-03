@@ -1,19 +1,20 @@
 package com.wyb.thread.apply.hospital;
 
-import java.util.List;
-
 import lombok.Data;
+
+import java.util.List;
+import java.util.concurrent.ExecutorService;
 
 /**
  * @author Marcher丶
- *         <p>
- *         叫号窗口
- *         </p>
+ * <p>
+ * 叫号窗口
+ * </p>
  */
 @Data
 public class Window implements Runnable, WindowCallNum {
 
-    private NumCenter numCenter;
+    private final NumCenter numCenter;
 
     /**
      * 窗口名称
@@ -46,32 +47,32 @@ public class Window implements Runnable, WindowCallNum {
 
     @Override
     public void callNum() {
-        synchronized (numCenter) {
-            if (numCenter.getNumber() > 0) {
-                Integer number = numCenter.getNumber();
-                System.out.println("请" + number + "号到" + Thread.currentThread().getName() + "抽血");
-                numCenter.setNumber(numCenter.getNumber() - 1);
-                System.out.println("剩余号子" + numCenter.getNumber() + "张");
-                try {
-                    Thread.sleep(1000);
-                }
-                catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                // display.callNumber();
-            }
-            else {
-                System.out.println(Thread.currentThread().getName() + "等待有人挂号");
-            }
-
-        }
-
+        ExecutorService windowService = numCenter.getWindowService();
+        windowService.submit(this);
     }
 
     @Override
     public void run() {
         while (true) {
-            callNum();
+            synchronized (numCenter) {
+                if (numCenter.getNumber() > 0) {
+                    Integer number = numCenter.getNumber();
+                    System.out.println("请" + number + "号到" + Thread.currentThread().getName() + "抽血");
+                    numCenter.setNumber(numCenter.getNumber() - 1);
+                    System.out.println("剩余号子" + numCenter.getNumber() + "张");
+                    try {
+                        Thread.sleep(1000);
+                        numCenter.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    // display.callNumber();
+                } else {
+                    System.out.println(Thread.currentThread().getName() + "等待有人挂号");
+                    numCenter.notify();
+                }
+
+            }
         }
     }
 }

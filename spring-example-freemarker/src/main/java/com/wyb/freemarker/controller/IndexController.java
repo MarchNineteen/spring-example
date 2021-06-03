@@ -22,20 +22,25 @@ public class IndexController {
     @Resource
     private UserService userService;
 
-    @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public String freemarker(UserDo userDo,HttpServletRequest request,HashMap<String,Object> map){
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String freemarker(UserDo userDo, HttpServletRequest request, HashMap<String, Object> map) {
         String username = userDo.getUsername();
         String pwd = request.getParameter("password");
         UserDo userDo1 = userService.getByName(username);
-        if (pwd.equals(userDo1.getPassword())){
+        if (pwd.equals(userDo1.getPassword())) {
             map.put("name", "Kunzite");
             map.put("sex", 1);    //sex:性别，1：男；0：女；
             // 模拟数据
-            List<UserDo> userDoList = userService.listAll(1,10);
+            List<UserDo> userDoList = userService.listAll(1, 10);
             map.put("users", userDoList);
             return "index";
         }
         return "error";
 
+    }
+
+    @RequestMapping(value = "/error", method = RequestMethod.GET)
+    public String error() {
+        return "error";
     }
 }

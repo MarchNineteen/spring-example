@@ -1,15 +1,20 @@
 package com.wyb.freemarker.dao.model;
 
-import java.io.Serializable;
-import java.util.Date;
-import javax.persistence.*;
-
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Date;
 
 @Data
 @Table(name = "springboot.user")
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserDo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,6 +42,7 @@ public class UserDo implements Serializable {
     private Integer status;
 
     @Column(name = "create_time")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
     @Column(name = "update_time")

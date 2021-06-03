@@ -1,9 +1,14 @@
 package com.wyb.thread.apply.hospital;
 
+import com.wyb.thread.pool.threadPoolExecutor.config.Config;
+import com.wyb.thread.pool.threadPoolExecutor.utils.NamedThreadFactory;
+import lombok.Data;
+import org.springframework.util.CollectionUtils;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import lombok.Data;
+import java.util.Random;
+import java.util.concurrent.*;
 
 /**
  * @author Marcher丶
@@ -25,21 +30,32 @@ public class NumCenterImpl implements NumCenter {
      */
     private Integer number = 0;
 
+    private ExecutorService registeredService;
+    private ExecutorService windowService;
+
     /**
      * 初始化系统
      */
-    public void init() {
-        // 模拟挂号
+    public void init(Config config) {
+        registeredService = new ThreadPoolExecutor(config.parallelThreads(), config.parallelThreads(), 0, TimeUnit.MILLISECONDS,
+                config.queueSize() == 0 ? new SynchronousQueue<>()
+                        : (config.queueSize() < 0 ? new LinkedBlockingQueue<>()
+                        : new LinkedBlockingQueue<>(config.queueSize())), new NamedThreadFactory("挂号机"));
+
+        windowService = new ThreadPoolExecutor(config.parallelThreads(), config.parallelThreads(), 0, TimeUnit.MILLISECONDS,
+                config.queueSize() == 0 ? new SynchronousQueue<>()
+                        : (config.queueSize() < 0 ? new LinkedBlockingQueue<>()
+                        : new LinkedBlockingQueue<>(config.queueSize())), new NamedThreadFactory("窗口"));
+
+        // 注册2个挂号机
         for (int i = 1; i <= 2; i++) {
-            Thread thread = new Thread(new RegisteredMachine(this));
-            thread.setName("挂号机" + i);
-            thread.start();
+            machines.add(new RegisteredMachine(this));
         }
-        // // 模拟叫号
-        for (int i = 1; i <= 5; i++) {
-            Thread thread = new Thread(new Window(this));
-            thread.setName("窗口" + i);
-            thread.start();
+        // 模拟叫号
+        for (int i = 1; i <= 2; i++) {
+            Window window = new Window(this);
+            windows.add(window);
+            window.callNum();
         }
     }
 
@@ -53,4 +69,31 @@ public class NumCenterImpl implements NumCenter {
         machines.remove(machine);
     }
 
+    @Override
+    public RegisteredMachine getRandomMachine() {
+        if (CollectionUtils.isEmpty(machines)) {
+            throw new RuntimeException("当前系统没有挂号机");
+        }
+        Random random = new Random();
+        return machines.get(random.nextInt(machines.size()));
+    }
+
+    @Override
+    public Window getRandomWindow() {
+        if (CollectionUtils.isEmpty(windows)) {
+            throw new RuntimeException("当前系统没有挂号机");
+        }
+        Random random = new Random();
+        return windows.get(random.nextInt(windows.size()));
+    }
+
+    @Override
+    public ExecutorService getRegisteredService() {
+        return registeredService;
+    }
+
+    @Override
+    public ExecutorService getWindowService() {
+        return windowService;
+    }
 }
