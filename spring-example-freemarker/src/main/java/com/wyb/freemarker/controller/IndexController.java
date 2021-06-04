@@ -1,15 +1,17 @@
 package com.wyb.freemarker.controller;
 
-import com.wyb.freemarker.dao.model.UserDo;
-import com.wyb.freemarker.service.UserService;
+import java.util.HashMap;
+import java.util.List;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.List;
+import com.wyb.freemarker.dao.model.UserDo;
+import com.wyb.freemarker.service.UserService;
 
 /**
  * Description:
@@ -29,7 +31,7 @@ public class IndexController {
         UserDo userDo1 = userService.getByName(username);
         if (pwd.equals(userDo1.getPassword())) {
             map.put("name", "Kunzite");
-            map.put("sex", 1);    //sex:性别，1：男；0：女；
+            map.put("sex", 1); // sex:性别，1：男；0：女；
             // 模拟数据
             List<UserDo> userDoList = userService.listAll(1, 10);
             map.put("users", userDoList);
@@ -37,10 +39,5 @@ public class IndexController {
         }
         return "error";
 
-    }
-
-    @RequestMapping(value = "/error", method = RequestMethod.GET)
-    public String error() {
-        return "error";
     }
 }
