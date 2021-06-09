@@ -5,11 +5,18 @@ import com.wyb.exception.exception.BizException;
 import com.wyb.exception.exception.NoAuth;
 import com.wyb.exception.result.BizResultEnum;
 import com.wyb.exception.result.WebResult;
+import com.wyb.exception.result.WebResultEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+import javax.validation.ConstraintViolationException;
 
 /**
  * @author Kunzite
@@ -43,6 +50,26 @@ public class GlobExceptionHandler {
         log.error("<=====================用户未登录异常========================>");
         WebResult<String> webResult = new WebResult<String>(BizResultEnum.SESSION_MISS);
         return webResult;
+    }
+
+    @ExceptionHandler({MethodArgumentNotValidException.class})
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public WebResult handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
+        BindingResult bindingResult = ex.getBindingResult();
+        StringBuilder sb = new StringBuilder("校验失败:");
+        for (FieldError fieldError : bindingResult.getFieldErrors()) {
+            sb.append(fieldError.getField()).append("：").append(fieldError.getDefaultMessage()).append(", ");
+        }
+        String msg = sb.toString();
+        return new WebResult(WebResultEnum.ILLEGAL_ARGUMENT, msg);
+    }
+
+    @ExceptionHandler({ConstraintViolationException.class})
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public WebResult handleConstraintViolationException(ConstraintViolationException ex) {
+        return new WebResult(WebResultEnum.ILLEGAL_ARGUMENT, ex.getMessage());
     }
 
     /**
