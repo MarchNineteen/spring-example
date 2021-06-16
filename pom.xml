@@ -160,12 +160,6 @@
         <artifactId>mybatis-spring-boot-starter</artifactId>
         <version>2.0.0</version>
       </dependency>
-
-      <!-- SpringBoot - MyBatis 逆向工程 -->
-      <dependency>
-        <groupId>org.mybatis.generator</groupId>
-        <artifactId>mybatis-generator-core</artifactId>
-      </dependency>
       <!--mybatis-->
 
       <dependency>
