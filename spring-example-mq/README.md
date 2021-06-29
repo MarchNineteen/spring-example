@@ -17,7 +17,7 @@
 
 ### rabbitmq
 
-> https://my.oschina.net/xiaolyuh?tab=newest&catalogId=5740269
+> https://www.jianshu.com/p/f7165dd06db3
 
 activemq
 

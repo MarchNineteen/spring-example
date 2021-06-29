@@ -1,5 +1,7 @@
 package com.wyb.test.java.common;
 
+import com.alibaba.fastjson.JSONObject;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -48,5 +50,9 @@ public class BaseEntity implements Serializable {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public static BaseEntity parseConfig(String str) {
+        return JSONObject.parseObject(str, BaseEntity.class);
     }
 }
