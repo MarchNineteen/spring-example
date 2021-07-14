@@ -26,6 +26,8 @@ public class ConfigReader extends AbstractConfigReader {
         ConfigReader configReader = new ConfigReader();
         BaseEntity entity = configReader.get(1L);
         System.out.println(entity.toString());
+        BaseEntity entity1 = configReader.get(1L);
+        System.out.println(entity1.toString());
     }
 }
 
